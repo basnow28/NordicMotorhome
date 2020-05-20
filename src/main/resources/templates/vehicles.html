@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Nordic Notorhome</title>
+    <title>Table - Nordic Notorhome</title>
     <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="../static/assets/fonts/fontawesome-all.min.css">
@@ -21,11 +21,11 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="bookings.html"><span><i class="fas fa-table"></i>Bookings</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="createNewBooking.html"><i class="far fa-calendar-plus"></i><span>Create New Booking</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="vehicles.html"><i class="fas fa-car"></i><span>Vehicles</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="vehicles.html"><i class="fas fa-car"></i><span>Vehicles</span></a></li>
                 </ul>
             </div>
         </nav>
@@ -130,46 +130,135 @@
             </div>
             </nav>
             <div class="container-fluid">
-                <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                    <h3 class="text-dark mb-0">Welcome Valerie! :)</h3>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-primary py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>CUSTOMERS expected today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>4</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fa fa-users fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
+                <h3 class="text-dark mb-4">Team</h3>
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">Vehicle Information</p>
                     </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>New Bookings today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>14</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-car-alt fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
+                    <div class="card-body">
+                        <div class="text-md-right d-flex flex-row align-items-center align-content-start align-items-xl-center dataTables_filter" id="dataTable_filter"><label><select class="form-control form-control-sm custom-select custom-select-sm"><option value="vehicle_licence_plate" selected="">Licence Plate</option><option value="vehicle_model">Model</option><option value="vehicle_state">State</option><option value="vehicle_brand">Brand</option><option value="capacity">Capacity</option></select></label>
+                            <input
+                                class="align-self-start form-control form-control-sm" type="search" aria-controls="dataTable" placeholder="Search" required=""><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="#">&nbsp;Search</a></div>
+                        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                            <table class="table dataTable my-0" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Licence Plate</th>
+                                        <th>Model</th>
+                                        <th>Brand</th>
+                                        <th>Capacity</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Airi Satou</td>
+                                        <td>Volkswagen</td>
+                                        <td>The best vehicle</td>
+                                        <td>2</td>
+                                        <td>AVAILABLE</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Angelica Ramos</td>
+                                        <td>Volkswagen</td>
+                                        <td>Your vehicle</td>
+                                        <td>4</td>
+                                        <td>RETURNED</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ashton Cox</td>
+                                        <td>Volkswagen</td>
+                                        <td>Voltswagen California</td>
+                                        <td>5</td>
+                                        <td>READY</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bradley Greer</td>
+                                        <td>Fiat</td>
+                                        <td>Winnebago Vista 31BE</td>
+                                        <td>6</td>
+                                        <td>RETURNED</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Brenden Wagner</td>
+                                        <td>287</td>
+                                        <td>Thor A.C.E.</td>
+                                        <td>2</td>
+                                        <td>AVAILABLE</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Brielle Williamson</td>
+                                        <td>289</td>
+                                        <td>Jayco Alante 31R</td>
+                                        <td>4</td>
+                                        <td>READY</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bruno Nash<br></td>
+                                        <td>292</td>
+                                        <td>Fleetwood Bounder 36H</td>
+                                        <td>6</td>
+                                        <td>RENTED</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Caesar Vance</td>
+                                        <td>300</td>
+                                        <td>Tiffin Allegro 36UA</td>
+                                        <td>4</td>
+                                        <td>UNAVAILABLE</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cara Stevens</td>
+                                        <td>305</td>
+                                        <td>Fleetwood RV</td>
+                                        <td>2</td>
+                                        <td>RENTED</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cedric Kelly</td>
+                                        <td>316</td>
+                                        <td>Forest River Rvs</td>
+                                        <td>2</td>
+                                        <td>RENTED</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td><strong>Licence Plate</strong></td>
+                                        <td><strong>Model</strong></td>
+                                        <td><strong>Brand</strong></td>
+                                        <td><strong>Capacity</strong></td>
+                                        <td><strong>Status</strong></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span style="color: rgb(200,28,183);">RETURNS&nbsp;today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>2</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-check-square fa-2x text-gray-300"></i></div>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-6 align-self-center">
+                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+                            </div>
+                            <div class="col-md-6">
+                                <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>

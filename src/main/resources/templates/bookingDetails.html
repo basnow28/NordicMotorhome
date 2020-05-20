@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Profile - Nordic Notorhome</title>
+    <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="../static/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/assets/fonts/fontawesome5-overrides.min.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-start align-items-xl-start sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-text mx-3"><span class="float-left">Nordic</span><span class="float-left">Motorhome</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="bookings.html"><span><i class="fas fa-table"></i>Bookings</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="createNewBooking.html"><i class="far fa-calendar-plus"></i><span>Create New Booking</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="vehicles.html"><i class="fas fa-car"></i><span>Vehicles</span></a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <ul class="nav navbar-nav flex-nowrap ml-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
+                                        <h6 class="dropdown-header">alerts center</h6>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="mr-3">
+                                                <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">December 12, 2019</span>
+                                                <p>A new monthly report is ready to download!</p>
+                                            </div>
+                                        </a>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="mr-3">
+                                                <div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">December 7, 2019</span>
+                                                <p>$290.29 has been deposited into your account!</p>
+                                            </div>
+                                        </a>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="mr-3">
+                                                <div class="bg-warning icon-circle"><i class="fas fa-exclamation-triangle text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">December 2, 2019</span>
+                                                <p>Spending Alert: We've noticed unusually high spending for your account.</p>
+                                            </div>
+                                        </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
+                                        <h6 class="dropdown-header">alerts center</h6>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../static/assets/img/avatars/avatar4.jpeg">
+                                                <div class="bg-success status-indicator"></div>
+                                            </div>
+                                            <div class="font-weight-bold">
+                                                <div class="text-truncate"><span>Hi there! I am wondering if you can help me with a problem I've been having.</span></div>
+                                                <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
+                                            </div>
+                                        </a>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../static/assets/img/avatars/avatar2.jpeg">
+                                                <div class="status-indicator"></div>
+                                            </div>
+                                            <div class="font-weight-bold">
+                                                <div class="text-truncate"><span>I have the photos that you ordered last month!</span></div>
+                                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
+                                            </div>
+                                        </a>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../static/assets/img/avatars/avatar3.jpeg">
+                                                <div class="bg-warning status-indicator"></div>
+                                            </div>
+                                            <div class="font-weight-bold">
+                                                <div class="text-truncate"><span>Last month's report looks great, I am very happy with the progress so far, keep up the good work!</span></div>
+                                                <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
+                                            </div>
+                                        </a>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../static/assets/img/avatars/avatar5.jpeg">
+                                                <div class="bg-success status-indicator"></div>
+                                            </div>
+                                            <div class="font-weight-bold">
+                                                <div class="text-truncate"><span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</span></div>
+                                                <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
+                                            </div>
+                                        </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
+                                </div>
+                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown"></div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow" role="presentation">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="../static/assets/img/avatars/avatar1.jpeg"></a>
+                                    <div
+                                        class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
+                                        <a
+                                            class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                    </div>
+                    </li>
+                    </ul>
+            </div>
+            </nav>
+            <div class="container-fluid">
+                <div class="d-flex flex-row justify-content-between" style="margin-bottom: 10px;"><button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button><button class="btn btn-primary btn-sm" type="submit">Save</button></div>
+                <div class="row mb-3">
+                    <div class="col-lg-4">
+                        <div class="card mb-3">
+                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="../static/assets/img/rent-a-motorhome.jpg" width="160" height="160">
+                                <h3 class="text-dark d-flex flex-row justify-content-center mb-4">Booking 145</h3>
+                            </div>
+                        </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex flex-row justify-content-between align-items-center py-3">
+                                <h6 class="text-primary font-weight-bold m-0">Status</h6>
+                            </div>
+                            <div class="card-body d-flex flex-row justify-content-between align-items-center"><select class="form-control form-control-sm custom-select custom-select-sm"><option value="booking_status">CREATED</option><option value="booking_status">ACTIVE</option><option value="booking_status">COMPLETED</option><option value="booking_status">CANCELLED</option></select></div>
+                            <div
+                                class="card-header d-flex flex-row justify-content-between align-items-center py-3">
+                                <h6 class="text-primary font-weight-bold m-0">Vehicle Information</h6><button class="btn btn-primary btn-sm" type="submit" style="height: 30px;font-size: 12px;">See More</button></div>
+                        <div class="card-body">
+                            <h4 class="small font-weight-bold">Brand<span class="float-right">Volkswagen</span></h4>
+                            <h4 class="small font-weight-bold">Model<span class="float-right">Model</span></h4>
+                            <h4 class="small font-weight-bold">Licence Plate<span class="float-right">DK20 2067</span></h4>
+                            <h4 class="small font-weight-bold">Type<span class="float-right">Class C</span></h4>
+                        </div>
+                        <div class="card-header d-flex flex-row justify-content-between align-items-center py-3">
+                            <h6 class="text-primary font-weight-bold m-0">Price Information</h6>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="text-primary font-weight-bold m-0" style="padding-bottom: 10px;">Quote</h6>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                                    <h4 class="small font-weight-bold">Initial Cost<br></h4>
+                                </div><span class="float-right">1000€</span></div>
+                            <h6 class="text-primary font-weight-bold m-0" style="padding-bottom: 10px;">Additional Costs</h6>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 200px;">
+                                    <h4 class="small font-weight-bold">Extra Kilometers (1€/km)<br></h4><input class="border rounded form-control-sm" type="number" style="width: 80px;color: #6e707e;padding-top: 6px;padding-right: 12px;padding-bottom: 6px;padding-left: 12px;" value="300"
+                                        min="1"></div><span class="float-right">900€</span></div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 200px;">
+                                    <h4 class="small font-weight-bold">Drop Off Kilometers (0,70€/km)<br></h4><input class="border rounded form-control-sm" type="number" style="width: 80px;color: #6e707e;padding-top: 6px;padding-right: 12px;padding-bottom: 6px;padding-left: 12px;" value="20"
+                                        min="1"></div><span class="float-right">14€</span></div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row justify-content-start align-items-center align-content-center" style="width: 180px;">
+                                    <h4 class="small font-weight-bold">Fuel Tank was half full (70€)<br></h4><select class="form-control form-control-sm custom-select custom-select-sm" style="width: 80px;height: 30px;margin-left: 20px;"><option value="extras" selected="">yes</option><option value="extras" selected="">no</option></select></div>
+                                <span
+                                    class="float-right">70€</span>
+                            </div>
+                            <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20pxpx;padding-bottom: 10px;">Extras (prices per day)</h6>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                                    <h4 class="small font-weight-bold">Picnic Set (5€)<br></h4><select class="form-control form-control-sm custom-select custom-select-sm" style="width: 60px;height: 30px;margin-left: 20px;"><option value="extras" selected="">yes</option><option value="extras" selected="">no</option></select></div>
+                                <span
+                                    class="float-right">0€</span>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                                    <h4 class="small font-weight-bold">Bike Rack (2€)<br></h4><select class="form-control form-control-sm custom-select custom-select-sm" style="width: 60px;height: 30px;margin-left: 20px;"><option value="extras" selected="">yes</option><option value="extras" selected="">no</option></select></div>
+                                <span
+                                    class="float-right">0€</span>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                                    <h4 class="small font-weight-bold">DVD Player (1€)<br></h4><select class="form-control form-control-sm custom-select custom-select-sm" style="width: 60px;height: 30px;margin-left: 20px;"><option value="extras" selected="">yes</option><option value="extras">no</option></select></div>
+                                <span
+                                    class="float-right">1€</span>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                                    <h4 class="small font-weight-bold">Tent (4€)<br></h4><select class="form-control form-control-sm custom-select custom-select-sm" style="width: 60px;height: 30px;margin-left: 20px;"><option value="extras" selected="">yes</option><option value="extras">no</option></select></div>
+                                <span
+                                    class="float-right">4€</span>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                                    <h4 class="small font-weight-bold">Bed Linen Set (3€)<br></h4><select class="form-control form-control-sm custom-select custom-select-sm" style="width: 60px;height: 30px;margin-left: 20px;"><option value="extras" selected="">yes</option><option value="extras">no</option></select></div>
+                                <span
+                                    class="float-right">3€</span>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center align-content-center">
+                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20pxpx;padding-bottom: 10px;">Total</h6><span class="float-right">1992€</span></div>
+                            <div class="form-group d-flex justify-content-between align-items-center align-content-center">
+                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20pxpx;padding-bottom: 10px;">Paid</h6><span class="float-right">1000€</span></div>
+                            <div class="form-group d-flex justify-content-between align-items-center align-content-center">
+                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20pxpx;padding-bottom: 10px;">Remaining</h6><span class="float-right">978€</span></div><button class="btn btn-primary btn-sm" type="submit" style="height: 30px;font-size: 12px;">Add New Payment Amount</button></div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row mb-3 d-none">
+                        <div class="col">
+                            <div class="card text-white bg-primary shadow">
+                                <div class="card-body">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <p class="m-0">Peformance</p>
+                                            <p class="m-0"><strong>65.2%</strong></p>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                    </div>
+                                    <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card text-white bg-success shadow">
+                                <div class="card-body">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <p class="m-0">Peformance</p>
+                                            <p class="m-0"><strong>65.2%</strong></p>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                    </div>
+                                    <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex flex-column justify-content-between">
+                            <div class="card shadow mb-3">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 font-weight-bold">Booking Information</p>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group"><label for="city"><strong>Start Date</strong></label><input class="form-control" type="date"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group"><label for="country"><strong>End Date</strong></label><input class="form-control" type="date"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="form-group" style="width: 280px;"><label for="address"><strong>Capacity</strong><br></label><select class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;"><option value="capacity" selected="">2</option><option value="capacity">4</option><option value="capacity">6</option></select></div>
+                                </div>
+                            </div>
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 font-weight-bold">Customers Details</p>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group"><label for="username"><strong>First Name</strong></label><input class="form-control" type="text" name="firts_name" value="John"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group"><label for="first_name"><strong>Last Name</strong></label><input class="form-control" type="text" name="last_name" value="Doe"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email" name="email" value="user@example.com"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group"><label for="last_name"><strong>Phone Number</strong><br></label><input class="form-control" type="text" placeholder="81523566" name="phone_number"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group"><label for="username"><strong>Driver Licence Number</strong><br></label><input class="form-control" type="text" name="driver_licence_number" value="2514541235"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group"><label for="first_name"><strong>Date of Birth</strong><br></label><input class="form-control" type="date" name="date_of_birth"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card shadow" style="margin-top: 20px;">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 font-weight-bold">Contact Information</p>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group"><label for="address"><strong>Street</strong></label><input class="form-control" type="text" name="street_number" value="Sunset Blvd"></div>
+                                        <div class="form-group"><label for="address"><strong>House Number</strong></label><input class="form-control" type="text" name="house_number" value="38"></div>
+                                        <div class="form-group"><label for="address"><strong>Postcode</strong><br></label><input class="form-control" type="text" name="postcode" value="2400"></div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" name="city" value="Los Angeles"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group"><label for="country"><strong>Country</strong></label><input class="form-control" type="text" name="country" value="USA"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-3" style="margin-top: 20px;">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 font-weight-bold">Card Information</p>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group"><label for="city"><strong>Card Number</strong><br></label><input class="form-control" type="text" name="card_number"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group"><label for="country"><strong>Expiry Date</strong></label><input class="form-control" type="text" name="card_expiry"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="form-group d-flex flex-column" style="width: 280px;"><label for="address"><strong>CVV</strong><br></label><input class="border rounded form-control-sm" type="text" name="card_cvv" style="color: #6e707e;height: 38px;width: 277;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form>
+                                <div class="form-group"><label for="signature"><strong>Additional Notes</strong><br></label><textarea class="form-control" rows="4" name="signature"></textarea></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-white sticky-footer">
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
+        </div>
+    </footer>
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+    <script src="../static/assets/js/jquery.min.js"></script>
+    <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="../static/assets/js/script.min.js"></script>
+</body>
+
+</html>

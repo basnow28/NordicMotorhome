@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Nordic Notorhome</title>
+    <title>Table - Nordic Notorhome</title>
     <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="../static/assets/fonts/fontawesome-all.min.css">
@@ -21,10 +21,10 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="bookings.html"><span><i class="fas fa-table"></i>Bookings</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="createNewBooking.html"><i class="far fa-calendar-plus"></i><span>Create New Booking</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="createNewBooking.html"><i class="far fa-calendar-plus"></i><span>Create New Booking</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="vehicles.html"><i class="fas fa-car"></i><span>Vehicles</span></a></li>
                 </ul>
             </div>
@@ -130,47 +130,152 @@
             </div>
             </nav>
             <div class="container-fluid">
-                <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                    <h3 class="text-dark mb-0">Welcome Valerie! :)</h3>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-primary py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>CUSTOMERS expected today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>4</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fa fa-users fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
+                <h3 class="text-dark mb-4">Create New Booking</h3>
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">Check Availability</p>
                     </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>New Bookings today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>14</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-car-alt fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
+                    <div class="card-body">
+                        <div class="form-group d-flex flex-row justify-content-start align-items-center">
+                            <div class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;"><label class="align-self-start" for="city" style="margin-bottom: 0px;"><strong>Start Date</strong><br></label><input class="border rounded" type="date" style="color: #6e707e;height: 31px;"></div>
+                            <div class="d-flex flex-column justify-content-start align-items-center"><label class="align-self-start" for="city" style="margin: px;margin-bottom: 0px;"><strong>End Date</strong><br></label><input class="border rounded" type="date" style="color: #6e707e;height: 31px;"></div>
+                            <div class="text-md-right d-flex flex-column justify-content-start align-items-center align-items-xl-center dataTables_filter"
+                                id="dataTable_filter-1" style="margin-left: 10px;height: 55px;"><label class="align-self-start" for="city" style="margin: 0;margin-bottom: 0px;"><strong>Capacity</strong><br></label><select class="align-self-center form-control form-control-sm custom-select custom-select-sm" style="margin: 0;"><option value="vehicle_capacity">2</option><option value="vehicle_capacity">3</option><option value="vehicle_capacity">4</option><option value="vehicle_capacity">6</option></select><label></label></div>
+                            <div><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" style="margin: 10px;">&nbsp;Search</a></div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span style="color: rgb(200,28,183);">RETURNS&nbsp;today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>2</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-check-square fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
+                        <div class="text-md-right d-flex flex-row justify-content-between align-items-xl-center dataTables_filter" id="dataTable_filter-2">
+                            <div class="text-md-right d-flex flex-row align-items-center align-content-center align-self-end align-items-xl-center dataTables_filter" id="dataTable_filter-3"></div>
+                        </div>
+                        <div class="form-group d-flex flex-row justify-content-around">
+                            <div></div>
+                        </div>
+                        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                            <table class="table my-0" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Vehicle Id</th>
+                                        <th>Model</th>
+                                        <th>Brand</th>
+                                        <th>Type</th>
+                                        <th>Capacity</th>
+                                        <th>Plate</th>
+                                        <th>Quote</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><img class="rounded-circle mr-2" width="30" height="30" src="../static/assets/img/avatars/avatar1.jpeg"><a href="vehicleDetails.html">1</a></td>
+                                        <td>Accountant</td>
+                                        <td>Tokyo</td>
+                                        <td>Class C</td>
+                                        <td>3</td>
+                                        <td>DK20 FT46</td>
+                                        <td>€162,700</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;Book</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img class="rounded-circle mr-2" width="30" height="30" src="../static/assets/img/avatars/avatar2.jpeg"><a href="vehicleDetails.html">2</a><br></td>
+                                        <td>Chief Executive Officer(CEO)</td>
+                                        <td>London</td>
+                                        <td>Class A&nbsp;</td>
+                                        <td>4<br></td>
+                                        <td>DK27 HG09</td>
+                                        <td>€162,700</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;Book</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img class="rounded-circle mr-2" width="30" height="30" src="../static/assets/img/avatars/avatar3.jpeg"><a href="vehicleDetails.html">3</a><br></td>
+                                        <td>Junior Technical Author</td>
+                                        <td>San Francisco</td>
+                                        <td>Class B</td>
+                                        <td>6<br></td>
+                                        <td>GH56 BR21</td>
+                                        <td>€162,700</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;Book</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img class="rounded-circle mr-2" width="30" height="30" src="../static/assets/img/avatars/avatar4.jpeg"><a href="vehicleDetails.html">5</a><br></td>
+                                        <td>Software Engineer</td>
+                                        <td>London</td>
+                                        <td>Luton</td>
+                                        <td>6<br></td>
+                                        <td>PL23 DH34</td>
+                                        <td>€162,700</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;Book</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img class="rounded-circle mr-2" width="30" height="30" src="../static/assets/img/avatars/avatar5.jpeg"><a href="vehicleDetails.html">4</a><br></td>
+                                        <td>Software Engineer</td>
+                                        <td>San Francisco</td>
+                                        <td>Mini</td>
+                                        <td>2</td>
+                                        <td>DK05 PL12</td>
+                                        <td>€162,700</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;Book</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img class="rounded-circle mr-2" width="30" height="30" src="../static/assets/img/avatars/avatar1.jpeg">Brielle Williamson</td>
+                                        <td>Integration Specialist</td>
+                                        <td>New York</td>
+                                        <td>61</td>
+                                        <td>2012/12/02<br></td>
+                                        <td>$372,000</td>
+                                        <td>$162,700</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;Book</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img class="rounded-circle mr-2" width="30" height="30" src="../static/assets/img/avatars/avatar2.jpeg">Bruno Nash<br></td>
+                                        <td>Software Engineer</td>
+                                        <td>London</td>
+                                        <td>38</td>
+                                        <td>2011/05/03<br></td>
+                                        <td>$163,500</td>
+                                        <td>$162,700</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;Book</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img class="rounded-circle mr-2" width="30" height="30" src="../static/assets/img/avatars/avatar3.jpeg">Caesar Vance</td>
+                                        <td>Pre-Sales Support</td>
+                                        <td>New York</td>
+                                        <td>21</td>
+                                        <td>2011/12/12<br></td>
+                                        <td>$106,450</td>
+                                        <td>$162,700</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;Book</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img class="rounded-circle mr-2" width="30" height="30" src="../static/assets/img/avatars/avatar4.jpeg">Cara Stevens</td>
+                                        <td>Sales Assistant</td>
+                                        <td>New York</td>
+                                        <td>46</td>
+                                        <td>2011/12/06<br></td>
+                                        <td>$145,600</td>
+                                        <td>$162,700</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;Book</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img class="rounded-circle mr-2" width="30" height="30" src="../static/assets/img/avatars/avatar5.jpeg">Cedric Kelly</td>
+                                        <td>Senior JavaScript Developer</td>
+                                        <td>Edinburgh</td>
+                                        <td>22</td>
+                                        <td>2012/03/29<br></td>
+                                        <td>$433,060</td>
+                                        <td>$162,700</td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;Book</a></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td><strong>Name</strong></td>
+                                        <td><strong>Position</strong></td>
+                                        <td><strong>Office</strong></td>
+                                        <td><strong>Age</strong></td>
+                                        <td><strong>Start date</strong></td>
+                                        <td><strong>Salary</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>

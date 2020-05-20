@@ -1,13 +1,14 @@
 package kea.nordicmotorhome.Model;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
 @Entity
-
+@Component
 public class Booking {
-    @Autowired
+    @OneToOne
     Vehicle vehicle;
 
     @Id
@@ -24,18 +25,16 @@ public class Booking {
     private boolean has_dvd_player;
     private boolean has_tent;
     private boolean has_linen;
-    private Vehicle vehicle;
-    private Employee employee;
 
+    @OneToOne
+    private Employee employee;
+    @OneToOne
     private Season season;
     @OneToOne
-    @MapsId
     private Cancellation cancellation;
     @OneToOne
-    @MapsId
     private Customer customer;
     @OneToOne
-    @MapsId
     private Card card;
 
     public int getBooking_id() {

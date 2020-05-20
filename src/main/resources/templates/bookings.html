@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Nordic Notorhome</title>
+    <title>Table - Nordic Notorhome</title>
     <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="../static/assets/fonts/fontawesome-all.min.css">
@@ -21,9 +21,9 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="bookings.html"><span><i class="fas fa-table"></i>Bookings</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="bookings.html"><span><i class="fas fa-table"></i>Bookings</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="createNewBooking.html"><i class="far fa-calendar-plus"></i><span>Create New Booking</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="vehicles.html"><i class="fas fa-car"></i><span>Vehicles</span></a></li>
                 </ul>
@@ -130,57 +130,162 @@
             </div>
             </nav>
             <div class="container-fluid">
-                <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                    <h3 class="text-dark mb-0">Welcome Valerie! :)</h3>
+                <h3 class="text-dark mb-4">Bookings</h3>
+                <div class="card shadow">
+                    <div class="card-header d-flex flex-row justify-content-between py-3">
+                        <p class="text-primary align-self-start m-0 font-weight-bold">Bookings information</p><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-end" role="button" href="createNewBooking.html"><i class="far fa-calendar-plus fa-sm text-white-50"></i>&nbsp;Create New Booking</a></div>
+                    <div
+                        class="card-body">
+                        <div class="text-md-right d-flex flex-row justify-content-between align-items-stretch align-items-xl-center dataTables_filter" id="dataTable_filter">
+                            <div class="d-flex flex-row" style="width: 600;"><label><select class="form-control form-control-sm custom-select custom-select-sm"><option value="first_name" selected="">First Name</option><option value="last_name">Last Name</option><option value="email">Email</option><option value="licence_plate">Vehicle Licence</option><option value="phone_number">Phone Number</option><option value="booking_id">Booking ID</option></select><input class="align-self-start form-control form-control-sm" type="search" aria-controls="dataTable" placeholder="Search" required=""></label></div>
+                            <div
+                                class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;"><label class="align-self-start" for="city" style="margin-bottom: 0px;"><strong>Start Date</strong><br></label><input class="border rounded" type="date" style="color: #6e707e;height: 31px;"></div>
+                        <div class="d-flex flex-column justify-content-start align-items-center"
+                            style="margin-right: 10px;"><label class="align-self-start" for="city" style="margin-bottom: 0px;"><strong>End Date</strong><br></label><input class="border rounded" type="date" style="color: #6e707e;height: 31px;"></div><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-center"
+                            role="button" href="#">&nbsp;Search</a></div>
+                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                    <table class="table dataTable my-0" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Booking ID</th>
+                                <th>Vehicle</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Airi Satou</td>
+                                <td>134</td>
+                                <td>The best vehicle</td>
+                                <td>15/07/2020</td>
+                                <td>22/07/2020</td>
+                                <td>CREATED</td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Angelica Ramos</td>
+                                <td>165</td>
+                                <td>Your vehicle</td>
+                                <td>21/06/2020</td>
+                                <td>28/06/2020<br></td>
+                                <td>CREATED</td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Ashton Cox</td>
+                                <td>211</td>
+                                <td>Voltswagen California</td>
+                                <td>04/04/2020</td>
+                                <td>10/04/2020<br></td>
+                                <td>CANCELLED</td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Bradley Greer</td>
+                                <td>212</td>
+                                <td>Winnebago Vista 31BE</td>
+                                <td>15/05/2020</td>
+                                <td>20/05/2020<br></td>
+                                <td>ACTIVE</td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Brenden Wagner</td>
+                                <td>287</td>
+                                <td>Thor A.C.E.</td>
+                                <td>13/05/2020</td>
+                                <td>18/05/2020<br></td>
+                                <td>ACTIVE</td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Brielle Williamson</td>
+                                <td>289</td>
+                                <td>Jayco Alante 31R</td>
+                                <td>06/03/2020</td>
+                                <td>011/05/202<br></td>
+                                <td>CANCELLED</td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Bruno Nash<br></td>
+                                <td>292</td>
+                                <td>Fleetwood Bounder 36H</td>
+                                <td>22/04/2020</td>
+                                <td>01/05/2020<br></td>
+                                <td>COMPLETED</td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Caesar Vance</td>
+                                <td>300</td>
+                                <td>Tiffin Allegro 36UA</td>
+                                <td>25/04/2020</td>
+                                <td>27/04/2020<br></td>
+                                <td>COMPLETEED</td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Cara Stevens</td>
+                                <td>305</td>
+                                <td>Fleetwood RV</td>
+                                <td>25/04/2020</td>
+                                <td>30/04/2020</td>
+                                <td>COMPLETED</td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Cedric Kelly</td>
+                                <td>316</td>
+                                <td>Forest River Rvs</td>
+                                <td>13/04/2020</td>
+                                <td>15/04/2020<br></td>
+                                <td>COMPLETED</td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td><strong>Customer Name</strong></td>
+                                <td><strong>Booking ID</strong></td>
+                                <td><strong>Vehicle</strong></td>
+                                <td><strong>Start Date</strong></td>
+                                <td><strong>End Date</strong></td>
+                                <td><strong>Status</strong></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-primary py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>CUSTOMERS expected today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>4</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fa fa-users fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-md-6 align-self-center">
+                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
                     </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>New Bookings today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>14</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-car-alt fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span style="color: rgb(200,28,183);">RETURNS&nbsp;today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>2</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-check-square fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-md-6">
+                        <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                            <ul class="pagination">
+                                <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="bg-white sticky-footer">
-            <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
-            </div>
-        </footer>
+    </div>
+    </div>
+    <footer class="bg-white sticky-footer">
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
+        </div>
+    </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
     <script src="../static/assets/js/jquery.min.js"></script>
     <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
