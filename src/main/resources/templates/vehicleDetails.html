@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Nordic Notorhome</title>
+    <title>Profile - Nordic Notorhome</title>
     <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}">
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
@@ -129,46 +129,117 @@
             </div>
             </nav>
             <div class="container-fluid">
-                <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                    <h3 class="text-dark mb-0">Welcome Valerie! :)</h3>
+                <h3 class="text-dark d-flex flex-row justify-content-between mb-4"><button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button>Vehicle 12<button class="btn btn-primary btn-sm" type="submit">Save</button></h3>
+                <div class="row mb-3">
+                    <div class="col-lg-4">
+                        <div class="card mb-3">
+                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="../static/assets/img/rent-a-motorhome.jpg" width="160" height="160"></div>
+                        </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="text-primary font-weight-bold m-0">Extras</h6>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="small font-weight-bold">Kitchen<span class="float-right"><i class="fas fa-check"></i></span></h6>
+                                <h6 class="small font-weight-bold">Wifi<span class="float-right"><i class="fas fa-minus"></i></span></h6>
+                                <h6 class="small font-weight-bold">Shower<span class="float-right"><i class="fas fa-check"></i></span></h6>
+                                <h6 class="small font-weight-bold">TV<span class="float-right"><i class="fas fa-check"></i></span></h6>
+                                <h4 class="small font-weight-bold">Storage Size<span class="float-right">40m^2</span></h4>
+                            </div>
+                            <div class="card-header py-3">
+                                <h6 class="text-primary font-weight-bold m-0">Status</h6>
+                            </div>
+                            <div class="card-body d-flex flex-row justify-content-between align-items-center"><select class="form-control form-control-sm custom-select custom-select-sm"><option value="vehicle_state">READY</option><option value="vehicle_state">RENTED</option><option value="vehicle_state">RETURNED</option><option value="vehicle_state">UNAVAILABLE</option></select></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row mb-3 d-none">
+                            <div class="col">
+                                <div class="card text-white bg-primary shadow">
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col">
+                                                <p class="m-0">Peformance</p>
+                                                <p class="m-0"><strong>65.2%</strong></p>
+                                            </div>
+                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                        </div>
+                                        <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card text-white bg-success shadow">
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col">
+                                                <p class="m-0">Peformance</p>
+                                                <p class="m-0"><strong>65.2%</strong></p>
+                                            </div>
+                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                        </div>
+                                        <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card shadow mb-3">
+                                    <div class="card-header py-3">
+                                        <p class="text-primary m-0 font-weight-bold">Vehicle Information</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group d-flex flex-column"><label for="username"><strong>Brand</strong></label><span>Volkswagen</span></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group d-flex flex-column"><label for="email"><strong>Model</strong><br></label><span>Golf</span></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group"><label for="first_name"><strong>Licence Plate</strong></label><input class="form-control" type="text" name="licence_plate" value="DK2049 GK5"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group d-flex flex-column"><label for="last_name"><strong>Vehicle Type</strong></label><span>Class B</span></div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <p class="text-primary m-0 font-weight-bold">Vehicle Details</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-group"><label for="address"><strong>Cost Per Day</strong></label><input class="form-control" type="text" name="cost_per_day" value="599"></div>
+                                            <div class="form-group"><label for="address"><strong>Odometer</strong></label><input class="form-control" type="text" name="vehicle_odometer" value="1500"></div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group"><label for="city"><strong>Capacity</strong></label><select class="form-control form-control form-control-sm custom-select custom-select-sm"><option value="vehicle_capacity">2</option><option value="vehicle_capacity">3</option><option value="vehicle_capacity">4</option><option value="vehicle_capacity">6</option></select></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group d-flex flex-column"><label for="country"><strong>Engine Type</strong></label><span>Gas</span></div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-primary py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>CUSTOMERS expected today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>4</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fa fa-users fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>New Bookings today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>14</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-car-alt fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span style="color: rgb(200,28,183);">RETURNS&nbsp;today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>2</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-check-square fa-2x text-gray-300"></i></div>
-                                </div>
+                <div class="card shadow mb-5">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form>
+                                    <div class="form-group"><label for="signature"><strong>Additional Notes</strong><br></label><textarea class="form-control" rows="4" name="signature"></textarea></div>
+                                </form>
                             </div>
                         </div>
                     </div>
