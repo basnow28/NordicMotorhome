@@ -56,8 +56,8 @@ PRIMARY KEY(card_id)
 CREATE TABLE seasons (
 season_id		INT		NOT NULL	AUTO_INCREMENT,
 season_name		VARCHAR(45)	NOT NULL,
-season_start		VARCHAR(45)		NOT NULL,
-season_end		VARCHAR(45)		NOT NULL,
+season_start		VARCHAR(45)	NOT NULL,
+season_end		VARCHAR(45)	NOT NULL,
 season_rate		DOUBLE		NOT NULL,
 PRIMARY KEY(season_id)
 );
@@ -94,7 +94,7 @@ PRIMARY KEY(address_id)
 ```bash
 CREATE TABLE cancellations (
 cancellation_id		INT		NOT NULL	AUTO_INCREMENT,
-days_out		INT	NOT NULL,
+days_out		INT	  NOT NULL,
 minimum_fee		INT,
 cancellation_rate	DOUBLE		NOT NULL,
 PRIMARY KEY(cancellation_id)
