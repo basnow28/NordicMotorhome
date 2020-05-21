@@ -253,3 +253,18 @@ VALUES
 (31, "Winnebago Adventurer", "36Z", "D-540N", 65280, "READY", "", "READY", "READY", 8),
 (32, "Winnebago Adventurer", "36Z", "D-6320", 360450, "READY", "", "READY", "READY", 8);
 ```
+by David Hards @dshards <https://github.com/dshards>
+```bash
+INSERT INTO seasons (season_name, season_start, season_end, season_rate)
+VALUES("Low Season", '12-01', '02-28', 1),
+("Mid Season", '03-01', '05-31', 1.3),
+("High Season", '06-01', '09-30', 1.6),
+("Mid Season", '10-01', '11-30', 1.3);
+```
+```bash
+INSERT INTO cancellations(days_out, minimum_fee, cancellation_rate)
+VALUES(50, 200, 0.2),
+(15, 200, 0.5),
+(1, 200, 0.8),
+(0, 200, 0.95);
+```
