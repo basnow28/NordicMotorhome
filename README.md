@@ -94,7 +94,7 @@ PRIMARY KEY(address_id)
 ```bash
 CREATE TABLE cancellations (
 cancellation_id		INT		NOT NULL	AUTO_INCREMENT,
-days_out		INT	    NOT NULL,
+days_out		INT	        NOT NULL,
 minimum_fee		INT,
 cancellation_rate	DOUBLE		NOT NULL,
 PRIMARY KEY(cancellation_id)
