@@ -25,4 +25,5 @@ public class MainController {
     public String vehicles(){
         return "vehicles.html";
     }
+
 }
