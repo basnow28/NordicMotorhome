@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Component
 public class Booking {
+
     @Autowired
     private Vehicle vehicle;
     @Autowired
@@ -141,51 +142,51 @@ public class Booking {
         this.has_linen = has_linen;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public int getEmployee_id() {
+        return employee_id;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public void setEmployee_id(int employee_id) {
+        this.employee_id = employee_id;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public int getSeason_id() {
+        return season_id;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setSeason_id(int season_id) {
+        this.season_id = season_id;
     }
 
-    public Season getSeason() {
-        return season;
+    public int getCancellation_id() {
+        return cancellation_id;
     }
 
-    public void setSeason(Season season) {
-        this.season = season;
+    public void setCancellation_id(int cancellation_id) {
+        this.cancellation_id = cancellation_id;
     }
 
-    public Cancellation getCancellation() {
-        return cancellation;
+    public int getCustomer_id() {
+        return customer_id;
     }
 
-    public void setCancellation(Cancellation cancellation) {
-        this.cancellation = cancellation;
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public int getCard_id() {
+        return card_id;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCard_id(int card_id) {
+        this.card_id = card_id;
     }
 
-    public Card getCard() {
-        return card;
+    public int getVehicle_id() {
+        return vehicle_id;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
+    public void setVehicle_id(int vehicle_id) {
+        this.vehicle_id = vehicle_id;
     }
 }

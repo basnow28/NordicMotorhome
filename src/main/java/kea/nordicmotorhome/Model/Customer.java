@@ -30,14 +30,6 @@ public class Customer {
         this.customer_id = customer_id;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
     public String getFirst_name() {
         return first_name;
     }
@@ -84,5 +76,13 @@ public class Customer {
 
     public void setDriver_licence_number(String driver_licence_number) {
         this.driver_licence_number = driver_licence_number;
+    }
+
+    public int getAddress_id() {
+        return address_id;
+    }
+
+    public void setAddress_id(int address_id) {
+        this.address_id = address_id;
     }
 }
