@@ -9,18 +9,19 @@ import javax.persistence.Id;
 
 @Component
 public class Customer {
-    @Autowired
-    private Address address;
-
     @Id
     private int customer_id;
-
     private String first_name;
     private String last_name;
     private String date_of_birth;
     private String phone_number;
     private String email;
     private String driver_licence_number;
+    private String street_name;
+    private String house_number;
+    private int postcode;
+    private String city;
+    private String country;
 
     public int getCustomer_id() {
         return customer_id;
@@ -78,11 +79,43 @@ public class Customer {
         this.driver_licence_number = driver_licence_number;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getStreet_name() {
+        return street_name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setStreet_name(String street_name) {
+        this.street_name = street_name;
+    }
+
+    public String getHouse_number() {
+        return house_number;
+    }
+
+    public void setHouse_number(String house_number) {
+        this.house_number = house_number;
+    }
+
+    public int getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(int postcode) {
+        this.postcode = postcode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
