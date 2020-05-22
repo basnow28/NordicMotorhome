@@ -8,35 +8,29 @@ import javax.persistence.*;
 @Component
 public class Booking {
 
-    @Autowired
-    private Vehicle vehicle;
-    @Autowired
-    private Employee employee;
-    @Autowired
-    private Season season;
-    @Autowired
-    private Cancellation cancellation;
-    @Autowired
-    private Customer customer;
-    @Autowired
-    private Card card;
-
-
     @Id
     private int booking_id;
+    private int customer_id;
+    private int vehicle_id;
     private String start_date;
     private String end_date;
     private int distance_driven;
     private String booking_status;
     private int payment_amount;
-    private boolean  fuel_check;
+    private boolean fuel_check;
     private String booking_notes;
     private boolean has_picnic;
     private boolean has_bikerack;
     private boolean has_dvd_player;
     private boolean has_tent;
     private boolean has_linen;
-
+    private String card_number;
+    private String card_expiry;
+    private int card_cvv;
+    private String days_range;
+    private double cancellation_rate;
+    private int minimum_fee;
+    private Cancellation cancellation;
 
     public int getBooking_id() {
         return booking_id;
@@ -44,6 +38,22 @@ public class Booking {
 
     public void setBooking_id(int booking_id) {
         this.booking_id = booking_id;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+    }
+
+    public int getVehicle_id() {
+        return vehicle_id;
+    }
+
+    public void setVehicle_id(int vehicle_id) {
+        this.vehicle_id = vehicle_id;
     }
 
     public String getStart_date() {
@@ -142,28 +152,52 @@ public class Booking {
         this.has_linen = has_linen;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public String getCard_number() {
+        return card_number;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public void setCard_number(String card_number) {
+        this.card_number = card_number;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public String getCard_expiry() {
+        return card_expiry;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setCard_expiry(String card_expiry) {
+        this.card_expiry = card_expiry;
     }
 
-    public Season getSeason() {
-        return season;
+    public int getCard_cvv() {
+        return card_cvv;
     }
 
-    public void setSeason(Season season) {
-        this.season = season;
+    public void setCard_cvv(int card_cvv) {
+        this.card_cvv = card_cvv;
+    }
+
+    public String getDays_range() {
+        return days_range;
+    }
+
+    public void setDays_range(String days_range) {
+        this.days_range = days_range;
+    }
+
+    public double getCancellation_rate() {
+        return cancellation_rate;
+    }
+
+    public void setCancellation_rate(double cancellation_rate) {
+        this.cancellation_rate = cancellation_rate;
+    }
+
+    public int getMinimum_fee() {
+        return minimum_fee;
+    }
+
+    public void setMinimum_fee(int minimum_fee) {
+        this.minimum_fee = minimum_fee;
     }
 
     public Cancellation getCancellation() {
@@ -172,21 +206,5 @@ public class Booking {
 
     public void setCancellation(Cancellation cancellation) {
         this.cancellation = cancellation;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
     }
 }
