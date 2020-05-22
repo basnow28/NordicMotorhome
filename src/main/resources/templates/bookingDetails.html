@@ -42,49 +42,6 @@
                                     </form>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown no-arrow mx-1" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
-                                        <h6 class="dropdown-header">alerts center</h6>
-                                        <a class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../static/assets/img/avatars/avatar4.jpeg">
-                                                <div class="bg-success status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>Hi there! I am wondering if you can help me with a problem I've been having.</span></div>
-                                                <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
-                                            </div>
-                                        </a>
-                                        <a class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../static/assets/img/avatars/avatar2.jpeg">
-                                                <div class="status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>I have the photos that you ordered last month!</span></div>
-                                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
-                                            </div>
-                                        </a>
-                                        <a class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../static/assets/img/avatars/avatar3.jpeg">
-                                                <div class="bg-warning status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>Last month's report looks great, I am very happy with the progress so far, keep up the good work!</span></div>
-                                                <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
-                                            </div>
-                                        </a>
-                                        <a class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../static/assets/img/avatars/avatar5.jpeg">
-                                                <div class="bg-success status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</span></div>
-                                                <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
-                                            </div>
-                                        </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
-                                </div>
-                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown"></div>
-                            </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow" role="presentation">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="../static/assets/img/avatars/avatar1.jpeg"></a>
@@ -98,12 +55,11 @@
                     </ul>
             </div>
             </nav>
-                <form action="/saveBooking">
+                <form th:action="@{'/saveBooking/' + ${booking} + '/' + ${customer} + '/' + ${vehicle}}" method="post">
             <div class="container-fluid">
                 <div class="d-flex flex-row justify-content-between" style="margin-bottom: 10px;">
                     <button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button>
-                    <button class="btn btn-primary btn-sm" type="submit" th:action="@{/saveBooking}">Save</button>
-                    <input class="btn btn-primary btn-sm" type="button" >
+                    <input class="btn btn-primary btn-sm" type="submit" value="Save">
                 </div>
                 <div class="row mb-3">
                     <div class="col-lg-4">
@@ -121,10 +77,10 @@
                                 class="card-header d-flex flex-row justify-content-between align-items-center py-3">
                                 <h6 class="text-primary font-weight-bold m-0">Vehicle Information</h6><button class="btn btn-primary btn-sm" type="submit" style="height: 30px;font-size: 12px;">See More</button></div>
                         <div class="card-body">
-                            <h4 class="small font-weight-bold">Brand<span th:text="@{vehicle.vehicle_brand}" class="float-right">Volkswagen</span></h4>
-                            <h4 class="small font-weight-bold">Model<span th:text="@{vehicle.vehicle_brand}" class="float-right">Model</span></h4>
-                            <h4 class="small font-weight-bold">Licence Plate<span th:text="@{vehicle.vehicle_licence_plate}" class="float-right" >DK20 2067</span></h4>
-                            <h4 class="small font-weight-bold">Type<span class="float-right">Class C</span></h4>
+                            <h4 class="small font-weight-bold">Brand<span th:text="${vehicle.vehicle_brand}" class="float-right"></span></h4>
+                            <h4 class="small font-weight-bold">Model<span th:text="${vehicle.vehicle_model}" class="float-right"></span></h4>
+                            <h4 class="small font-weight-bold">Licence Plate<span th:text="${vehicle.licence_plate}" class="float-right" ></span></h4>
+                            <h4 class="small font-weight-bold">Type<span class="float-right" th:text="${vehicle.vehicle_type_name}"></span></h4>
                         </div>
                         <div class="card-header d-flex flex-row justify-content-between align-items-center py-3">
                             <h6 class="text-primary font-weight-bold m-0">Price Information</h6>
@@ -189,37 +145,6 @@
                                 <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20pxpx;padding-bottom: 10px;">Remaining</h6><span class="float-right">978€</span></div><button class="btn btn-primary btn-sm" type="submit" style="height: 30px;font-size: 12px;">Add New Payment Amount</button></div>
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="row mb-3 d-none">
-                        <div class="col">
-                            <div class="card text-white bg-primary shadow">
-                                <div class="card-body">
-                                    <div class="row mb-2">
-                                        <div class="col">
-                                            <p class="m-0">Peformance</p>
-                                            <p class="m-0"><strong>65.2%</strong></p>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                    </div>
-                                    <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-white bg-success shadow">
-                                <div class="card-body">
-                                    <div class="row mb-2">
-                                        <div class="col">
-                                            <p class="m-0">Peformance</p>
-                                            <p class="m-0"><strong>65.2%</strong></p>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                    </div>
-                                    <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col d-flex flex-column justify-content-between">
                             <div class="card shadow mb-3">
@@ -239,7 +164,7 @@
                                     </form>
                                     <div class="form-group" style="width: 280px;">
                                         <label><strong>Capacity</strong><br></label>
-                                        <select th:field="${booking.vehicle.vehicle_type.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
+                                        <select th:field="${vehicle.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
                                             <option th:value="2" selected="">2</option>
                                             <option th:value="4">4</option>
                                             <option th:value="6">6</option>
@@ -267,7 +192,7 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Email Address</strong></label>
+                                                <div class="form-group"><label><strong>Email</strong></label>
                                                     <input class="form-control" type="email" th:name="email" th:value="${customer.email}">
                                                 </div>
                                             </div>
@@ -298,23 +223,23 @@
                                     <form>
                                         <div class="form-group">
                                             <label><strong>Street</strong></label>
-                                            <input class="form-control" type="text" th:name="street_number" th:value="${address.street_name}">
+                                            <input class="form-control" type="text" th:name="street_number" th:value="${customer.street_name}">
                                         </div>
                                         <div class="form-group"><label><strong>House Number</strong></label>
-                                            <input class="form-control" type="text" th:name="house_number" th:value="${address.house_number}">
+                                            <input class="form-control" type="text" th:name="house_number" th:value="${customer.house_number}">
                                         </div>
                                         <div class="form-group"><label><strong>Postcode</strong><br></label>
-                                            <input class="form-control" type="text" th:name="postcode" th:value="${address.postcode}">
+                                            <input class="form-control" type="text" th:name="postcode" th:value="${customer.postcode}">
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>City</strong></label>
-                                                    <input class="form-control" type="text" th:name="city" th:value="${address.city}"></div>
+                                                    <input class="form-control" type="text" th:name="city" th:value="${customer.city}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label><strong>Country</strong></label>
-                                                    <input class="form-control" type="text" th:name="country" th:value=${address.country}></div>
+                                                    <input class="form-control" type="text" th:name="country" th:value=${customer.country}></div>
                                             </div>
                                         </div>
                                     </form>
@@ -329,17 +254,17 @@
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Card Number</strong><br></label>
-                                                    <input class="form-control" type="text" th:name="card_number" th:value="${card.card_number}"></div>
+                                                    <input class="form-control" type="text" th:name="card_number" th:value="${booking.card_number}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Expiry Date</strong></label>
-                                                    <input class="form-control" type="text" th:name="card_expiry" th:value="${card.card_expiry}"></div>
+                                                    <input class="form-control" type="text" th:name="card_expiry" th:value="${booking.card_expiry}"></div>
                                             </div>
                                         </div>
                                     </form>
                                     <div class="form-group d-flex flex-column" style="width: 280px;">
                                         <label><strong>CVV</strong><br></label>
-                                        <input class="border rounded form-control-sm" type="text" th:name="card_cvv" th:value="${card.card_cvv}" style="color: #6e707e;height: 38px;width: 277;">
+                                        <input class="border rounded form-control-sm" type="text" th:name="card_cvv" th:value="${booking.card_cvv}" style="color: #6e707e;height: 38px;width: 277;">
                                     </div>
                                 </div>
                             </div>

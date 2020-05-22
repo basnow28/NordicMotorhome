@@ -32,6 +32,34 @@ public class Booking {
     private int minimum_fee;
     private Cancellation cancellation;
 
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "booking_id=" + booking_id +
+                ", customer_id=" + customer_id +
+                ", vehicle_id=" + vehicle_id +
+                ", start_date='" + start_date + '\'' +
+                ", end_date='" + end_date + '\'' +
+                ", distance_driven=" + distance_driven +
+                ", booking_status='" + booking_status + '\'' +
+                ", payment_amount=" + payment_amount +
+                ", fuel_check=" + fuel_check +
+                ", booking_notes='" + booking_notes + '\'' +
+                ", has_picnic=" + has_picnic +
+                ", has_bikerack=" + has_bikerack +
+                ", has_dvd_player=" + has_dvd_player +
+                ", has_tent=" + has_tent +
+                ", has_linen=" + has_linen +
+                ", card_number='" + card_number + '\'' +
+                ", card_expiry='" + card_expiry + '\'' +
+                ", card_cvv=" + card_cvv +
+                ", days_range='" + days_range + '\'' +
+                ", cancellation_rate=" + cancellation_rate +
+                ", minimum_fee=" + minimum_fee +
+                ", cancellation=" + cancellation +
+                '}';
+    }
+
     public int getBooking_id() {
         return booking_id;
     }

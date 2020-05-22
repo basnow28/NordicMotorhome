@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CarRepository {
+public class VehicleRepository {
 
     @Autowired
     JdbcTemplate template;
@@ -22,4 +22,9 @@ public class CarRepository {
     }
 
 
+    public Vehicle getVehicle(String vehicle_id) {
+        String sql = "SELECT * FROM vehicles INNER JOIN vehicle_types WHERE vehicles.vehicle_id = " + vehicle_id + " AND vehicles.vehicle_type_id = vehicle_types.vehicle_type_id";
+        RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
+        return template.query(sql, rowMapper).get(0);
+    }
 }
