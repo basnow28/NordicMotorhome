@@ -7,7 +7,7 @@ import javax.persistence.Id;
 @Component
 public class VehicleType {
     @Id
-    private int vehicle_typr_id;
+    private int vehicle_type_id;
     private String vehicle_type_name;
     private int cost_per_day;
     private int vehicle_capacity;
@@ -18,12 +18,12 @@ public class VehicleType {
     private boolean wifi;
     private boolean tv;
 
-    public int getVehicle_typr_id() {
-        return vehicle_typr_id;
+    public int getVehicle_type_id() {
+        return vehicle_type_id;
     }
 
-    public void setVehicle_typr_id(int vehicle_typr_id) {
-        this.vehicle_typr_id = vehicle_typr_id;
+    public void setVehicle_type_id(int vehicle_typr_id) {
+        this.vehicle_type_id = vehicle_typr_id;
     }
 
     public String getVehicle_type_name() {

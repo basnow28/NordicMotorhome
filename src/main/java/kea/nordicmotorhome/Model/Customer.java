@@ -78,11 +78,11 @@ public class Customer {
         this.driver_licence_number = driver_licence_number;
     }
 
-    public int getAddress_id() {
-        return address_id;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
