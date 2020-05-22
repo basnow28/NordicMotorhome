@@ -33,7 +33,7 @@ CREATE USER 'nordic'@'localhost' IDENTIFIED BY 'Nordic@Password1!';
 ```
 Grant all the priviliges in the nordic_database
 ```bash
-GRANT ALL ON nordic_database TO 'nordic'@'localhost';
+GRANT ALL ON nordic_database.* TO 'nordic'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
