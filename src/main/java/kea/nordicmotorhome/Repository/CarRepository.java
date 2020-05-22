@@ -16,7 +16,7 @@ public class CarRepository {
     JdbcTemplate template;
 
     public List<Vehicle> getAllVehicles(){
-        String sql = "SELECT * from vehicles";
+        String sql = "SELECT * FROM vehicles";
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
         return template.query(sql, rowMapper);
     }
