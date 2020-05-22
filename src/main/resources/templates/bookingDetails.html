@@ -47,36 +47,6 @@
                                     <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
                                         <h6 class="dropdown-header">alerts center</h6>
                                         <a class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="mr-3">
-                                                <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 12, 2019</span>
-                                                <p>A new monthly report is ready to download!</p>
-                                            </div>
-                                        </a>
-                                        <a class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="mr-3">
-                                                <div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 7, 2019</span>
-                                                <p>$290.29 has been deposited into your account!</p>
-                                            </div>
-                                        </a>
-                                        <a class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="mr-3">
-                                                <div class="bg-warning icon-circle"><i class="fas fa-exclamation-triangle text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 2, 2019</span>
-                                                <p>Spending Alert: We've noticed unusually high spending for your account.</p>
-                                            </div>
-                                        </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown no-arrow mx-1" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
-                                        <h6 class="dropdown-header">alerts center</h6>
-                                        <a class="d-flex align-items-center dropdown-item" href="#">
                                             <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../static/assets/img/avatars/avatar4.jpeg">
                                                 <div class="bg-success status-indicator"></div>
                                             </div>
@@ -128,12 +98,17 @@
                     </ul>
             </div>
             </nav>
+                <form action="/saveBooking">
             <div class="container-fluid">
-                <div class="d-flex flex-row justify-content-between" style="margin-bottom: 10px;"><button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button><button class="btn btn-primary btn-sm" type="submit">Save</button></div>
+                <div class="d-flex flex-row justify-content-between" style="margin-bottom: 10px;">
+                    <button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button>
+                    <button class="btn btn-primary btn-sm" type="submit" th:action="@{/saveBooking}">Save</button>
+                    <input class="btn btn-primary btn-sm" type="button" >
+                </div>
                 <div class="row mb-3">
                     <div class="col-lg-4">
                         <div class="card mb-3">
-                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="../static/assets/img/rent-a-motorhome.jpg" width="160" height="160">
+                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" th:src="@{/assets/img/rent-a-motorhome.jpg}" width="160" height="160">
                                 <h3 class="text-dark d-flex flex-row justify-content-center mb-4">Booking 145</h3>
                             </div>
                         </div>
@@ -146,9 +121,9 @@
                                 class="card-header d-flex flex-row justify-content-between align-items-center py-3">
                                 <h6 class="text-primary font-weight-bold m-0">Vehicle Information</h6><button class="btn btn-primary btn-sm" type="submit" style="height: 30px;font-size: 12px;">See More</button></div>
                         <div class="card-body">
-                            <h4 class="small font-weight-bold">Brand<span class="float-right">Volkswagen</span></h4>
-                            <h4 class="small font-weight-bold">Model<span class="float-right">Model</span></h4>
-                            <h4 class="small font-weight-bold">Licence Plate<span class="float-right">DK20 2067</span></h4>
+                            <h4 class="small font-weight-bold">Brand<span th:text="@{vehicle.vehicle_brand}" class="float-right">Volkswagen</span></h4>
+                            <h4 class="small font-weight-bold">Model<span th:text="@{vehicle.vehicle_brand}" class="float-right">Model</span></h4>
+                            <h4 class="small font-weight-bold">Licence Plate<span th:text="@{vehicle.vehicle_licence_plate}" class="float-right" >DK20 2067</span></h4>
                             <h4 class="small font-weight-bold">Type<span class="float-right">Class C</span></h4>
                         </div>
                         <div class="card-header d-flex flex-row justify-content-between align-items-center py-3">
@@ -255,14 +230,21 @@
                                     <form>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label for="city"><strong>Start Date</strong></label><input class="form-control" type="date"></div>
+                                                <div class="form-group"><label><strong>Start Date</strong></label><input class="form-control" type="date" th:value="@{booking.start_date}" ></div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label for="country"><strong>End Date</strong></label><input class="form-control" type="date"></div>
+                                                <div class="form-group"><label><strong>End Date</strong></label><input class="form-control" type="date" th:value="@{booking.end_date}"></div>
                                             </div>
                                         </div>
                                     </form>
-                                    <div class="form-group" style="width: 280px;"><label for="address"><strong>Capacity</strong><br></label><select class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;"><option value="capacity" selected="">2</option><option value="capacity">4</option><option value="capacity">6</option></select></div>
+                                    <div class="form-group" style="width: 280px;">
+                                        <label><strong>Capacity</strong><br></label>
+                                        <select th:field="${booking.vehicle.vehicle_type.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
+                                            <option th:value="2" selected="">2</option>
+                                            <option th:value="4">4</option>
+                                            <option th:value="6">6</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card shadow">
@@ -273,26 +255,36 @@
                                     <form>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label for="username"><strong>First Name</strong></label><input class="form-control" type="text" name="firts_name" value="John"></div>
+                                                <div class="form-group"><label><strong>First Name</strong></label>
+                                                    <input class="form-control" type="text" th:name="first_name" th:value="${customer.first_name}">
+                                                </div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label for="first_name"><strong>Last Name</strong></label><input class="form-control" type="text" name="last_name" value="Doe"></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col">
-                                                <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email" name="email" value="user@example.com"></div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group"><label for="last_name"><strong>Phone Number</strong><br></label><input class="form-control" type="text" placeholder="81523566" name="phone_number"></div>
+                                                <div class="form-group"><strong>Last Name</strong></label>
+                                                    <input class="form-control" type="text" th:name="last_name" th:value="${customer.last_name}">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label for="username"><strong>Driver Licence Number</strong><br></label><input class="form-control" type="text" name="driver_licence_number" value="2514541235"></div>
+                                                <div class="form-group"><label><strong>Email Address</strong></label>
+                                                    <input class="form-control" type="email" th:name="email" th:value="${customer.email}">
+                                                </div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label for="first_name"><strong>Date of Birth</strong><br></label><input class="form-control" type="date" name="date_of_birth"></div>
+                                                <div class="form-group"><label><strong>Phone Number</strong><br></label>
+                                                    <input class="form-control" type="text" th:name="phone_number" th:value="${customer.phone_number}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group"><label><strong>Driver Licence Number</strong><br></label>
+                                                    <input class="form-control" type="text" th:name="driver_licence_number" th:value="${customer.driver_licence_number}"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group"><label><strong>Date of Birth</strong><br></label>
+                                                    <input class="form-control" type="date" th:name="date_of_birth" th:value="${customer.date_of_birth}"></div>
                                             </div>
                                         </div>
                                     </form>
@@ -304,15 +296,25 @@
                                 </div>
                                 <div class="card-body">
                                     <form>
-                                        <div class="form-group"><label for="address"><strong>Street</strong></label><input class="form-control" type="text" name="street_number" value="Sunset Blvd"></div>
-                                        <div class="form-group"><label for="address"><strong>House Number</strong></label><input class="form-control" type="text" name="house_number" value="38"></div>
-                                        <div class="form-group"><label for="address"><strong>Postcode</strong><br></label><input class="form-control" type="text" name="postcode" value="2400"></div>
+                                        <div class="form-group">
+                                            <label><strong>Street</strong></label>
+                                            <input class="form-control" type="text" th:name="street_number" th:value="${address.street_name}">
+                                        </div>
+                                        <div class="form-group"><label><strong>House Number</strong></label>
+                                            <input class="form-control" type="text" th:name="house_number" th:value="${address.house_number}">
+                                        </div>
+                                        <div class="form-group"><label><strong>Postcode</strong><br></label>
+                                            <input class="form-control" type="text" th:name="postcode" th:value="${address.postcode}">
+                                        </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" name="city" value="Los Angeles"></div>
+                                                <div class="form-group"><label><strong>City</strong></label>
+                                                    <input class="form-control" type="text" th:name="city" th:value="${address.city}"></div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label for="country"><strong>Country</strong></label><input class="form-control" type="text" name="country" value="USA"></div>
+                                                <div class="form-group">
+                                                    <label><strong>Country</strong></label>
+                                                    <input class="form-control" type="text" th:name="country" th:value=${address.country}></div>
                                             </div>
                                         </div>
                                     </form>
@@ -326,14 +328,19 @@
                                     <form>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label for="city"><strong>Card Number</strong><br></label><input class="form-control" type="text" name="card_number"></div>
+                                                <div class="form-group"><label><strong>Card Number</strong><br></label>
+                                                    <input class="form-control" type="text" th:name="card_number" th:value="${card.card_number}"></div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label for="country"><strong>Expiry Date</strong></label><input class="form-control" type="text" name="card_expiry"></div>
+                                                <div class="form-group"><label><strong>Expiry Date</strong></label>
+                                                    <input class="form-control" type="text" th:name="card_expiry" th:value="${card.card_expiry}"></div>
                                             </div>
                                         </div>
                                     </form>
-                                    <div class="form-group d-flex flex-column" style="width: 280px;"><label for="address"><strong>CVV</strong><br></label><input class="border rounded form-control-sm" type="text" name="card_cvv" style="color: #6e707e;height: 38px;width: 277;"></div>
+                                    <div class="form-group d-flex flex-column" style="width: 280px;">
+                                        <label><strong>CVV</strong><br></label>
+                                        <input class="border rounded form-control-sm" type="text" th:name="card_cvv" th:value="${card.card_cvv}" style="color: #6e707e;height: 38px;width: 277;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -345,13 +352,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <form>
-                                <div class="form-group"><label for="signature"><strong>Additional Notes</strong><br></label><textarea class="form-control" rows="4" name="signature"></textarea></div>
+                                <div class="form-group"><label><strong>Additional Notes</strong><br></label>
+                                    <textarea class="form-control" rows="4" th:name="booking_notes" th:text="${booking.booking_notes}"></textarea></div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+                </form>
     </div>
     <footer class="bg-white sticky-footer">
         <div class="container my-auto">
@@ -359,10 +368,6 @@
         </div>
     </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
-    <script src="../static/assets/js/jquery.min.js"></script>
-    <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="../static/assets/js/script.min.js"></script>
 </body>
 
 </html>
