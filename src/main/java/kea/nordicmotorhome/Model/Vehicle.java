@@ -22,9 +22,7 @@ public class Vehicle {
     private String additional_notes;
     private String mechanic_status;
     private String cleaning_status;
-
-    @OneToOne
-    private VehicleType vehicle_type;
+    private int vehicle_type_id;
 
     public int getVehicle_id() {
         return vehicle_id;
@@ -98,11 +96,11 @@ public class Vehicle {
         this.cleaning_status = cleaning_status;
     }
 
-    public VehicleType getVehicle_type() {
-        return vehicle_type;
+    public int getVehicle_type_id() {
+        return vehicle_type_id;
     }
 
-    public void setVehicle_type(VehicleType vehicle_type) {
-        this.vehicle_type = vehicle_type;
+    public void setVehicle_type_id(int vehicle_type_id) {
+        this.vehicle_type_id = vehicle_type_id;
     }
 }

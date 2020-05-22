@@ -12,8 +12,7 @@ import javax.persistence.OneToOne;
 public class Customer {
     @Id
     private int customer_id;
-    @OneToOne
-    private Address address;
+    private int address_id;
     private String first_name;
     private String last_name;
     private String date_of_birth;
@@ -27,14 +26,6 @@ public class Customer {
 
     public void setCustomer_id(int customer_id) {
         this.customer_id = customer_id;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getFirst_name() {
@@ -83,5 +74,13 @@ public class Customer {
 
     public void setDriver_licence_number(String driver_licence_number) {
         this.driver_licence_number = driver_licence_number;
+    }
+
+    public int getAddress_id() {
+        return address_id;
+    }
+
+    public void setAddress_id(int address_id) {
+        this.address_id = address_id;
     }
 }
