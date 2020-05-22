@@ -3,14 +3,14 @@ package kea.nordicmotorhome.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 
-@Entity
+
+
 @Component
 public class Vehicle {
+    @Autowired
+    VehicleType vehicle_type;
 
     @Id
     private int vehicle_id;
@@ -22,7 +22,6 @@ public class Vehicle {
     private String additional_notes;
     private String mechanic_status;
     private String cleaning_status;
-    private int vehicle_type_id;
 
     public int getVehicle_id() {
         return vehicle_id;

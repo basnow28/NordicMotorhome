@@ -3,16 +3,18 @@ package kea.nordicmotorhome.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
-@Entity
+
+
 @Component
 public class Customer {
+    @Autowired
+    private Address address;
+
     @Id
     private int customer_id;
-    private int address_id;
+
     private String first_name;
     private String last_name;
     private String date_of_birth;

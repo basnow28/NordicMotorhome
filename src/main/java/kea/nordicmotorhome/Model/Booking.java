@@ -5,9 +5,22 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Entity
 @Component
 public class Booking {
+
+    @Autowired
+    private Vehicle vehicle;
+    @Autowired
+    private Employee employee;
+    @Autowired
+    private Season season;
+    @Autowired
+    private Cancellation cancellation;
+    @Autowired
+    private Customer customer;
+    @Autowired
+    private Card card;
+
 
     @Id
     private int booking_id;
@@ -24,12 +37,6 @@ public class Booking {
     private boolean has_tent;
     private boolean has_linen;
 
-    private int vehicle_id;
-    private int employee_id;
-    private int season_id;
-    private int cancellation_id;
-    private int customer_id;
-    private int card_id;
 
     public int getBooking_id() {
         return booking_id;
