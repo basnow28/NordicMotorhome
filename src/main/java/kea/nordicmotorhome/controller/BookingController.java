@@ -28,7 +28,7 @@ public class BookingController {
         System.out.println(bookingForm.toString());
 
         model.addAttribute(bookingForm);
-        model.addAttribute("title", "booking");
+        model.addAttribute("title", "Booking");
         return "bookingDetails.html";
     }
 
@@ -49,14 +49,6 @@ public class BookingController {
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("title", "New Booking");
         return "bookingDetails.html";
-    }
-
-    @PostMapping("/saveBooking/{vehicle}")
-    public String saveBooking(@RequestParam("customer.first_name") String first_name){
-
-        System.out.println(first_name);
-
-        return null;
     }
 
 }
