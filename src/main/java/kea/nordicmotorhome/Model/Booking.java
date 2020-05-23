@@ -59,7 +59,6 @@ public class Booking {
                 ", days_range='" + days_range + '\'' +
                 ", cancellation_rate=" + cancellation_rate +
                 ", minimum_fee=" + minimum_fee +
-                ", cancellation=" + cancellation +
                 '}';
     }
 

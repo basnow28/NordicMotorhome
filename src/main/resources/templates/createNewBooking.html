@@ -36,8 +36,8 @@
                         <p class="text-primary m-0 font-weight-bold">Check Availability</p>
                     </div>
                     <div class="card-body">
+                        <form action="/findFreeVehicles" method="post">
                         <div class="form-group d-flex flex-row justify-content-start align-items-center">
-                            <form action="/findFreeVehicles" method="post">
                             <div class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;">
                                 <label class="align-self-start"  style="margin-bottom: 0px;"><strong>Start Date</strong><br></label>
                                 <input class="border rounded" type="date" name = "startDate" th:value="startDate" style="color: #6e707e;height: 31px;"></div>
@@ -50,10 +50,13 @@
                                     <option th:value="vehicle_capacity" th:text="3">3</option>
                                     <option th:value="vehicle_capacity" th:text="4">4</option>
                                     <option th:value="vehicle_capacity" th:text="6">6</option>
-                                </select><label></label></div>
-                            <div><input  style="margin: 10px;" class="btn btn-primary btn-sm d-none d-sm-inline-block" type = "submit" value="Search"></div>
-                            </form>
+                                </select>
+                            </div>
+                            <div class="justify-content-center align-content-center">
+                            <input  style="margin: 10px;" class="btn btn-primary btn-sm d-none d-sm-inline-block" type = "submit" value="Search">
+                            </div>
                         </div>
+                        </form>
 
                         <div class="text-md-right d-flex flex-row justify-content-between align-items-xl-center dataTables_filter" id="dataTable_filter-2">
                             <div class="text-md-right d-flex flex-row align-items-center align-content-center align-self-end align-items-xl-center dataTables_filter" id="dataTable_filter-3"></div>
@@ -113,6 +116,7 @@
                 <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
             </div>
         </footer>
+    </div>
 </body>
 
 </html>
