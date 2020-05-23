@@ -60,7 +60,7 @@
                     <div class="col-lg-4">
                         <div class="card mb-3">
                             <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" th:src="@{/assets/img/rent-a-motorhome.jpg}" width="160" height="160">
-                                <h3 class="text-dark d-flex flex-row justify-content-center mb-4">Booking 145</h3>
+                                <span th:text="${title}" class="text-dark d-flex flex-row justify-content-center mb-4"></span>
                             </div>
                         </div>
                         <div class="card shadow mb-4">
@@ -72,10 +72,10 @@
                                 class="card-header d-flex flex-row justify-content-between align-items-center py-3">
                                 <h6 class="text-primary font-weight-bold m-0">Vehicle Information</h6><button class="btn btn-primary btn-sm" type="submit" style="height: 30px;font-size: 12px;">See More</button></div>
                         <div class="card-body">
-                            <h4 class="small font-weight-bold">Brand<input type="text" name="vehicle.vehicle_brand" th:text="*{vehicle.vehicle_brand}" class="float-right"></input></h4>
-                            <h4 class="small font-weight-bold">Model<input type="text" name="vehicle.vehicle_model" th:text="*{vehicle.vehicle_model}" class="float-right"></input></h4>
-                            <h4 class="small font-weight-bold">Licence Plate<input type="text" name="vehicle.licence_plate" th:text="*{vehicle.licence_plate}" class="float-right" ></input></h4>
-                            <h4 class="small font-weight-bold">Type<input type="text" name="vehicle.vehicle_type_name" th:text="*{vehicle.vehicle_type_name}" class="float-right"  ></input></h4>
+                            <h4 class="small font-weight-bold">Brand<input disabled type="text" name="vehicle.vehicle_brand" th:value="*{vehicle.vehicle_brand}" class="float-right"></h4>
+                            <h4 class="small font-weight-bold">Model<input disabled type="text" name="vehicle.vehicle_model" th:value="*{vehicle.vehicle_model}" class="float-right"></h4>
+                            <h4 class="small font-weight-bold">Licence Plate<input disabled type="text" name="vehicle.licence_plate" th:value="*{vehicle.licence_plate}" class="float-right" ></h4>
+                            <h4 class="small font-weight-bold">Type<input disabled type="text" name="vehicle.vehicle_type_name" th:value="*{vehicle.vehicle_type_name}" class="float-right"></h4>
                         </div>
                         <div class="card-header d-flex flex-row justify-content-between align-items-center py-3">
                             <h6 class="text-primary font-weight-bold m-0">Price Information</h6>
@@ -173,35 +173,35 @@
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>First Name</strong></label>
-                                                    <input class="form-control" type="text" name="bookingForm.customer.first_name" th:value="${bookingForm.customer.first_name}">
+                                                    <input class="form-control" type="text" name="customer.first_name" th:value="*{customer.first_name}">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><strong>Last Name</strong></label>
-                                                    <input class="form-control" type="text" th:name="last_name" th:value="${bookingForm.customer.last_name}">
+                                                    <input class="form-control" type="text" name="customer.last_name" th:value="*{customer.last_name}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Email</strong></label>
-                                                    <input class="form-control" type="email" th:name="email" th:value="${bookingForm.customer.email}">
+                                                    <input class="form-control" type="email" name="customer.email" th:value="*{customer.email}">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Phone Number</strong><br></label>
-                                                    <input class="form-control" type="text" th:name="phone_number" th:value="${bookingForm.customer.phone_number}">
+                                                    <input class="form-control" type="text" name="customer.phone_number" th:value="*{customer.phone_number}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Driver Licence Number</strong><br></label>
-                                                    <input class="form-control" type="text" th:name="driver_licence_number" th:value="${bookingForm.customer.driver_licence_number}"></div>
+                                                    <input class="form-control" type="text" name="customer.driver_licence_number" th:value="*{customer.driver_licence_number}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Date of Birth</strong><br></label>
-                                                    <input class="form-control" type="date" th:name="date_of_birth" th:value="${bookingForm.customer.date_of_birth}"></div>
+                                                    <input class="form-control" type="date" name="customer.date_of_birth" th:value="*{customer.date_of_birth}"></div>
                                             </div>
                                         </div>
                                 </div>
@@ -213,23 +213,23 @@
                                 <div class="card-body">
                                         <div class="form-group">
                                             <label><strong>Street</strong></label>
-                                            <input class="form-control" type="text" th:name="street_number" th:value="${bookingForm.customer.street_name}">
+                                            <input class="form-control" type="text" th:name="customer.street_name" th:value="*{customer.street_name}">
                                         </div>
                                         <div class="form-group"><label><strong>House Number</strong></label>
-                                            <input class="form-control" type="text" th:name="house_number" th:value="${bookingForm.customer.house_number}">
+                                            <input class="form-control" type="text" th:name="customer.house_number" th:value="*{customer.house_number}">
                                         </div>
                                         <div class="form-group"><label><strong>Postcode</strong><br></label>
-                                            <input class="form-control" type="text" th:name="postcode" th:value="${bookingForm.customer.postcode}">
+                                            <input class="form-control" type="text" th:name="customer.postcode" th:value="*{customer.postcode}">
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>City</strong></label>
-                                                    <input class="form-control" type="text" th:name="city" th:value="${bookingForm.customer.city}"></div>
+                                                    <input class="form-control" type="text" th:name="customer.city" th:value="*{customer.city}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label><strong>Country</strong></label>
-                                                    <input class="form-control" type="text" th:name="country" th:value=${bookingForm.customer.country}></div>
+                                                    <input class="form-control" type="text" th:name="customer.country" th:value="*{customer.country}"></div>
                                             </div>
                                         </div>
                                 </div>
@@ -243,35 +243,36 @@
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Card Number</strong><br></label>
-                                                    <input class="form-control" type="text" th:name="card_number" th:value="${bookingForm.booking.card_number}"></div>
+                                                    <input class="form-control" type="text" th:name="booking.card_number" th:value="*{booking.card_number}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Expiry Date</strong></label>
-                                                    <input class="form-control" type="text" th:name="card_expiry" th:value="${bookingForm.booking.card_expiry}"></div>
+                                                    <input class="form-control" type="text" th:name="booking.card_expiry" th:value="*{booking.card_expiry}"></div>
                                             </div>
                                         </div>
                                     <div class="form-group d-flex flex-column" style="width: 280px;">
                                         <label><strong>CVV</strong><br></label>
-                                        <input class="border rounded form-control-sm" type="text" th:name="card_cvv" th:value="${bookingForm.booking.card_cvv}" style="color: #6e707e;height: 38px;width: 277;">
+                                        <input class="border rounded form-control-sm" type="text" th:name="booking.card_cvv" th:value="*{booking.card_cvv}" style="color: #6e707e;height: 38px;width: 277;">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card shadow mb-5">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
+                <div class="card shadow mb-5">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="form-group"><label><strong>Additional Notes</strong><br></label>
-                                    <textarea class="form-control" rows="4" th:name="booking_notes" th:text="${bookingForm.booking.booking_notes}"></textarea>
+                                    <textarea class="form-control" rows="4" name="booking.booking_notes" th:text="*{booking.booking_notes}"></textarea>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
                 </form>
+            </div>
         </div>
     </div>
     <footer class="bg-white sticky-footer">

@@ -24,13 +24,11 @@ public class BookingController {
     }
 
     @PostMapping("/saveBooking")
-    String createNewBooking(Model model, @ModelAttribute("bookingForm") BookingForm bookingForm, @ModelAttribute("vehicle") Vehicle vehicle){
+    String createNewBooking(Model model, @ModelAttribute("bookingForm") BookingForm bookingForm){
         System.out.println(bookingForm.toString());
 
-        System.out.println(vehicle);
-
         model.addAttribute(bookingForm);
-
+        model.addAttribute("title", "booking");
         return "bookingDetails.html";
     }
 
@@ -47,8 +45,9 @@ public class BookingController {
         bookingForm.getBooking().setEnd_date(end_date);
         bookingForm.setVehicle(vehicleService.getVehicle(vehicle_id));
 
-        model.addAttribute("bookingForm", bookingForm);
 
+        model.addAttribute("bookingForm", bookingForm);
+        model.addAttribute("title", "New Booking");
         return "bookingDetails.html";
     }
 
