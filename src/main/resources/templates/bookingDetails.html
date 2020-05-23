@@ -35,11 +35,6 @@
                         <ul class="nav navbar-nav flex-nowrap ml-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-search"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
-                                    <form class="form-inline mr-auto navbar-search w-100">
-                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
-                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                                        </div>
-                                    </form>
                                 </div>
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
@@ -55,7 +50,7 @@
                     </ul>
             </div>
             </nav>
-                <form th:action="@{'/saveBooking/' + ${booking} + '/' + ${customer} + '/' + ${vehicle}}" method="post">
+                <form th:action="@{/saveBooking}" method="post" th:object="${bookingForm}" modelAttribute="bookingForm" >
             <div class="container-fluid">
                 <div class="d-flex flex-row justify-content-between" style="margin-bottom: 10px;">
                     <button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button>
@@ -77,10 +72,10 @@
                                 class="card-header d-flex flex-row justify-content-between align-items-center py-3">
                                 <h6 class="text-primary font-weight-bold m-0">Vehicle Information</h6><button class="btn btn-primary btn-sm" type="submit" style="height: 30px;font-size: 12px;">See More</button></div>
                         <div class="card-body">
-                            <h4 class="small font-weight-bold">Brand<span th:text="${vehicle.vehicle_brand}" class="float-right"></span></h4>
-                            <h4 class="small font-weight-bold">Model<span th:text="${vehicle.vehicle_model}" class="float-right"></span></h4>
-                            <h4 class="small font-weight-bold">Licence Plate<span th:text="${vehicle.licence_plate}" class="float-right" ></span></h4>
-                            <h4 class="small font-weight-bold">Type<span class="float-right" th:text="${vehicle.vehicle_type_name}"></span></h4>
+                            <h4 class="small font-weight-bold">Brand<input type="text" name="vehicle.vehicle_brand" th:text="*{vehicle.vehicle_brand}" class="float-right"></input></h4>
+                            <h4 class="small font-weight-bold">Model<input type="text" name="vehicle.vehicle_model" th:text="*{vehicle.vehicle_model}" class="float-right"></input></h4>
+                            <h4 class="small font-weight-bold">Licence Plate<input type="text" name="vehicle.licence_plate" th:text="*{vehicle.licence_plate}" class="float-right" ></input></h4>
+                            <h4 class="small font-weight-bold">Type<input type="text" name="vehicle.vehicle_type_name" th:text="*{vehicle.vehicle_type_name}" class="float-right"  ></input></h4>
                         </div>
                         <div class="card-header d-flex flex-row justify-content-between align-items-center py-3">
                             <h6 class="text-primary font-weight-bold m-0">Price Information</h6>
@@ -152,19 +147,17 @@
                                     <p class="text-primary m-0 font-weight-bold">Booking Information</p>
                                 </div>
                                 <div class="card-body">
-                                    <form>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Start Date</strong></label><input class="form-control" type="date" th:value="@{booking.start_date}" ></div>
+                                                <div class="form-group"><label><strong>Start Date</strong></label><input disabled class="form-control" type="date" th:value="*{booking.start_date}" ></div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label><strong>End Date</strong></label><input class="form-control" type="date" th:value="@{booking.end_date}"></div>
+                                                <div class="form-group"><label><strong>End Date</strong></label><input disabled class="form-control" type="date" th:value="*{booking.end_date}"></div>
                                             </div>
                                         </div>
-                                    </form>
                                     <div class="form-group" style="width: 280px;">
                                         <label><strong>Capacity</strong><br></label>
-                                        <select th:field="${vehicle.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
+                                        <select disabled th:field="*{vehicle.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
                                             <option th:value="2" selected="">2</option>
                                             <option th:value="4">4</option>
                                             <option th:value="6">6</option>
@@ -177,42 +170,40 @@
                                     <p class="text-primary m-0 font-weight-bold">Customers Details</p>
                                 </div>
                                 <div class="card-body">
-                                    <form>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>First Name</strong></label>
-                                                    <input class="form-control" type="text" th:name="first_name" th:value="${customer.first_name}">
+                                                    <input class="form-control" type="text" name="bookingForm.customer.first_name" th:value="${bookingForm.customer.first_name}">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><strong>Last Name</strong></label>
-                                                    <input class="form-control" type="text" th:name="last_name" th:value="${customer.last_name}">
+                                                    <input class="form-control" type="text" th:name="last_name" th:value="${bookingForm.customer.last_name}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Email</strong></label>
-                                                    <input class="form-control" type="email" th:name="email" th:value="${customer.email}">
+                                                    <input class="form-control" type="email" th:name="email" th:value="${bookingForm.customer.email}">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Phone Number</strong><br></label>
-                                                    <input class="form-control" type="text" th:name="phone_number" th:value="${customer.phone_number}">
+                                                    <input class="form-control" type="text" th:name="phone_number" th:value="${bookingForm.customer.phone_number}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Driver Licence Number</strong><br></label>
-                                                    <input class="form-control" type="text" th:name="driver_licence_number" th:value="${customer.driver_licence_number}"></div>
+                                                    <input class="form-control" type="text" th:name="driver_licence_number" th:value="${bookingForm.customer.driver_licence_number}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Date of Birth</strong><br></label>
-                                                    <input class="form-control" type="date" th:name="date_of_birth" th:value="${customer.date_of_birth}"></div>
+                                                    <input class="form-control" type="date" th:name="date_of_birth" th:value="${bookingForm.customer.date_of_birth}"></div>
                                             </div>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                             <div class="card shadow" style="margin-top: 20px;">
@@ -220,51 +211,48 @@
                                     <p class="text-primary m-0 font-weight-bold">Contact Information</p>
                                 </div>
                                 <div class="card-body">
-                                    <form>
                                         <div class="form-group">
                                             <label><strong>Street</strong></label>
-                                            <input class="form-control" type="text" th:name="street_number" th:value="${customer.street_name}">
+                                            <input class="form-control" type="text" th:name="street_number" th:value="${bookingForm.customer.street_name}">
                                         </div>
                                         <div class="form-group"><label><strong>House Number</strong></label>
-                                            <input class="form-control" type="text" th:name="house_number" th:value="${customer.house_number}">
+                                            <input class="form-control" type="text" th:name="house_number" th:value="${bookingForm.customer.house_number}">
                                         </div>
                                         <div class="form-group"><label><strong>Postcode</strong><br></label>
-                                            <input class="form-control" type="text" th:name="postcode" th:value="${customer.postcode}">
+                                            <input class="form-control" type="text" th:name="postcode" th:value="${bookingForm.customer.postcode}">
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>City</strong></label>
-                                                    <input class="form-control" type="text" th:name="city" th:value="${customer.city}"></div>
+                                                    <input class="form-control" type="text" th:name="city" th:value="${bookingForm.customer.city}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label><strong>Country</strong></label>
-                                                    <input class="form-control" type="text" th:name="country" th:value=${customer.country}></div>
+                                                    <input class="form-control" type="text" th:name="country" th:value=${bookingForm.customer.country}></div>
                                             </div>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
+
                             <div class="card shadow mb-3" style="margin-top: 20px;">
                                 <div class="card-header py-3">
                                     <p class="text-primary m-0 font-weight-bold">Card Information</p>
                                 </div>
                                 <div class="card-body">
-                                    <form>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Card Number</strong><br></label>
-                                                    <input class="form-control" type="text" th:name="card_number" th:value="${booking.card_number}"></div>
+                                                    <input class="form-control" type="text" th:name="card_number" th:value="${bookingForm.booking.card_number}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Expiry Date</strong></label>
-                                                    <input class="form-control" type="text" th:name="card_expiry" th:value="${booking.card_expiry}"></div>
+                                                    <input class="form-control" type="text" th:name="card_expiry" th:value="${bookingForm.booking.card_expiry}"></div>
                                             </div>
                                         </div>
-                                    </form>
                                     <div class="form-group d-flex flex-column" style="width: 280px;">
                                         <label><strong>CVV</strong><br></label>
-                                        <input class="border rounded form-control-sm" type="text" th:name="card_cvv" th:value="${booking.card_cvv}" style="color: #6e707e;height: 38px;width: 277;">
+                                        <input class="border rounded form-control-sm" type="text" th:name="card_cvv" th:value="${bookingForm.booking.card_cvv}" style="color: #6e707e;height: 38px;width: 277;">
                                     </div>
                                 </div>
                             </div>
@@ -276,16 +264,15 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <form>
                                 <div class="form-group"><label><strong>Additional Notes</strong><br></label>
-                                    <textarea class="form-control" rows="4" th:name="booking_notes" th:text="${booking.booking_notes}"></textarea></div>
-                            </form>
+                                    <textarea class="form-control" rows="4" th:name="booking_notes" th:text="${bookingForm.booking.booking_notes}"></textarea>
+                                </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
                 </form>
+        </div>
     </div>
     <footer class="bg-white sticky-footer">
         <div class="container my-auto">
