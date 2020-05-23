@@ -15,8 +15,8 @@ public class BookingService {
     BookingRepository bookingRepository;
 
 
-    public Booking createBooking(Booking booking, Customer customer, Card card, Address address){
-        return bookingRepository.createBooking(booking, customer, card, address);
+    public Booking createBooking(Booking booking, Customer customer){
+        return bookingRepository.createBooking(booking, customer);
     }
 
 }
