@@ -15,6 +15,9 @@ public class Booking {
     private String start_date;
     private String end_date;
     private int distance_driven;
+    private int drop_off_kilometers;
+    private int initial_cost;
+    private int extras_cost;
     private String booking_status;
     private int payment_amount;
     private boolean fuel_check;
@@ -234,5 +237,29 @@ public class Booking {
 
     public void setCancellation(Cancellation cancellation) {
         this.cancellation = cancellation;
+    }
+
+    public int getDrop_off_kilometers() {
+        return drop_off_kilometers;
+    }
+
+    public void setDrop_off_kilometers(int drop_off_kilometers) {
+        this.drop_off_kilometers = drop_off_kilometers;
+    }
+
+    public int getInitial_cost() {
+        return initial_cost;
+    }
+
+    public void setInitial_cost(int initial_cost) {
+        this.initial_cost = initial_cost;
+    }
+
+    public int getExtras_cost() {
+        return extras_cost;
+    }
+
+    public void setExtras_cost(int extras_cost) {
+        this.extras_cost = extras_cost;
     }
 }
