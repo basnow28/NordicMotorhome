@@ -49,7 +49,7 @@ public class BookingRepository {
 
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
         String sql = "SELECT vehicles.vehicle_id, vehicles.vehicle_model, vehicles.vehicle_brand, vehicle_types.vehicle_type_name, vehicle_types.vehicle_capacity, vehicles.licence_plate, vehicle_types.cost_per_day" +
-                "FROM vehicles JOIN on vehicles.vehicle_id = vehicle_types.vehicle_id JOIN vehicles.vehicle_id= bookings.vehicle.id " +
+                "FROM vehicles JOIN on vehicles.vehicle_id = vehicle_types.vehicle_id LEFT JOIN bookings ON vehicles.vehicle_id= bookings.vehicle.id " +
                 "WHERE ? NOT BETWEEN bookings.start_date AND bookings_end_date AND vehicle_types.vehicle_capacity=? " +
                 "AND bookings.start_date NOT BETWEEN ? AND ? " +
                 "AND ? NOT BETWEEN bookings.start_date AND bookings_end_date AND vehicle_types.vehicle_capacity=?";

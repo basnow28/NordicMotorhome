@@ -5,6 +5,7 @@ import kea.nordicmotorhome.Service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,6 +26,7 @@ public class BookingController {
         model.addAttribute("season_rate", season);
         int numberOfDays = parseInt(endDate.substring(0,2))- parseInt(startDate.substring(0,2));
         model.addAttribute("numberOfDays", numberOfDays);
+        System.out.println(startDate);
         return "createNewBooking";
     }
 
