@@ -23,6 +23,24 @@ public class Customer {
     private String city;
     private String country;
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customer_id=" + customer_id +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", date_of_birth='" + date_of_birth + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", email='" + email + '\'' +
+                ", driver_licence_number='" + driver_licence_number + '\'' +
+                ", street_name='" + street_name + '\'' +
+                ", house_number='" + house_number + '\'' +
+                ", postcode=" + postcode +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
+
     public int getCustomer_id() {
         return customer_id;
     }

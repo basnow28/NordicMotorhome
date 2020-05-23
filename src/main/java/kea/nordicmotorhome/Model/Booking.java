@@ -16,6 +16,9 @@ public class Booking {
     private String start_date;
     private String end_date;
     private int distance_driven;
+    private int drop_off_kilometers;
+    private int initial_cost;
+    private int extras_cost;
     private String booking_status;
     private int payment_amount;
     private boolean fuel_check;
@@ -31,6 +34,34 @@ public class Booking {
     private String days_range;
     private double cancellation_rate;
     private int minimum_fee;
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "booking_id=" + booking_id +
+                ", customer_id=" + customer_id +
+                ", vehicle_id=" + vehicle_id +
+                ", start_date='" + start_date + '\'' +
+                ", end_date='" + end_date + '\'' +
+                ", distance_driven=" + distance_driven +
+                ", booking_status='" + booking_status + '\'' +
+                ", payment_amount=" + payment_amount +
+                ", fuel_check=" + fuel_check +
+                ", booking_notes='" + booking_notes + '\'' +
+                ", has_picnic=" + has_picnic +
+                ", has_bikerack=" + has_bikerack +
+                ", has_dvd_player=" + has_dvd_player +
+                ", has_tent=" + has_tent +
+                ", has_linen=" + has_linen +
+                ", card_number='" + card_number + '\'' +
+                ", card_expiry='" + card_expiry + '\'' +
+                ", card_cvv=" + card_cvv +
+                ", days_range='" + days_range + '\'' +
+                ", cancellation_rate=" + cancellation_rate +
+                ", minimum_fee=" + minimum_fee +
+                ", cancellation=" + cancellation +
+                '}';
+    }
 
     public int getBooking_id() {
         return booking_id;
@@ -208,4 +239,27 @@ public class Booking {
         this.minimum_fee = minimum_fee;
     }
 
+    public int getDrop_off_kilometers() {
+        return drop_off_kilometers;
+    }
+
+    public void setDrop_off_kilometers(int drop_off_kilometers) {
+        this.drop_off_kilometers = drop_off_kilometers;
+    }
+
+    public int getInitial_cost() {
+        return initial_cost;
+    }
+
+    public void setInitial_cost(int initial_cost) {
+        this.initial_cost = initial_cost;
+    }
+
+    public int getExtras_cost() {
+        return extras_cost;
+    }
+
+    public void setExtras_cost(int extras_cost) {
+        this.extras_cost = extras_cost;
+    }
 }

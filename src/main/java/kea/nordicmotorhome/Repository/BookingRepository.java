@@ -2,7 +2,6 @@ package kea.nordicmotorhome.Repository;
 
 
 import kea.nordicmotorhome.Model.Booking;
-
 import kea.nordicmotorhome.Model.Customer;
 import kea.nordicmotorhome.Model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -61,5 +63,4 @@ public class BookingRepository {
         String sql = "SELECT seasons.season_rate FROM seasons WHERE ? BETWEEN season_start AND season_end";
         return template.queryForObject(sql, new Object[] {startDate}, Integer.class);
     }
-
 }

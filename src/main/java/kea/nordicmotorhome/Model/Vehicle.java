@@ -30,6 +30,30 @@ public class Vehicle {
     private boolean wifi;
     private boolean tv;
 
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "vehicle_id=" + vehicle_id +
+                ", vehicle_brand='" + vehicle_brand + '\'' +
+                ", vehicle_model='" + vehicle_model + '\'' +
+                ", licence_plate='" + licence_plate + '\'' +
+                ", vehicle_odometer=" + vehicle_odometer +
+                ", vehicle_status='" + vehicle_status + '\'' +
+                ", additional_notes='" + additional_notes + '\'' +
+                ", mechanic_status='" + mechanic_status + '\'' +
+                ", cleaning_status='" + cleaning_status + '\'' +
+                ", vehicle_type_name='" + vehicle_type_name + '\'' +
+                ", cost_per_day=" + cost_per_day +
+                ", vehicle_capacity=" + vehicle_capacity +
+                ", fuel_type='" + fuel_type + '\'' +
+                ", storage_size=" + storage_size +
+                ", kitchen=" + kitchen +
+                ", shower=" + shower +
+                ", wifi=" + wifi +
+                ", tv=" + tv +
+                '}';
+    }
+
     public int getVehicle_id() {
         return vehicle_id;
     }
