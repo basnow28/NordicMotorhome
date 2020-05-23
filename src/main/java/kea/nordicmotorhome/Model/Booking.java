@@ -11,6 +11,7 @@ public class Booking {
     @Id
     private int booking_id;
     private int customer_id;
+    private int employee_id;
     private int vehicle_id;
     private String start_date;
     private String end_date;
@@ -33,7 +34,6 @@ public class Booking {
     private String days_range;
     private double cancellation_rate;
     private int minimum_fee;
-    private Cancellation cancellation;
 
     @Override
     public String toString() {
@@ -65,6 +65,14 @@ public class Booking {
 
     public int getBooking_id() {
         return booking_id;
+    }
+
+    public int getEmployee_id() {
+        return employee_id;
+    }
+
+    public void setEmployee_id(int employee_id) {
+        this.employee_id = employee_id;
     }
 
     public void setBooking_id(int booking_id) {
@@ -229,14 +237,6 @@ public class Booking {
 
     public void setMinimum_fee(int minimum_fee) {
         this.minimum_fee = minimum_fee;
-    }
-
-    public Cancellation getCancellation() {
-        return cancellation;
-    }
-
-    public void setCancellation(Cancellation cancellation) {
-        this.cancellation = cancellation;
     }
 
     public int getDrop_off_kilometers() {

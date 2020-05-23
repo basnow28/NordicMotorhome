@@ -33,7 +33,7 @@ CREATE USER 'nordic'@'localhost' IDENTIFIED BY 'Nordic@Password1!';
 ```
 Grant all the priviliges in the nordic_database
 ```bash
-GRANT ALL ON nordic_database TO 'nordic'@'localhost';
+GRANT ALL ON nordic_database.* TO 'nordic'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
@@ -158,8 +158,11 @@ booking_id		INT		NOT NULL	AUTO_INCREMENT,
 start_date		DATE		NOT NULL,
 end_date		DATE		NOT NULL,
 distance_driven		INT,
-booking_status		VARCHAR(20)	NOT NULL,
+drop_off_kilometers 	INT,
+initial_cost 		INT,
+extras_cost		INT,
 payment_amount		INT,
+booking_status		VARCHAR(20)	NOT NULL,
 fuel_check		TINYINT,
 booking_notes		VARCHAR(500),
 has_picnic		TINYINT,
