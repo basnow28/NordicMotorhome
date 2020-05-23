@@ -1,8 +1,8 @@
 package kea.nordicmotorhome.Repository;
 
-import kea.nordicmotorhome.Model.Address;
+
 import kea.nordicmotorhome.Model.Booking;
-import kea.nordicmotorhome.Model.Card;
+
 import kea.nordicmotorhome.Model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
