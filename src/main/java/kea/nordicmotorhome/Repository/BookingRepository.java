@@ -4,9 +4,14 @@ package kea.nordicmotorhome.Repository;
 import kea.nordicmotorhome.Model.Booking;
 
 import kea.nordicmotorhome.Model.Customer;
+import kea.nordicmotorhome.Model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class BookingRepository {
@@ -40,6 +45,21 @@ public class BookingRepository {
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(), booking.getVehicle_id(), booking.getEmployee_id(), season_id, booking.getCustomer_id(), card_id);
 
         return booking;
+    }
+
+    public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
+        String sql = "SELECT vehicles.vehicle_id, vehicles.vehicle_model, vehicles.vehicle_brand, vehicle_types.vehicle_type_name, vehicle_types.vehicle_capacity, vehicles.licence_plate, vehicle_types.cost_per_day" +
+                "FROM vehicles JOIN on vehicles.vehicle_id = vehicle_types.vehicle_id JOIN vehicles.vehicle_id= bookings.vehicle.id " +
+                "WHERE ? NOT BETWEEN bookings.start_date AND bookings_end_date AND vehicle_types.vehicle_capacity=? " +
+                "AND bookings.start_date NOT BETWEEN ? AND ? " +
+                "AND ? NOT BETWEEN bookings.start_date AND bookings_end_date AND vehicle_types.vehicle_capacity=?";
+        RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
+        return template.query(sql, rowMapper, startDate, vehicle_capacity, endDate);
+    }
+
+    public int findSeasonRate(String startDate, String endDate){
+        String sql = "SELECT seasons.season_rate FROM seasons WHERE ? BETWEEN season_start AND season_end";
+        return template.queryForObject(sql, new Object[] {startDate}, Integer.class);
     }
 
 }
