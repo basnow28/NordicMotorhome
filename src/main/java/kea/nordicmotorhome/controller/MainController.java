@@ -1,6 +1,7 @@
 package kea.nordicmotorhome.controller;
 
 
+import kea.nordicmotorhome.Model.SearchAvailabilityForm;
 import kea.nordicmotorhome.Model.Vehicle;
 import kea.nordicmotorhome.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,8 @@ public class MainController {
         model.addAttribute("freeVehicles", vehicles);
         model.addAttribute("start_date", "05-06-2020");
         model.addAttribute("end_date", "12-06-2020");
-        model.addAttribute("vehicle_capacity", 2);
+        model.addAttribute("vehicle_capacity", 4);
+        model.addAttribute("availabilityForm", new SearchAvailabilityForm());
         return "createNewBooking.html";
     }
 

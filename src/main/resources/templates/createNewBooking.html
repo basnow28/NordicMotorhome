@@ -34,21 +34,21 @@
                         <p class="text-primary m-0 font-weight-bold">Check Availability</p>
                     </div>
                     <div class="card-body">
-                        <form action="/findFreeVehicles" method="post" class="form-group d-flex flex-row justify-content-start align-items-center">
+                        <form th:action="@{/findFreeVehicles}" th:object="${availabilityForm}" method="post" class="form-group d-flex flex-row justify-content-start align-items-center">
                             <div class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;">
                                 <label class="align-self-start"  style="margin-bottom: 0px;">
                                     <strong>Start Date (YYYY-MM-DD)</strong><br>
                                 </label>
-                                <input class="border rounded" type="text" name="start_date" th:value="${start_date}" style="color: #6e707e;height: 31px;">
+                                <input class="border rounded" type="text" name="start_date" th:value="*{start_date}" style="color: #6e707e;height: 31px;">
                             </div>
                             <div class="d-flex flex-column justify-content-start align-items-center">
                                 <label class="align-self-start" ><strong>End Date (YYYY-MM-DD) </strong><br></label>
-                                <input class="border rounded" type="text" name="end_date" style="color: #6e707e;height: 31px;" th:value="${end_date}">
+                                <input class="border rounded" type="text" name="end_date" style="color: #6e707e;height: 31px;" th:value="*{end_date}">
                             </div>
                             <div class="text-md-right d-flex flex-column justify-content-start align-items-center align-items-xl-center dataTables_filter"
                                 id="dataTable_filter-1" style="margin-left: 10px;height: 55px;">
                                 <label><strong>Capacity</strong><br></label>
-                                <select name="vehicle_capacity" th:value="${vehicle_capacity}" class="align-self-center form-control form-control-sm custom-select custom-select-sm" style="margin: 0;" >
+                                <select name="vehicle_capacity" th:field="*{vehicle_capacity}" class="align-self-center form-control form-control-sm custom-select custom-select-sm" style="margin: 0;" >
                                     <option th:value="2">2</option>
                                     <option th:value="3">3</option>
                                     <option th:value="4">4</option>
@@ -92,7 +92,7 @@
                                        <!--- <td th:with="result=${vehicle.cost_per_day * season * numberOfDays}"> --->
                                             <span th:text="${result}"></span>><a href="vehicleDetails.html"></a></td>
                                         <td>
-                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${start_date}+'/'+${end_date}}">Book</a>
+                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${availabilityForm.start_date}+'/'+${availabilityForm.end_date}}">Book</a>
                                       </td>
                                     </tr>
                                 </tbody>

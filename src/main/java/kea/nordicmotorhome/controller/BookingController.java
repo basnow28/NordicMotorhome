@@ -1,9 +1,6 @@
 package kea.nordicmotorhome.controller;
 
-import kea.nordicmotorhome.Model.Booking;
-import kea.nordicmotorhome.Model.BookingForm;
-import kea.nordicmotorhome.Model.Customer;
-import kea.nordicmotorhome.Model.Vehicle;
+import kea.nordicmotorhome.Model.*;
 import kea.nordicmotorhome.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,8 +71,8 @@ public class BookingController {
     }
 
     @PostMapping("/findFreeVehicles")
-    public String findFreeVehicles(@RequestParam String start_date, @RequestParam String end_date, @RequestParam(name="vehicle_capacity") Integer vehicle_capacity, Model model){
-        System.out.println(start_date+ end_date+ vehicle_capacity);
+    public String findFreeVehicles(@ModelAttribute SearchAvailabilityForm searchAvailabilityForm, Model model){
+        System.out.println(searchAvailabilityForm);
         //List<Vehicle> freeVehicles = bookingService.findFreeVehicles(start_date, end_date, vehicle_capacity);
         model.addAttribute("freeVehicles", vehicleService.getAllVehicles());
 
@@ -84,9 +81,8 @@ public class BookingController {
         //int numberOfDays = parseInt(endDate.substring(0,2))- parseInt(startDate.substring(0,2));
         //model.addAttribute("numberOfDays", numberOfDays);
         //System.out.println(startDate);
-        model.addAttribute("start_date", start_date);
-        model.addAttribute("end_date", end_date);
-        model.addAttribute("vehicle_capacity", vehicle_capacity);
+
+        model.addAttribute("availabilityForm", searchAvailabilityForm);
         return "createNewBooking";
     }
 
