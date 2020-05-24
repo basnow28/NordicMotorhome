@@ -41,22 +41,20 @@
                             <li class="nav-item dropdown no-arrow" role="presentation">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="../static/assets/img/avatars/avatar1.jpeg"></a>
                                     <div
-                                        class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
-                                        <a
-                                            class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                            class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
+                                        <a class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    </li>
-                    </ul>
-            </div>
-            </nav>
-                <form th:action="@{/saveBooking}" method="post" th:object="${bookingForm}" modelAttribute="bookingForm" >
-            <div class="container-fluid">
+                </nav>
+            <form th:action="${title} == 'New Booking'? @{/newBooking} : @{/saveBooking}" method="post" th:object="${bookingForm}" modelAttribute="bookingForm" class="container-fluid">
                 <div class="d-flex flex-row justify-content-between" style="margin-bottom: 10px;">
                     <a th:href="@{/createNewBooking}"><button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button></a>
                     <input class="btn btn-primary btn-sm" type="submit" value="Save">
                 </div>
-                <div class="row mb-3">
+                <div class="row mb-2">
                     <div class="col-lg-4">
                         <div class="card mb-3">
                             <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" th:src="@{/assets/img/rent-a-motorhome.jpg}" width="160" height="160">
@@ -81,6 +79,7 @@
                                 <a class="btn btn-primary btn-sm" th:href="@{'/vehicleDetails/'+ *{vehicle.vehicle_id}}"><span>See More</span></a>
                             </div>
                         <div class="card-body">
+                            <input type="hidden"  name="vehicle.vehicle_id" th:value="*{vehicle.vehicle_id}">
                             <h4 class="small font-weight-bold">Brand<input readonly type="text" name="vehicle.vehicle_brand" th:value="*{vehicle.vehicle_brand}" class="float-right"></h4>
                             <h4 class="small font-weight-bold">Model<input readonly type="text" name="vehicle.vehicle_model" th:value="*{vehicle.vehicle_model}" class="float-right"></h4>
                             <h4 class="small font-weight-bold">Licence Plate<input readonly type="text" name="vehicle.licence_plate" th:value="*{vehicle.licence_plate}" class="float-right" ></h4>
@@ -230,6 +229,7 @@
                             <button class="btn btn-primary btn-sm" type="submit" style="height: 30px;font-size: 12px;">Add New Payment Amount</button></div>
                     </div>
                 </div>
+                    <div class="col-lg-8">
                     <div class="row">
                         <div class="col d-flex flex-column justify-content-between">
                             <div class="card shadow mb-3">
@@ -239,15 +239,15 @@
                                 <div class="card-body">
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Start Date</strong></label><input disabled class="form-control" type="date" th:value="*{booking.start_date}" ></div>
+                                                <div class="form-group"><label><strong>Start Date</strong></label><input readonly class="form-control" type="text" name="booking.start_date" th:value="*{booking.start_date}" ></div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label><strong>End Date</strong></label><input disabled class="form-control" type="date" th:value="*{booking.end_date}"></div>
+                                                <div class="form-group"><label><strong>End Date</strong></label><input readonly class="form-control" type="text"  name="booking.end_date" th:value="*{booking.end_date}"></div>
                                             </div>
                                         </div>
                                     <div class="form-group" style="width: 280px;">
                                         <label><strong>Capacity</strong><br></label>
-                                        <select disabled th:field="*{vehicle.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
+                                        <select readonly th:field="*{vehicle.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
                                             <option th:value="2" >2</option>
                                             <option th:value="3">3</option>
                                             <option th:value="4">4</option>
@@ -264,35 +264,35 @@
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>First Name</strong></label>
-                                                    <input class="form-control" type="text" name="customer.first_name" th:value="*{customer.first_name}">
+                                                    <input required class="form-control" type="text" name="customer.first_name" th:value="*{customer.first_name}">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><strong>Last Name</strong></label>
-                                                    <input class="form-control" type="text" name="customer.last_name" th:value="*{customer.last_name}">
+                                                    <input required class="form-control" type="text" name="customer.last_name" th:value="*{customer.last_name}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Email</strong></label>
-                                                    <input class="form-control" type="email" name="customer.email" th:value="*{customer.email}">
+                                                    <input required class="form-control" type="email" name="customer.email" th:value="*{customer.email}">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Phone Number</strong><br></label>
-                                                    <input class="form-control" type="text" name="customer.phone_number" th:value="*{customer.phone_number}">
+                                                    <input required class="form-control" type="text" name="customer.phone_number" th:value="*{customer.phone_number}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Driver Licence Number</strong><br></label>
-                                                    <input class="form-control" type="text" name="customer.driver_licence_number" th:value="*{customer.driver_licence_number}"></div>
+                                                    <input required class="form-control" type="text" name="customer.driver_licence_number" th:value="*{customer.driver_licence_number}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Date of Birth</strong><br></label>
-                                                    <input class="form-control" type="date" name="customer.date_of_birth" th:value="*{customer.date_of_birth}"></div>
+                                                    <input placeholder="YYYY-MM-DD" required pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="form-control" type="text" name="customer.date_of_birth" th:value="*{customer.date_of_birth}"></div>
                                             </div>
                                         </div>
                                 </div>
@@ -304,23 +304,23 @@
                                 <div class="card-body">
                                         <div class="form-group">
                                             <label><strong>Street</strong></label>
-                                            <input class="form-control" type="text" th:name="customer.street_name" th:value="*{customer.street_name}">
+                                            <input required class="form-control" type="text" th:name="customer.street_name" th:value="*{customer.street_name}">
                                         </div>
                                         <div class="form-group"><label><strong>House Number</strong></label>
-                                            <input class="form-control" type="text" th:name="customer.house_number" th:value="*{customer.house_number}">
+                                            <input required class="form-control" type="text" th:name="customer.house_number" th:value="*{customer.house_number}">
                                         </div>
                                         <div class="form-group"><label><strong>Postcode</strong><br></label>
-                                            <input class="form-control" type="text" th:name="customer.postcode" th:value="*{customer.postcode}">
+                                            <input required class="form-control" type="text" th:name="customer.postcode" th:value="*{customer.postcode}">
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>City</strong></label>
-                                                    <input class="form-control" type="text" th:name="customer.city" th:value="*{customer.city}"></div>
+                                                    <input required class="form-control" type="text" th:name="customer.city" th:value="*{customer.city}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label><strong>Country</strong></label>
-                                                    <input class="form-control" type="text" th:name="customer.country" th:value="*{customer.country}"></div>
+                                                    <input required class="form-control" type="text" th:name="customer.country" th:value="*{customer.country}"></div>
                                             </div>
                                         </div>
                                 </div>
@@ -334,21 +334,22 @@
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Card Number</strong><br></label>
-                                                    <input class="form-control" type="text" th:name="booking.card_number" th:value="*{booking.card_number}"></div>
+                                                    <input pattern="[0-9\s]{13,19}" required inputmode="numeric" placeholder="xxxx xxxx xxxx xxxx" class="form-control" type="text" th:name="booking.card_number" th:value="*{booking.card_number}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Expiry Date</strong></label>
-                                                    <input class="form-control" type="text" th:name="booking.card_expiry" th:value="*{booking.card_expiry}"></div>
+                                                    <input pattern="\d{1,2}/\d{1,2}" inputmode="numeric" placeholder="MM/YY" required class="form-control" type="text" th:name="booking.card_expiry_date" th:value="*{booking.card_expiry_date}"></div>
                                             </div>
                                         </div>
                                     <div class="form-group d-flex flex-column" style="width: 280px;">
                                         <label><strong>CVV</strong><br></label>
-                                        <input class="border rounded form-control-sm" type="text" th:name="booking.card_cvv" th:value="*{booking.card_cvv}" style="color: #6e707e;height: 38px;width: 277;">
+                                        <input pattern="[0-9]{3,4}" required inputmode="numeric" class="border rounded form-control-sm" type="text" th:name="booking.card_cvv" th:value="*{booking.card_cvv}" style="color: #6e707e;height: 38px;width: 277;">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
                 <div class="card shadow mb-5">
                     <div class="card-body">
@@ -361,8 +362,8 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
-                </form>
             </div>
         </div>
     </div>
@@ -371,7 +372,6 @@
             <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
         </div>
     </footer>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
 </body>
 
 </html>

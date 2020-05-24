@@ -28,35 +28,59 @@
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
-
-            <div class="container-fluid">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                        <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <ul class="nav navbar-nav flex-nowrap ml-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
+                                </div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow" role="presentation">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="../static/assets/img/avatars/avatar1.jpeg"></a>
+                                    <div
+                                            class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
+                                        <a
+                                                class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                </div>
+                            </li>
+                        </ul>
+                </nav>
+                <div class="container-fluid">
                 <h3 class="text-dark mb-4">Create New Booking</h3>
                 <div class="card shadow">
                     <div class="card-header py-3">
                         <p class="text-primary m-0 font-weight-bold">Check Availability</p>
                     </div>
                     <div class="card-body">
-                        <form action="/findFreeVehicles" method="post">
-                        <div class="form-group d-flex flex-row justify-content-start align-items-center">
+                        <form th:action="@{/findFreeVehicles}" th:object="${availabilityForm}" method="post" class="form-group d-flex flex-row justify-content-start align-items-center">
                             <div class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;">
-                                <label class="align-self-start"  style="margin-bottom: 0px;"><strong>Start Date</strong><br></label>
-                                <input class="border rounded" type="date" name = "startDate" th:value="startDate" style="color: #6e707e;height: 31px;"></div>
-                            <div class="d-flex flex-column justify-content-start align-items-center"><label class="align-self-start" ><strong>End Date</strong><br>
-                            </label><input class="border rounded" type="date" name = "endDate" style="color: #6e707e;height: 31px;" th:value="endDate"></div>
+                                <label class="align-self-start"  style="margin-bottom: 0px;">
+                                    <strong>Start Date</strong><br>
+                                </label>
+                                <input placeholder="YYYY-MM-DD" required pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="border rounded" type="text" name="start_date" th:value="*{start_date}" style="color: #6e707e;height: 31px;">
+                            </div>
+                            <div class="d-flex flex-column justify-content-start align-items-center">
+                                <label class="align-self-start" ><strong>End Date</strong><br></label>
+                                <input placeholder="YYYY-MM-DD" required pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="border rounded" type="text" name="end_date" style="color: #6e707e;height: 31px;" th:value="*{end_date}">
+                            </div>
                             <div class="text-md-right d-flex flex-column justify-content-start align-items-center align-items-xl-center dataTables_filter"
-                                id="dataTable_filter-1" style="margin-left: 10px;height: 55px;"><label class="align-self-start"  style="margin: 0;margin-bottom: 0px;"><strong>Capacity</strong><br></label>
-                                <select class="align-self-center form-control form-control-sm custom-select custom-select-sm" style="margin: 0;" >
-                                    <option th:value="vehicle_capacity" th:text="2">2</option>
-                                    <option th:value="vehicle_capacity" th:text="3">3</option>
-                                    <option th:value="vehicle_capacity" th:text="4">4</option>
-                                    <option th:value="vehicle_capacity" th:text="6">6</option>
+                                id="dataTable_filter-1" style="margin-left: 10px;height: 55px;">
+                                <label><strong>Capacity</strong><br></label>
+                                <select required name="vehicle_capacity" th:field="*{vehicle_capacity}" class="align-self-center form-control form-control-sm custom-select custom-select-sm" style="margin: 0;" >
+                                    <option th:value="2">2</option>
+                                    <option th:value="3">3</option>
+                                    <option th:value="4">4</option>
+                                    <option th:value="6">6</option>
                                 </select>
                             </div>
                             <div class="justify-content-center align-content-center">
-                            <input  style="margin: 10px;" class="btn btn-primary btn-sm d-none d-sm-inline-block" type = "submit" value="Search">
+                                <input type="submit" value="Search" style="margin: 10px;" class="btn btn-primary btn-sm d-none d-sm-inline-block">
                             </div>
-                        </div>
                         </form>
+                        </div>
 
                         <div class="text-md-right d-flex flex-row justify-content-between align-items-xl-center dataTables_filter" id="dataTable_filter-2">
                             <div class="text-md-right d-flex flex-row align-items-center align-content-center align-self-end align-items-xl-center dataTables_filter" id="dataTable_filter-3"></div>
@@ -86,10 +110,10 @@
                                         <td th:text="${vehicle.vehicle_type_name}"><a href="vehicleDetails.html"></a></td>
                                         <td th:text="${vehicle.vehicle_capacity}"><a href="vehicleDetails.html"></a></td>
                                         <td th:text="${vehicle.licence_plate}"><a href="vehicleDetails.html"></a></td>
-                                        <td th:with="result=${vehicle.cost_per_day * season * numberOfDays}">
+                                       <!--- <td th:with="result=${vehicle.cost_per_day * season * numberOfDays}"> --->
                                             <span th:text="${result}"></span>><a href="vehicleDetails.html"></a></td>
                                         <td>
-                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${start_date}+'/'+${end_date}}">Book</a>
+                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${availabilityForm.start_date}+'/'+${availabilityForm.end_date}}">Book</a>
                                       </td>
                                     </tr>
                                 </tbody>
@@ -109,14 +133,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <footer class="bg-white sticky-footer">
-            <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
-            </div>
-        </footer>
     </div>
+    </div>
+    </div>
+    <footer class="bg-white sticky-footer">
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
+        </div>
+    </footer>
 </body>
 
 </html>
