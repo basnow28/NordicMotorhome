@@ -50,8 +50,7 @@
                     </ul>
             </div>
             </nav>
-                <form th:action="@{/saveBooking}" method="post" th:object="${bookingForm}" modelAttribute="bookingForm" >
-            <div class="container-fluid">
+            <form th:action="${title} == 'New Booking'? @{/newBooking} : @{/saveBooking}" method="post" th:object="${bookingForm}" modelAttribute="bookingForm" class="container-fluid">
                 <div class="d-flex flex-row justify-content-between" style="margin-bottom: 10px;">
                     <a th:href="@{/createNewBooking}"><button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button></a>
                     <input class="btn btn-primary btn-sm" type="submit" value="Save">
@@ -239,10 +238,10 @@
                                 <div class="card-body">
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Start Date</strong></label><input disabled class="form-control" type="date" th:value="*{booking.start_date}" ></div>
+                                                <div class="form-group"><label><strong>Start Date</strong></label><input disabled class="form-control" type="text" th:value="*{booking.start_date}" ></div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label><strong>End Date</strong></label><input disabled class="form-control" type="date" th:value="*{booking.end_date}"></div>
+                                                <div class="form-group"><label><strong>End Date</strong></label><input disabled class="form-control" type="text" th:value="*{booking.end_date}"></div>
                                             </div>
                                         </div>
                                     <div class="form-group" style="width: 280px;">
@@ -361,8 +360,8 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
-                </form>
             </div>
         </div>
     </div>
