@@ -79,6 +79,7 @@
                                 <a class="btn btn-primary btn-sm" th:href="@{'/vehicleDetails/'+ *{vehicle.vehicle_id}}"><span>See More</span></a>
                             </div>
                         <div class="card-body">
+                            <input type="hidden"  name="vehicle.vehicle_id" th:value="*{vehicle.vehicle_id}">
                             <h4 class="small font-weight-bold">Brand<input readonly type="text" name="vehicle.vehicle_brand" th:value="*{vehicle.vehicle_brand}" class="float-right"></h4>
                             <h4 class="small font-weight-bold">Model<input readonly type="text" name="vehicle.vehicle_model" th:value="*{vehicle.vehicle_model}" class="float-right"></h4>
                             <h4 class="small font-weight-bold">Licence Plate<input readonly type="text" name="vehicle.licence_plate" th:value="*{vehicle.licence_plate}" class="float-right" ></h4>
@@ -238,15 +239,15 @@
                                 <div class="card-body">
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Start Date</strong></label><input disabled class="form-control" type="text" th:value="*{booking.start_date}" ></div>
+                                                <div class="form-group"><label><strong>Start Date</strong></label><input readonly class="form-control" type="text" name="booking.start_date" th:value="*{booking.start_date}" ></div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label><strong>End Date</strong></label><input disabled class="form-control" type="text" th:value="*{booking.end_date}"></div>
+                                                <div class="form-group"><label><strong>End Date</strong></label><input readonly class="form-control" type="text"  name="booking.end_date" th:value="*{booking.end_date}"></div>
                                             </div>
                                         </div>
                                     <div class="form-group" style="width: 280px;">
                                         <label><strong>Capacity</strong><br></label>
-                                        <select disabled th:field="*{vehicle.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
+                                        <select readonly th:field="*{vehicle.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
                                             <option th:value="2" >2</option>
                                             <option th:value="3">3</option>
                                             <option th:value="4">4</option>
