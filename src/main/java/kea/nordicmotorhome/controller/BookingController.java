@@ -47,7 +47,8 @@ public class BookingController {
     @PostMapping("/newBooking")
     String newBooking(Model model, @ModelAttribute("bookingForm") BookingForm bookingForm){
         System.out.println(bookingForm.toString());
-
+        bookingForm.getBooking().setVehicle_id(bookingForm.getVehicle().getVehicle_id());
+        bookingService.createBooking(bookingForm.getBooking(), bookingForm.getCustomer());
         model.addAttribute(bookingForm);
         model.addAttribute("title", "Booking");
         return "bookingDetails.html";

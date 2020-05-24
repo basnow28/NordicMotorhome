@@ -26,10 +26,10 @@ public class BookingRepository {
         String sqlAddressID = "SELECT address_id FROM addresses WHERE street_name = ? AND  house_number = ? AND postcode = ? AND city = ? AND country = ?";
         int address_id=(template.queryForObject(sqlAddressID, new Object[] {customer.getStreet_name(), customer.getHouse_number(), customer.getPostcode(), customer.getCity(), customer.getCountry()}, Integer.class));
 
-        String sqlCard = "INSERT INTO card_information (card_number, card_expiry, card_cvv) VALUES (?, ?, ?)";
-        template.update(sqlCard, booking.getCard_number(), booking.getCard_expiry(), booking.getCard_cvv());
+        String sqlCard = "INSERT INTO card_information (card_number, card_expiry_date, card_cvv) VALUES (?, ?, ?)";
+        template.update(sqlCard, booking.getCard_number(), booking.getCard_expiry_date(), booking.getCard_cvv());
         String sqlCardID = "SELECT card_id FROM card_information WHERE card_number=? AND card_expiry=? AND card_cvv=?";
-        int card_id=(template.queryForObject(sqlCard, new Object[] {booking.getCard_number(), booking.getCard_expiry(), booking.getCard_cvv()}, Integer.class));
+        int card_id=(template.queryForObject(sqlCard, new Object[] {booking.getCard_number(), booking.getCard_expiry_date(), booking.getCard_cvv()}, Integer.class));
 
         String sqlCustomer = " INSERT INTO customers (first_name, last_name, date_of_birth, phone_number, email, driver_licence_number, address_id) VALUES (?,?,?,?,?,?,?)";
         template.update(sqlCustomer, customer.getFirst_name(), customer.getLast_name(), customer.getDate_of_birth(), customer.getPhone_number(), customer.getEmail(), customer.getDriver_licence_number(), address_id);

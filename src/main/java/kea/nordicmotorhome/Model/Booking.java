@@ -31,9 +31,8 @@ public class Booking {
     private boolean has_tent;
     private boolean has_linen;
     private String card_number;
-    private String card_expiry;
+    private String card_expiry_date;
     private int card_cvv;
-    private String days_range;
     private double cancellation_rate;
     private int minimum_fee;
 
@@ -56,9 +55,8 @@ public class Booking {
                 ", has_tent=" + has_tent +
                 ", has_linen=" + has_linen +
                 ", card_number='" + card_number + '\'' +
-                ", card_expiry='" + card_expiry + '\'' +
+                ", card_expiry='" + card_expiry_date + '\'' +
                 ", card_cvv=" + card_cvv +
-                ", days_range='" + days_range + '\'' +
                 ", cancellation_rate=" + cancellation_rate +
                 ", minimum_fee=" + minimum_fee +
                 '}';
@@ -200,12 +198,12 @@ public class Booking {
         this.card_number = card_number;
     }
 
-    public String getCard_expiry() {
-        return card_expiry;
+    public String getCard_expiry_date() {
+        return card_expiry_date;
     }
 
-    public void setCard_expiry(String card_expiry) {
-        this.card_expiry = card_expiry;
+    public void setCard_expiry_date(String card_expiry_date) {
+        this.card_expiry_date = card_expiry_date;
     }
 
     public int getCard_cvv() {
@@ -214,14 +212,6 @@ public class Booking {
 
     public void setCard_cvv(int card_cvv) {
         this.card_cvv = card_cvv;
-    }
-
-    public String getDays_range() {
-        return days_range;
-    }
-
-    public void setDays_range(String days_range) {
-        this.days_range = days_range;
     }
 
     public double getCancellation_rate() {
