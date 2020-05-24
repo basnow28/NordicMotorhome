@@ -73,8 +73,8 @@ public class BookingController {
     @PostMapping("/findFreeVehicles")
     public String findFreeVehicles(@ModelAttribute SearchAvailabilityForm searchAvailabilityForm, Model model){
         System.out.println(searchAvailabilityForm);
-        //List<Vehicle> freeVehicles = bookingService.findFreeVehicles(start_date, end_date, vehicle_capacity);
-        model.addAttribute("freeVehicles", vehicleService.getAllVehicles());
+        List<Vehicle> freeVehicles = bookingService.findFreeVehicles(searchAvailabilityForm.getStart_date(), searchAvailabilityForm.getEnd_date(), searchAvailabilityForm.getVehicle_capacity());
+        model.addAttribute("freeVehicles", freeVehicles);
 
         //int season = bookingService.findSeasonRate(startDate, endDate);
         //model.addAttribute("season_rate", season);
