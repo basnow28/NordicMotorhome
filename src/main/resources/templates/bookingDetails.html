@@ -41,21 +41,20 @@
                             <li class="nav-item dropdown no-arrow" role="presentation">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="../static/assets/img/avatars/avatar1.jpeg"></a>
                                     <div
-                                        class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
-                                        <a
-                                            class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                            class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
+                                        <a class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    </li>
-                    </ul>
-            </div>
-            </nav>
+                </nav>
             <form th:action="${title} == 'New Booking'? @{/newBooking} : @{/saveBooking}" method="post" th:object="${bookingForm}" modelAttribute="bookingForm" class="container-fluid">
                 <div class="d-flex flex-row justify-content-between" style="margin-bottom: 10px;">
                     <a th:href="@{/createNewBooking}"><button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button></a>
                     <input class="btn btn-primary btn-sm" type="submit" value="Save">
                 </div>
-                <div class="row mb-3">
+                <div class="row mb-2">
                     <div class="col-lg-4">
                         <div class="card mb-3">
                             <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" th:src="@{/assets/img/rent-a-motorhome.jpg}" width="160" height="160">
@@ -229,6 +228,7 @@
                             <button class="btn btn-primary btn-sm" type="submit" style="height: 30px;font-size: 12px;">Add New Payment Amount</button></div>
                     </div>
                 </div>
+                    <div class="col-lg-8">
                     <div class="row">
                         <div class="col d-flex flex-column justify-content-between">
                             <div class="card shadow mb-3">
@@ -349,6 +349,7 @@
                         </div>
                     </div>
                 </div>
+                </div>
                 <div class="card shadow mb-5">
                     <div class="card-body">
                         <div class="row">
@@ -370,7 +371,6 @@
             <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
         </div>
     </footer>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
 </body>
 
 </html>
