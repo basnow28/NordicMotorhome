@@ -264,9 +264,9 @@ VALUES("Low Season", '12-01', '02-28', 1),
 ("Mid Season", '10-01', '11-30', 1.3);
 ```
 ```bash
-INSERT INTO cancellations(days_out, minimum_fee, cancellation_rate)
-VALUES(50, 200, 0.2),
-(15, 200, 0.5),
-(1, 200, 0.8),
-(0, 200, 0.95);
+INSERT INTO seasons (season_name, season_start_month, season_end_month, season_rate)
+VALUES("Low Season", 12, 2, 1),
+("Mid Season", 3, 5, 1.3),
+("High Season", 6, 9, 1.6),
+("Mid Season", 10, 11, 1.3);
 ```
