@@ -59,6 +59,11 @@
                         <div class="card mb-3">
                             <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" th:src="@{/assets/img/rent-a-motorhome.jpg}" width="160" height="160">
                                 <span th:text="${title}" class="text-dark d-flex flex-row justify-content-center mb-4"></span>
+                                <input type="hidden"  name="booking.booking_id" th:value="*{booking.booking_id}">
+                                <input type="hidden"  name="customer.customer_id" th:value="*{customer.customer_id}">
+                                <input type="hidden"  name="customer.address_id" th:value="*{customer.address_id}">
+                                <input type="hidden"  name="booking.customer_id" th:value="*{booking.customer_id}">
+                                <input type="hidden"  name="booking.card_id" th:value="*{booking.card_id}">
                             </div>
                         </div>
                         <div class="card shadow mb-4">
@@ -103,7 +108,7 @@
                             <h6 class="text-primary font-weight-bold m-0" style="padding-bottom: 10px;">Additional Costs</h6>
                             <div class="form-group d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 200px;">
-                                    <h4 class="small font-weight-bold">Extra Kilometers (1€/km)<br></h4>
+                                    <h4 class="small font-weight-bold">Kilometers Driven (1€/km if over 400 a day)<br></h4>
                                     <input class="border rounded form-control-sm" type="number"
                                            style="width: 80px;color: #6e707e;padding-top: 6px;padding-right: 12px;padding-bottom: 6px;padding-left: 12px;"
                                            th:value="*{booking.distance_driven}" min="0"
@@ -111,7 +116,7 @@
                                     >
                                 </div>
                                 <div class="float-right flex-row justify-content-end">
-                                    <span th:text="*{booking.distance_driven}"></span>
+                                    <span th:text="*{booking.extra_kilometers_fee}"></span>
                                     <span>€</span>
                                 </div>
                             </div>
@@ -137,7 +142,7 @@
                                         <option th:value="false">no</option>
                                     </select>
                                 </div>
-                                <div th:with="tank_price=${bookingForm.booking.fuel_check ? 70 : 0 }" class="float-right flex-row justify-content-end">
+                                <div th:with="tank_price=${bookingForm.booking.fuel_check ? 0 : 70 }" class="float-right flex-row justify-content-end">
                                     <span th:text="${tank_price}"></span>
                                     <span>€</span>
                                 </div>
@@ -151,7 +156,7 @@
                                         <option th:value="false">no</option>
                                     </select>
                                 </div>
-                                <div th:with="picnic_price=${bookingForm.booking.fuel_check ? 5 : 0 }" class="float-right flex-row justify-content-end">
+                                <div th:with="picnic_price=${bookingForm.booking.has_picnic ? 5 : 0 }" class="float-right flex-row justify-content-end">
                                     <span th:text="${picnic_price}"></span>
                                     <span>€</span>
                                 </div>
@@ -164,7 +169,7 @@
                                         <option th:value="false">no</option>
                                     </select>
                                 </div>
-                                <div th:with="bikerack_price=${bookingForm.booking.fuel_check ? 2 : 0 }" class="float-right flex-row justify-content-end">
+                                <div th:with="bikerack_price=${bookingForm.booking.has_bikerack ? 2 : 0 }" class="float-right flex-row justify-content-end">
                                     <span th:text="${bikerack_price}"></span>
                                     <span>€</span>
                                 </div>
@@ -177,7 +182,7 @@
                                         <option th:value="false">no</option>
                                     </select>
                                 </div>
-                                <div th:with="dvd_price=${bookingForm.booking.fuel_check ? 1 : 0 }" class="float-right flex-row justify-content-end">
+                                <div th:with="dvd_price=${bookingForm.booking.has_dvd_player ? 1 : 0 }" class="float-right flex-row justify-content-end">
                                     <span th:text="${dvd_price}"></span>
                                     <span>€</span>
                                 </div>
@@ -190,7 +195,7 @@
                                         <option th:value="false">no</option>
                                     </select>
                                 </div>
-                                <div th:with="tent_price=${bookingForm.booking.fuel_check ? 4 : 0 }" class="float-right flex-row justify-content-end">
+                                <div th:with="tent_price=${bookingForm.booking.has_tent ? 4 : 0 }" class="float-right flex-row justify-content-end">
                                     <span th:text="${tent_price}"></span>
                                     <span>€</span>
                                 </div>
@@ -203,25 +208,25 @@
                                         <option th:value="false">no</option>
                                     </select>
                                 </div>
-                                <div th:with="bed_linen_price=${bookingForm.booking.fuel_check ? 3 : 0 }" class="float-right flex-row justify-content-end">
+                                <div th:with="bed_linen_price=${bookingForm.booking.has_linen ? 3 : 0 }" class="float-right flex-row justify-content-end">
                                     <span th:text="${bed_linen_price}"></span>
                                     <span>€</span>
                                 </div>
                             </div>
                             <div class="form-group d-flex justify-content-between align-items-center align-content-center">
-                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20pxpx;padding-bottom: 10px;">Total</h6>
+                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Total</h6>
                                 <div class="float-right flex-row justify-content-end">
                                     <span>€</span>
                                 </div>
                             </div>
                             <div class="form-group d-flex justify-content-between align-items-center align-content-center">
-                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20pxpx;padding-bottom: 10px;">Paid</h6>
+                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Paid</h6>
                                 <div class="float-right flex-row justify-content-end">
                                     <span>€</span>
                                 </div>
                             </div>
                             <div class="form-group d-flex justify-content-between align-items-center align-content-center">
-                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20pxpx;padding-bottom: 10px;">Remaining</h6>
+                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Remaining</h6>
                                 <div class="float-right flex-row justify-content-end">
                                     <span>€</span>
                                 </div>

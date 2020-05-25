@@ -32,19 +32,35 @@ public class BookingController {
     String bookingDetails(@PathVariable("id") int id,  Model model){
         BookingForm bookingForm = new BookingForm();
         bookingForm.setBooking(bookingService.getBooking(id));
-        System.out.println("got the booking");
         bookingForm.setCustomer(customerService.getCustomer(bookingForm.getBooking().getCustomer_id()));
         bookingForm.setVehicle(vehicleService.getVehicle(bookingForm.getBooking().getVehicle_id()));
+        bookingForm.getBooking().setExtra_kilometers_fee(
+                bookingService.calculateExtraKilometersPrice(
+                        bookingForm.getBooking().getStart_date(),
+                        bookingForm.getBooking().getEnd_date(),
+                        bookingForm.getBooking().getDistance_driven()));
+
         model.addAttribute("bookingForm", bookingForm);
+        model.addAttribute("title", "Booking " + bookingForm.getBooking().getBooking_id());
+
         return "bookingDetails.html";
     }
 
     @PostMapping("/saveBooking")
     String saveBooking(Model model, @ModelAttribute("bookingForm") BookingForm bookingForm){
-        System.out.println(bookingForm.toString());
+        bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
+        bookingForm.getBooking().setExtra_kilometers_fee(
+                bookingService.calculateExtraKilometersPrice(
+                        bookingForm.getBooking().getStart_date(),
+                        bookingForm.getBooking().getEnd_date(),
+                        bookingForm.getBooking().getDistance_driven()));
+
+        bookingService.updateBooking(bookingForm.getBooking(), bookingForm.getCustomer());
+
 
         model.addAttribute(bookingForm);
-        model.addAttribute("title", "Booking");
+        model.addAttribute("title", "Booking " + bookingForm.getBooking().getBooking_id());
+
         return "bookingDetails.html";
     }
 
@@ -55,6 +71,11 @@ public class BookingController {
         bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
 
         int booking_id = bookingService.createBooking(bookingForm.getBooking(), bookingForm.getCustomer());
+        bookingForm.getBooking().setExtra_kilometers_fee(
+                bookingService.calculateExtraKilometersPrice(
+                        bookingForm.getBooking().getStart_date(),
+                        bookingForm.getBooking().getEnd_date(),
+                        bookingForm.getBooking().getDistance_driven()));
 
         bookingForm.getBooking().setBooking_id(booking_id);
         model.addAttribute(bookingForm);
@@ -85,7 +106,6 @@ public class BookingController {
 
     @PostMapping("/findFreeVehicles")
     public String findFreeVehicles(@ModelAttribute SearchAvailabilityForm searchAvailabilityForm, Model model){
-
         ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchAvailabilityForm.getStart_date(), searchAvailabilityForm.getEnd_date(), searchAvailabilityForm.getVehicle_capacity());
         bookingService.setVehiclesQuotes(searchAvailabilityForm.getStart_date(), searchAvailabilityForm.getEnd_date(), freeVehicles);
 

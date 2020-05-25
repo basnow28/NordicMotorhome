@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.time.temporal.ChronoUnit;
 
@@ -23,8 +24,15 @@ public class BookingService {
     }
 
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
-        return bookingRepository.findFreeVehicles(startDate, endDate, vehicle_capacity);
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate start_date  = LocalDate.parse(startDate,pattern);
+        LocalDate end_date = LocalDate.parse(endDate, pattern);
+        if(start_date.isBefore(end_date)) {
+            return bookingRepository.findFreeVehicles(startDate, endDate, vehicle_capacity);
+        }
+        return new ArrayList<Vehicle>();
     }
+
     public int findSeasonRate(String startDate, String endDate){
         return bookingRepository.findSeasonRate(startDate, endDate);
     }
@@ -105,9 +113,9 @@ public class BookingService {
         LocalDate endDate = LocalDate.parse(end_date, pattern);
         int days = (int) ChronoUnit.DAYS.between(startDate, endDate);
 
-        double extraKilometersPrice = (kilometers/days)/400*bookingRepository.getExtraPrice("extra_kilometer");
+        double extraKilometersPrice = (kilometers - days*400)*bookingRepository.getExtraPrice("extra_kilometer");
 
-        return extraKilometersPrice;
+        return extraKilometersPrice < 0? 0.0 : extraKilometersPrice;
     }
 
     public double calculateCancellationRate(){
@@ -116,5 +124,9 @@ public class BookingService {
 
     public Booking getBooking(int id) {
         return bookingRepository.getBooking(id);
+    }
+
+    public void updateBooking(Booking booking, Customer customer) {
+        bookingRepository.updateBooking(booking, customer);
     }
 }
