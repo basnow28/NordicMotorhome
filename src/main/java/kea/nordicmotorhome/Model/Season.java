@@ -10,8 +10,8 @@ public class Season {
     @Id
     private int season_id;
     private String season_name;
-    private String season_start;
-    private String season_end;
+    private int season_start_month;
+    private int season_end_month;
     private double season_rate;
 
     public int getSeason_id() {
@@ -30,20 +30,20 @@ public class Season {
         this.season_name = season_name;
     }
 
-    public String getSeason_start() {
-        return season_start;
+    public int getSeason_start_month() {
+        return season_start_month;
     }
 
-    public void setSeason_start(String season_start) {
-        this.season_start = season_start;
+    public void setSeason_start_month(int season_start_month) {
+        this.season_start_month = season_start_month;
     }
 
-    public String getSeason_end() {
-        return season_end;
+    public int getSeason_end_month() {
+        return season_end_month;
     }
 
-    public void setSeason_end(String season_end) {
-        this.season_end = season_end;
+    public void setSeason_end_month(int season_end_month) {
+        this.season_end_month = season_end_month;
     }
 
     public double getSeason_rate() {

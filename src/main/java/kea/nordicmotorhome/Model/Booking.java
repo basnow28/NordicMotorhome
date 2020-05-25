@@ -19,10 +19,10 @@ public class Booking {
     private String end_date;
     private int distance_driven;
     private int drop_off_kilometers;
-    private int initial_cost;
-    private int extras_cost;
+    private double initial_cost;
+    private double extras_cost;
     private String booking_status;
-    private int payment_amount;
+    private double payment_amount;
     private boolean fuel_check;
     private String booking_notes;
     private boolean has_picnic;
@@ -124,14 +124,6 @@ public class Booking {
 
     public void setBooking_status(String booking_status) {
         this.booking_status = booking_status;
-    }
-
-    public int getPayment_amount() {
-        return payment_amount;
-    }
-
-    public void setPayment_amount(int payment_amount) {
-        this.payment_amount = payment_amount;
     }
 
     public boolean isFuel_check() {
@@ -238,19 +230,27 @@ public class Booking {
         this.drop_off_kilometers = drop_off_kilometers;
     }
 
-    public int getInitial_cost() {
+    public double getInitial_cost() {
         return initial_cost;
     }
 
-    public void setInitial_cost(int initial_cost) {
+    public void setInitial_cost(double initial_cost) {
         this.initial_cost = initial_cost;
     }
 
-    public int getExtras_cost() {
+    public double getExtras_cost() {
         return extras_cost;
     }
 
-    public void setExtras_cost(int extras_cost) {
+    public void setExtras_cost(double extras_cost) {
         this.extras_cost = extras_cost;
+    }
+
+    public double getPayment_amount() {
+        return payment_amount;
+    }
+
+    public void setPayment_amount(double payment_amount) {
+        this.payment_amount = payment_amount;
     }
 }
