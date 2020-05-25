@@ -3,6 +3,7 @@ package kea.nordicmotorhome.Repository;
 
 import kea.nordicmotorhome.Model.Booking;
 import kea.nordicmotorhome.Model.Customer;
+import kea.nordicmotorhome.Model.Season;
 import kea.nordicmotorhome.Model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -103,5 +105,12 @@ public class BookingRepository {
     public int findSeasonRate(String startDate, String endDate){
         String sql = "SELECT seasons.season_rate FROM seasons WHERE ? BETWEEN season_start AND season_end";
         return template.queryForObject(sql, new Object[] {startDate}, Integer.class);
+    }
+
+    public List<Season> getSeasons() {
+        String sql = "SELECT * FROM seasons;";
+        RowMapper<Season> rowMapper = new BeanPropertyRowMapper<>(Season.class);
+
+        return template.query(sql, rowMapper);
     }
 }
