@@ -197,6 +197,14 @@ PRIMARY KEY(payment_id)
 );
 ```
 
+```bash
+CREATE TABLE extras (
+extra_id INT NOT NULL AUTO_INCREMENT,
+extra_name VARCHAR(20) NOT NULL UNIQUE, 
+extra_price DOUBLE,
+PRIMARY KEY(extra_id)
+);
+```
 # Data
 
 by Dagmara Przygocka @dprzygocka <https://github.com/dprzygocka>
@@ -262,6 +270,20 @@ VALUES
 (31, "Winnebago Adventurer", "36Z", "D-540N", 65280, "READY", "", "READY", "READY", 8),
 (32, "Winnebago Adventurer", "36Z", "D-6320", 360450, "READY", "", "READY", "READY", 8);
 ```
+
+```bash
+INSERT INTO extras (extra_name, extra_price)
+VALUES 
+('pick_up_kilometer', 0.7),
+('extra_kilometer', 1.0),
+('fuel', 70.0),
+('picnic', 5),
+('bike_rack', 2.0),
+('dvd_player', 1.0),
+('tent', 4.0),
+('bed_linen', 3.0);
+```
+
 by David Hards @dshards <https://github.com/dshards>
 ```bash
 INSERT INTO seasons (season_name, season_start, season_end, season_rate)
