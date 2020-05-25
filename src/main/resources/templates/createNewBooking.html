@@ -110,10 +110,9 @@
                                         <td th:text="${vehicle.vehicle_type_name}"><a href="vehicleDetails.html"></a></td>
                                         <td th:text="${vehicle.vehicle_capacity}"><a href="vehicleDetails.html"></a></td>
                                         <td th:text="${vehicle.licence_plate}"><a href="vehicleDetails.html"></a></td>
-                                       <!--- <td th:with="result=${vehicle.cost_per_day * season * numberOfDays}"> --->
-                                            <span th:text="${result}"></span>><a href="vehicleDetails.html"></a></td>
+                                        <td th:text="${vehicle.vehicle_calculated_quote}"><span><span>€</span></span>><a href="vehicleDetails.html"></a></td>
                                         <td>
-                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${availabilityForm.start_date}+'/'+${availabilityForm.end_date}}">Book</a>
+                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${availabilityForm.start_date}+'/'+${availabilityForm.end_date}+'/'+${vehicle.vehicle_calculated_quote}}">Book</a>
                                       </td>
                                     </tr>
                                 </tbody>

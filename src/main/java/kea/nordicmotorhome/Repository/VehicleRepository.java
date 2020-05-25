@@ -16,7 +16,7 @@ public class VehicleRepository {
     JdbcTemplate template;
 
     public List<Vehicle> getAllVehicles(){
-        String sql = "SELECT * FROM vehicles";
+        String sql = "SELECT * FROM vehicles INNER JOIN vehicle_types WHERE vehicles.vehicle_type_id = vehicle_types.vehicle_type_id";
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
         return template.query(sql, rowMapper);
     }

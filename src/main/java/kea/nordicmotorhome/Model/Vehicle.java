@@ -29,6 +29,7 @@ public class Vehicle {
     private boolean shower;
     private boolean wifi;
     private boolean tv;
+    private double vehicle_calculated_quote;
 
     @Override
     public String toString() {
@@ -196,5 +197,13 @@ public class Vehicle {
 
     public void setTv(boolean tv) {
         this.tv = tv;
+    }
+
+    public double getVehicle_calculated_quote() {
+        return vehicle_calculated_quote;
+    }
+
+    public void setVehicle_calculated_quote(double vehicle_calculated_quote) {
+        this.vehicle_calculated_quote = vehicle_calculated_quote;
     }
 }
