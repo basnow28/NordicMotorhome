@@ -91,13 +91,16 @@ public class BookingRepository {
 
 
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
-        String sql = "SELECT vehicles.vehicle_id, vehicles.vehicle_model, vehicles.vehicle_brand, vehicle_types.vehicle_type_name, vehicle_types.vehicle_capacity, vehicles.licence_plate, vehicle_types.cost_per_day" +
-                "FROM vehicles JOIN on vehicles.vehicle_id = vehicle_types.vehicle_id LEFT JOIN bookings ON vehicles.vehicle_id= bookings.vehicle.id " +
-                "WHERE ? NOT BETWEEN bookings.start_date AND bookings_end_date AND vehicle_types.vehicle_capacity=? " +
-                "AND bookings.start_date NOT BETWEEN ? AND ? " +
-                "AND ? NOT BETWEEN bookings.start_date AND bookings_end_date AND vehicle_types.vehicle_capacity=?";
+        String sql = "SELECT vehicles.vehicle_id, vehicles.vehicle_model, vehicles.vehicle_brand, \n" +
+                "vehicle_types.vehicle_type_name, vehicle_types.vehicle_capacity, vehicles.licence_plate, \n" + "vehicle_types.cost_per_day\n" +
+                "FROM vehicles JOIN vehicle_types\n" +
+                "ON vehicles.vehicle_type_id = vehicle_types.vehicle_type_id\n" +
+                "WHERE vehicle_types.vehicle_capacity=? AND vehicles.vehicle_id NOT IN \n" +
+                "(SELECT vehicles.vehicle_id FROM vehicles JOIN bookings " +
+                "ON vehicles.vehicle_id=bookings.vehicle_id\n" +
+                "WHERE bookings.start_date < ? AND bookings.end_date > ? )";
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
-        return template.query(sql, rowMapper, startDate, vehicle_capacity, endDate);
+        return template.query(sql, rowMapper, vehicle_capacity, endDate,startDate);
     }
 
     public int findSeasonRate(String startDate, String endDate){
