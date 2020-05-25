@@ -1,23 +1,16 @@
 package kea.nordicmotorhome.Service;
 
+import kea.nordicmotorhome.Model.*;
 
-import kea.nordicmotorhome.Model.Booking;
-
-import kea.nordicmotorhome.Model.Customer;
-
-import kea.nordicmotorhome.Model.Season;
-import kea.nordicmotorhome.Model.Vehicle;
 import kea.nordicmotorhome.Repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 @Service
 public class BookingService {
@@ -74,5 +67,54 @@ public class BookingService {
         for(Vehicle vehicle : freeVehicles){
             vehicle.setVehicle_calculated_quote(getInitialQuote(start_date, end_date, vehicle.getCost_per_day()));
         }
+    }
+
+    public double setExtrasPrice(Booking booking){
+        double extrasPrice = 0;
+
+        if(booking.isHas_picnic()){
+            extrasPrice += bookingRepository.getExtraPrice("picnic");
+        }
+        if(booking.isHas_bikerack()){
+            extrasPrice += bookingRepository.getExtraPrice("bike_rack");
+        }
+        if(booking.isHas_dvd_player()){
+            extrasPrice += bookingRepository.getExtraPrice("dvd_player");
+        }
+        if(booking.isHas_tent()){
+            extrasPrice += bookingRepository.getExtraPrice("tent");
+        }
+        if(booking.isHas_dvd_player()){
+            extrasPrice += bookingRepository.getExtraPrice("bed_linen");
+        }
+        if(!booking.isFuel_check()){
+            extrasPrice += bookingRepository.getExtraPrice("fuel");
+        }
+        if(booking.getDrop_off_kilometers() > 0){
+            extrasPrice += booking.getDrop_off_kilometers() * bookingRepository.getExtraPrice("pick_up_kilometer");
+        }
+
+        extrasPrice += calculateExtraKilometersPrice(booking.getStart_date(), booking.getEnd_date(), booking.getDistance_driven());
+
+        return extrasPrice;
+    }
+
+    public double calculateExtraKilometersPrice(String start_date, String end_date, int kilometers){
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(start_date, pattern);
+        LocalDate endDate = LocalDate.parse(end_date, pattern);
+        int days = (int) ChronoUnit.DAYS.between(startDate, endDate);
+
+        double extraKilometersPrice = (kilometers/days)/400*bookingRepository.getExtraPrice("extra_kilometer");
+
+        return extraKilometersPrice;
+    }
+
+    public double calculateCancellationRate(){
+        return 0.0;
+    }
+
+    public Booking getBooking(int id) {
+        return bookingRepository.getBooking(id);
     }
 }

@@ -1,10 +1,7 @@
 package kea.nordicmotorhome.Repository;
 
 
-import kea.nordicmotorhome.Model.Booking;
-import kea.nordicmotorhome.Model.Customer;
-import kea.nordicmotorhome.Model.Season;
-import kea.nordicmotorhome.Model.Vehicle;
+import kea.nordicmotorhome.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,5 +117,16 @@ public class BookingRepository {
         RowMapper<Season> rowMapper = new BeanPropertyRowMapper<>(Season.class);
 
         return template.query(sql, rowMapper);
+    }
+
+    public double getExtraPrice(String extra_name) {
+        String sql = "SELECT extra_price FROM extras WHERE extra_name = ?" ;
+        return template.queryForObject(sql,new Object[]{extra_name}, Double.class);
+    }
+
+    public Booking getBooking(int id) {
+        String sql = "SELECT * FROM bookings INNER JOIN card_information ON bookings.card_id = card_information.card_id WHERE booking_id = ?";
+        RowMapper<Booking> rowMapper = new BeanPropertyRowMapper<>(Booking.class);
+        return template.query(sql, rowMapper, id).get(0);
     }
 }
