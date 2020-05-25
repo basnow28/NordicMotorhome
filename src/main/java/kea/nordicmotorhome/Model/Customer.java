@@ -22,6 +22,7 @@ public class Customer {
     private int postcode;
     private String city;
     private String country;
+    private int address_id;
 
     @Override
     public String toString() {
@@ -135,5 +136,13 @@ public class Customer {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public int getAddress_id() {
+        return address_id;
+    }
+
+    public void setAddress_id(int address_id) {
+        this.address_id = address_id;
     }
 }
