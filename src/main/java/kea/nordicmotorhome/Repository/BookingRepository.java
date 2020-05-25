@@ -54,7 +54,7 @@ public class BookingRepository {
 
      */
 
-    public Booking createBooking(Booking booking, Customer customer) { //employee_id is manual for now
+    public int createBooking(Booking booking, Customer customer) { //employee_id is manual for now
         int address_id = createAddress(customer);
         int card_id = createCardInformation(booking);
         int customer_id = createCustomer(customer, address_id);
@@ -64,6 +64,9 @@ public class BookingRepository {
                 "start_date, " +
                 "end_date, " +
                 "distance_driven, " +
+                "drop_off_kilometers, "+
+                "initial_cost, "+
+                "extras_cost, " +
                 "booking_status, " +
                 "payment_amount, " +
                 "fuel_check, " +
@@ -75,19 +78,20 @@ public class BookingRepository {
                 "has_linen, " +
                 "vehicle_id, " +
                 "employee_id, " +
-                "season_id, " +
                 "cancellation_id, " +
                 "customer_id, " +
                 "card_id) " +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         template.update(sqlBooking, booking.getStart_date(), booking.getEnd_date(),
-                booking.getDistance_driven(), booking.getBooking_status(),
+                booking.getDistance_driven(), booking.getDrop_off_kilometers(), booking.getInitial_cost(), booking.getExtras_cost(), booking.getBooking_status(),
                 booking.getPayment_amount(), booking.isFuel_check(), booking.getBooking_notes(), booking.isHas_picnic(), booking.isHas_bikerack(),
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(),
-                booking.getVehicle_id(), 4, 9, 9, customer_id, card_id);
+                booking.getVehicle_id(), 1, 1, customer_id, card_id);
 
-        return booking;
+        String sqlBookingID = "SELECT booking_id FROM bookings ORDER BY customer_id DESC LIMIT 1";
+        int booking_id = template.queryForObject(sqlBookingID, Integer.class);
 
+        return booking_id;
     }
 
 

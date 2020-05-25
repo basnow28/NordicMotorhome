@@ -44,11 +44,13 @@ public class BookingController {
 
     @PostMapping("/newBooking")
     String createNewBooking(Model model, @ModelAttribute("bookingForm") BookingForm bookingForm){
-        System.out.println(bookingForm.toString());
+
         bookingForm.getBooking().setVehicle_id(bookingForm.getVehicle().getVehicle_id());
-        bookingService.createBooking(bookingForm.getBooking(), bookingForm.getCustomer());
+        int booking_id = bookingService.createBooking(bookingForm.getBooking(), bookingForm.getCustomer());
+
+        bookingForm.getBooking().setBooking_id(booking_id);
         model.addAttribute(bookingForm);
-        model.addAttribute("title", "Booking");
+        model.addAttribute("title", "Booking "+booking_id);
         return "bookingDetails.html";
     }
 
@@ -76,8 +78,7 @@ public class BookingController {
     @PostMapping("/findFreeVehicles")
     public String findFreeVehicles(@ModelAttribute SearchAvailabilityForm searchAvailabilityForm, Model model){
 
-        List<Vehicle> freeVehicles = bookingService.findFreeVehicles(searchAvailabilityForm.getStart_date(), searchAvailabilityForm.getEnd_date(), searchAvailabilityForm.getVehicle_capacity());
-        ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) vehicleService.getAllVehicles();
+        ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchAvailabilityForm.getStart_date(), searchAvailabilityForm.getEnd_date(), searchAvailabilityForm.getVehicle_capacity());
         bookingService.setVehiclesQuotes(searchAvailabilityForm.getStart_date(), searchAvailabilityForm.getEnd_date(), freeVehicles);
 
         model.addAttribute("freeVehicles", freeVehicles);

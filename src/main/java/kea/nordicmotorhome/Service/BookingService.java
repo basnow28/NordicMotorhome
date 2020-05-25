@@ -25,7 +25,7 @@ public class BookingService {
     BookingRepository bookingRepository;
 
 
-    public Booking createBooking(Booking booking, Customer customer){
+    public int createBooking(Booking booking, Customer customer){
         return bookingRepository.createBooking(booking, customer);
     }
 
@@ -38,33 +38,23 @@ public class BookingService {
 
     private double getInitialQuote(String start_date, String end_date, int vehiclePricePerDay) {
         ArrayList<Season> seasons = (ArrayList<Season>) bookingRepository.getSeasons();
-        System.out.println("Got the season" + seasons.toString());
         ///Getting a format to change string to LocalDate object
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         double quote = 0.0;
 
         LocalDate startDate  = LocalDate.parse(start_date, pattern);
         LocalDate endDate = LocalDate.parse(end_date, pattern);
-        System.out.println(startDate);
-        System.out.println(endDate);
 
         ///Calculating a season rate for each day of the upcoming booking
         for(LocalDate day = startDate; day.isBefore(endDate); day = day.plusDays(1L)){
-            //System.out.println(day);
             double result = getPricePerDayDependingOnASeason(day,seasons, vehiclePricePerDay);
-            System.out.println(result);
             quote += result;
         }
-        System.out.println(quote);
         return Math.floor(quote);
     }
 
     private double getPricePerDayDependingOnASeason(LocalDate day, ArrayList<Season> seasons, int vehiclePricePerDay){
         for(Season season : seasons){
-            System.out.println(season.getSeason_start_month());
-            System.out.println(season.getSeason_end_month());
-            System.out.println("Vehicle price" + vehiclePricePerDay);
-            System.out.println("Vehicle price" + season.getSeason_rate());
             if(season.getSeason_id() == 1){
                 if(day.getMonthValue() == season.getSeason_start_month()){
 
@@ -82,9 +72,7 @@ public class BookingService {
 
     public void setVehiclesQuotes(String start_date, String end_date, ArrayList<Vehicle> freeVehicles) {
         for(Vehicle vehicle : freeVehicles){
-            System.out.println("SetVehiclesQuotes");
             vehicle.setVehicle_calculated_quote(getInitialQuote(start_date, end_date, vehicle.getCost_per_day()));
-            System.out.println("Vehicle quote " + vehicle.getVehicle_calculated_quote());
         }
     }
 }
