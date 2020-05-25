@@ -98,7 +98,7 @@ public class BookingRepository {
                 "WHERE vehicle_types.vehicle_capacity=? AND vehicles.vehicle_id NOT IN \n" +
                 "(SELECT vehicles.vehicle_id FROM vehicles JOIN bookings " +
                 "ON vehicles.vehicle_id=bookings.vehicle_id\n" +
-                "WHERE bookings.start_date < ? AND bookings.end_date > ? )";
+                "WHERE bookings.start_date <= ? AND bookings.end_date >= ? )";
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
         return template.query(sql, rowMapper, vehicle_capacity, endDate,startDate);
     }
