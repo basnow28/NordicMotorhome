@@ -125,9 +125,9 @@ public class BookingController {
     public String findBooking(@ModelAttribute FindBookingForm findBookingForm, Model model){
         ArrayList<Booking> bookinglist = (ArrayList<Booking>) bookingService.getBookings(findBookingForm.getStart_date(), findBookingForm.getEnd_date(), findBookingForm.getInputType(), findBookingForm.getInputText());
 
-        model.addAttribute("findBooking", bookinglist);
+        model.addAttribute("bookings", bookinglist);
         model.addAttribute("FindBookingForm", findBookingForm);
-        return "findBooking";
+        return "bookings";
     }
 
 }
