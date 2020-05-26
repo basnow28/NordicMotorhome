@@ -210,12 +210,12 @@ by Dagmara Przygocka @dprzygocka <https://github.com/dprzygocka>
 
 ```bash
 INSERT INTO cancellations (
-cancellation_id, days_out, minimum_fee, cancellation_rate)
+cancellation_id, minimum_fee, cancellation_rate, days_out_max, days_out_min)
 VALUES (1,200,0.2, 50, 16),
 (2,200,0.5, 15, 2),
-(3,200, 0.8,1,1),
 (4,200,0.95, 0,0);
 ```
+(3,200, 0.8,1,1),
 
 ```bash
 INSERT INTO vehicle_types (vehicle_type_id,vehicle_type_name, cost_per_day, vehicle_capacity, fuel_type, storage_size, kitchen, shower, wifi, tv) VALUES
