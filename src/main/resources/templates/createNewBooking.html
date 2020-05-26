@@ -55,7 +55,7 @@
                         <p class="text-primary m-0 font-weight-bold">Check Availability</p>
                     </div>
                     <div class="card-body">
-                        <form method="post" th:object="${availabilityForm}" class="form-group d-flex flex-row justify-content-start align-items-center">
+                        <form th:action="@{/findFreeVehicles}" method="post" th:object="${availabilityForm}" class="form-group d-flex flex-row justify-content-start align-items-center">
                             <div class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;">
                                 <label class="align-self-start"  style="margin-bottom: 0px;">
                                     <strong>Start Date</strong><br>
