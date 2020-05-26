@@ -218,7 +218,6 @@ VALUES
 (4,200,0.8, 1,1),
 (5,200,0.95,0,0);
 ```
-(3,200, 0.8,1,1),
 
 ```bash
 INSERT INTO vehicle_types (vehicle_type_id,vehicle_type_name, cost_per_day, vehicle_capacity, fuel_type, storage_size, kitchen, shower, wifi, tv) VALUES
