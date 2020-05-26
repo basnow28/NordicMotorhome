@@ -145,4 +145,10 @@ public class BookingRepository {
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(), booking.getBooking_id());
     }
 
+    public void updateBookingPayment(int booking_id, double payment_amount) {
+        String sql = "UPDATE bookings SET " +
+                "payment_amount = ? " +
+                "WHERE booking_id = ?";
+        template.update(sql, payment_amount, booking_id);
+    }
 }

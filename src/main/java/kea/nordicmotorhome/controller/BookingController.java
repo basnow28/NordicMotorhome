@@ -46,7 +46,7 @@ public class BookingController {
         return "bookingDetails.html";
     }
 
-    @PostMapping("/saveBooking")
+    @RequestMapping(value = "/saveBooking", params="save", method=RequestMethod.POST)
     String saveBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
         bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
         bookingForm.getBooking().setExtra_kilometers_fee(
@@ -57,6 +57,14 @@ public class BookingController {
 
         bookingService.updateBooking(bookingForm.getBooking(), bookingForm.getCustomer());
 
+        return "redirect:/bookingDetails/"+bookingForm.getBooking().getBooking_id();
+    }
+
+    @RequestMapping(value = "/saveBooking", params="addNewPayment", method=RequestMethod.POST)
+    String addNewPayment(@ModelAttribute("bookingForm") BookingForm bookingForm){
+        double bookingPayment = bookingForm.getBooking().getPayment_amount() + bookingForm.getNewPaymentAmount();
+        bookingForm.getBooking().setPayment_amount(bookingPayment);
+        bookingService.updateBookingPayment(bookingForm.getBooking().getBooking_id(), bookingForm.getBooking().getPayment_amount());
         return "redirect:/bookingDetails/"+bookingForm.getBooking().getBooking_id();
     }
 
