@@ -26,10 +26,6 @@ public class MainController {
     @GetMapping("/createNewBooking")
     public String createNewBooking(Model model){
         List<Vehicle> vehicles = carservice.getAllVehicles();
-        model.addAttribute("freeVehicles", vehicles);
-        model.addAttribute("start_date", "05-06-2020");
-        model.addAttribute("end_date", "12-06-2020");
-        model.addAttribute("vehicle_capacity", 4);
         model.addAttribute("availabilityForm", new SearchAvailabilityForm());
         return "createNewBooking.html";
     }
