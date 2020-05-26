@@ -34,15 +34,12 @@ public class BookingController {
         bookingForm.setBooking(bookingService.getBooking(id));
         bookingForm.setCustomer(customerService.getCustomer(bookingForm.getBooking().getCustomer_id()));
         bookingForm.setVehicle(vehicleService.getVehicle(bookingForm.getBooking().getVehicle_id()));
-        if (bookingForm.getBooking().getBooking_status().equalsIgnoreCase("cancelled")){
-            bookingForm.getBooking().setInitial_cost(bookingService.calculateCancellationRate(bookingForm.getBooking().getStart_date(), bookingForm.getBooking().getInitial_cost()));
-        }else {
-            bookingForm.getBooking().setExtra_kilometers_fee(
-                bookingService.calculateExtraKilometersPrice(
+
+        bookingForm.getBooking().setExtra_kilometers_fee(bookingService.calculateExtraKilometersPrice(
                         bookingForm.getBooking().getStart_date(),
                         bookingForm.getBooking().getEnd_date(),
                         bookingForm.getBooking().getDistance_driven()));
-        }
+
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("title", "Booking " + bookingForm.getBooking().getBooking_id());
 
@@ -52,12 +49,15 @@ public class BookingController {
     @RequestMapping(value = "/saveBooking", params="save", method=RequestMethod.POST)
     String saveBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
         bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
-        bookingForm.getBooking().setExtra_kilometers_fee(
-                bookingService.calculateExtraKilometersPrice(
-                        bookingForm.getBooking().getStart_date(),
-                        bookingForm.getBooking().getEnd_date(),
-                        bookingForm.getBooking().getDistance_driven()));
-
+        if (bookingForm.getBooking().getBooking_status().equalsIgnoreCase("cancelled")){
+            bookingForm.getBooking().setInitial_cost(bookingService.calculateCancellationRate(bookingForm.getBooking().getStart_date(), bookingForm.getBooking().getInitial_cost()));
+        }else {
+            bookingForm.getBooking().setExtra_kilometers_fee(
+                    bookingService.calculateExtraKilometersPrice(
+                            bookingForm.getBooking().getStart_date(),
+                            bookingForm.getBooking().getEnd_date(),
+                            bookingForm.getBooking().getDistance_driven()));
+        }
         bookingService.updateBooking(bookingForm.getBooking(), bookingForm.getCustomer());
 
         return "redirect:/bookingDetails/"+bookingForm.getBooking().getBooking_id();
