@@ -29,17 +29,21 @@ public class BookingController {
     CustomerService customerService;
 
     @GetMapping("/bookingDetails/{id}")
-    String bookingDetails(@PathVariable("id") int id,  Model model){
+    String bookingDetails(@PathVariable("id") int id,  Model model) {
         BookingForm bookingForm = new BookingForm();
         bookingForm.setBooking(bookingService.getBooking(id));
         bookingForm.setCustomer(customerService.getCustomer(bookingForm.getBooking().getCustomer_id()));
         bookingForm.setVehicle(vehicleService.getVehicle(bookingForm.getBooking().getVehicle_id()));
-        bookingForm.getBooking().setExtra_kilometers_fee(
+        if (bookingForm.getBooking().getBooking_status().equalsIgnoreCase("cancelled")){
+            System.out.println("I am here");
+            bookingForm.getBooking().setInitial_cost(bookingService.calculateCancellationRate(bookingForm.getBooking().getStart_date(), bookingForm.getBooking().getInitial_cost()));
+        }else {
+            bookingForm.getBooking().setExtra_kilometers_fee(
                 bookingService.calculateExtraKilometersPrice(
                         bookingForm.getBooking().getStart_date(),
                         bookingForm.getBooking().getEnd_date(),
                         bookingForm.getBooking().getDistance_driven()));
-
+        }
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("title", "Booking " + bookingForm.getBooking().getBooking_id());
 

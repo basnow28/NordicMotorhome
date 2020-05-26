@@ -1,5 +1,6 @@
 package kea.nordicmotorhome.Service;
 
+
 import kea.nordicmotorhome.Model.*;
 
 import kea.nordicmotorhome.Repository.BookingRepository;
@@ -54,7 +55,7 @@ public class BookingService {
         return Math.floor(quote);
     }
 
-    private double getPricePerDayDependingOnASeason(LocalDate day, ArrayList<Season> seasons, int vehiclePricePerDay){
+    public double getPricePerDayDependingOnASeason(LocalDate day, ArrayList<Season> seasons, int vehiclePricePerDay){
         for(Season season : seasons){
             if(season.getSeason_id() == 1){
                 if(day.getMonthValue() == season.getSeason_start_month()){
@@ -118,8 +119,21 @@ public class BookingService {
         return extraKilometersPrice < 0? 0.0 : extraKilometersPrice;
     }
 
-    public double calculateCancellationRate(){
-        return 0.0;
+    public double calculateCancellationRate(String start_date, Double initial_cost) {
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(start_date, pattern);
+        LocalDate cancellation_date = LocalDate.now();
+        int days = (int) ChronoUnit.DAYS.between(cancellation_date, startDate);
+        Cancellation cancellation = getCancellationRate(days);
+
+        double cancellationFee = cancellation.getCancellation_rate() * initial_cost;
+        if (cancellationFee < cancellation.getMinimum_fee()) {
+            return cancellation.getMinimum_fee();
+        }else
+            return cancellationFee ;
+    }
+    private Cancellation getCancellationRate(int days_out){
+        return bookingRepository.getCancellationRate(days_out);
     }
 
     public Booking getBooking(int id) {

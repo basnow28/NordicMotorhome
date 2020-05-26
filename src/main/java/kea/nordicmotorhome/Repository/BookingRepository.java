@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.awt.print.Book;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,6 +144,17 @@ public class BookingRepository {
                 booking.getDistance_driven(), booking.getDrop_off_kilometers(), booking.getInitial_cost(), booking.getExtras_cost(), booking.getBooking_status(),
                 booking.getPayment_amount(), booking.isFuel_check(), booking.getBooking_notes(), booking.isHas_picnic(), booking.isHas_bikerack(),
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(), booking.getBooking_id());
+    }
+    public Cancellation getCancellationRate(int days_out){
+        String sql = "SELECT * FROM cancellations WHERE ? BETWEEN cancellations.days_out_min AND cancellations.days_out_max ";
+        RowMapper<Cancellation> rowMapper = new BeanPropertyRowMapper<>(Cancellation.class);
+        Cancellation c = template.query(sql, rowMapper, days_out).get(0);
+
+        String sqlUpdateBooking= "UPDATE bookings SET cancellation_id = ?";
+        template.update(sqlUpdateBooking, c.getCancellation_id());
+
+        System.out.println(c.toString());
+        return c;
     }
 
 }
