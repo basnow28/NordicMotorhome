@@ -17,7 +17,7 @@ public class VehicleService {
         return vehicleRepository.getAllVehicles();
     }
 
-    public Vehicle getVehicle(String vehicle_id) {
+    public Vehicle getVehicle(int vehicle_id) {
         return vehicleRepository.getVehicle(vehicle_id);
     }
 }

@@ -1,23 +1,18 @@
 package kea.nordicmotorhome.Service;
 
 
-import kea.nordicmotorhome.Model.Booking;
+import kea.nordicmotorhome.Model.*;
 
-import kea.nordicmotorhome.Model.Customer;
-
-import kea.nordicmotorhome.Model.Season;
-import kea.nordicmotorhome.Model.Vehicle;
 import kea.nordicmotorhome.Repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 @Service
 public class BookingService {
@@ -29,11 +24,18 @@ public class BookingService {
         return bookingRepository.createBooking(booking, customer);
     }
 
-    public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity) {
-        return bookingRepository.findFreeVehicles(startDate, endDate, vehicle_capacity);
+    public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
+            DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate start_date = LocalDate.parse(startDate, pattern);
+            LocalDate end_date = LocalDate.parse(endDate, pattern);
+            LocalDate today = LocalDate.now();
+            if (start_date.isBefore(end_date) && (start_date.isEqual(today) || start_date.isAfter(today))) {
+                return bookingRepository.findFreeVehicles(startDate, endDate, vehicle_capacity);
+            }
+        return new ArrayList<Vehicle>();
     }
 
-    public int findSeasonRate(String startDate, String endDate) {
+    public int findSeasonRate(String startDate, String endDate){
         return bookingRepository.findSeasonRate(startDate, endDate);
     }
 
@@ -54,11 +56,11 @@ public class BookingService {
         return Math.floor(quote);
     }
 
-    private double getPricePerDayDependingOnASeason(LocalDate day, ArrayList<Season> seasons, int vehiclePricePerDay) {
-        for (Season season : seasons) {
-            if (season.getSeason_id() == 1) {
-                if (day.getMonthValue() == season.getSeason_start_month()) {
-
+    public double getPricePerDayDependingOnASeason(LocalDate day, ArrayList<Season> seasons, int vehiclePricePerDay){
+        for(Season season : seasons){
+            if(season.getSeason_id() == 1){
+                if(day.getMonthValue() == season.getSeason_start_month()){
+                    return season.getSeason_rate() * vehiclePricePerDay;
                 } else if (day.getMonthValue() <= season.getSeason_end_month()) {
                     return season.getSeason_rate() * vehiclePricePerDay;
                 }
@@ -77,11 +79,82 @@ public class BookingService {
         }
     }
 
-    public List<Booking> getBookings(String startDate, String endDate, String searchTerm, String searchType) {
+
+    /*public List<Booking> getBookings(String startDate, String endDate, String searchTerm, String searchType) {
         return bookingRepository.getBookings(startDate, endDate, searchTerm, searchType);
-    }
+    }*/
 
     public List<Booking> getAllBookings() {
         return bookingRepository.getAllBookings();
+    }
+
+    public double setExtrasPrice(Booking booking){
+        double extrasPrice = 0;
+
+        if(booking.isHas_picnic()){
+            extrasPrice += bookingRepository.getExtraPrice("picnic");
+        }
+        if(booking.isHas_bikerack()){
+            extrasPrice += bookingRepository.getExtraPrice("bike_rack");
+        }
+        if(booking.isHas_dvd_player()){
+            extrasPrice += bookingRepository.getExtraPrice("dvd_player");
+        }
+        if(booking.isHas_tent()){
+            extrasPrice += bookingRepository.getExtraPrice("tent");
+        }
+        if(booking.isHas_linen()){
+            extrasPrice += bookingRepository.getExtraPrice("bed_linen");
+        }
+        if(!booking.isFuel_check()){
+            extrasPrice += bookingRepository.getExtraPrice("fuel");
+        }
+        if(booking.getDrop_off_kilometers() > 0){
+            extrasPrice += booking.getDrop_off_kilometers() * bookingRepository.getExtraPrice("pick_up_kilometer");
+        }
+
+        extrasPrice += calculateExtraKilometersPrice(booking.getStart_date(), booking.getEnd_date(), booking.getDistance_driven());
+
+        return extrasPrice;
+    }
+
+    public double calculateExtraKilometersPrice(String start_date, String end_date, int kilometers){
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(start_date, pattern);
+        LocalDate endDate = LocalDate.parse(end_date, pattern);
+        int days = (int) ChronoUnit.DAYS.between(startDate, endDate);
+
+        double extraKilometersPrice = (kilometers - days*400)*bookingRepository.getExtraPrice("extra_kilometer");
+
+        return extraKilometersPrice < 0? 0.0 : extraKilometersPrice;
+    }
+
+    public double calculateCancellationRate(String start_date, Double initial_cost) {
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(start_date, pattern);
+        LocalDate cancellation_date = LocalDate.now();
+        int days = (int) ChronoUnit.DAYS.between(cancellation_date, startDate);
+        Cancellation cancellation = getCancellationRate(days);
+
+        double cancellationFee = cancellation.getCancellation_rate() * initial_cost;
+        if (cancellationFee < cancellation.getMinimum_fee()) {
+            return cancellation.getMinimum_fee();
+        }else
+            return cancellationFee ;
+    }
+    private Cancellation getCancellationRate(int days_out){
+        return bookingRepository.getCancellationRate(days_out);
+    }
+
+    public Booking getBooking(int id) {
+        return bookingRepository.getBooking(id);
+    }
+
+    public void updateBooking(Booking booking, Customer customer) {
+        bookingRepository.updateBooking(booking, customer);
+    }
+
+    public void updateBookingPayment(int booking_id, double payment_amount) {
+        bookingRepository.updateBookingPayment(booking_id, payment_amount);
     }
 }

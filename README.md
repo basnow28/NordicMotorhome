@@ -51,13 +51,12 @@ card_cvv		INT		NOT NULL,
 PRIMARY KEY(card_id)
 );
 ```
-
 ```bash
 CREATE TABLE seasons (
 season_id		INT		NOT NULL	AUTO_INCREMENT,
 season_name		VARCHAR(45)	NOT NULL,
-season_start		VARCHAR(45)	NOT NULL,
-season_end		VARCHAR(45)	NOT NULL,
+season_start_month		int	NOT NULL,
+season_end_month		int	NOT NULL,
 season_rate		DOUBLE		NOT NULL,
 PRIMARY KEY(season_id)
 );
@@ -94,7 +93,8 @@ PRIMARY KEY(address_id)
 ```bash
 CREATE TABLE cancellations (
 cancellation_id		INT		NOT NULL	AUTO_INCREMENT,
-days_out		INT	        NOT NULL,
+days_out_max		INT	        NOT NULL,
+days_out_min		INT	        NOT NULL,
 minimum_fee		INT,
 cancellation_rate	DOUBLE		NOT NULL,
 PRIMARY KEY(cancellation_id)
@@ -177,7 +177,6 @@ customer_id		INT		NOT NULL,
 card_id			INT		NOT NULL,
 FOREIGN KEY (vehicle_id) REFERENCES vehicles(vehicle_id),		
 FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
-FOREIGN KEY (season_id) REFERENCES seasons(season_id),
 FOREIGN KEY (cancellation_id) REFERENCES cancellations(cancellation_id),
 FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
 FOREIGN KEY (card_id) REFERENCES card_information(card_id),
@@ -200,7 +199,7 @@ PRIMARY KEY(payment_id)
 ```bash
 CREATE TABLE extras (
 extra_id INT NOT NULL AUTO_INCREMENT,
-extra_name VARCHAR(20) NOT NULL UNIQUE, 
+extra_name VARCHAR(20) NOT NULL, 
 extra_price DOUBLE,
 PRIMARY KEY(extra_id)
 );
@@ -208,6 +207,18 @@ PRIMARY KEY(extra_id)
 # Data
 
 by Dagmara Przygocka @dprzygocka <https://github.com/dprzygocka>
+
+```bash
+INSERT INTO cancellations (
+cancellation_id, minimum_fee, cancellation_rate, days_out_max, days_out_min)
+VALUES 
+(1,200,0,51,10000000),
+(2,200,0.2, 50, 16),
+(3,200,0.5, 15, 2),
+(4,200,0.8, 1,1),
+(5,200,0.95,0,0);
+```
+
 ```bash
 INSERT INTO vehicle_types (vehicle_type_id,vehicle_type_name, cost_per_day, vehicle_capacity, fuel_type, storage_size, kitchen, shower, wifi, tv) VALUES
 (1,"Class A", 599, 6, "Diesel", 20, true,true,true,true),
@@ -285,13 +296,6 @@ VALUES
 ```
 
 by David Hards @dshards <https://github.com/dshards>
-```bash
-INSERT INTO seasons (season_name, season_start, season_end, season_rate)
-VALUES("Low Season", '12-01', '02-28', 1),
-("Mid Season", '03-01', '05-31', 1.3),
-("High Season", '06-01', '09-30', 1.6),
-("Mid Season", '10-01', '11-30', 1.3);
-```
 ```bash
 INSERT INTO seasons (season_name, season_start_month, season_end_month, season_rate)
 VALUES("Low Season", 12, 2, 1),

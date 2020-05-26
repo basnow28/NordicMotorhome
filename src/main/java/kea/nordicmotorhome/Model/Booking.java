@@ -23,7 +23,7 @@ public class Booking {
     private double extras_cost;
     private String booking_status;
     private double payment_amount;
-    private boolean fuel_check;
+    private boolean fuel_check = true;
     private String booking_notes;
     private boolean has_picnic;
     private boolean has_bikerack;
@@ -35,6 +35,8 @@ public class Booking {
     private int card_cvv;
     private double cancellation_rate;
     private int minimum_fee;
+    private int card_id;
+    private double extra_kilometers_fee;
 
     @Override
     public String toString() {
@@ -252,5 +254,21 @@ public class Booking {
 
     public void setPayment_amount(double payment_amount) {
         this.payment_amount = payment_amount;
+    }
+
+    public int getCard_id() {
+        return card_id;
+    }
+
+    public void setCard_id(int card_id) {
+        this.card_id = card_id;
+    }
+
+    public double getExtra_kilometers_fee() {
+        return extra_kilometers_fee;
+    }
+
+    public void setExtra_kilometers_fee(double extra_kilometers_fee) {
+        this.extra_kilometers_fee = extra_kilometers_fee;
     }
 }

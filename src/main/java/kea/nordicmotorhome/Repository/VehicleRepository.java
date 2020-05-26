@@ -22,7 +22,7 @@ public class VehicleRepository {
     }
 
 
-    public Vehicle getVehicle(String vehicle_id) {
+    public Vehicle getVehicle(int vehicle_id) {
         String sql = "SELECT * FROM vehicles INNER JOIN vehicle_types WHERE vehicles.vehicle_id = " + vehicle_id + " AND vehicles.vehicle_type_id = vehicle_types.vehicle_type_id";
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
         return template.query(sql, rowMapper).get(0);
