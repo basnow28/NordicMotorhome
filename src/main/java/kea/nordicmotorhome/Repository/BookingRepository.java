@@ -1,10 +1,7 @@
 package kea.nordicmotorhome.Repository;
 
 
-import kea.nordicmotorhome.Model.Booking;
-import kea.nordicmotorhome.Model.Customer;
-import kea.nordicmotorhome.Model.Season;
-import kea.nordicmotorhome.Model.Vehicle;
+import kea.nordicmotorhome.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +19,9 @@ import java.util.List;
 public class BookingRepository {
     @Autowired
     JdbcTemplate template;
+    @Autowired
+    CustomerRepository customerRepository;
 
-    public int createAddress(Customer customer){
-        String sqlAddress = "INSERT INTO addresses (street_name, house_number, postcode, city, country) VALUES (?, ?, ?, ?, ?)";
-        template.update(sqlAddress, customer.getStreet_name(), customer.getHouse_number(), customer.getPostcode(), customer.getCity(), customer.getCountry());
-        String sqlAddressID = "select address_id from addresses ORDER BY address_id DESC LIMIT 1";
-        return template.queryForObject(sqlAddressID, Integer.class);
-    }
     public int createCardInformation(Booking booking){
         String sqlCard = "INSERT INTO card_information (card_number, card_expiry_date, card_cvv) VALUES (?, ?, ?)";
         template.update(sqlCard, booking.getCard_number(), booking.getCard_expiry_date(), booking.getCard_cvv());
@@ -36,29 +30,10 @@ public class BookingRepository {
         return template.queryForObject(sqlCardID, Integer.class);
     }
 
-    public int createCustomer(Customer customer, int address_id){
-        String sqlCustomer = " INSERT INTO customers (first_name, last_name, date_of_birth, phone_number, email, driver_licence_number, address_id) VALUES (?,?,?,?,?,?,?)";
-        template.update(sqlCustomer, customer.getFirst_name(), customer.getLast_name(), customer.getDate_of_birth(), customer.getPhone_number(), customer.getEmail(), customer.getDriver_licence_number(), address_id);
-
-        String sqlCustomerID = "select customer_id from customers ORDER BY customer_id DESC LIMIT 1";
-        int customer_id = template.queryForObject(sqlCustomerID, Integer.class);
-        customer.setCustomer_id(customer_id);
-        return customer.getCustomer_id();
-    }
-    /*public int findSeasonId(Booking booking){
-        String sqlSeason = "SELECT season_id FROM seasons WHERE season_start < ?"; //we will count whole price depending when the reservation starts, which mean that if reservation starts in mid season and ends in low season wew ill count whole price for mid season
-        int season_id = template.queryForObject(sqlSeason, new Object[] {booking.getStart_date()}, Integer.class);
-        System.out.println("Season:" + season_id);
-        return season_id;
-    }
-
-     */
-
     public int createBooking(Booking booking, Customer customer) { //employee_id is manual for now
-        int address_id = createAddress(customer);
+        int address_id = customerRepository.createAddress(customer);
         int card_id = createCardInformation(booking);
-        int customer_id = createCustomer(customer, address_id);
-        //int season_id= findSeasonId(booking);
+        int customer_id = customerRepository.createCustomer(customer, address_id);
 
         String sqlBooking = "INSERT INTO bookings (" +
                 "start_date, " +
@@ -94,8 +69,6 @@ public class BookingRepository {
         return booking_id;
     }
 
-
-
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
         String sql = "SELECT vehicles.vehicle_id, vehicles.vehicle_model, vehicles.vehicle_brand, \n" +
                 "vehicle_types.vehicle_type_name, vehicle_types.vehicle_capacity, vehicles.licence_plate, \n" + "vehicle_types.cost_per_day\n" +
@@ -120,4 +93,56 @@ public class BookingRepository {
 
         return template.query(sql, rowMapper);
     }
+
+    public double getExtraPrice(String extra_name) {
+        String sql = "SELECT extra_price FROM extras WHERE extra_name = ?" ;
+        return template.queryForObject(sql,new Object[]{extra_name}, Double.class);
+    }
+
+    public Booking getBooking(int id) {
+        String sql = "SELECT * FROM bookings INNER JOIN card_information ON bookings.card_id = card_information.card_id WHERE booking_id = ?";
+        RowMapper<Booking> rowMapper = new BeanPropertyRowMapper<>(Booking.class);
+        return template.query(sql, rowMapper, id).get(0);
+    }
+
+    ///////////////UPDATE BOOKING INFORMATION////////////////////
+
+    public void updateCardInformation(Booking booking){
+        String sqlCard = "UPDATE card_information SET " +
+                            "card_number = ? , " +
+                            "card_expiry_date = ? , " +
+                            "card_cvv =  ? " +
+                            "WHERE card_id = ?";
+
+        template.update(sqlCard, booking.getCard_number(), booking.getCard_expiry_date(), booking.getCard_cvv(), booking.getCard_id());
+    }
+
+    public void updateBooking(Booking booking, Customer customer) { //employee_id is manual for now
+        updateCardInformation(booking);
+        customerRepository.updateAddress(customer);
+        customerRepository.updateCustomer(customer);
+
+        String sqlBooking = "UPDATE bookings SET " +
+                "start_date = ? , " +
+                "end_date = ? , " +
+                "distance_driven = ? , " +
+                "drop_off_kilometers = ? , "+
+                "initial_cost = ? , "+
+                "extras_cost = ? , " +
+                "booking_status = ? , " +
+                "payment_amount = ? , " +
+                "fuel_check = ? , " +
+                "booking_notes = ? , " +
+                "has_picnic = ? , " +
+                "has_bikerack = ? , " +
+                "has_dvd_player = ? ," +
+                "has_tent = ? , " +
+                "has_linen = ? " +
+                "WHERE booking_id = ?";
+        template.update(sqlBooking, booking.getStart_date(), booking.getEnd_date(),
+                booking.getDistance_driven(), booking.getDrop_off_kilometers(), booking.getInitial_cost(), booking.getExtras_cost(), booking.getBooking_status(),
+                booking.getPayment_amount(), booking.isFuel_check(), booking.getBooking_notes(), booking.isHas_picnic(), booking.isHas_bikerack(),
+                booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(), booking.getBooking_id());
+    }
+
 }

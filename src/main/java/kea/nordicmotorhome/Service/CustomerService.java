@@ -1,0 +1,16 @@
+package kea.nordicmotorhome.Service;
+
+import kea.nordicmotorhome.Model.Customer;
+import kea.nordicmotorhome.Repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CustomerService {
+    @Autowired
+    CustomerRepository customerRepository;
+
+    public Customer getCustomer(int customer_id) {
+        return customerRepository.getCustomer(customer_id);
+    }
+}
