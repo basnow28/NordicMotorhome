@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -84,6 +85,15 @@ public class BookingController {
         model.addAttribute("freeVehicles", freeVehicles);
         model.addAttribute("availabilityForm", searchAvailabilityForm);
         return "createNewBooking";
+    }
+
+    @PostMapping("/findBooking")
+    public String findBooking(@ModelAttribute FindBookingForm findBookingForm, Model model){
+        ArrayList<Booking> bookinglist = (ArrayList<Booking>) bookingService.getBookings(findBookingForm.getStart_date(), findBookingForm.getEnd_date(), findBookingForm.getInputType(), findBookingForm.getInputText());
+
+        model.addAttribute("findBooking", bookinglist);
+        model.addAttribute("FindBookingForm", findBookingForm);
+        return "findBooking";
     }
 
 }

@@ -120,4 +120,21 @@ public class BookingRepository {
 
         return template.query(sql, rowMapper);
     }
+
+    public List<Booking> getBookings(String startDate, String endDate, String inputType, String inputText ) {
+        String inputsql = "SELECT * FROM bookings WHERE ? = ?; ";
+        String datesql = "SELECT * FROM bookings WHERE start_date = ? AND end_date = ?;";
+        RowMapper<Booking> rowMapper = new BeanPropertyRowMapper<>(Booking.class);
+        if(inputType==null){
+            return template.query(datesql, rowMapper, startDate, endDate);
+        }
+        return template.query(inputsql, rowMapper, inputType, inputText);
+    }
+
+    public List<Booking> getAllBookings(){
+        String sql = "SELECT * FROM bookings;";
+        RowMapper<Booking> rowMapper = new BeanPropertyRowMapper<>(Booking.class);
+        return template.query(sql, rowMapper);
+    }
+
 }

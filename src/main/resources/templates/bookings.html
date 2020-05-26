@@ -135,12 +135,29 @@
                         <p class="text-primary align-self-start m-0 font-weight-bold">Bookings information</p><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-end" role="button" href="createNewBooking.html"><i class="far fa-calendar-plus fa-sm text-white-50"></i>&nbsp;Create New Booking</a></div>
                     <div
                         class="card-body">
+                        <form th:action="@{/findBooking}" th:object="${FindBookingForm}" method="post">
                         <div class="text-md-right d-flex flex-row justify-content-between align-items-stretch align-items-xl-center dataTables_filter" id="dataTable_filter">
-                            <div class="d-flex flex-row" style="width: 600;"><label><select class="form-control form-control-sm custom-select custom-select-sm"><option value="first_name" selected="">First Name</option><option value="last_name">Last Name</option><option value="email">Email</option><option value="licence_plate">Vehicle Licence</option><option value="phone_number">Phone Number</option><option value="booking_id">Booking ID</option></select><input class="align-self-start form-control form-control-sm" type="search" aria-controls="dataTable" placeholder="Search" required=""></label></div>
-                            <div
-                                class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;"><label class="align-self-start" for="city" style="margin-bottom: 0px;"><strong>Start Date</strong><br></label><input class="border rounded" type="date" style="color: #6e707e;height: 31px;"></div>
-                        <div class="d-flex flex-column justify-content-start align-items-center"
-                            style="margin-right: 10px;"><label class="align-self-start" for="city" style="margin-bottom: 0px;"><strong>End Date</strong><br></label><input class="border rounded" type="date" style="color: #6e707e;height: 31px;"></div><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-center"
+                            <div class="d-flex flex-row" style="width: 600;"><label>
+                                <select name="inputType" th:field="*{inputType}" class="form-control form-control-sm custom-select custom-select-sm">
+                                    <option th:value="first_name" selected="">First Name</option>
+                                    <option th:value="last_name">Last Name</option>
+                                    <option th:value="email">Email</option>
+                                    <option th:value="licence_plate">Vehicle Licence</option>
+                                    <option th:value="phone_number">Phone Number</option>
+                                    <option th:value="booking_id">Booking ID</option>
+                                </select>
+                                <input th:value="*{inputText}" name="inputText" class="align-self-start form-control form-control-sm" type="search" aria-controls="dataTable" placeholder="Search" required=""></label>
+                            </div>
+                            <div class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;"><label class="align-self-start" for="city" style="margin-bottom: 0px;"><strong>Start Date</strong><br></label>
+                                <input th:value="*{start_date}" class="border rounded" name="start_date" type="text" placeholder="YYYY-MM-DD" style="color: #6e707e;height: 31px;">
+                            </div>
+                        <div class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;">
+                            <label class="align-self-start" for="city" style="margin-bottom: 0px;"><strong>End Date</strong><br></label>
+                            <input th:value="*{end_date}" class="border rounded" name="end_date" type="text" placeholder="YYYY-MM-DD" style="color: #6e707e;height: 31px;">
+                        </div>
+                        </div>
+                        </form>
+                            <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-center"
                             role="button" href="#">&nbsp;Search</a></div>
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                     <table class="table dataTable my-0" id="dataTable">
@@ -156,86 +173,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Airi Satou</td>
-                                <td>134</td>
-                                <td>The best vehicle</td>
-                                <td>15/07/2020</td>
-                                <td>22/07/2020</td>
-                                <td>CREATED</td>
-                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
-                            </tr>
-                            <tr>
-                                <td>Angelica Ramos</td>
-                                <td>165</td>
-                                <td>Your vehicle</td>
-                                <td>21/06/2020</td>
-                                <td>28/06/2020<br></td>
-                                <td>CREATED</td>
-                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>211</td>
-                                <td>Voltswagen California</td>
-                                <td>04/04/2020</td>
-                                <td>10/04/2020<br></td>
-                                <td>CANCELLED</td>
-                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
-                            </tr>
-                            <tr>
-                                <td>Bradley Greer</td>
-                                <td>212</td>
-                                <td>Winnebago Vista 31BE</td>
-                                <td>15/05/2020</td>
-                                <td>20/05/2020<br></td>
-                                <td>ACTIVE</td>
-                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
-                            </tr>
-                            <tr>
-                                <td>Brenden Wagner</td>
-                                <td>287</td>
-                                <td>Thor A.C.E.</td>
-                                <td>13/05/2020</td>
-                                <td>18/05/2020<br></td>
-                                <td>ACTIVE</td>
-                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
-                            </tr>
-                            <tr>
-                                <td>Brielle Williamson</td>
-                                <td>289</td>
-                                <td>Jayco Alante 31R</td>
-                                <td>06/03/2020</td>
-                                <td>011/05/202<br></td>
-                                <td>CANCELLED</td>
-                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
-                            </tr>
-                            <tr>
-                                <td>Bruno Nash<br></td>
-                                <td>292</td>
-                                <td>Fleetwood Bounder 36H</td>
-                                <td>22/04/2020</td>
-                                <td>01/05/2020<br></td>
-                                <td>COMPLETED</td>
-                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
-                            </tr>
-                            <tr>
-                                <td>Caesar Vance</td>
-                                <td>300</td>
-                                <td>Tiffin Allegro 36UA</td>
-                                <td>25/04/2020</td>
-                                <td>27/04/2020<br></td>
-                                <td>COMPLETEED</td>
-                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
-                            </tr>
-                            <tr>
-                                <td>Cara Stevens</td>
-                                <td>305</td>
-                                <td>Fleetwood RV</td>
-                                <td>25/04/2020</td>
-                                <td>30/04/2020</td>
-                                <td>COMPLETED</td>
-                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="bookingDetails.html">&nbsp;View</a></td>
+                            <tr th:each="booking : ${bookings}">
+                                <td><span th:text="${booking.customer_id}"> Customer Name </span></td>
+                                <td><span th:text="${booking.booking_id}"> Booking ID </span></td>
+                                <th><span th:text="${booking.vehicle_id}"> Vehicle</span></th>
+                                <th><span th:text="${booking.start_date}"> Start Date</span></th>
+                                <th><span th:text="${booking.end_date}"> End Date</span></th>
+                                <th><span th:text="${booking.booking_status}"> Status</span></th>
                             </tr>
                             <tr>
                                 <td>Cedric Kelly</td>
