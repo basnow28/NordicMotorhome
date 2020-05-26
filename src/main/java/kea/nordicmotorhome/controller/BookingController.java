@@ -35,7 +35,6 @@ public class BookingController {
         bookingForm.setCustomer(customerService.getCustomer(bookingForm.getBooking().getCustomer_id()));
         bookingForm.setVehicle(vehicleService.getVehicle(bookingForm.getBooking().getVehicle_id()));
         if (bookingForm.getBooking().getBooking_status().equalsIgnoreCase("cancelled")){
-            System.out.println("I am here");
             bookingForm.getBooking().setInitial_cost(bookingService.calculateCancellationRate(bookingForm.getBooking().getStart_date(), bookingForm.getBooking().getInitial_cost()));
         }else {
             bookingForm.getBooking().setExtra_kilometers_fee(
