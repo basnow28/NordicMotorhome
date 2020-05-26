@@ -92,7 +92,7 @@ public class BookingService {
         if(booking.isHas_tent()){
             extrasPrice += bookingRepository.getExtraPrice("tent");
         }
-        if(booking.isHas_dvd_player()){
+        if(booking.isHas_linen()){
             extrasPrice += bookingRepository.getExtraPrice("bed_linen");
         }
         if(!booking.isFuel_check()){

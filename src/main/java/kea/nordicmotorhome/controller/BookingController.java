@@ -47,7 +47,7 @@ public class BookingController {
     }
 
     @PostMapping("/saveBooking")
-    String saveBooking(Model model, @ModelAttribute("bookingForm") BookingForm bookingForm){
+    String saveBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
         bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
         bookingForm.getBooking().setExtra_kilometers_fee(
                 bookingService.calculateExtraKilometersPrice(
@@ -57,15 +57,11 @@ public class BookingController {
 
         bookingService.updateBooking(bookingForm.getBooking(), bookingForm.getCustomer());
 
-
-        model.addAttribute(bookingForm);
-        model.addAttribute("title", "Booking " + bookingForm.getBooking().getBooking_id());
-
-        return "bookingDetails.html";
+        return "redirect:/bookingDetails/"+bookingForm.getBooking().getBooking_id();
     }
 
     @PostMapping("/newBooking")
-    String createNewBooking(Model model, @ModelAttribute("bookingForm") BookingForm bookingForm){
+    String createNewBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
 
         bookingForm.getBooking().setVehicle_id(bookingForm.getVehicle().getVehicle_id());
         bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
@@ -78,9 +74,8 @@ public class BookingController {
                         bookingForm.getBooking().getDistance_driven()));
 
         bookingForm.getBooking().setBooking_id(booking_id);
-        model.addAttribute(bookingForm);
-        model.addAttribute("title", "Booking "+booking_id);
-        return "bookingDetails.html";
+
+        return "redirect:/bookingDetails/"+bookingForm.getBooking().getBooking_id();
     }
 
     @GetMapping("/bookingDetails/{vehicle.vehicle_id}/{start_date}/{end_date}/{vehicle.vehicle_calculated_quote}")

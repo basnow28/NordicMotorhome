@@ -100,7 +100,7 @@
                                     <h4 class="small font-weight-bold">Initial Cost<br></h4>
                                 </div>
                                 <div class="float-right flex-row justify-content-end">
-                                    <input readonly name="booking.initial_cost"  th:value="*{booking.initial_cost}">
+                                    <input readonly type="text" class="form-control-sm" name="booking.initial_cost"  th:value="*{booking.initial_cost}">
                                     <span>€</span>
                                 </div>
                              </div>
@@ -214,21 +214,27 @@
                                 </div>
                             </div>
                             <div class="form-group d-flex justify-content-between align-items-center align-content-center">
-                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Total</h6>
+                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Total Extras</h6>
                                 <div class="float-right flex-row justify-content-end">
-                                    <span>€</span>
+                                    <input readonly type="text" class="form-control-sm" name="booking.extras_cost" th:value="*{booking.extras_cost}"><span>€</span>
+                                </div>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center align-content-center">
+                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Total</h6>
+                                <div th:with="total=${bookingForm.booking.extras_cost} + ${bookingForm.booking.initial_cost}" class="float-right flex-row justify-content-end">
+                                    <input readonly type="text" class="form-control-sm" th:value="${total}"><span>€</span>
                                 </div>
                             </div>
                             <div class="form-group d-flex justify-content-between align-items-center align-content-center">
                                 <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Paid</h6>
                                 <div class="float-right flex-row justify-content-end">
-                                    <span>€</span>
+                                    <input readonly type="text" class="form-control-sm" name="booking.payment_amount" th:value="*{booking.payment_amount}"><span>€</span>
                                 </div>
                             </div>
                             <div class="form-group d-flex justify-content-between align-items-center align-content-center">
                                 <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Remaining</h6>
-                                <div class="float-right flex-row justify-content-end">
-                                    <span>€</span>
+                                <div th:with="remaining=(${bookingForm.booking.extras_cost} + ${bookingForm.booking.initial_cost}) - ${bookingForm.booking.payment_amount}" class="float-right flex-row justify-content-end">
+                                    <input readonly type="text" class="form-control-sm" th:value="${remaining}"><span>€</span>
                                 </div>
                             </div>
                             <button class="btn btn-primary btn-sm" type="submit" style="height: 30px;font-size: 12px;">Add New Payment Amount</button></div>
@@ -252,7 +258,7 @@
                                         </div>
                                     <div class="form-group" style="width: 280px;">
                                         <label><strong>Capacity</strong><br></label>
-                                        <select readonly th:field="*{vehicle.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
+                                        <select disabled th:field="*{vehicle.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
                                             <option th:value="2" >2</option>
                                             <option th:value="3">3</option>
                                             <option th:value="4">4</option>

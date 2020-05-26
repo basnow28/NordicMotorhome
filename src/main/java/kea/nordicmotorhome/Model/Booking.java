@@ -23,7 +23,7 @@ public class Booking {
     private double extras_cost;
     private String booking_status;
     private double payment_amount;
-    private boolean fuel_check;
+    private boolean fuel_check = true;
     private String booking_notes;
     private boolean has_picnic;
     private boolean has_bikerack;
