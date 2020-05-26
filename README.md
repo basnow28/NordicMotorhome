@@ -206,7 +206,16 @@ PRIMARY KEY(extra_id)
 # Data
 
 by Dagmara Przygocka @dprzygocka <https://github.com/dprzygocka>
+
 ```bash
+INSERT INTO cancellations (
+cancellation_id, days_out, minimum_fee, cancellation_rate)
+VALUES (1, 50,200,0.2),
+(2,15,200,0.5),
+(3, 1, 200, 0.8),
+(4,0,200,0.95);
+```bash
+
 INSERT INTO vehicle_types (vehicle_type_id,vehicle_type_name, cost_per_day, vehicle_capacity, fuel_type, storage_size, kitchen, shower, wifi, tv) VALUES
 (1,"Class A", 599, 6, "Diesel", 20, true,true,true,true),
 (2,"Class B", 449, 3, "Gasoline", 15,true, true,true, true ),
