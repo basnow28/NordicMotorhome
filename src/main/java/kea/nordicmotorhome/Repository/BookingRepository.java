@@ -157,4 +157,10 @@ public class BookingRepository {
         return c;
     }
 
+    public void updateBookingPayment(int booking_id, double payment_amount) {
+        String sql = "UPDATE bookings SET " +
+                "payment_amount = ? " +
+                "WHERE booking_id = ?";
+        template.update(sql, payment_amount, booking_id);
+    }
 }

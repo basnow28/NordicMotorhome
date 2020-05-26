@@ -13,6 +13,7 @@ public class BookingForm {
     Vehicle vehicle;
 
     private boolean isExistingCustomer;
+    private double newPaymentAmount;
 
     public Booking getBooking() {
         return booking;
@@ -54,5 +55,13 @@ public class BookingForm {
                 ", vehicle=" + vehicle +
                 ", isExistingCustomer=" + isExistingCustomer +
                 '}';
+    }
+
+    public double getNewPaymentAmount() {
+        return newPaymentAmount;
+    }
+
+    public void setNewPaymentAmount(double newPaymentAmount) {
+        this.newPaymentAmount = newPaymentAmount;
     }
 }

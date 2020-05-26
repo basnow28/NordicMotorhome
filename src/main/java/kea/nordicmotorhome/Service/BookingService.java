@@ -25,12 +25,13 @@ public class BookingService {
     }
 
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate start_date  = LocalDate.parse(startDate,pattern);
-        LocalDate end_date = LocalDate.parse(endDate, pattern);
-        if(start_date.isBefore(end_date)) {
-            return bookingRepository.findFreeVehicles(startDate, endDate, vehicle_capacity);
-        }
+            DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate start_date = LocalDate.parse(startDate, pattern);
+            LocalDate end_date = LocalDate.parse(endDate, pattern);
+            LocalDate today = LocalDate.now();
+            if (start_date.isBefore(end_date) && (start_date.isEqual(today) || start_date.isAfter(today))) {
+                return bookingRepository.findFreeVehicles(startDate, endDate, vehicle_capacity);
+            }
         return new ArrayList<Vehicle>();
     }
 
@@ -142,5 +143,9 @@ public class BookingService {
 
     public void updateBooking(Booking booking, Customer customer) {
         bookingRepository.updateBooking(booking, customer);
+    }
+
+    public void updateBookingPayment(int booking_id, double payment_amount) {
+        bookingRepository.updateBookingPayment(booking_id, payment_amount);
     }
 }
