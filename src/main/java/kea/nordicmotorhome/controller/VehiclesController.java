@@ -1,5 +1,6 @@
 package kea.nordicmotorhome.controller;
 
+import kea.nordicmotorhome.Model.SearchForm;
 import kea.nordicmotorhome.Model.Vehicle;
 import kea.nordicmotorhome.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.websocket.server.PathParam;
+import java.util.ArrayList;
 
 @Controller
 public class VehiclesController {
@@ -33,4 +35,14 @@ public class VehiclesController {
 
         return "redirect:/vehicleDetails/"+vehicle.getVehicle_id();
     }
+
+    @GetMapping("/findVehicles")
+    public String findVehicles(@ModelAttribute SearchForm searchForm, Model model){
+        ArrayList<Vehicle> vehicles = (ArrayList<Vehicle>) vehicleService.getVehicles(searchForm);
+        
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("vehicles", vehicles);
+        return "vehicles";
+    }
+
 }
