@@ -27,7 +27,7 @@ public class CustomerController {
     }
     @PostMapping("/findCustomer")
     public String findCustomer(@ModelAttribute SearchSelectForm searchSelectForm, Model model){
-        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(searchSelectForm.getField_value());
+        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(searchSelectForm.getField_name(),searchSelectForm.getField_value());
         model.addAttribute("customersList", customersList);
         model.addAttribute("searchSelectForm", searchSelectForm);
         return "/customers";

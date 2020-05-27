@@ -65,8 +65,8 @@ public class CustomerRepository {
     }
     ///LIST//
 
-    public List<Customer> findAllMatchingCustomer(String field_value){
-        String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers WHERE ? IN (first_name, last_name, email, phone_number)";
+    public List<Customer> findAllMatchingCustomer(String field_name, String field_value){
+        String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers WHERE \"+ field_name + \" LIKE ?";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return template.query(sql,rowMapper, field_value);
     }

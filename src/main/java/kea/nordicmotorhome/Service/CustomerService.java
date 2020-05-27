@@ -15,8 +15,8 @@ public class CustomerService {
     public Customer getCustomer(int customer_id) {
         return customerRepository.getCustomer(customer_id);
     }
-    public List<Customer> findAllMatchingCustomer(String field_value){
-        return customerRepository.findAllMatchingCustomer(field_value);
+    public List<Customer> findAllMatchingCustomer(String field_name, String field_value){
+        return customerRepository.findAllMatchingCustomer(field_name, field_value);
     }
     public void updateCustomer(Customer customer){
         customerRepository.updateCustomer(customer);
