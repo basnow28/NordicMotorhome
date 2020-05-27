@@ -20,4 +20,8 @@ public class VehicleService {
     public Vehicle getVehicle(int vehicle_id) {
         return vehicleRepository.getVehicle(vehicle_id);
     }
+
+    public void updateVehicle(Vehicle vehicle) {
+        vehicleRepository.updateVehicle(vehicle);
+    }
 }

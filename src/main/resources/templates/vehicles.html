@@ -150,86 +150,14 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Airi Satou</td>
-                                        <td>Volkswagen</td>
-                                        <td>The best vehicle</td>
-                                        <td>2</td>
-                                        <td>AVAILABLE</td>
-                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Angelica Ramos</td>
-                                        <td>Volkswagen</td>
-                                        <td>Your vehicle</td>
-                                        <td>4</td>
-                                        <td>RETURNED</td>
-                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Volkswagen</td>
-                                        <td>Voltswagen California</td>
-                                        <td>5</td>
-                                        <td>READY</td>
-                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bradley Greer</td>
-                                        <td>Fiat</td>
-                                        <td>Winnebago Vista 31BE</td>
-                                        <td>6</td>
-                                        <td>RETURNED</td>
-                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brenden Wagner</td>
-                                        <td>287</td>
-                                        <td>Thor A.C.E.</td>
-                                        <td>2</td>
-                                        <td>AVAILABLE</td>
-                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brielle Williamson</td>
-                                        <td>289</td>
-                                        <td>Jayco Alante 31R</td>
-                                        <td>4</td>
-                                        <td>READY</td>
-                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bruno Nash<br></td>
-                                        <td>292</td>
-                                        <td>Fleetwood Bounder 36H</td>
-                                        <td>6</td>
-                                        <td>RENTED</td>
-                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Caesar Vance</td>
-                                        <td>300</td>
-                                        <td>Tiffin Allegro 36UA</td>
-                                        <td>4</td>
-                                        <td>UNAVAILABLE</td>
-                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cara Stevens</td>
-                                        <td>305</td>
-                                        <td>Fleetwood RV</td>
-                                        <td>2</td>
-                                        <td>RENTED</td>
-                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>316</td>
-                                        <td>Forest River Rvs</td>
-                                        <td>2</td>
-                                        <td>RENTED</td>
-                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" href="vehicleDetails.html">&nbsp;View</a></td>
+                                <tbody >
+                                    <tr th:each="vehicle : ${vehicles}">
+                                        <td th:text="${vehicle.licence_plate}"></td>
+                                        <td th:text="${vehicle.vehicle_model}"></td>
+                                        <td th:text="${vehicle.vehicle_brand}"></td>
+                                        <td th:text="${vehicle.vehicle_capacity}"></td>
+                                        <td th:text="${vehicle.vehicle_status}"></td>
+                                        <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'vehicleDetails/'+${vehicle.vehicle_id}}">&nbsp;View</a></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>

@@ -1,0 +1,36 @@
+package kea.nordicmotorhome.controller;
+
+import kea.nordicmotorhome.Model.Vehicle;
+import kea.nordicmotorhome.Service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.websocket.server.PathParam;
+
+@Controller
+public class VehiclesController {
+    @Autowired
+    VehicleService vehicleService;
+
+    @GetMapping("/vehicleDetails/{vehicle_id}")
+    public String vehicleDetails(@PathVariable("vehicle_id") int vehicle_id, Model model){
+        Vehicle vehicle = vehicleService.getVehicle(vehicle_id);
+        String title = "Vehicle " + vehicle_id;
+
+        model.addAttribute("vehicle", vehicle);
+        model.addAttribute("title", title);
+        return "vehicleDetails";
+    }
+
+    @PostMapping("/saveVehicle")
+    public String saveVehicle(@ModelAttribute Vehicle vehicle){
+        vehicleService.updateVehicle(vehicle);
+
+        return "redirect:/vehicleDetails/"+vehicle.getVehicle_id();
+    }
+}

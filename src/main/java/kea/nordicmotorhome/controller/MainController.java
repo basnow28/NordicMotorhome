@@ -25,7 +25,6 @@ public class MainController {
 
     @GetMapping("/createNewBooking")
     public String createNewBooking(Model model){
-        List<Vehicle> vehicles = carservice.getAllVehicles();
         model.addAttribute("availabilityForm", new SearchAvailabilityForm());
         return "createNewBooking.html";
     }
@@ -36,7 +35,9 @@ public class MainController {
     }
 
     @GetMapping("/vehicles")
-    public String vehicles(){
+    public String vehicles(Model model){
+        List<Vehicle> vehicles = carservice.getAllVehicles();
+        model.addAttribute("vehicles", vehicles);
         return "vehicles.html";
     }
 

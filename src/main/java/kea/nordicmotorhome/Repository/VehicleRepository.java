@@ -27,4 +27,23 @@ public class VehicleRepository {
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
         return template.query(sql, rowMapper).get(0);
     }
+
+    public void updateVehicle(Vehicle vehicle) {
+        String sql = "UPDATE vehicles SET " +
+                "licence_plate = ? , " +
+                "vehicle_odometer = ? , " +
+                "vehicle_status = ? , " +
+                "additional_notes = ? , " +
+                "mechanic_status = ? , " +
+                "cleaning_status = ?  " +
+         //       "cost_per_day = ? , " +
+        //        "vehicle_capacity = ? " +
+                " WHERE vehicle_id = ?";
+
+        template.update(sql, vehicle.getLicence_plate(), vehicle.getVehicle_odometer(), vehicle.getVehicle_status(), vehicle.getAdditional_notes(),
+                vehicle.getMechanic_status(), vehicle.getCleaning_status(),
+               // vehicle.getCost_per_day(),
+             //   vehicle.getVehicle_capacity(),
+                vehicle.getVehicle_id());
+    }
 }
