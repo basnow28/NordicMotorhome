@@ -77,14 +77,13 @@ public class BookingController {
 
         bookingForm.getBooking().setVehicle_id(bookingForm.getVehicle().getVehicle_id());
         bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
-
-        int booking_id = bookingService.createBooking(bookingForm.getBooking(), bookingForm.getCustomer());
         bookingForm.getBooking().setExtra_kilometers_fee(
                 bookingService.calculateExtraKilometersPrice(
                         bookingForm.getBooking().getStart_date(),
                         bookingForm.getBooking().getEnd_date(),
                         bookingForm.getBooking().getDistance_driven()));
 
+        int booking_id = bookingService.createBooking(bookingForm.getBooking(), bookingForm.getCustomer());
         bookingForm.getBooking().setBooking_id(booking_id);
 
         return "redirect:/bookingDetails/"+bookingForm.getBooking().getBooking_id();
