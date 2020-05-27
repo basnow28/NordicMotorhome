@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CustomerRepository {
     @Autowired
@@ -60,6 +62,13 @@ public class CustomerRepository {
                 "country = ?" +
                 "WHERE address_id = ?";
         template.update(sqlAddress, customer.getStreet_name(), customer.getHouse_number(), customer.getPostcode(), customer.getCity(), customer.getCountry(), customer.getAddress_id());
+    }
+    ///LIST//
+
+    public List<Customer> findAllMatchingCustomer(String first_name){
+        String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers WHERE first_name = ?";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        return template.query(sql,rowMapper, first_name);
     }
 
 }
