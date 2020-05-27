@@ -2,6 +2,7 @@ package kea.nordicmotorhome.controller;
 
 
 import kea.nordicmotorhome.Model.SearchAvailabilityForm;
+import kea.nordicmotorhome.Model.SearchForm;
 import kea.nordicmotorhome.Model.Vehicle;
 import kea.nordicmotorhome.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,6 @@ public class MainController {
 
     @GetMapping("/createNewBooking")
     public String createNewBooking(Model model){
-        List<Vehicle> vehicles = carservice.getAllVehicles();
         model.addAttribute("availabilityForm", new SearchAvailabilityForm());
         return "createNewBooking.html";
     }
@@ -36,7 +36,11 @@ public class MainController {
     }
 
     @GetMapping("/vehicles")
-    public String vehicles(){
+    public String vehicles(Model model){
+        List<Vehicle> vehicles = carservice.getAllVehicles();
+
+        model.addAttribute("searchForm", new SearchForm());
+        model.addAttribute("vehicles", vehicles);
         return "vehicles.html";
     }
 

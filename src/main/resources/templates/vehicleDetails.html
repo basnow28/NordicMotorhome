@@ -35,11 +35,11 @@
                         <ul class="nav navbar-nav flex-nowrap ml-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-search"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
-                                    <form class="form-inline mr-auto navbar-search w-100">
+                                    <div class="form-inline mr-auto navbar-search w-100">
                                         <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
                                             <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1" role="presentation">
@@ -77,7 +77,7 @@
                                     <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
                                         <h6 class="dropdown-header">alerts center</h6>
                                         <a class="d-flex align-items-center dropdown-item" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="../static/assets/img/avatars/avatar4.jpeg">
+                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" th:src="@{assets/img/avatars/avatar4.jpeg}">
                                                 <div class="bg-success status-indicator"></div>
                                             </div>
                                             <div class="font-weight-bold">
@@ -128,8 +128,13 @@
                     </ul>
             </div>
             </nav>
-            <div class="container-fluid">
-                <h3 class="text-dark d-flex flex-row justify-content-between mb-4"><button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button>Vehicle 12<button class="btn btn-primary btn-sm" type="submit">Save</button></h3>
+            <form th:action="@{/saveVehicle}" class="container-fluid" th:object="${vehicle}" modelAttribute="vehicle" name="vehicle" method="post">
+                <input hidden th:value="*{vehicle_id}" name="vehicle_id">
+                <div class="justify-content-between flex-row d-flex align-content-center" style="margin-bottom: 10px;">
+                    <a th:href="@{/vehicles}"><button class="btn btn-link btn-sm" type="button"> <i class="fa fa-chevron-left"></i></button></a>
+                    <h3 th:text="${title}" name="title" class="text-dark d-flex flex-row justify-content-between mb-4"></h3>
+                    <input type="submit" class="btn btn-primary btn-sm" value="Save" name="save" style="height: 30px">
+                </div>
                 <div class="row mb-3">
                     <div class="col-lg-4">
                         <div class="card mb-3">
@@ -137,52 +142,89 @@
                         </div>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
+                                <h6 class="text-primary font-weight-bold m-0">Status</h6>
+                            </div>
+                            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+                                <select th:field="*{vehicle_status}" name="vehicle_status" class="form-control form-control-sm custom-select custom-select-sm">
+                                    <option th:value="READY">READY</option>
+                                    <option th:value="RENTED">RENTED</option>
+                                    <option th:value="RETURNED">RETURNED</option>
+                                    <option th:value="UNAVAILABLE">UNAVAILABLE</option>
+                                </select>
+                            </div>
+                            <div class="card-header py-3">
+                                <h6 class="text-primary font-weight-bold m-0">Mechanic Status</h6>
+                            </div>
+                            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+                                <select th:field="*{mechanic_status}" name="mechanic_status" class="form-control form-control-sm custom-select custom-select-sm">
+                                    <option th:value="READY">READY</option>
+                                    <option th:value="TO_BE_CHECKED">TO BE CHECKED</option>
+                                    <option th:value="MAINTENANCE_NEEDED">MAINTENANCE NEEDED</option>
+                                </select>
+                            </div>
+                            <div class="card-header py-3">
+                                <h6 class="text-primary font-weight-bold m-0">Cleaning Status</h6>
+                            </div>
+                            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+                                <select th:field="*{cleaning_status}" name="cleaning_status" class="form-control form-control-sm custom-select custom-select-sm">
+                                    <option th:value="READY">READY</option>
+                                    <option th:value="CLEANING_NEEDED">CLEANING NEEDED</option>
+                                </select>
+                            </div>
+                            <div class="card-header py-3">
                                 <h6 class="text-primary font-weight-bold m-0">Extras</h6>
                             </div>
                             <div class="card-body">
-                                <h6 class="small font-weight-bold">Kitchen<span class="float-right"><i class="fas fa-check"></i></span></h6>
-                                <h6 class="small font-weight-bold">Wifi<span class="float-right"><i class="fas fa-minus"></i></span></h6>
-                                <h6 class="small font-weight-bold">Shower<span class="float-right"><i class="fas fa-check"></i></span></h6>
-                                <h6 class="small font-weight-bold">TV<span class="float-right"><i class="fas fa-check"></i></span></h6>
-                                <h4 class="small font-weight-bold">Storage Size<span class="float-right">40m^2</span></h4>
+                                    <h6 class="small font-weight-bold">Kitchen
+                                        <td th:switch="*{kitchen}">
+                                        <span th:case="true" class="float-right">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span th:case="false" class="float-right">
+                                            <i class="fas fa-minus"></i>
+                                        </span>
+                                        </td>
+                                    </h6>
+                                <h6 class="small font-weight-bold">Wifi
+                                    <td th:switch="*{wifi}">
+                                        <span th:case="true" class="float-right">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span th:case="false" class="float-right">
+                                            <i class="fas fa-minus"></i>
+                                        </span>
+                                    </td>
+                                </h6>
+                                <h6 class="small font-weight-bold">Shower
+                                    <td th:switch="*{shower}">
+                                        <span th:case="true" class="float-right">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span th:case="false" class="float-right">
+                                            <i class="fas fa-minus"></i>
+                                        </span>
+                                    </td>
+                                </h6>
+                                <h6 class="small font-weight-bold">TV
+                                    <td th:switch="*{shower}">
+                                        <span th:case="true" class="float-right">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span th:case="false" class="float-right">
+                                            <i class="fas fa-minus"></i>
+                                        </span>
+                                    </td>
+                                </h6>
+                                <h4 class="small font-weight-bold">Storage Size
+                                    <span class="float-right">
+                                        <span th:text="*{storage_size}"></span>
+                                        <span class="float-right"> m^2</span>
+                                    </span>
+                                </h4>
                             </div>
-                            <div class="card-header py-3">
-                                <h6 class="text-primary font-weight-bold m-0">Status</h6>
-                            </div>
-                            <div class="card-body d-flex flex-row justify-content-between align-items-center"><select class="form-control form-control-sm custom-select custom-select-sm"><option value="vehicle_state">READY</option><option value="vehicle_state">RENTED</option><option value="vehicle_state">RETURNED</option><option value="vehicle_state">UNAVAILABLE</option></select></div>
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        <div class="row mb-3 d-none">
-                            <div class="col">
-                                <div class="card text-white bg-primary shadow">
-                                    <div class="card-body">
-                                        <div class="row mb-2">
-                                            <div class="col">
-                                                <p class="m-0">Peformance</p>
-                                                <p class="m-0"><strong>65.2%</strong></p>
-                                            </div>
-                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                        </div>
-                                        <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card text-white bg-success shadow">
-                                    <div class="card-body">
-                                        <div class="row mb-2">
-                                            <div class="col">
-                                                <p class="m-0">Peformance</p>
-                                                <p class="m-0"><strong>65.2%</strong></p>
-                                            </div>
-                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                        </div>
-                                        <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col">
                                 <div class="card shadow mb-3">
@@ -190,24 +232,30 @@
                                         <p class="text-primary m-0 font-weight-bold">Vehicle Information</p>
                                     </div>
                                     <div class="card-body">
-                                        <form>
+                                        <div>
                                             <div class="form-row">
                                                 <div class="col">
-                                                    <div class="form-group d-flex flex-column"><label for="username"><strong>Brand</strong></label><span>Volkswagen</span></div>
+                                                    <div class="form-group d-flex flex-column"><label><strong>Brand</strong></label>
+                                                        <span th:text="*{vehicle_brand}" name="vehicle_brand"></span>
+                                                    </div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="form-group d-flex flex-column"><label for="email"><strong>Model</strong><br></label><span>Golf</span></div>
+                                                    <div class="form-group d-flex flex-column"><label><strong>Model</strong><br></label>
+                                                        <span th:text="*{vehicle_model}" name="vehicle_model"></span></div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col">
-                                                    <div class="form-group"><label for="first_name"><strong>Licence Plate</strong></label><input class="form-control" type="text" name="licence_plate" value="DK2049 GK5"></div>
+                                                    <div class="form-group"><label><strong>Licence Plate</strong></label>
+                                                        <input th:value="*{licence_plate}" class="form-control" type="text" name="licence_plate">
+                                                    </div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="form-group d-flex flex-column"><label for="last_name"><strong>Vehicle Type</strong></label><span>Class B</span></div>
+                                                    <div class="form-group d-flex flex-column"><label><strong>Vehicle Type</strong></label>
+                                                        <span th:text="*{vehicle_type_name}" name="vehicle_type_name"></span></div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card shadow">
@@ -215,18 +263,29 @@
                                         <p class="text-primary m-0 font-weight-bold">Vehicle Details</p>
                                     </div>
                                     <div class="card-body">
-                                        <form>
-                                            <div class="form-group"><label for="address"><strong>Cost Per Day</strong></label><input class="form-control" type="text" name="cost_per_day" value="599"></div>
-                                            <div class="form-group"><label for="address"><strong>Odometer</strong></label><input class="form-control" type="text" name="vehicle_odometer" value="1500"></div>
+                                        <div>
+                                            <div class="form-group"><label><strong>Cost Per Day</strong></label>
+                                                <input class="form-control" type="text" name="cost_per_day" th:value="*{cost_per_day}"></div>
+                                            <div class="form-group"><label><strong>Odometer</strong></label>
+                                                <input class="form-control" type="text" name="vehicle_odometer" th:value="*{vehicle_odometer}"></div>
                                             <div class="form-row">
                                                 <div class="col">
-                                                    <div class="form-group"><label for="city"><strong>Capacity</strong></label><select class="form-control form-control form-control-sm custom-select custom-select-sm"><option value="vehicle_capacity">2</option><option value="vehicle_capacity">3</option><option value="vehicle_capacity">4</option><option value="vehicle_capacity">6</option></select></div>
+                                                    <div class="form-group"><label><strong>Capacity</strong></label>
+                                                        <select th:field="*{vehicle_capacity}" name="vehicle_capacity" class="form-control form-control form-control-sm custom-select custom-select-sm">
+                                                            <option th:value="2">2</option>
+                                                            <option th:value="3">3</option>
+                                                            <option th:value="4">4</option>
+                                                            <option th:value="6">6</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="form-group d-flex flex-column"><label for="country"><strong>Engine Type</strong></label><span>Gas</span></div>
+                                                    <div class="form-group d-flex flex-column">
+                                                        <label><strong>Engine Type</strong></label>
+                                                        <span th:text="*{fuel_type}" name="fuel_type"></span></div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -237,25 +296,21 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <form>
-                                    <div class="form-group"><label for="signature"><strong>Additional Notes</strong><br></label><textarea class="form-control" rows="4" name="signature"></textarea></div>
-                                </form>
+                                    <div class="form-group"><label><strong>Additional Notes</strong><br></label>
+                                        <textarea th:text="*{additional_notes}" name="additional_notes" class="form-control" rows="4"></textarea></div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <footer class="bg-white sticky-footer">
             <div class="container my-auto">
                 <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
             </div>
         </footer>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
-    <script src="../static/assets/js/jquery.min.js"></script>
-    <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="../static/assets/js/script.min.js"></script>
+    </div>
+    </div>
 </body>
 
 </html>
