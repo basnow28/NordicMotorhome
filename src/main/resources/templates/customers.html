@@ -55,12 +55,17 @@
                         <p class="text-primary m-0 font-weight-bold">Find Customer</p>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/findCustomer}" th:object="${customer}" method="post" class="form-group d-flex flex-row justify-content-start align-items-center">
-                            <div class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;">
-                                <label class="align-self-start"  style="margin-bottom: 0px;">
-                                    <strong>First Name</strong><br>
+                        <form th:action="@{/findCustomer}" th:object="${searchSelectForm}" method="post" class="form-group d-flex flex-row justify-content-start align-items-center">
+                            <div class="d-flex flex-row" style="width: 600;">
+                                <label>
+                                    <select th:field="*{field_name}" class="form-control form-control-sm custom-select custom-select-sm">
+                                        <option th:value="first_name" selected="">First Name</option>
+                                        <option th:value="last_name">Last Name</option>
+                                        <option th:value="email">Email</option>
+                                        <option th:value="phone_number">Phone Number</option>
+                                    </select>
+                                    <input name ="field_value" th:value="*{field_value}" class="align-self-start form-control form-control-sm" type="search" aria-controls="dataTable" placeholder="Search" required="">
                                 </label>
-                                <input class="border rounded" type="text" name="first_name" th:value="*{first_name}" style="color: #6e707e;height: 31px;">
                             </div>
                             <div class="justify-content-center align-content-center">
                                 <input type="submit" value="Search" style="margin: 10px;" class="btn btn-primary btn-sm d-none d-sm-inline-block">

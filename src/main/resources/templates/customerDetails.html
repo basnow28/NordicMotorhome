@@ -55,16 +55,12 @@
                     <a th:href="@{/customers}"><button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button></a>
                     <input class="btn btn-primary btn-sm" type="submit" name="save" value="Save">
                 </div>
+                <div class="card-body text-center shadow">
+                    <span th:text="${title}" class="text-dark d-flex flex-row justify-content-center mb-4"></span>
+                    <input type="hidden"  name="customer_id" th:value="*{customer_id}">
+                    <input type="hidden"  name="address_id" th:value="*{address_id}">
+                </div>
                 <div class="row mb-2">
-                    <div class="col-lg-4">
-                        <div class="card mb-3">
-                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" th:src="@{/assets/img/customerincon.png}" width="160" height="160">
-                                <span th:text="${title}" class="text-dark d-flex flex-row justify-content-center mb-4"></span>
-                                <input type="hidden"  name="customer_id" th:value="*{customer_id}">
-                                <input type="hidden"  name="address_id" th:value="*{address_id}">
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-lg-8">
                         <div class="row">
                             <div class="col d-flex flex-column justify-content-between">
