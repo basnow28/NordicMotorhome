@@ -1,12 +1,19 @@
 package kea.nordicmotorhome.controller;
 
 
+
 import kea.nordicmotorhome.Model.Employee;
 import kea.nordicmotorhome.Model.SearchAvailabilityForm;
 import kea.nordicmotorhome.Model.SearchForm;
 import kea.nordicmotorhome.Model.Vehicle;
 import kea.nordicmotorhome.NordicmotorhomeApplication;
 import kea.nordicmotorhome.Service.EmployeeService;
+
+import com.mysql.cj.x.protobuf.MysqlxCrud;
+import kea.nordicmotorhome.Model.Booking;
+import kea.nordicmotorhome.Model.FindBookingForm;
+import kea.nordicmotorhome.Service.BookingService;
+
 import kea.nordicmotorhome.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +33,9 @@ public class MainController {
     VehicleService carservice;
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    BookingService bookingservice;
+
 
     @GetMapping("/")
     public String login(Model model){
@@ -55,7 +66,10 @@ public class MainController {
     }
 
     @GetMapping("/bookings")
-    public String bookings(){
+    public String bookings(Model model){
+        model.addAttribute("FindBookingForm", new FindBookingForm());
+        List<Booking> allbookings = bookingservice.getAllBookings();
+        model.addAttribute("getAllBookings", allbookings);
         return "bookings.html";
     }
 
@@ -67,5 +81,6 @@ public class MainController {
         model.addAttribute("vehicles", vehicles);
         return "vehicles.html";
     }
+
 
 }
