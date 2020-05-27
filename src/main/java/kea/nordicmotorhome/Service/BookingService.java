@@ -20,7 +20,7 @@ public class BookingService {
     BookingRepository bookingRepository;
 
 
-    public int createBooking(Booking booking, Customer customer){
+    public int createBooking(Booking booking, Customer customer) {
         return bookingRepository.createBooking(booking, customer);
     }
 
@@ -45,12 +45,12 @@ public class BookingService {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         double quote = 0.0;
 
-        LocalDate startDate  = LocalDate.parse(start_date, pattern);
+        LocalDate startDate = LocalDate.parse(start_date, pattern);
         LocalDate endDate = LocalDate.parse(end_date, pattern);
 
         ///Calculating a season rate for each day of the upcoming booking
-        for(LocalDate day = startDate; day.isBefore(endDate); day = day.plusDays(1L)){
-            double result = getPricePerDayDependingOnASeason(day,seasons, vehiclePricePerDay);
+        for (LocalDate day = startDate; day.isBefore(endDate); day = day.plusDays(1L)) {
+            double result = getPricePerDayDependingOnASeason(day, seasons, vehiclePricePerDay);
             quote += result;
         }
         return Math.floor(quote);
@@ -60,11 +60,11 @@ public class BookingService {
         for(Season season : seasons){
             if(season.getSeason_id() == 1){
                 if(day.getMonthValue() == season.getSeason_start_month()){
-
-                }else if (day.getMonthValue() <= season.getSeason_end_month()) {
+                    return season.getSeason_rate() * vehiclePricePerDay;
+                } else if (day.getMonthValue() <= season.getSeason_end_month()) {
                     return season.getSeason_rate() * vehiclePricePerDay;
                 }
-            }else {
+            } else {
                 if (day.getMonthValue() >= season.getSeason_start_month() && day.getMonthValue() <= season.getSeason_end_month()) {
                     return season.getSeason_rate() * vehiclePricePerDay;
                 }
@@ -74,9 +74,18 @@ public class BookingService {
     }
 
     public void setVehiclesQuotes(String start_date, String end_date, ArrayList<Vehicle> freeVehicles) {
-        for(Vehicle vehicle : freeVehicles){
+        for (Vehicle vehicle : freeVehicles) {
             vehicle.setVehicle_calculated_quote(getInitialQuote(start_date, end_date, vehicle.getCost_per_day()));
         }
+    }
+
+
+    public List<BookingTable> getBookings(FindBookingForm findBookingForm) {
+        return bookingRepository.getBookings(findBookingForm);
+    }
+
+    public List<Booking> getAllBookings() {
+        return bookingRepository.getAllBookings();
     }
 
     public double setExtrasPrice(Booking booking){
