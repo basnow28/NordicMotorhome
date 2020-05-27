@@ -80,8 +80,8 @@ public class BookingService {
     }
 
 
-    public List<Booking> getBookings(String startDate, String endDate, String searchTerm, String searchType) {
-        return bookingRepository.getBookings(startDate, endDate, searchTerm, searchType);
+    public List<BookingTable> getBookings(FindBookingForm findBookingForm) {
+        return bookingRepository.getBookings(findBookingForm);
     }
 
     public List<Booking> getAllBookings() {

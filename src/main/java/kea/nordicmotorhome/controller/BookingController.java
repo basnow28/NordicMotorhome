@@ -123,9 +123,8 @@ public class BookingController {
 
     @PostMapping("/findBooking")
     public String findBooking(@ModelAttribute FindBookingForm findBookingForm, Model model){
-        ArrayList<Booking> bookinglist = (ArrayList<Booking>) bookingService.getBookings(findBookingForm.getStart_date(), findBookingForm.getEnd_date(), findBookingForm.getInputType(), findBookingForm.getInputText());
-
-        model.addAttribute("bookings", bookinglist);
+        ArrayList<BookingTable> bookinglist = (ArrayList<BookingTable>) bookingService.getBookings(findBookingForm);
+        model.addAttribute("bookingTable", bookinglist);
         model.addAttribute("FindBookingForm", findBookingForm);
         return "bookings";
     }

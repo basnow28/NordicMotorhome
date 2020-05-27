@@ -25,6 +25,8 @@
                     <li class="nav-item" role="presentation"><a class="nav-link active" th:href="@{/bookings}"><span><i class="fas fa-table"></i>Bookings</span></a></li>
                     <li class="nav-item" role="presentation" ><a class="nav-link" th:href="@{/createNewBooking}"><i class="far fa-calendar-plus"></i><span>Create New Booking</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/vehicles}"><i class="fas fa-car"></i><span>Vehicles</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/customers}"><i class="fas fa-car"></i><span>Customers</span></a></li>
+
                 </ul>
             </div>
         </nav>
@@ -165,7 +167,7 @@
                             <tr>
                                 <th>Customer Name</th>
                                 <th>Booking ID</th>
-                                <th>Vehicle</th>
+                                <th>Vehicle Model</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Status</th>
@@ -173,20 +175,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="booking : ${bookings}">
-                                <td><span th:text="${booking.customer_id}"> Customer Name </span></td>
-                                <td><span th:text="${booking.booking_id}"> Booking ID </span></td>
-                                <th><span th:text="${booking.vehicle_id}"> Vehicle</span></th>
-                                <th><span th:text="${booking.start_date}"> Start Date</span></th>
-                                <th><span th:text="${booking.end_date}"> End Date</span></th>
-                                <th><span th:text="${booking.booking_status}"> Status</span></th>
+                            <tr th:each="booking : ${bookingTable}">
+                                <td th:text="${booking.customer_name}"></td>
+                                <td th:text="${booking.booking_id}"> Booking ID></td>
+                                <td th:text="${booking.vehicle_model}"></td>
+                                <td th:text="${booking.start_date}"></td>
+                                <td th:text="${booking.end_date}"></td>
+                                <td th:text="${booking.booking_status}"></td>
+                                <td><a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${booking.booking_id}}">View</a></td>
                             </tr>
+
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td><strong>Customer Name</strong></td>
                                 <td><strong>Booking ID</strong></td>
-                                <td><strong>Vehicle</strong></td>
+                                <td><strong>Vehicle Model</strong></td>
                                 <td><strong>Start Date</strong></td>
                                 <td><strong>End Date</strong></td>
                                 <td><strong>Status</strong></td>

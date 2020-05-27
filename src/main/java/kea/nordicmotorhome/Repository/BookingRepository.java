@@ -96,12 +96,18 @@ public class BookingRepository {
     }
 
 
-    public List<Booking> getBookings(String startDate, String endDate, String inputType, String inputText ) {
-        String sql = "SELECT * FROM bookings WHERE ? = ? OR start_date = ? OR end_date = ? ";
+    public List<BookingTable> getBookings(FindBookingForm findBookingForm ) {
+        String sql = "SELECT CONCAT(customers.first_name,' ', customers.last_name) AS customer_name, bookings.booking_id, vehicles.vehicle_model, bookings.start_date, bookings.end_date, bookings.booking_status " +
+                "FROM bookings JOIN customers " +
+                "ON bookings.customer_id=customers.customer_id JOIN vehicles " +
+                "ON bookings.vehicle_id=vehicles.vehicle_id" +
+                " WHERE "+ findBookingForm.getInputType() +" LIKE ? OR bookings.start_date = ? OR bookings.end_date = ? ";
 
-        RowMapper<Booking> rowMapper = new BeanPropertyRowMapper<>(Booking.class);
-        return template.query(sql, rowMapper, inputType, inputText, startDate, endDate);
+        RowMapper<BookingTable> rowMapper = new BeanPropertyRowMapper<>(BookingTable.class);
+        String value = "%"+findBookingForm.getInputText()+"%";
+        return template.query(sql, rowMapper, value, findBookingForm.getStart_date(), findBookingForm.getEnd_date());
     }
+
 
     public List<Booking> getAllBookings(){
         String sql = "SELECT * FROM bookings;";
