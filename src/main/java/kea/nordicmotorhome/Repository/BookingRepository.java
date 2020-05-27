@@ -96,6 +96,7 @@ public class BookingRepository {
     }
 
 
+
     public List<BookingTable> getBookings(FindBookingForm findBookingForm ) {
         String sql = "SELECT CONCAT(customers.first_name,' ', customers.last_name) AS customer_name, bookings.booking_id, vehicles.vehicle_model, bookings.start_date, bookings.end_date, bookings.booking_status " +
                 "FROM bookings JOIN customers " +
@@ -106,6 +107,7 @@ public class BookingRepository {
         RowMapper<BookingTable> rowMapper = new BeanPropertyRowMapper<>(BookingTable.class);
         String value = "%"+findBookingForm.getInputText()+"%";
         return template.query(sql, rowMapper, value, findBookingForm.getStart_date(), findBookingForm.getEnd_date());
+
     }
 
 
