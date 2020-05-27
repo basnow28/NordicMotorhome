@@ -1,6 +1,7 @@
 package kea.nordicmotorhome.Repository;
 
 import kea.nordicmotorhome.Model.Customer;
+import kea.nordicmotorhome.Model.SearchSelectForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -65,10 +66,11 @@ public class CustomerRepository {
     }
     ///LIST//
 
-    public List<Customer> findAllMatchingCustomer(String field_name, String field_value){
-        String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers WHERE \"+ field_name + \" LIKE ?";
+    public List<Customer> findAllMatchingCustomer(SearchSelectForm searchSelectForm){
+        String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers WHERE "+ searchSelectForm.getField_name() + " LIKE ?";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-        return template.query(sql,rowMapper, field_value);
+        String value = "%"+searchSelectForm.getField_value()+"%";
+        return template.query(sql,rowMapper, value);
     }
 
 }
