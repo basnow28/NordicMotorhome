@@ -2,6 +2,7 @@ package kea.nordicmotorhome.controller;
 
 import kea.nordicmotorhome.Model.Customer;
 import kea.nordicmotorhome.Model.SearchSelectForm;
+import kea.nordicmotorhome.NordicmotorhomeApplication;
 import kea.nordicmotorhome.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class CustomerController {
 
     @GetMapping("/customers")
     public String findCustomer(Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         SearchSelectForm searchSelectForm = new SearchSelectForm();
         model.addAttribute("searchSelectForm", searchSelectForm);
         return "/customers";
@@ -34,6 +38,9 @@ public class CustomerController {
     }
     @GetMapping("/customerDetails/{id}")
     public String viewCustomerDetails(@PathVariable int id, Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         Customer customer = customerService.getCustomer(id);
         model.addAttribute("customer", customer);
         model.addAttribute("title", "Customer " + customer.getCustomer_id());

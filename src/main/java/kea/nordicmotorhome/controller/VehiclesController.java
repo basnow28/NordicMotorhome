@@ -2,6 +2,7 @@ package kea.nordicmotorhome.controller;
 
 import kea.nordicmotorhome.Model.SearchForm;
 import kea.nordicmotorhome.Model.Vehicle;
+import kea.nordicmotorhome.NordicmotorhomeApplication;
 import kea.nordicmotorhome.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class VehiclesController {
 
     @GetMapping("/vehicleDetails/{vehicle_id}")
     public String vehicleDetails(@PathVariable("vehicle_id") int vehicle_id, Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         Vehicle vehicle = vehicleService.getVehicle(vehicle_id);
         String title = "Vehicle " + vehicle_id;
 
@@ -38,6 +42,9 @@ public class VehiclesController {
 
     @GetMapping("/findVehicles")
     public String findVehicles(@ModelAttribute SearchForm searchForm, Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         ArrayList<Vehicle> vehicles = (ArrayList<Vehicle>) vehicleService.getVehicles(searchForm);
         
         model.addAttribute("searchForm", searchForm);

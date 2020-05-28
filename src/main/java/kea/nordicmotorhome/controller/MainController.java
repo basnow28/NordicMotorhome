@@ -56,17 +56,26 @@ public class MainController {
 
     @GetMapping("/dashboard")
     public String dashboard(){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         return "index.html";
     }
 
     @GetMapping("/createNewBooking")
     public String createNewBooking(Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         model.addAttribute("availabilityForm", new SearchAvailabilityForm());
         return "createNewBooking.html";
     }
 
     @GetMapping("/bookings")
     public String bookings(Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         model.addAttribute("FindBookingForm", new FindBookingForm());
         List<Booking> allbookings = bookingservice.getAllBookings();
         model.addAttribute("getAllBookings", allbookings);
@@ -75,6 +84,9 @@ public class MainController {
 
     @GetMapping("/vehicles")
     public String vehicles(Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         List<Vehicle> vehicles = carservice.getAllVehicles();
 
         model.addAttribute("searchForm", new SearchForm());

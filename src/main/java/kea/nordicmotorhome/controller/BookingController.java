@@ -1,6 +1,7 @@
 package kea.nordicmotorhome.controller;
 
 import kea.nordicmotorhome.Model.*;
+import kea.nordicmotorhome.NordicmotorhomeApplication;
 import kea.nordicmotorhome.Service.CustomerService;
 import kea.nordicmotorhome.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class BookingController {
 
     @GetMapping("/bookingDetails/{id}")
     String bookingDetails(@PathVariable("id") int id,  Model model) {
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         BookingForm bookingForm = new BookingForm();
         bookingForm.setBooking(bookingService.getBooking(id));
         bookingForm.setCustomer(customerService.getCustomer(bookingForm.getBooking().getCustomer_id()));
@@ -95,7 +99,9 @@ public class BookingController {
                                    @PathVariable("end_date") String end_date,
                                    @PathVariable("vehicle.vehicle_calculated_quote") double quote,
                                    Model model){
-
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         BookingForm bookingForm = new BookingForm();
         bookingForm.setBooking(new Booking());
         bookingForm.setCustomer(new Customer());
