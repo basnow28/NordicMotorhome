@@ -127,8 +127,8 @@ first_name		VARCHAR(45)	NOT NULL,
 last_name		VARCHAR(45)	NOT NULL,
 date_of_birth		DATE		NOT NULL,
 phone_number		VARCHAR(45)	NOT NULL,
-email			VARCHAR(45)	NOT NULL,
-driver_licence_number	VARCHAR(45)	NOT NULL,
+email			VARCHAR(45)	NOT NULL UNIQUE,
+driver_licence_number	VARCHAR(45)	NOT NULL UNIQUE,
 address_id		INT		NOT NULL,
 PRIMARY KEY(customer_id),
 FOREIGN KEY (address_id) REFERENCES addresses(address_id)
@@ -140,7 +140,7 @@ CREATE TABLE vehicles (
 vehicle_id		INT		NOT NULL	AUTO_INCREMENT,
 vehicle_brand		VARCHAR(45)	NOT NULL,
 vehicle_model		VARCHAR(45)	NOT NULL,
-licence_plate		VARCHAR(45)	NOT NULL,
+licence_plate		VARCHAR(45)	NOT NULL UNIQUE,
 vehicle_odometer	INT		NOT NULL,
 vehicle_status		VARCHAR(45)	NOT NULL,
 additional_notes	VARCHAR(500)	NOT NULL,
@@ -200,7 +200,7 @@ PRIMARY KEY(payment_id)
 CREATE TABLE extras (
 extra_id INT NOT NULL AUTO_INCREMENT,
 extra_name VARCHAR(20) NOT NULL, 
-extra_price DOUBLE,
+extra_price DOUBLE NOT NULL,
 PRIMARY KEY(extra_id)
 );
 ```
