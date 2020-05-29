@@ -102,4 +102,9 @@ public class MainController {
         return "redirect:/";
     }
 
+    @GetMapping("/noAuth")
+    public String noAuth(){
+        return "noAuth.html";
+    }
+
 }
