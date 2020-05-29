@@ -2,16 +2,11 @@ package kea.nordicmotorhome.controller;
 
 
 
-import kea.nordicmotorhome.Model.Employee;
-import kea.nordicmotorhome.Model.SearchAvailabilityForm;
-import kea.nordicmotorhome.Model.SearchForm;
-import kea.nordicmotorhome.Model.Vehicle;
+import kea.nordicmotorhome.Model.*;
 import kea.nordicmotorhome.NordicmotorhomeApplication;
 import kea.nordicmotorhome.Service.EmployeeService;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud;
-import kea.nordicmotorhome.Model.Booking;
-import kea.nordicmotorhome.Model.FindBookingForm;
 import kea.nordicmotorhome.Service.BookingService;
 
 import kea.nordicmotorhome.Service.VehicleService;
@@ -69,7 +64,7 @@ public class MainController {
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
-        else if(NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("bookkeeper")){
+        else if(!NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("SalesAssistant")){
             return "noAuth.html";
         }
         model.addAttribute("availabilityForm", new SearchAvailabilityForm());
@@ -80,6 +75,10 @@ public class MainController {
     public String bookings(Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
+        }
+        else if(!NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("Mechanic") ||
+                !NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("Cleaner")){
+            return "noAuth.html";
         }
         model.addAttribute("FindBookingForm", new FindBookingForm());
         List<Booking> allbookings = bookingservice.getAllBookings();
@@ -92,7 +91,7 @@ public class MainController {
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
-        else if(NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("bookkeeper")){
+        else if(NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("Bookkeeper")){
             return "noAuth.html";
         }
         List<Vehicle> vehicles = carservice.getAllVehicles();
@@ -101,7 +100,19 @@ public class MainController {
         model.addAttribute("vehicles", vehicles);
         return "vehicles.html";
     }
-
+    @GetMapping("/customers")
+    public String findCustomer(Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
+        else if(!NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("Mechanic") ||
+                !NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("Cleaner")){
+            return "noAuth.html";
+        }
+        SearchSelectForm searchSelectForm = new SearchSelectForm();
+        model.addAttribute("searchSelectForm", searchSelectForm);
+        return "/customers";
+    }
     @GetMapping("/logout")
     public String logout(){
         NordicmotorhomeApplication.getEmployee().setAllAttributesToEmpty();

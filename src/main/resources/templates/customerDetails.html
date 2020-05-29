@@ -40,7 +40,7 @@
                     <h3 th:text="${title}" class="text-dark d-flex flex-row justify-content-center mb-4"></h3>
                     <input type="hidden"  name="customer_id" th:value="*{customer_id}">
                     <input type="hidden"  name="address_id" th:value="*{address_id}">
-                    <input th:disabled="${isDisabled}" class="btn btn-primary btn-sm" type="submit" name="save" value="Save">
+                    <input th:hidden="${isDisabled}" class="btn btn-primary btn-sm" type="submit" name="save" value="Save">
                 </div>
                 <div class="row mb-2 ">
                     <div class="col-lg-8">

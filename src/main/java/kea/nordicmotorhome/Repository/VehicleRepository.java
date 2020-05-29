@@ -55,4 +55,14 @@ public class VehicleRepository {
         String value = "%"+searchForm.getValue()+"%";
         return template.query(sql, rowMapper, value);
     }
+
+    public void updateVehicleStatus(Vehicle vehicle) {
+        String sql = "UPDATE vehicles SET " +
+                "mechanic_status = ? , " +
+                "cleaning_status = ?,  " +
+                "additional_notes = ? " +
+                " WHERE vehicle_id = ?";
+
+        template.update(sql, vehicle.getMechanic_status(), vehicle.getCleaning_status(), vehicle.getAdditional_notes(), vehicle.getVehicle_id());
+    }
 }

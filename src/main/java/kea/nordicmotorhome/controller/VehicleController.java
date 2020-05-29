@@ -30,6 +30,11 @@ public class VehicleController {
 
         model.addAttribute("vehicle", vehicle);
         model.addAttribute("title", title);
+        if (NordicmotorhomeApplication.getEmployee().getEmployee_type().equals("SalesAssistant")){
+            model.addAttribute("employee_type", "SALESASSISTANT");
+        }else {
+            model.addAttribute("employee_type", "MAINTENANCE");
+        }
         return "vehicleDetails";
     }
 
@@ -37,6 +42,11 @@ public class VehicleController {
     public String saveVehicle(@ModelAttribute Vehicle vehicle){
         vehicleService.updateVehicle(vehicle);
 
+        return "redirect:/vehicleDetails/"+vehicle.getVehicle_id();
+    }
+    @PostMapping("/saveVehicleStatus")
+    public String saveVehicleStatus(@ModelAttribute Vehicle vehicle){
+        vehicleService.updateVehicleStatus(vehicle);
         return "redirect:/vehicleDetails/"+vehicle.getVehicle_id();
     }
 

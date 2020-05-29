@@ -30,4 +30,8 @@ public class VehicleService {
     public List<Vehicle> getVehicles(SearchForm searchForm) {
         return vehicleRepository.getVehicles(searchForm);
     }
+
+    public void updateVehicleStatus(Vehicle vehicle) {
+        vehicleRepository.updateVehicleStatus(vehicle);
+    }
 }

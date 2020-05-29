@@ -20,15 +20,6 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-    @GetMapping("/customers")
-    public String findCustomer(Model model){
-        if(!NordicmotorhomeApplication.isAuthorized()){
-            return "redirect:/";
-        }
-        SearchSelectForm searchSelectForm = new SearchSelectForm();
-        model.addAttribute("searchSelectForm", searchSelectForm);
-        return "/customers";
-    }
     @PostMapping("/findCustomer")
     public String findCustomer(@ModelAttribute SearchSelectForm searchSelectForm, Model model){
         ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(searchSelectForm);
