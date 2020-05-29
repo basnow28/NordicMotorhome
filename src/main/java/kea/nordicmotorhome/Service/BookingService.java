@@ -129,7 +129,7 @@ public class BookingService {
         return extraKilometersPrice < 0? 0.0 : extraKilometersPrice;
     }
 
-    public double calculateCancellationRate(String start_date, Double initial_cost) {
+    public double calculateCancellationFee(String start_date, Double initial_cost) {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(start_date, pattern);
         LocalDate cancellation_date = LocalDate.now();

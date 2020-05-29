@@ -55,7 +55,7 @@ public class BookingController {
     String saveBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
         bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
         if (bookingForm.getBooking().getBooking_status().equalsIgnoreCase("cancelled")){
-            bookingForm.getBooking().setInitial_cost(bookingService.calculateCancellationRate(bookingForm.getBooking().getStart_date(), bookingForm.getBooking().getInitial_cost()));
+            bookingForm.getBooking().setInitial_cost(bookingService.calculateCancellationFee(bookingForm.getBooking().getStart_date(), bookingForm.getBooking().getInitial_cost()));
         }else {
             bookingForm.getBooking().setExtra_kilometers_fee(
                     bookingService.calculateExtraKilometersPrice(
