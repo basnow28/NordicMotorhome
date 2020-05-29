@@ -82,7 +82,7 @@ CREATE TABLE addresses (
 address_id		INT		NOT NULL	AUTO_INCREMENT,
 street_name		VARCHAR(45)	NOT NULL,
 house_number		VARCHAR(45)	NOT NULL,
-postcode		INT		NOT NULL,
+postcode		VARCHAR(45)		NOT NULL,
 city			VARCHAR(45)	NOT NULL,
 country			VARCHAR(45)	NOT NULL,
 PRIMARY KEY(address_id)
