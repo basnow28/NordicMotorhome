@@ -20,6 +20,9 @@ public class NordicmotorhomeApplication {
         return employee;
     }
 
+    public static boolean isAuthorized(){
+        return employee.getEmployee_first_name() != null && employee.getEmployee_last_name() != null;
+    }
     public static void setEmployee(Employee employee) {
         NordicmotorhomeApplication.employee = employee;
     }

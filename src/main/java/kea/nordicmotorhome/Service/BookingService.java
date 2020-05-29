@@ -35,9 +35,6 @@ public class BookingService {
         return new ArrayList<Vehicle>();
     }
 
-    public int findSeasonRate(String startDate, String endDate){
-        return bookingRepository.findSeasonRate(startDate, endDate);
-    }
 
     private double getInitialQuote(String start_date, String end_date, int vehiclePricePerDay) {
         ArrayList<Season> seasons = (ArrayList<Season>) bookingRepository.getSeasons();
@@ -129,12 +126,12 @@ public class BookingService {
         return extraKilometersPrice < 0? 0.0 : extraKilometersPrice;
     }
 
-    public double calculateCancellationRate(String start_date, Double initial_cost) {
+    public double calculateCancellationFee(String start_date, Double initial_cost) {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(start_date, pattern);
         LocalDate cancellation_date = LocalDate.now();
         int days = (int) ChronoUnit.DAYS.between(cancellation_date, startDate);
-        Cancellation cancellation = getCancellationRate(days);
+        Cancellation cancellation = getCancellation(days);
 
         double cancellationFee = cancellation.getCancellation_rate() * initial_cost;
         if (cancellationFee < cancellation.getMinimum_fee()) {
@@ -142,8 +139,8 @@ public class BookingService {
         }else
             return cancellationFee ;
     }
-    private Cancellation getCancellationRate(int days_out){
-        return bookingRepository.getCancellationRate(days_out);
+    private Cancellation getCancellation(int days_out){
+        return bookingRepository.getCancellation(days_out);
     }
 
     public Booking getBooking(int id) {

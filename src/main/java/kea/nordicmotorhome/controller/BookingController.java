@@ -1,6 +1,7 @@
 package kea.nordicmotorhome.controller;
 
 import kea.nordicmotorhome.Model.*;
+import kea.nordicmotorhome.NordicmotorhomeApplication;
 import kea.nordicmotorhome.Service.CustomerService;
 import kea.nordicmotorhome.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class BookingController {
 
     @GetMapping("/bookingDetails/{id}")
     String bookingDetails(@PathVariable("id") int id,  Model model) {
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         BookingForm bookingForm = new BookingForm();
         bookingForm.setBooking(bookingService.getBooking(id));
         bookingForm.setCustomer(customerService.getCustomer(bookingForm.getBooking().getCustomer_id()));
@@ -44,6 +48,7 @@ public class BookingController {
 
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("title", "Booking " + bookingForm.getBooking().getBooking_id());
+        model.addAttribute("employee_type", NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase());
 
         return "bookingDetails.html";
     }
@@ -52,7 +57,7 @@ public class BookingController {
     String saveBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
         bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
         if (bookingForm.getBooking().getBooking_status().equalsIgnoreCase("cancelled")){
-            bookingForm.getBooking().setInitial_cost(bookingService.calculateCancellationRate(bookingForm.getBooking().getStart_date(), bookingForm.getBooking().getInitial_cost()));
+            bookingForm.getBooking().setInitial_cost(bookingService.calculateCancellationFee(bookingForm.getBooking().getStart_date(), bookingForm.getBooking().getInitial_cost()));
         }else {
             bookingForm.getBooking().setExtra_kilometers_fee(
                     bookingService.calculateExtraKilometersPrice(
@@ -96,7 +101,9 @@ public class BookingController {
                                    @PathVariable("end_date") String end_date,
                                    @PathVariable("vehicle.vehicle_calculated_quote") double quote,
                                    Model model){
-
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         BookingForm bookingForm = new BookingForm();
         bookingForm.setBooking(new Booking());
         bookingForm.setCustomer(new Customer());

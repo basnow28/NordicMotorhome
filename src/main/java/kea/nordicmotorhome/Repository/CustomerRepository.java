@@ -21,9 +21,9 @@ public class CustomerRepository {
         return template.query(sql, rowMapper, customer_id).get(0);
     }
 
-    public int createCustomer(Customer customer, int address_id){
+    public int createCustomer(Customer customer){
         String sqlCustomer = " INSERT INTO customers (first_name, last_name, date_of_birth, phone_number, email, driver_licence_number, address_id) VALUES (?,?,?,?,?,?,?)";
-        template.update(sqlCustomer, customer.getFirst_name(), customer.getLast_name(), customer.getDate_of_birth(), customer.getPhone_number(), customer.getEmail(), customer.getDriver_licence_number(), address_id);
+        template.update(sqlCustomer, customer.getFirst_name(), customer.getLast_name(), customer.getDate_of_birth(), customer.getPhone_number(), customer.getEmail(), customer.getDriver_licence_number(), customer.getAddress_id());
 
         String sqlCustomerID = "select customer_id from customers ORDER BY customer_id DESC LIMIT 1";
         int customer_id = template.queryForObject(sqlCustomerID, Integer.class);

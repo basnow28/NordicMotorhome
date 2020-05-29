@@ -34,7 +34,8 @@ public class BookingRepository {
     public int createBooking(Booking booking, Customer customer) { //employee_id is manual for now
         int address_id = customerRepository.createAddress(customer);
         int card_id = createCardInformation(booking);
-        int customer_id = customerRepository.createCustomer(customer, address_id);
+        customer.setAddress_id(address_id);
+        int customer_id = customerRepository.createCustomer(customer);
 
         String sqlBooking = "INSERT INTO bookings (" +
                 "start_date, " +
@@ -81,11 +82,6 @@ public class BookingRepository {
                 "WHERE bookings.start_date <= ? AND bookings.end_date >= ? AND bookings.booking_status != 'CANCELLED' )";
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
         return template.query(sql, rowMapper, vehicle_capacity, endDate,startDate);
-    }
-
-    public int findSeasonRate(String startDate, String endDate){
-        String sql = "SELECT seasons.season_rate FROM seasons WHERE ? BETWEEN season_start AND season_end";
-        return template.queryForObject(sql, new Object[] {startDate}, Integer.class);
     }
 
     public List<Season> getSeasons() {
@@ -168,7 +164,7 @@ public class BookingRepository {
                 booking.getPayment_amount(), booking.isFuel_check(), booking.getBooking_notes(), booking.isHas_picnic(), booking.isHas_bikerack(),
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(), booking.getBooking_id());
     }
-    public Cancellation getCancellationRate(int days_out){
+    public Cancellation getCancellation(int days_out){
         String sql = "SELECT * FROM cancellations WHERE ? BETWEEN cancellations.days_out_min AND cancellations.days_out_max ";
         RowMapper<Cancellation> rowMapper = new BeanPropertyRowMapper<>(Cancellation.class);
         Cancellation c = template.query(sql, rowMapper, days_out).get(0);
@@ -176,7 +172,6 @@ public class BookingRepository {
         String sqlUpdateBooking= "UPDATE bookings SET cancellation_id = ?";
         template.update(sqlUpdateBooking, c.getCancellation_id());
 
-        System.out.println(c.toString());
         return c;
     }
 

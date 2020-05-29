@@ -1,6 +1,6 @@
 package kea.nordicmotorhome.controller;
-
 import kea.nordicmotorhome.Model.Customer;
+import kea.nordicmotorhome.NordicmotorhomeApplication;
 import kea.nordicmotorhome.Model.SearchForm;
 import kea.nordicmotorhome.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,6 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-    @GetMapping("/customers")
-    public String findCustomer(Model model){
-        SearchForm searchForm = new SearchForm();
-        model.addAttribute("searchForm", searchForm);
-        return "/customers";
-    }
     @PostMapping("/findCustomer")
     public String findCustomer(@ModelAttribute SearchForm searchForm, Model model){
         ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(searchForm);
@@ -34,9 +28,13 @@ public class CustomerController {
     }
     @GetMapping("/customerDetails/{id}")
     public String viewCustomerDetails(@PathVariable int id, Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
         Customer customer = customerService.getCustomer(id);
         model.addAttribute("customer", customer);
         model.addAttribute("title", "Customer " + customer.getCustomer_id());
+        model.addAttribute("employee_type", NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase());
         return "customerDetails";
     }
     @PostMapping("/saveCustomerDetails")
