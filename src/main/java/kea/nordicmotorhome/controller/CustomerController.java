@@ -1,7 +1,7 @@
 package kea.nordicmotorhome.controller;
 
 import kea.nordicmotorhome.Model.Customer;
-import kea.nordicmotorhome.Model.SearchSelectForm;
+import kea.nordicmotorhome.Model.SearchForm;
 import kea.nordicmotorhome.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,15 +21,15 @@ public class CustomerController {
 
     @GetMapping("/customers")
     public String findCustomer(Model model){
-        SearchSelectForm searchSelectForm = new SearchSelectForm();
-        model.addAttribute("searchSelectForm", searchSelectForm);
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         return "/customers";
     }
     @PostMapping("/findCustomer")
-    public String findCustomer(@ModelAttribute SearchSelectForm searchSelectForm, Model model){
-        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(searchSelectForm);
+    public String findCustomer(@ModelAttribute SearchForm searchForm, Model model){
+        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(searchForm);
         model.addAttribute("customersList", customersList);
-        model.addAttribute("searchSelectForm", searchSelectForm);
+        model.addAttribute("searchForm", searchForm);
         return "/customers";
     }
     @GetMapping("/customerDetails/{id}")

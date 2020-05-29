@@ -121,16 +121,16 @@ public class BookingController {
     }
 
     @PostMapping("/findBooking")
-    public String findBooking(@ModelAttribute FindBookingForm findBookingForm, Model model){
-        if (findBookingForm.getStart_date().equals("")){
-            findBookingForm.setStart_date("0000-00-00");
+    public String findBooking(@ModelAttribute SearchForm searchForm, Model model){
+        if (searchForm.getStart_date().equals("")){
+            searchForm.setStart_date("0000-00-00");
         }
-        if (findBookingForm.getEnd_date().equals("")){
-            findBookingForm.setEnd_date("0000-00-00");
+        if (searchForm.getEnd_date().equals("")){
+            searchForm.setEnd_date("0000-00-00");
         }
-        ArrayList<BookingTable> bookinglist = (ArrayList<BookingTable>) bookingService.getBookings(findBookingForm);
+        ArrayList<BookingTable> bookinglist = (ArrayList<BookingTable>) bookingService.getBookings(searchForm);
         model.addAttribute("bookingTable", bookinglist);
-        model.addAttribute("FindBookingForm", findBookingForm);
+        model.addAttribute("searchForm", searchForm);
         return "bookings";
     }
 

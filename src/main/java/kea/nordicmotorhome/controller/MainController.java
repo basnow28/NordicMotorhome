@@ -11,7 +11,6 @@ import kea.nordicmotorhome.Service.EmployeeService;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import kea.nordicmotorhome.Model.Booking;
-import kea.nordicmotorhome.Model.FindBookingForm;
 import kea.nordicmotorhome.Service.BookingService;
 
 import kea.nordicmotorhome.Service.VehicleService;
@@ -67,7 +66,7 @@ public class MainController {
 
     @GetMapping("/bookings")
     public String bookings(Model model){
-        model.addAttribute("FindBookingForm", new FindBookingForm());
+        model.addAttribute("searchForm", new SearchForm());
         List<Booking> allbookings = bookingservice.getAllBookings();
         model.addAttribute("getAllBookings", allbookings);
         return "bookings.html";
