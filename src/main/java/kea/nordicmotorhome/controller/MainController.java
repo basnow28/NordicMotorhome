@@ -48,17 +48,19 @@ public class MainController {
     public String login(@ModelAttribute Employee employee, Model model){
         NordicmotorhomeApplication.setEmployee(employeeService.auth(employee));
         if(NordicmotorhomeApplication.getEmployee() != null){
-            return "index.html";
+            return "redirect:/dashboard";
         }
         model.addAttribute("incorrect", "Incorrect login id or password");
         return "login.html";
     }
 
     @GetMapping("/dashboard")
-    public String dashboard(){
+    public String dashboard(Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
+        String welcome = "Welcome "+NordicmotorhomeApplication.getEmployee().getEmployee_first_name()+"! :)";
+        model.addAttribute("welcome", welcome);
         return "index.html";
     }
 
