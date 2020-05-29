@@ -15,6 +15,15 @@ public class Employee {
     private String employee_login;
     private String employee_password;
 
+    public void setAllAttributesToEmpty(){
+        this.employee_id = 0;
+        this.employee_first_name = "";
+        this.employee_last_name="";
+        this.employee_type="";
+        this.employee_login="";
+        this.employee_password="";
+    }
+
     public int getEmployee_id() {
         return employee_id;
     }

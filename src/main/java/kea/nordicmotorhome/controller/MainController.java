@@ -39,7 +39,7 @@ public class MainController {
 
     @GetMapping("/")
     public String login(Model model){
-        model.addAttribute(NordicmotorhomeApplication.getEmployee());
+        model.addAttribute("employee", NordicmotorhomeApplication.getEmployee());
         model.addAttribute("incorrect", "");
         return "login.html";
     }
@@ -96,5 +96,10 @@ public class MainController {
         return "vehicles.html";
     }
 
+    @GetMapping("/logout")
+    public String logout(){
+        NordicmotorhomeApplication.getEmployee().setAllAttributesToEmpty();
+        return "redirect:/";
+    }
 
 }
