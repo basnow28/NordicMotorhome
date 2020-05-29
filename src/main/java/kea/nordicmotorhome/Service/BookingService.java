@@ -77,8 +77,8 @@ public class BookingService {
     }
 
 
-    public List<BookingTable> getBookings(FindBookingForm findBookingForm) {
-        return bookingRepository.getBookings(findBookingForm);
+    public List<BookingTable> getBookings(SearchForm searchForm) {
+        return bookingRepository.getBookings(searchForm);
     }
 
     public List<Booking> getAllBookings() {

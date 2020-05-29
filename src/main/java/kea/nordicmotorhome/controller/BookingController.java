@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.print.attribute.IntegerSyntax;
 import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Date;
@@ -118,26 +119,28 @@ public class BookingController {
     }
 
     @PostMapping("/findFreeVehicles")
-    public String findFreeVehicles(@ModelAttribute SearchAvailabilityForm searchAvailabilityForm, Model model){
-        ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchAvailabilityForm.getStart_date(), searchAvailabilityForm.getEnd_date(), searchAvailabilityForm.getVehicle_capacity());
-        bookingService.setVehiclesQuotes(searchAvailabilityForm.getStart_date(), searchAvailabilityForm.getEnd_date(), freeVehicles);
+    public String findFreeVehicles(@ModelAttribute SearchForm searchForm, Model model){
+        ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchForm.getStart_date(),
+                searchForm.getEnd_date(),
+                Integer.parseInt(searchForm.getValue()));
+        bookingService.setVehiclesQuotes(searchForm.getStart_date(), searchForm.getEnd_date(), freeVehicles);
 
         model.addAttribute("freeVehicles", freeVehicles);
-        model.addAttribute("availabilityForm", searchAvailabilityForm);
+        model.addAttribute("searchForm", searchForm);
         return "createNewBooking";
     }
 
     @PostMapping("/findBooking")
-    public String findBooking(@ModelAttribute FindBookingForm findBookingForm, Model model){
-        if (findBookingForm.getStart_date().equals("")){
-            findBookingForm.setStart_date("0000-00-00");
+    public String findBooking(@ModelAttribute SearchForm searchForm, Model model){
+        if (searchForm.getStart_date().equals("")){
+            searchForm.setStart_date("0000-00-00");
         }
-        if (findBookingForm.getEnd_date().equals("")){
-            findBookingForm.setEnd_date("0000-00-00");
+        if (searchForm.getEnd_date().equals("")){
+            searchForm.setEnd_date("0000-00-00");
         }
-        ArrayList<BookingTable> bookinglist = (ArrayList<BookingTable>) bookingService.getBookings(findBookingForm);
+        ArrayList<BookingTable> bookinglist = (ArrayList<BookingTable>) bookingService.getBookings(searchForm);
         model.addAttribute("bookingTable", bookinglist);
-        model.addAttribute("FindBookingForm", findBookingForm);
+        model.addAttribute("searchForm", searchForm);
         return "bookings";
     }
 

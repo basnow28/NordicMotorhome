@@ -25,6 +25,7 @@ public class SearchForm {
         this.value = value;
     }
 
+
     public String getStart_date() {
         return start_date;
     }

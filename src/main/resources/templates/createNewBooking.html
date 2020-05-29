@@ -41,7 +41,7 @@
                         <p class="text-primary m-0 font-weight-bold">Check Availability</p>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/findFreeVehicles}" method="post" th:object="${availabilityForm}" class="form-group d-flex flex-row justify-content-start align-items-center">
+                        <form th:action="@{/findFreeVehicles}" method="post" th:object="${searchForm}" class="form-group d-flex flex-row justify-content-start align-items-center">
                             <div class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;">
                                 <label class="align-self-start"  style="margin-bottom: 0px;">
                                     <strong>Start Date</strong><br>
@@ -55,7 +55,7 @@
                             <div class="text-md-right d-flex flex-column justify-content-start align-items-center align-items-xl-center dataTables_filter"
                                 id="dataTable_filter-1" style="margin-left: 10px;height: 55px;">
                                 <label><strong>Capacity</strong><br></label>
-                                <select required name="vehicle_capacity" th:field="*{vehicle_capacity}" class="align-self-center form-control form-control-sm custom-select custom-select-sm" style="margin: 0;" >
+                                <select required name="vehicle_capacity" th:field="*{value}" class="align-self-center form-control form-control-sm custom-select custom-select-sm" style="margin: 0;" >
                                     <option th:value="2">2</option>
                                     <option th:value="3">3</option>
                                     <option th:value="4">4</option>
@@ -98,7 +98,7 @@
                                         <td th:text="${vehicle.licence_plate}"><a href="vehicleDetails.html"></a></td>
                                         <td th:text="${vehicle.vehicle_calculated_quote}"><span><span>€</span></span>><a href="vehicleDetails.html"></a></td>
                                         <td>
-                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${availabilityForm.start_date}+'/'+${availabilityForm.end_date}+'/'+${vehicle.vehicle_calculated_quote}}">Book</a>
+                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${searchForm.start_date}+'/'+${searchForm.end_date}+'/'+${vehicle.vehicle_calculated_quote}}">Book</a>
                                       </td>
                                     </tr>
                                 </tbody>
