@@ -2,6 +2,7 @@ package kea.nordicmotorhome.Repository;
 
 
 import kea.nordicmotorhome.Model.*;
+import kea.nordicmotorhome.NordicmotorhomeApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,8 +21,6 @@ import java.util.List;
 public class BookingRepository {
     @Autowired
     JdbcTemplate template;
-    @Autowired
-    CustomerRepository customerRepository;
 
     public int createCardInformation(Booking booking){
         String sqlCard = "INSERT INTO card_information (card_number, card_expiry_date, card_cvv) VALUES (?, ?, ?)";
@@ -31,11 +30,8 @@ public class BookingRepository {
         return template.queryForObject(sqlCardID, Integer.class);
     }
 
-    public int createBooking(Booking booking, Customer customer) { //employee_id is manual for now
-        int address_id = customerRepository.createAddress(customer);
+    public int createBooking(Booking booking, int customer_id, int address_id) { //employee_id is manual for now
         int card_id = createCardInformation(booking);
-        customer.setAddress_id(address_id);
-        int customer_id = customerRepository.createCustomer(customer);
 
         String sqlBooking = "INSERT INTO bookings (" +
                 "start_date, " +
@@ -63,7 +59,7 @@ public class BookingRepository {
                 booking.getDistance_driven(), booking.getDrop_off_kilometers(), booking.getInitial_cost(), booking.getExtras_cost(), booking.getBooking_status(),
                 booking.getPayment_amount(), booking.isFuel_check(), booking.getBooking_notes(), booking.isHas_picnic(), booking.isHas_bikerack(),
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(),
-                booking.getVehicle_id(), 1, 1, customer_id, card_id);
+                booking.getVehicle_id(), NordicmotorhomeApplication.getEmployee().getEmployee_id(), null, customer_id, card_id);
 
         String sqlBookingID = "SELECT booking_id FROM bookings ORDER BY customer_id DESC LIMIT 1";
         int booking_id = template.queryForObject(sqlBookingID, Integer.class);
@@ -139,8 +135,6 @@ public class BookingRepository {
 
     public void updateBooking(Booking booking, Customer customer) { //employee_id is manual for now
         updateCardInformation(booking);
-        customerRepository.updateAddress(customer);
-        customerRepository.updateCustomer(customer);
 
         String sqlBooking = "UPDATE bookings SET " +
                 "start_date = ? , " +

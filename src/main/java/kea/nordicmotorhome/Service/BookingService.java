@@ -4,6 +4,7 @@ package kea.nordicmotorhome.Service;
 import kea.nordicmotorhome.Model.*;
 
 import kea.nordicmotorhome.Repository.BookingRepository;
+import kea.nordicmotorhome.Repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,14 @@ import java.time.temporal.ChronoUnit;
 public class BookingService {
     @Autowired
     BookingRepository bookingRepository;
-
+    @Autowired
+    CustomerRepository customerRepository;
 
     public int createBooking(Booking booking, Customer customer) {
-        return bookingRepository.createBooking(booking, customer);
+        int address_id = customerRepository.createAddress(customer);
+        customer.setAddress_id(address_id);
+        int customer_id = customerRepository.createCustomer(customer);
+        return bookingRepository.createBooking(booking, customer_id, address_id);
     }
 
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
@@ -148,6 +153,8 @@ public class BookingService {
     }
 
     public void updateBooking(Booking booking, Customer customer) {
+        customerRepository.updateAddress(customer);
+        customerRepository.updateCustomer(customer);
         bookingRepository.updateBooking(booking, customer);
     }
 
