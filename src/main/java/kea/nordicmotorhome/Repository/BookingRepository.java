@@ -97,16 +97,16 @@ public class BookingRepository {
 
 
 
-    public List<BookingTable> getBookings(FindBookingForm findBookingForm ) {
+    public List<BookingTable> getBookings(SearchForm searchForm ) {
         String sql = "SELECT CONCAT(customers.first_name,' ', customers.last_name) AS customer_name, bookings.booking_id, vehicles.vehicle_model, bookings.start_date, bookings.end_date, bookings.booking_status " +
                 "FROM bookings JOIN customers " +
                 "ON bookings.customer_id=customers.customer_id JOIN vehicles " +
                 "ON bookings.vehicle_id=vehicles.vehicle_id" +
-                " WHERE "+ findBookingForm.getInputType() +" LIKE ? OR bookings.start_date = ? OR bookings.end_date = ? ";
+                " WHERE "+ searchForm.getAttribute() +" LIKE ? OR bookings.start_date = ? OR bookings.end_date = ? ";
 
         RowMapper<BookingTable> rowMapper = new BeanPropertyRowMapper<>(BookingTable.class);
-        String value = "%"+findBookingForm.getInputText()+"%";
-        return template.query(sql, rowMapper, value, findBookingForm.getStart_date(), findBookingForm.getEnd_date());
+        String value = "%"+searchForm.getValue()+"%";
+        return template.query(sql, rowMapper, value, searchForm.getStart_date(), searchForm.getEnd_date());
 
     }
 
