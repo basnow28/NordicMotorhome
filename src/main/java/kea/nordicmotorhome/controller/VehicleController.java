@@ -16,7 +16,7 @@ import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 
 @Controller
-public class VehiclesController {
+public class VehicleController {
     @Autowired
     VehicleService vehicleService;
 

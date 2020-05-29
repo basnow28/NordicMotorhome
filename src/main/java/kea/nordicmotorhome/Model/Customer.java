@@ -19,7 +19,7 @@ public class Customer {
     private String driver_licence_number;
     private String street_name;
     private String house_number;
-    private int postcode;
+    private String postcode;
     private String city;
     private String country;
     private int address_id;
@@ -114,11 +114,11 @@ public class Customer {
         this.house_number = house_number;
     }
 
-    public int getPostcode() {
+    public String getPostcode() {
         return postcode;
     }
 
-    public void setPostcode(int postcode) {
+    public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
 
