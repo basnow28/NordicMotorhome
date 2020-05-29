@@ -233,9 +233,10 @@ INSERT INTO vehicle_types (vehicle_type_id,vehicle_type_name, cost_per_day, vehi
 
 ```bash
 INSERT INTO employees (employee_first_name, employee_last_name, employee_type, employee_login, employee_password) VALUES
-("David", "Hards", "Sale assistant", "dhards", "qoehg2741"),("Barbara", "Rekowska", "Sale assistant", "brekowska", "cksle3391"),
-("Maja", "Miskeri", "Sale assistant", "mmiskeri", "lspwh0021"),
-("Dagmara", "Przygocka", "Sale assistant", "dprzygocka", "dkagk3885"),
+("David", "Hards", "SalesAssistant", "dhards", "qoehg2741"),
+("Barbara", "Rekowska", "SalesAssistant", "brekowska", "cksle3391"),
+("Maja", "Miskeri", "SalesAssistant", "mmiskeri", "lspwh0021"),
+("Dagmara", "Przygocka", "SalesAssistant", "dprzygocka", "dkagk3885"),
 ("Thomas", "Jensen", "Cleaner", "tjensen", "gggls2017"),
 ("Alex", "Pedersen", "Cleaner", "apedersen", "melsh8826"),
 ("Maria", "Hansen", "Mechanic", "mhansen", "llsik3078"),
