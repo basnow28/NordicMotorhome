@@ -12,7 +12,7 @@
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome5-overrides.min.css}">
 </head>
 
-<body id="page-top">
+<body id="page-top" th:with="isDisabled=${employee_type}== 'BOOKKEEPER' ? true : false">
 <div id="wrapper">
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
         <div class="container-fluid d-flex flex-column p-0">
@@ -34,13 +34,13 @@
             <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top flex-row justify-content-end">
                 <a class="nav-link" th:href="@{/logout}" ></i><span>Logout</span></a>
             </nav>
-            <form th:action="@{/saveCustomerDetails}" method="post" th:object="${customer}" modelAttribute="customer" class="container-fluid">
+            <form th:action="@{/saveCustomerDetails}"  method="post" th:object="${customer}" modelAttribute="customer" class="container-fluid">
                 <div class="d-flex flex-row justify-content-between align-content-center" style="margin-bottom: 10px;">
                     <a th:href="@{/customers}"><button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button></a>
                     <h3 th:text="${title}" class="text-dark d-flex flex-row justify-content-center mb-4"></h3>
                     <input type="hidden"  name="customer_id" th:value="*{customer_id}">
                     <input type="hidden"  name="address_id" th:value="*{address_id}">
-                    <input class="btn btn-primary btn-sm" type="submit" name="save" value="Save">
+                    <input th:disabled="${isDisabled}" class="btn btn-primary btn-sm" type="submit" name="save" value="Save">
                 </div>
                 <div class="row mb-2 ">
                     <div class="col-lg-8">
@@ -54,35 +54,35 @@
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>First Name</strong></label>
-                                                    <input required class="form-control" type="text" name="first_name" th:value="*{first_name}">
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="first_name" th:value="*{first_name}">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Last Name</strong></label>
-                                                    <input required class="form-control" type="text" name="last_name" th:value="*{last_name}">
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="last_name" th:value="*{last_name}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Email</strong></label>
-                                                    <input required class="form-control" type="email" name="email" th:value="*{email}">
+                                                <div th:disabled="${isDisabled}" class="form-group"><label><strong>Email</strong></label>
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="email" name="email" th:value="*{email}">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Phone Number</strong><br></label>
-                                                    <input required class="form-control" type="text" name="phone_number" th:value="*{phone_number}">
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="phone_number" th:value="*{phone_number}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Driver Licence Number</strong><br></label>
-                                                    <input required class="form-control" type="text" name="driver_licence_number" th:value="*{driver_licence_number}"></div>
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="driver_licence_number" th:value="*{driver_licence_number}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label><strong>Date of Birth</strong><br></label>
-                                                    <input placeholder="YYYY-MM-DD" required pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="form-control" type="text" name="date_of_birth" th:value="*{date_of_birth}"></div>
+                                                    <input th:disabled="${isDisabled}" placeholder="YYYY-MM-DD" required pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="form-control" type="text" name="date_of_birth" th:value="*{date_of_birth}"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -94,23 +94,23 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label><strong>Street</strong></label>
-                                            <input required class="form-control" type="text" th:name="street_name" th:value="*{street_name}">
+                                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="street_name" th:value="*{street_name}">
                                         </div>
                                         <div class="form-group"><label><strong>House Number</strong></label>
-                                            <input required class="form-control" type="text" th:name="house_number" th:value="*{house_number}">
+                                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="house_number" th:value="*{house_number}">
                                         </div>
                                         <div class="form-group"><label><strong>Postcode</strong><br></label>
-                                            <input required class="form-control" type="text" th:name="postcode" th:value="*{postcode}">
+                                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="postcode" th:value="*{postcode}">
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label><strong>City</strong></label>
-                                                    <input required class="form-control" type="text" th:name="city" th:value="*{city}"></div>
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="city" th:value="*{city}"></div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label><strong>Country</strong></label>
-                                                    <input required class="form-control" type="text" th:name="country" th:value="*{country}"></div>
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="country" th:value="*{country}"></div>
                                             </div>
                                         </div>
                                     </div>

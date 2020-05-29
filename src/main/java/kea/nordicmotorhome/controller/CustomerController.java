@@ -44,6 +44,7 @@ public class CustomerController {
         Customer customer = customerService.getCustomer(id);
         model.addAttribute("customer", customer);
         model.addAttribute("title", "Customer " + customer.getCustomer_id());
+        model.addAttribute("employee_type", NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase());
         return "customerDetails";
     }
     @PostMapping("/saveCustomerDetails")
