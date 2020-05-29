@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.print.attribute.IntegerSyntax;
 import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Date;
@@ -111,12 +112,14 @@ public class BookingController {
     }
 
     @PostMapping("/findFreeVehicles")
-    public String findFreeVehicles(@ModelAttribute SearchAvailabilityForm searchAvailabilityForm, Model model){
-        ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchAvailabilityForm.getStart_date(), searchAvailabilityForm.getEnd_date(), searchAvailabilityForm.getVehicle_capacity());
-        bookingService.setVehiclesQuotes(searchAvailabilityForm.getStart_date(), searchAvailabilityForm.getEnd_date(), freeVehicles);
+    public String findFreeVehicles(@ModelAttribute SearchForm searchForm, Model model){
+        ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchForm.getStart_date(),
+                searchForm.getEnd_date(),
+                Integer.parseInt(searchForm.getValue()));
+        bookingService.setVehiclesQuotes(searchForm.getStart_date(), searchForm.getEnd_date(), freeVehicles);
 
         model.addAttribute("freeVehicles", freeVehicles);
-        model.addAttribute("availabilityForm", searchAvailabilityForm);
+        model.addAttribute("searchForm", searchForm);
         return "createNewBooking";
     }
 
