@@ -69,6 +69,9 @@ public class MainController {
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
+        else if(NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("bookkeeper")){
+            return "noAuth.html";
+        }
         model.addAttribute("availabilityForm", new SearchAvailabilityForm());
         return "createNewBooking.html";
     }
@@ -88,6 +91,9 @@ public class MainController {
     public String vehicles(Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
+        }
+        else if(NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("bookkeeper")){
+            return "noAuth.html";
         }
         List<Vehicle> vehicles = carservice.getAllVehicles();
 

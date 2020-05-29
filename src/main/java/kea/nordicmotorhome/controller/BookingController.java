@@ -47,6 +47,7 @@ public class BookingController {
 
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("title", "Booking " + bookingForm.getBooking().getBooking_id());
+        model.addAttribute("employee_type", NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase());
 
         return "bookingDetails.html";
     }
