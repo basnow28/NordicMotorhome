@@ -66,7 +66,7 @@ public class MainController {
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
-        else if(!NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("SalesAssistant")){
+        else if(!NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase().equals("SALESASSISTANT")){
             return "noAuth.html";
         }
         model.addAttribute("searchForm", new SearchForm());
@@ -79,8 +79,8 @@ public class MainController {
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
-        else if(!NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("Mechanic") ||
-                !NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("Cleaner")){
+        else if(NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase().equals("MECHANIC") ||
+                NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase().equals("CLEANER")){
             return "noAuth.html";
         }
         model.addAttribute("searchForm", new SearchForm());
@@ -94,7 +94,7 @@ public class MainController {
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
-        else if(NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("Bookkeeper")){
+        else if(NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase().equals("BOOKKEEPER")){
             return "noAuth.html";
         }
         List<Vehicle> vehicles = carservice.getAllVehicles();
@@ -108,12 +108,12 @@ public class MainController {
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
-        else if(!NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("Mechanic") ||
-                !NordicmotorhomeApplication.getEmployee().getEmployee_type().toLowerCase().equals("Cleaner")){
+        else if(NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase().equals("MECHANIC") ||
+                NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase().equals("CLEANER")){
             return "noAuth.html";
         }
-        SearchSelectForm searchSelectForm = new SearchSelectForm();
-        model.addAttribute("searchSelectForm", searchSelectForm);
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         return "/customers";
     }
     @GetMapping("/logout")
