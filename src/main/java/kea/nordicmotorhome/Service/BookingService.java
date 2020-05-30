@@ -41,7 +41,7 @@ public class BookingService {
     }
 
 
-    private double getInitialQuote(String start_date, String end_date, int vehiclePricePerDay) {
+    public double getInitialQuote(String start_date, String end_date, int vehiclePricePerDay) {
         ArrayList<Season> seasons = (ArrayList<Season>) bookingRepository.getSeasons();
         ///Getting a format to change string to LocalDate object
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
