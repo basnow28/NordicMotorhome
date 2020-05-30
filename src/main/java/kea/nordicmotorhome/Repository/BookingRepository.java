@@ -30,7 +30,7 @@ public class BookingRepository {
         return template.queryForObject(sqlCardID, Integer.class);
     }
 
-    public int createBooking(Booking booking, int customer_id, int address_id) { //employee_id is manual for now
+    public int createBooking(Booking booking, int customer_id) {
         int card_id = createCardInformation(booking);
 
         String sqlBooking = "INSERT INTO bookings (" +
@@ -60,7 +60,7 @@ public class BookingRepository {
                 booking.getPayment_amount(), booking.isFuel_check(), booking.getBooking_notes(), booking.isHas_picnic(), booking.isHas_bikerack(),
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(),
                 booking.getVehicle_id(), NordicmotorhomeApplication.getEmployee().getEmployee_id(), null, customer_id, card_id);
-
+        //for testing purpose change  NordicmotorhomeApplication.getEmployee().getEmployee_id() to booking.getEmployee_id()
         String sqlBookingID = "SELECT booking_id FROM bookings ORDER BY customer_id DESC LIMIT 1";
         int booking_id = template.queryForObject(sqlBookingID, Integer.class);
 

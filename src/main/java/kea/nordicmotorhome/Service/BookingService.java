@@ -22,13 +22,20 @@ public class BookingService {
     @Autowired
     CustomerRepository customerRepository;
 
+//CREATE BOOKING USE CASE
+
+    //method for creating booking
     public int createBooking(Booking booking, Customer customer) {
         int address_id = customerRepository.createAddress(customer);
         customer.setAddress_id(address_id);
         int customer_id = customerRepository.createCustomer(customer);
-        return bookingRepository.createBooking(booking, customer_id, address_id);
+        return bookingRepository.createBooking(booking, customer_id);
     }
 
+ //CHECK AVAILABLE BOOKINGS USE CASE
+
+    //Method for returning from repository list of free vehicles in selected dates, additionally in method body there is a check if end
+    // datt is higher than start date and if the start dates is higher or equals to today's date
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
             DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate start_date = LocalDate.parse(startDate, pattern);
@@ -40,7 +47,7 @@ public class BookingService {
         return new ArrayList<Vehicle>();
     }
 
-
+    //Method for calculating initial price for renting vehicle in given date range
     public double getInitialQuote(String start_date, String end_date, int vehiclePricePerDay) {
         ArrayList<Season> seasons = (ArrayList<Season>) bookingRepository.getSeasons();
         ///Getting a format to change string to LocalDate object
@@ -58,6 +65,7 @@ public class BookingService {
         return Math.floor(quote);
     }
 
+    //Method for calculating price for a specific day depending on date, vehicle and season
     public double getPricePerDayDependingOnASeason(LocalDate day, ArrayList<Season> seasons, int vehiclePricePerDay){
         for(Season season : seasons){
             if(season.getSeason_id() == 1){
@@ -75,21 +83,28 @@ public class BookingService {
         return 0.0;
     }
 
+    //Method for setting quota for every vehicle from available vehicles to book
     public void setVehiclesQuotes(String start_date, String end_date, ArrayList<Vehicle> freeVehicles) {
         for (Vehicle vehicle : freeVehicles) {
             vehicle.setVehicle_calculated_quote(getInitialQuote(start_date, end_date, vehicle.getCost_per_day()));
         }
     }
+//FIND BOOKINGS USE CASE
 
-
+    //Method which based on searching criteria in search form returns from repository list of booking table objects
+    // (combined information from bookings, customers, vehicles tables from DB)
     public List<BookingTable> getBookings(SearchForm searchForm) {
         return bookingRepository.getBookings(searchForm);
     }
 
+    //Method for returning from repository all existing bookings ??????????????????????????????????????????????????????????????????????????????????????????//
     public List<Booking> getAllBookings() {
         return bookingRepository.getAllBookings();
     }
 
+//UPDATE BOOKING USE CASE
+
+    //Method for adding to the initial price, price of extras (like bike rack)
     public double setExtrasPrice(Booking booking){
         double extrasPrice = 0;
 
@@ -120,6 +135,7 @@ public class BookingService {
         return extrasPrice;
     }
 
+    //Method for calculating price after vehicle is returned so the fee for additional kilometers can be added to the bill
     public double calculateExtraKilometersPrice(String start_date, String end_date, int kilometers){
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(start_date, pattern);
@@ -131,6 +147,7 @@ public class BookingService {
         return extraKilometersPrice < 0? 0.0 : extraKilometersPrice;
     }
 
+    //Method for calculating fee for cancellation
     public double calculateCancellationFee(String start_date, Double initial_cost) {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(start_date, pattern);
@@ -144,21 +161,28 @@ public class BookingService {
         }else
             return cancellationFee ;
     }
+
+    //Method for returning from repository right cancellation rate based on the days between cancellation day and start day og the booking
     private Cancellation getCancellation(int days_out){
         return bookingRepository.getCancellation(days_out);
     }
 
-    public Booking getBooking(int id) {
-        return bookingRepository.getBooking(id);
-    }
-
+    //Method for calling repositories to update changed fields in bookings, customers, card_information, addresses, vehicles, tables
     public void updateBooking(Booking booking, Customer customer) {
         customerRepository.updateAddress(customer);
         customerRepository.updateCustomer(customer);
         bookingRepository.updateBooking(booking, customer);
     }
 
+    //Method for calling repository to update final payment amount
     public void updateBookingPayment(int booking_id, double payment_amount) {
         bookingRepository.updateBookingPayment(booking_id, payment_amount);
     }
+
+
+ //????????????????????????????????????????????
+    public Booking getBooking(int id) {
+        return bookingRepository.getBooking(id);
+    }
+
 }

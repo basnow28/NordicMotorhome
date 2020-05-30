@@ -96,10 +96,8 @@ public class BookingController {
     }
 
     @GetMapping("/bookingDetails/{vehicle.vehicle_id}/{start_date}/{end_date}/{vehicle.vehicle_calculated_quote}")
-    public String createNewBooking(@PathVariable("vehicle.vehicle_id") int vehicle_id,
-                                   @PathVariable("start_date") String start_date,
-                                   @PathVariable("end_date") String end_date,
-                                   @PathVariable("vehicle.vehicle_calculated_quote") double quote,
+    public String createNewBooking(@PathVariable("vehicle.vehicle_id") int vehicle_id, @PathVariable("start_date") String start_date,
+                                   @PathVariable("end_date") String end_date, @PathVariable("vehicle.vehicle_calculated_quote") double quote,
                                    Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";

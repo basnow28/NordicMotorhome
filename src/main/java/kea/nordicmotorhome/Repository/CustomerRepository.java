@@ -15,12 +15,16 @@ public class CustomerRepository {
     @Autowired
     JdbcTemplate template;
 
+//???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     public Customer getCustomer(int customer_id) {
         String sql = "SELECT * FROM customers INNER JOIN addresses ON customers.address_id = addresses.address_id WHERE customer_id = ?";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return template.query(sql, rowMapper, customer_id).get(0);
     }
 
+////// CREATE BOOKING USE CASE \\\\\\\\\\
+
+    //Method for creating new customer in database and returning created customer ID
     public int createCustomer(Customer customer){
         String sqlCustomer = " INSERT INTO customers (first_name, last_name, date_of_birth, phone_number, email, driver_licence_number, address_id) VALUES (?,?,?,?,?,?,?)";
         template.update(sqlCustomer, customer.getFirst_name(), customer.getLast_name(), customer.getDate_of_birth(), customer.getPhone_number(), customer.getEmail(), customer.getDriver_licence_number(), customer.getAddress_id());
@@ -31,6 +35,7 @@ public class CustomerRepository {
         return customer.getCustomer_id();
     }
 
+    //Method for creating new address in database and returning created address ID
     public int createAddress(Customer customer){
         String sqlAddress = "INSERT INTO addresses (street_name, house_number, postcode, city, country) VALUES (?, ?, ?, ?, ?)";
         template.update(sqlAddress, customer.getStreet_name(), customer.getHouse_number(), customer.getPostcode(), customer.getCity(), customer.getCountry());
@@ -38,8 +43,9 @@ public class CustomerRepository {
         return template.queryForObject(sqlAddressID, Integer.class);
     }
 
-    ///////////Updating customer////////////
+    ///////////Updating customer use case////////////
 
+    //Method for updating customer information in database
     public void updateCustomer(Customer customer){
         String sqlCustomer = " UPDATE customers SET " +
                 "first_name = ? , " +
@@ -53,7 +59,7 @@ public class CustomerRepository {
                 customer.getDate_of_birth(), customer.getPhone_number(), customer.getEmail(),
                 customer.getDriver_licence_number(), customer.getCustomer_id());
     }
-
+    ////Method for updating address information in database
     public void updateAddress(Customer customer){
         String sqlAddress = "UPDATE addresses SET " +
                 "street_name = ? , " +
@@ -64,8 +70,10 @@ public class CustomerRepository {
                 "WHERE address_id = ?";
         template.update(sqlAddress, customer.getStreet_name(), customer.getHouse_number(), customer.getPostcode(), customer.getCity(), customer.getCountry(), customer.getAddress_id());
     }
-    ///LIST//
 
+///FIND CUSTOMER USE CASE//
+
+    //Method for creating list of all customers which fit searching criteria
     public List<Customer> findAllMatchingCustomer(SearchForm searchForm){
         String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers WHERE "+ searchForm.getAttribute() + " LIKE ?";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
