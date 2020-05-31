@@ -89,6 +89,9 @@ public class CustomerRepository {
         return template.query(sql, rowMapper, customer_id).get(0);
     }
 
+//Check if customer exists
+
+    //Method return from database customer that already exists by email
     public boolean doesExist(Customer customer) {
         String sql = "SELECT * FROM customers WHERE email = ? ";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);

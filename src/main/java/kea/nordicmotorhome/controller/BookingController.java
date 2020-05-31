@@ -99,7 +99,7 @@ public class BookingController {
 
     @PostMapping("/findCustomerForBooking")
     public String findCustomer(@ModelAttribute BookingForExistingCustomer bookingForExistingCustomer, Model model){
-        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(bookingForExistingCustomer.getSearchForm());
+        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomers(bookingForExistingCustomer.getSearchForm());
         model.addAttribute("customersList", customersList);
         model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
         return "bookForCustomer.html";

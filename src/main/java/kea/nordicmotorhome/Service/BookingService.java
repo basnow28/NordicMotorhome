@@ -38,7 +38,7 @@ public class BookingService {
             customer_id = customer.getCustomer_id();
             address_id = customer.getAddress_id();
         }
-        return bookingRepository.createBooking(booking, customer_id, address_id);
+        return bookingRepository.createBooking(booking, customer_id);
     }
 
  //CHECK AVAILABLE BOOKINGS USE CASE
