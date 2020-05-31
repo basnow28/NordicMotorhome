@@ -246,6 +246,13 @@ table{
     background-color: white;
 }
 
+textarea{
+    width: 1332px;
+    height: 100px;
+    resize: none;
+}
+
+
 .align-items-stretch{
     align-items: stretch;
 }
