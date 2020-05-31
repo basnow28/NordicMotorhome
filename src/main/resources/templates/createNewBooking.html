@@ -4,58 +4,55 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Nordic Notorhome</title>
-    <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+    <title>Create New Booking - Nordic Notorhome</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}">
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome5-overrides.min.css}">
 </head>
 
-<body id="page-top">
-    <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-start align-items-xl-start sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-text mx-3"><span class="float-left">Nordic</span><span class="float-left">Motorhome</span></div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/dashboard}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/bookings}"><span><i class="fas fa-table"></i>Bookings</span></a></li>
-                    <li class="nav-item" role="presentation" ><a class="nav-link active" th:href="@{/createNewBooking}"><i class="far fa-calendar-plus"></i><span>Create New Booking</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/vehicles}"><i class="fas fa-car"></i><span>Vehicles</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/customers}"><i class="fa fa-users fa-2x"></i><span>Customers</span></a></li>
-                </ul>
-            </div>
-        </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
+<body id="wrapper">
+    <nav class="nav">
+        <div class="nav-title">
+            <span>Nordic</span>
+            <span>Motorhome</span>
+        </div>
+        <br>
+        <ul class="navbar-nav">
+            <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/dashboard}"><i class="fas fa-tachometer-alt nav-icon"></i><span>Dashboard</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/bookings}"><span><i class="fas fa-table nav-icon"></i>Bookings</span></a></li>
+            <li class="nav-item" role="presentation" ><a class="nav-link active" th:href="@{/createNewBooking}"><i class="far fa-calendar-plus nav-icon"></i><span>Create New Booking</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/vehicles}"><i class="fas fa-car nav-icon"></i><span>Vehicles</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/customers}"><i class="fas fa-users nav-icon"></i><span>Customers</span></a></li>
+        </ul>
+    </nav>
             <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top flex-row justify-content-end">
-                    <a class="nav-link" th:href="@{/logout}" ></i><span>Logout</span></a>
+                <nav class="nav-top">
+                    <a class="nav-top-link" th:href="@{/logout}" ><span>Logout</span></a>
                 </nav>
                 <div class="container-fluid">
-                <h3 class="text-dark mb-4">Create New Booking</h3>
+                <h3 class="text-dark">Create New Booking</h3>
                 <div class="card shadow">
-                    <div class="card-header py-3">
-                        <p class="text-primary m-0 font-weight-bold">Check Availability</p>
+                    <div class="card-header-container">
+                        <p class="card-header-text">Check Availability</p>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/findFreeVehicles}" method="post" th:object="${searchForm}" class="form-group d-flex flex-row justify-content-start align-items-center">
-                            <div class="d-flex flex-column justify-content-start align-items-center" style="margin-right: 10px;">
-                                <label class="align-self-start"  style="margin-bottom: 0px;">
+                        <form th:action="@{/findFreeVehicles}" method="post" th:object="${searchForm}">
+                            <div class="flex flex-row justify-content-between align-items-stretch">
+                            <div class="flex col justify-content-start align-items-center" style="margin-right: 10px;">
+                                <label>
                                     <strong>Start Date</strong><br>
                                 </label>
-                                <input placeholder="YYYY-MM-DD" required pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="border rounded" type="text" name="start_date" th:value="*{start_date}" style="color: #6e707e;height: 31px;">
+                                <input placeholder="YYYY-MM-DD" required pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="form-control-sm" type="text" name="start_date" th:value="*{start_date}">
                             </div>
-                            <div class="d-flex flex-column justify-content-start align-items-center">
-                                <label class="align-self-start" ><strong>End Date</strong><br></label>
-                                <input placeholder="YYYY-MM-DD" required pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="border rounded" type="text" name="end_date" th:value="*{end_date}" style="color: #6e707e;height: 31px;" >
+                            <div class="flex col justify-content-start align-items-center">
+                                <label><strong>End Date</strong><br></label>
+                                <input placeholder="YYYY-MM-DD" required pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="form-control-sm" type="text" name="end_date" th:value="*{end_date}" >
                             </div>
-                            <div class="text-md-right d-flex flex-column justify-content-start align-items-center align-items-xl-center dataTables_filter"
-                                id="dataTable_filter-1" style="margin-left: 10px;height: 55px;">
+                            <div class="flex col justify-content-start align-items-center" style="margin-left: 10px">
                                 <label><strong>Capacity</strong><br></label>
-                                <select required name="vehicle_capacity" th:field="*{value}" class="align-self-center form-control form-control-sm custom-select custom-select-sm" style="margin: 0;" >
+                                <select required name="vehicle_capacity" th:field="*{value}" class="form-control-sm">
                                     <option th:value="2">2</option>
                                     <option th:value="3">3</option>
                                     <option th:value="4">4</option>
@@ -65,17 +62,11 @@
                             <div class="justify-content-center align-content-center">
                                 <input type="submit" value="Search" style="margin: 10px;" class="btn btn-primary btn-sm d-none d-sm-inline-block">
                             </div>
+                            </div>
                         </form>
                         </div>
-
-                        <div class="text-md-right d-flex flex-row justify-content-between align-items-xl-center dataTables_filter" id="dataTable_filter-2">
-                            <div class="text-md-right d-flex flex-row align-items-center align-content-center align-self-end align-items-xl-center dataTables_filter" id="dataTable_filter-3"></div>
-                        </div>
-                        <div class="form-group d-flex flex-row justify-content-around">
-                            <div></div>
-                        </div>
-                        <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
-                            <table class="table my-0" id="dataTable">
+                        <div class="">
+                            <table class="">
                                 <thead>
                                     <tr>
                                         <th>Vehicle Id</th>
@@ -85,6 +76,7 @@
                                         <th>Capacity</th>
                                         <th>Plate</th>
                                         <th>Quote</th>
+                                        <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -96,11 +88,13 @@
                                         <td th:text="${vehicle.vehicle_type_name}"><a href="vehicleDetails.html"></a></td>
                                         <td th:text="${vehicle.vehicle_capacity}"><a href="vehicleDetails.html"></a></td>
                                         <td th:text="${vehicle.licence_plate}"><a href="vehicleDetails.html"></a></td>
-                                        <td th:text="${vehicle.vehicle_calculated_quote}"><span><span>€</span></span>><a href="vehicleDetails.html"></a></td>
+                                        <td th:text="${vehicle.vehicle_calculated_quote}"><span><span>€</span></span></td>
                                         <td>
-                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${searchForm.start_date}+'/'+${searchForm.end_date}+'/'+${vehicle.vehicle_calculated_quote}}">Book</a>
-                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookForCustomer/'+${vehicle.vehicle_id}+'/'+${searchForm.start_date}+'/'+${searchForm.end_date}+'/'+${vehicle.vehicle_calculated_quote}}">Book For Existing Customer</a>
-                                      </td>
+                                            <a class="btn" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${searchForm.start_date}+'/'+${searchForm.end_date}+'/'+${vehicle.vehicle_calculated_quote}}">Book</a>
+                                        </td>
+                                        <td>
+                                            <a class="btn" th:href="@{'/bookForCustomer/'+${vehicle.vehicle_id}+'/'+${searchForm.start_date}+'/'+${searchForm.end_date}+'/'+${vehicle.vehicle_calculated_quote}}">Book For Existing Customer</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -113,20 +107,17 @@
                                         <th>Plate</th>
                                         <th>Quote</th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                     </div>
                 </div>
+                <footer class="footer">
+                    <span>Copyright © Nordic Notorhome 2020</span>
+                </footer>
     </div>
-    </div>
-    </div>
-    <footer class="bg-white sticky-footer">
-        <div class="container my-auto">
-            <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
-        </div>
-    </footer>
 </body>
 
 </html>

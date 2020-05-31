@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Profile - Nordic Notorhome</title>
+    <title>Booking Details- Nordic Notorhome</title>
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}">
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
@@ -31,10 +31,10 @@
                 <nav class="nav-top">
                     <a class="nav-top-link" th:href="@{/logout}" ><span>Logout</span></a>
                 </nav>
-            <form class="container-main" th:action="${title} == 'New Booking'? @{/newBooking} : @{/saveBooking}" method="post" th:object="${bookingForm}" modelAttribute="bookingForm">
-                <div class="container-header" style="margin-bottom: 10px;">
-                    <a th:href="@{/createNewBooking}"><button class="" type="button"><i class="fa fa-chevron-left"></i></button></a>
-                    <input th:hidden="${isDisabled}" class="" type="submit" name="save" value="Save">
+            <form class="container-fluid" th:action="${title} == 'New Booking'? @{/newBooking} : @{/saveBooking}" method="post" th:object="${bookingForm}" modelAttribute="bookingForm">
+                <div class="container-header">
+                    <a th:href="@{/createNewBooking}"><button type="button"><i class="fa fa-chevron-left btn"></i></button></a>
+                    <input th:hidden="${isDisabled}" class="btn" type="submit" name="save" value="Save">
                 </div>
                 <div class="container-column">
                     <div class="container-row">
@@ -228,7 +228,7 @@
                                     <span th:hidden="${isDisabled}" >€</span>
                                 </div>
                                 <div class="float-right flex-row justify-content-end">
-                                    <button th:hidden="${isDisabled}" class="btn btn-primary btn-sm" name="addNewPayment" type="submit" style="height: 30px;font-size: 12px;">Add New Payment Amount</button>
+                                    <button th:hidden="${isDisabled}" class="btn" name="addNewPayment" type="submit">Add New Payment Amount</button>
                                 </div>
                             </div>
                             </div>
@@ -366,5 +366,4 @@
                 </footer>
             </div>
 </body>
-
 </html>

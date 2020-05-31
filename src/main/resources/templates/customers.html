@@ -4,68 +4,56 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Nordic Notorhome</title>
-    <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+    <title>Customers - Nordic Notorhome</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}">
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome5-overrides.min.css}">
 </head>
 
-<body id="page-top">
-<div id="wrapper">
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-        <div class="container-fluid d-flex flex-column p-0">
-            <a class="navbar-brand d-flex justify-content-center align-items-start align-items-xl-start sidebar-brand m-0" href="#">
-                <div class="sidebar-brand-text mx-3"><span class="float-left">Nordic</span><span class="float-left">Motorhome</span></div>
-            </a>
-            <hr class="sidebar-divider my-0">
-            <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/dashboard}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/bookings}"><span><i class="fas fa-table"></i>Bookings</span></a></li>
-                <li class="nav-item" role="presentation" ><a class="nav-link" th:href="@{/createNewBooking}"><i class="far fa-calendar-plus"></i><span>Create New Booking</span></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/vehicles}"><i class="fas fa-car"></i><span>Vehicles</span></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link  active" th:href="@{/customers}"><i class="fa fa-users fa-2x text-gray-300"></i><span>Customers</span></a></li>
-            </ul>
+<body id="wrapper">
+    <nav class="nav">
+        <div class="nav-title">
+            <span>Nordic</span>
+            <span>Motorhome</span>
         </div>
+        <br>
+        <ul class="navbar-nav">
+            <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/dashboard}"><i class="fas fa-tachometer-alt nav-icon"></i><span>Dashboard</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/bookings}"><span><i class="fas fa-table nav-icon"></i>Bookings</span></a></li>
+            <li class="nav-item" role="presentation" ><a class="nav-link" th:href="@{/createNewBooking}"><i class="far fa-calendar-plus nav-icon"></i><span>Create New Booking</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/vehicles}"><i class="fas fa-car nav-icon"></i><span>Vehicles</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link active" th:href="@{/customers}"><i class="fas fa-users nav-icon"></i><span>Customers</span></a></li>
+        </ul>
     </nav>
-    <div class="d-flex flex-column" id="content-wrapper">
         <div id="content">
-            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top flex-row justify-content-end">
-                <a class="nav-link" th:href="@{/logout}" ></i><span>Logout</span></a>
+            <nav class="nav-top">
+                <a class="nav-top-link" th:href="@{/logout}" ><span>Logout</span></a>
             </nav>
             <div class="container-fluid">
                 <div class="card shadow">
-                    <div class="card-header py-3">
-                        <p class="text-primary m-0 font-weight-bold">Find Customer</p>
+                    <div class="card-header-container">
+                        <p class="card-header-text">Find Customer</p>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/findCustomer}" th:object="${searchForm}" method="post" class="form-group d-flex flex-row justify-content-start align-items-center">
-                            <div class="d-flex flex-row" style="width: 600;">
+                        <form th:action="@{/findCustomer}" th:object="${searchForm}" method="post">
+                            <div class="flex container-row justify-content-start align-items-center">
                                 <label>
-                                    <select th:field="*{attribute}" class="form-control form-control-sm custom-select custom-select-sm">
+                                    <select th:field="*{attribute}" class="form-control-sm">
                                         <option th:value="first_name" selected="">First Name</option>
                                         <option th:value="last_name">Last Name</option>
                                         <option th:value="email">Email</option>
                                         <option th:value="phone_number">Phone Number</option>
                                     </select>
-                                    <input name ="value" th:value="*{value}" class="align-self-start form-control form-control-sm" type="search" aria-controls="dataTable" placeholder="Search" >
+                                    <input name ="value" th:value="*{value}" class="form-control-sm" placeholder="Search" >
                                 </label>
-                            </div>
-                            <div class="justify-content-center align-content-center">
-                                <input type="submit" value="Search" style="margin: 10px;" class="btn btn-primary btn-sm d-none d-sm-inline-block">
+                                <input type="submit" value="Search" style="margin: 10px;" class="btn">
                             </div>
                         </form>
                     </div>
-
-                    <div class="text-md-right d-flex flex-row justify-content-between align-items-xl-center dataTables_filter" id="dataTable_filter-2">
-                        <div class="text-md-right d-flex flex-row align-items-center align-content-center align-self-end align-items-xl-center dataTables_filter" id="dataTable_filter-3"></div>
-                    </div>
-                    <div class="form-group d-flex flex-row justify-content-around">
-                        <div></div>
-                    </div>
-                    <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
-                        <table class="table my-0" id="dataTable">
+                    <div class="">
+                        <table class="">
                             <thead>
                             <tr>
                                 <th>Customer Id</th>
@@ -86,7 +74,7 @@
                                 <td th:text="${customer.email}"></td>
                                 <td th:text="${customer.address_id}"></td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/customerDetails/'+${customer.customer_id}}">View</a>
+                                    <a class="btn" th:href="@{'/customerDetails/'+${customer.customer_id}}">View</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -105,14 +93,10 @@
                     </div>
                 </div>
             </div>
+            <footer class="footer">
+                <span>Copyright © Nordic Notorhome 2020</span>
+            </footer>
         </div>
-    </div>
-</div>
-<footer class="bg-white sticky-footer">
-    <div class="container my-auto">
-        <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
-    </div>
-</footer>
 </body>
 
 </html>
