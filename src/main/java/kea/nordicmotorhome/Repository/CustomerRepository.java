@@ -73,4 +73,10 @@ public class CustomerRepository {
         return template.query(sql,rowMapper, value);
     }
 
+    public boolean doesExist(Customer customer) {
+        String sql = "SELECT * FROM customers WHERE email = ? ";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        List<Customer> list = template.query(sql,rowMapper, customer.getEmail());
+        return list.size() > 0;
+    }
 }

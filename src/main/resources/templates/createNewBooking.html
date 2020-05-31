@@ -99,6 +99,7 @@
                                         <td th:text="${vehicle.vehicle_calculated_quote}"><span><span>€</span></span>><a href="vehicleDetails.html"></a></td>
                                         <td>
                                       <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookingDetails/'+${vehicle.vehicle_id}+'/'+${searchForm.start_date}+'/'+${searchForm.end_date}+'/'+${vehicle.vehicle_calculated_quote}}">Book</a>
+                                      <a class="btn btn-primary btn-sm d-none d-sm-inline-block align-self-start" role="button" th:href="@{'/bookForCustomer/'+${vehicle.vehicle_id}+'/'+${searchForm.start_date}+'/'+${searchForm.end_date}+'/'+${vehicle.vehicle_calculated_quote}}">Book For Existing Customer</a>
                                       </td>
                                     </tr>
                                 </tbody>

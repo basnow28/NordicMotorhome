@@ -80,7 +80,6 @@ public class BookingController {
 
     @PostMapping("/newBooking")
     String createNewBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
-
         bookingForm.getBooking().setVehicle_id(bookingForm.getVehicle().getVehicle_id());
         bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
         bookingForm.getBooking().setExtra_kilometers_fee(
@@ -112,6 +111,55 @@ public class BookingController {
         bookingForm.getBooking().setInitial_cost(quote);
         bookingForm.setVehicle(vehicleService.getVehicle(vehicle_id));
 
+
+        model.addAttribute("bookingForm", bookingForm);
+        model.addAttribute("title", "New Booking");
+        return "bookingDetails.html";
+    }
+
+    @GetMapping("/bookForCustomer/{vehicle_id}/{start_date}/{end_date}/{quote}")
+    public String createBookingExistingCustomer(@PathVariable("vehicle_id") int vehicle_id,
+                                                @PathVariable("start_date") String start_date,
+                                                @PathVariable("end_date") String end_date,
+                                                @PathVariable("quote") double quote,
+                                                Model model){
+        BookingForExistingCustomer bookingForExistingCustomer = new BookingForExistingCustomer();
+        bookingForExistingCustomer.setSearchForm(new SearchForm());
+        bookingForExistingCustomer.getSearchForm().setStart_date(start_date);
+        bookingForExistingCustomer.getSearchForm().setEnd_date(end_date);
+        bookingForExistingCustomer.setVehicle_id(vehicle_id);
+        bookingForExistingCustomer.setQuote(quote);
+
+        model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
+
+        return "bookForCustomer.html";
+    }
+
+    @PostMapping("/findCustomerForBooking")
+    public String findCustomer(@ModelAttribute BookingForExistingCustomer bookingForExistingCustomer, Model model){
+        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(bookingForExistingCustomer.getSearchForm());
+        model.addAttribute("customersList", customersList);
+        model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
+        return "bookForCustomer.html";
+    }
+
+    @GetMapping("/bookingDetails/{vehicle_id}/{start_date}/{end_date}/{quote}/{customer_id}")
+    public String createNewBooking(@PathVariable("vehicle_id") int vehicle_id,
+                                   @PathVariable("start_date") String start_date,
+                                   @PathVariable("end_date") String end_date,
+                                   @PathVariable("quote") double quote,
+                                   @PathVariable("customer_id") int customer_id,
+                                   Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
+        BookingForm bookingForm = new BookingForm();
+        bookingForm.setBooking(new Booking());
+        bookingForm.setCustomer(customerService.getCustomer(customer_id));
+        bookingForm.getBooking().setStart_date(start_date);
+        bookingForm.getBooking().setEnd_date(end_date);
+        bookingForm.getBooking().setInitial_cost(quote);
+        bookingForm.setVehicle(vehicleService.getVehicle(vehicle_id));
 
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("title", "New Booking");

@@ -61,7 +61,7 @@ public class BookingRepository {
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(),
                 booking.getVehicle_id(), NordicmotorhomeApplication.getEmployee().getEmployee_id(), null, customer_id, card_id);
 
-        String sqlBookingID = "SELECT booking_id FROM bookings ORDER BY customer_id DESC LIMIT 1";
+        String sqlBookingID = "SELECT booking_id FROM bookings ORDER BY booking_id DESC LIMIT 1";
         int booking_id = template.queryForObject(sqlBookingID, Integer.class);
 
         return booking_id;

@@ -23,9 +23,17 @@ public class BookingService {
     CustomerRepository customerRepository;
 
     public int createBooking(Booking booking, Customer customer) {
-        int address_id = customerRepository.createAddress(customer);
-        customer.setAddress_id(address_id);
-        int customer_id = customerRepository.createCustomer(customer);
+        boolean isExistingCustomer = customerRepository.doesExist(customer);
+        int address_id;
+        int customer_id;
+        if(!isExistingCustomer) {
+            address_id = customerRepository.createAddress(customer);
+            customer.setAddress_id(address_id);
+            customer_id = customerRepository.createCustomer(customer);
+        }else{
+            customer_id = customer.getCustomer_id();
+            address_id = customer.getAddress_id();
+        }
         return bookingRepository.createBooking(booking, customer_id, address_id);
     }
 
