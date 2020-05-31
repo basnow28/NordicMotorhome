@@ -22,7 +22,7 @@ public class VehicleController {
 
 //FIND VEHICLE USE CASE//
 
-    //
+    //Method for modeling List of vehicles which fit searching criteria
     @GetMapping("/findVehicles")
     public String findVehicles(@ModelAttribute SearchForm searchForm, Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
@@ -37,7 +37,7 @@ public class VehicleController {
 
 //UPDATE VEHICLE USE CASE//
 
-
+    //Method for displaying selected vehicle details page
     @GetMapping("/vehicleDetails/{vehicle_id}")
     public String vehicleDetails(@PathVariable("vehicle_id") int vehicle_id, Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
@@ -56,6 +56,7 @@ public class VehicleController {
         return "vehicleDetails";
     }
 
+    //Method for updating selected vehicle details
     @PostMapping("/saveVehicle")
     public String saveVehicle(@ModelAttribute Vehicle vehicle){
         vehicleService.updateVehicle(vehicle);
@@ -65,6 +66,7 @@ public class VehicleController {
 
 //UPDATE VEHICLE STATUS USE CASE//
 
+    //Method for updating new vehicle status
     @PostMapping("/saveVehicleStatus")
     public String saveVehicleStatus(@ModelAttribute Vehicle vehicle){
         vehicleService.updateVehicleStatus(vehicle);

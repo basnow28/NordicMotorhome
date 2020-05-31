@@ -21,8 +21,8 @@ public class CustomerController {
 
 //FIND CUSTOMER USE CASE//
 
-    //Method for modeling ArrayList of customers which fit searching criteria
-    @PostMapping("/findCustomer")
+    //Method for modeling List of customers which fit searching criteria
+    @PostMapping("/findCustomer") //@get mapping should be
     public String findCustomer(@ModelAttribute SearchForm searchForm, Model model){
         ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomers(searchForm);
         model.addAttribute("customersList", customersList);

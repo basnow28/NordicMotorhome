@@ -61,6 +61,6 @@ public class VehicleServiceTest {
         assertEquals("READY", vehicleService.getVehicle(1).getCleaning_status());
         assertEquals("", vehicleService.getVehicle(1).getAdditional_notes());
     }
-    
+
 
 }
