@@ -32,7 +32,7 @@ public class CustomerServiceTest {
         assertEquals(2, customerService.findAllMatchingCustomers(searchForm).size());
     }
 
- //UPDATE CUSTOMER USE CASE//
+ //TESTS FOR UPDATE CUSTOMER USE CASE//
 
     @Test
     //Method tests if the right customer is returned based on given customer_id

@@ -20,7 +20,7 @@ public class VehicleController {
     @Autowired
     VehicleService vehicleService;
 
-//Find vehciles use case//
+//FIND VEHICLE USE CASE//
 
     //
     @GetMapping("/findVehicles")
@@ -35,7 +35,7 @@ public class VehicleController {
         return "vehicles";
     }
 
-//Update vehicle use case//
+//UPDATE VEHICLE USE CASE//
 
 
     @GetMapping("/vehicleDetails/{vehicle_id}")
@@ -62,6 +62,9 @@ public class VehicleController {
 
         return "redirect:/vehicleDetails/"+vehicle.getVehicle_id();
     }
+
+//UPDATE VEHICLE STATUS USE CASE//
+
     @PostMapping("/saveVehicleStatus")
     public String saveVehicleStatus(@ModelAttribute Vehicle vehicle){
         vehicleService.updateVehicleStatus(vehicle);
