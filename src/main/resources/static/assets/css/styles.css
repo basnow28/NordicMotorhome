@@ -3,15 +3,39 @@ body{
     padding: 0px;
     background-color: #ececec;
     color: #858796;
+    line-height: 1.5;
+    font-size: 18px;
+    height: 100%;
+}
+
+html{
+    height: 100%;
+}
+
+td, th{
+    border-bottom:1px solid #e3e6f0;
+    border-top:1px solid #e3e6f0;
+    padding: 15px;
+}
+th{
+    text-align: left;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
 }
 
 .footer{
     background-color: white;
-    height: 200px;
+    height: 70px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-top:auto;
+    flex-shrink: 0;
 }
 
 
@@ -25,16 +49,21 @@ body{
     flex-direction: column;
     justify-content: start;
     align-items: flex-start;
-    width: 10%;
+    width: 250px;
     background-color: #4e73df;
     color: white;
+    height: 100%;
+    position:fixed;
 }
 
 .nav-title{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 10px;
+    margin-left: 50px;
+    text-transform: capitalize;
 }
 
 .navbar-nav{
@@ -69,15 +98,17 @@ body{
     width: 90%;
     display: flex;
     flex-direction: column;
+    margin-left: 250px;
 }
 
 .nav-top{
-    height:200px;
+    height:70px;
     display: flex;
     flex-direction: row;
     justify-content: end;
     align-items: end;
     background-color: white;
+    flex-shrink: 0;
 }
 
 .nav-top-link{
@@ -89,7 +120,7 @@ body{
     text-decoration: none;
 }
 
-.container-main{
+.container-fluid{
     display: flex;
     flex-direction: column;
 }
@@ -213,4 +244,49 @@ body{
     border: 1px solid #d1d3e2;
     border-radius: 5px;
     background-color: white;
+}
+
+.align-items-stretch{
+    align-items: stretch;
+}
+
+.form-control-sm{
+    padding: 2px;
+    font-size: small;
+    border: 1px solid #d1d3e2;
+    border-radius: 5px;
+    background-color: white;
+    height:30px;
+}
+
+.btn{
+    color: #fff;
+    background-color: #4e73df;
+    border: 1px solid #4e73df;
+    border-radius: 5px;
+    height: 50px;
+    text-decoration: none;
+}
+
+.text-dark{
+    color:#5a5c69;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.bg-gradient-primary{
+    background-color:#4e73df;
+    background-image:linear-gradient(180deg,#4e73df 10%,#224abe);
+    height: 100%;
+}
+
+.text-light{
+    color:white;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.login-dog{
+    background-image: url("../img/dogs/dog.jpeg");
+    background-size: contain;
 }
