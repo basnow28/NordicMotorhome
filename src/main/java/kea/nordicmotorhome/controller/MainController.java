@@ -8,6 +8,7 @@ import kea.nordicmotorhome.Model.Employee;
 import kea.nordicmotorhome.Model.SearchForm;
 import kea.nordicmotorhome.Model.Vehicle;
 import kea.nordicmotorhome.NordicmotorhomeApplication;
+import kea.nordicmotorhome.Service.CustomerService;
 import kea.nordicmotorhome.Service.EmployeeService;
 
 import kea.nordicmotorhome.Model.Booking;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,25 +33,10 @@ public class MainController {
     EmployeeService employeeService;
     @Autowired
     BookingService bookingservice;
+    @Autowired
+    CustomerService customerService;
 
-
-    @GetMapping("/")
-    public String login(Model model){
-        model.addAttribute("employee", NordicmotorhomeApplication.getEmployee());
-        model.addAttribute("incorrect", "");
-        return "login.html";
-    }
-
-    @PostMapping("/login")
-    public String login(@ModelAttribute Employee employee, Model model){
-        NordicmotorhomeApplication.setEmployee(employeeService.auth(employee));
-        if(NordicmotorhomeApplication.getEmployee() != null){
-            return "redirect:/dashboard";
-        }
-        model.addAttribute("incorrect", "Incorrect login id or password");
-        return "login.html";
-    }
-
+//?????????????????????????????????????????????????????????????????????????????????????????????????
     @GetMapping("/dashboard")
     public String dashboard(Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
@@ -60,9 +47,12 @@ public class MainController {
         return "index.html";
     }
 
+ //CREATE BOOKING USE CASE//
+
+    //Method for displaying search available vehicles pages
     @GetMapping("/createNewBooking")
     public String createNewBooking(Model model){
-
+        //check of login credentials
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
@@ -74,8 +64,12 @@ public class MainController {
         return "createNewBooking.html";
     }
 
+ //UPDATE BOOKING USE CASE//
+
+    //method for displaying existing bookings
     @GetMapping("/bookings")
     public String bookings(Model model){
+        //authorisation check
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
@@ -84,25 +78,33 @@ public class MainController {
             return "noAuth.html";
         }
         model.addAttribute("searchForm", new SearchForm());
-        List<Booking> allbookings = bookingservice.getAllBookings();
-        model.addAttribute("getAllBookings", allbookings);
         return "bookings.html";
     }
 
+//FIND VEHICLE USE CASE//
+
+    //method for displaying vehicle search page
     @GetMapping("/vehicles")
     public String vehicles(Model model){
+
+        //authentication check
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
         else if(NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase().equals("BOOKKEEPER")){
             return "noAuth.html";
         }
+        //create list of vehicles and add it to the model
         List<Vehicle> vehicles = carservice.getAllVehicles();
+        model.addAttribute("vehicles", vehicles);
 
         model.addAttribute("searchForm", new SearchForm());
-        model.addAttribute("vehicles", vehicles);
         return "vehicles.html";
     }
+
+//FIND CUSTOMER USE CASE//
+
+    //method for dispalying search customer page
     @GetMapping("/customers")
     public String findCustomer(Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
@@ -112,16 +114,43 @@ public class MainController {
                 NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase().equals("CLEANER")){
             return "noAuth.html";
         }
-        SearchForm searchForm = new SearchForm();
-        model.addAttribute("searchForm", searchForm);
+        //create list of customers and add it to the model
+        List<Customer> customers = customerService.getAllCustomers();
+        model.addAttribute("customersList", customers);
+
+        model.addAttribute("searchForm", new SearchForm());
         return "/customers";
     }
+
+// Login and log out //
+
+    //Method for displaying login page
+    @GetMapping("/")
+    public String login(Model model){
+        model.addAttribute("employee", NordicmotorhomeApplication.getEmployee());
+        model.addAttribute("incorrect", "");
+        return "login.html";
+    }
+
+    //Method for logging in right employee
+    @PostMapping("/login")
+    public String login(@ModelAttribute Employee employee, Model model){
+        NordicmotorhomeApplication.setEmployee(employeeService.auth(employee));
+        if(NordicmotorhomeApplication.getEmployee() != null){
+            return "redirect:/dashboard";
+        }
+        model.addAttribute("incorrect", "Incorrect login id or password");
+        return "login.html";
+    }
+
+    //Method for logging out an employee and redirecting user to log in page
     @GetMapping("/logout")
     public String logout(){
         NordicmotorhomeApplication.getEmployee().setAllAttributesToEmpty();
         return "redirect:/";
     }
 
+    //Method for displaying page when unauthorised uuser tries to enter the system
     @GetMapping("/noAuth")
     public String noAuth(){
         return "noAuth.html";
