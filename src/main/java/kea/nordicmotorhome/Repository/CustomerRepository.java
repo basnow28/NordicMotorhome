@@ -15,14 +15,8 @@ public class CustomerRepository {
     @Autowired
     JdbcTemplate template;
 
-//???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    public Customer getCustomer(int customer_id) {
-        String sql = "SELECT * FROM customers INNER JOIN addresses ON customers.address_id = addresses.address_id WHERE customer_id = ?";
-        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-        return template.query(sql, rowMapper, customer_id).get(0);
-    }
 
-////// CREATE BOOKING USE CASE \\\\\\\\\\
+////// CREATE BOOKING USE CASE //
 
     //Method for creating new customer in database and returning created customer ID
     public int createCustomer(Customer customer){
@@ -43,7 +37,24 @@ public class CustomerRepository {
         return template.queryForObject(sqlAddressID, Integer.class);
     }
 
-    ///////////Updating customer use case////////////
+///FIND CUSTOMER USE CASE//
+
+    //Method for displaying all existing customers
+    public List<Customer> getAllCustomers(){
+        String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers ";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        return template.query(sql,rowMapper);
+    }
+
+    //Method for creating list of all customers which fit searching criteria
+    public List<Customer> findAllMatchingCustomers(SearchForm searchForm){
+        String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers WHERE "+ searchForm.getAttribute() + " LIKE ?";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        String value = "%"+searchForm.getValue()+"%";
+        return template.query(sql,rowMapper, value);
+    }
+
+//UPDATE CUSTOMER USE CASE//
 
     //Method for updating customer information in database
     public void updateCustomer(Customer customer){
@@ -71,21 +82,11 @@ public class CustomerRepository {
         template.update(sqlAddress, customer.getStreet_name(), customer.getHouse_number(), customer.getPostcode(), customer.getCity(), customer.getCountry(), customer.getAddress_id());
     }
 
-///FIND CUSTOMER USE CASE//
-
-    //Method for displaying all existing customers
-    public List<Customer> getAllCustomers(){
-        String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers ";
+    //Method for returning customer from database based on given ID
+    public Customer getCustomer(int customer_id) {
+        String sql = "SELECT * FROM customers INNER JOIN addresses ON customers.address_id = addresses.address_id WHERE customer_id = ?";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-        return template.query(sql,rowMapper);
-    }
-
-    //Method for creating list of all customers which fit searching criteria
-    public List<Customer> findAllMatchingCustomer(SearchForm searchForm){
-        String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers WHERE "+ searchForm.getAttribute() + " LIKE ?";
-        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-        String value = "%"+searchForm.getValue()+"%";
-        return template.query(sql,rowMapper, value);
+        return template.query(sql, rowMapper, customer_id).get(0);
     }
 
 }

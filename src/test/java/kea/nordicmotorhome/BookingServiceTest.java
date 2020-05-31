@@ -17,7 +17,7 @@ public class BookingServiceTest {
     @Autowired
     BookingService bookingService;
 
-    //TEST FOR CREATE BOOKING USE CASE
+    //TESTS FOR CREATE BOOKING USE CASE
 
     //method for testing if booking was added to the database
     @Test
@@ -61,7 +61,7 @@ public class BookingServiceTest {
         assertEquals(7,bookingService.createBooking(booking, customer));
     }
 
-    //TEST FOR CHECK AVAILABILITY USE CASE
+    //TESTS FOR CHECK AVAILABILITY USE CASE
 
     //Method for testing if list of available vehicles for booking contains option for overbooking vehicle in specified date
     @Test
@@ -123,7 +123,7 @@ public class BookingServiceTest {
         int vehiclePricePerDay = 99;
         assertEquals(257.0, bookingService.getInitialQuote(start_date, end_date, vehiclePricePerDay));
     }
-//TEST FOR FIND BOOKING USE CASE//
+//TESTS FOR FIND BOOKING USE CASE//
 
     //Test method for checking if the list displays bookings which don't match criteria
     @Test
@@ -137,7 +137,7 @@ public class BookingServiceTest {
         assertFalse(bookingService.getBookings(searchForm).contains(bookingTable));
     }
 
- //TEST FOR UPDATE BOOKING USE CASE//
+ //TESTS FOR UPDATE BOOKING USE CASE//
 
     //Test method for calculating additional fee for renting extras
     @Test

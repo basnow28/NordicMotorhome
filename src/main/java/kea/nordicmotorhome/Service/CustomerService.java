@@ -13,10 +13,6 @@ import java.util.List;
 public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
-//??????????????????????????????????????????????????????????????????????????????????????????????????????????????????/
-    public Customer getCustomer(int customer_id) {
-        return customerRepository.getCustomer(customer_id);
-    }
 
  //FIND CUSTOMER USE CASE
 
@@ -26,8 +22,8 @@ public class CustomerService {
     }
 
     //Method for returning from repository list of matching customers with criteria from searchForm
-    public List<Customer> findAllMatchingCustomer(SearchForm searchForm){
-        return customerRepository.findAllMatchingCustomer(searchForm);
+    public List<Customer> findAllMatchingCustomers(SearchForm searchForm){
+        return customerRepository.findAllMatchingCustomers(searchForm);
     }
 
  //UPDATE CUSTOMER USE CASE
@@ -40,5 +36,10 @@ public class CustomerService {
     //Method for calling repository to update existing address
     public void updateAddress(Customer customer){
         customerRepository.updateAddress(customer);
+    }
+
+    //Method that returns from repository specified by ID customer
+    public Customer getCustomer(int customer_id) {
+        return customerRepository.getCustomer(customer_id);
     }
 }

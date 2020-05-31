@@ -47,7 +47,7 @@ public class MainController {
         return "index.html";
     }
 
- //Create booking use case//
+ //CREATE BOOKING USE CASE//
 
     //Method for displaying search available vehicles pages
     @GetMapping("/createNewBooking")
@@ -64,7 +64,7 @@ public class MainController {
         return "createNewBooking.html";
     }
 
- //Update booking use case//
+ //UPDATE BOOKING USE CASE//
 
     //method for displaying existing bookings
     @GetMapping("/bookings")
@@ -81,7 +81,7 @@ public class MainController {
         return "bookings.html";
     }
 
-//Find vehicle use case//
+//FIND VEHICLE USE CASE//
 
     //method for displaying vehicle search page
     @GetMapping("/vehicles")
@@ -102,7 +102,7 @@ public class MainController {
         return "vehicles.html";
     }
 
-//Find customer use case//
+//FIND CUSTOMER USE CASE//
 
     //method for dispalying search customer page
     @GetMapping("/customers")

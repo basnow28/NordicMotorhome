@@ -19,18 +19,18 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-//Find customer use case//
+//FIND CUSTOMER USE CASE//
 
     //Method for modeling ArrayList of customers which fit searching criteria
     @PostMapping("/findCustomer")
     public String findCustomer(@ModelAttribute SearchForm searchForm, Model model){
-        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(searchForm);
+        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomers(searchForm);
         model.addAttribute("customersList", customersList);
         model.addAttribute("searchForm", searchForm);
         return "/customers";
     }
 
-//Update customer use case//
+//UPDATE CUSTOMER USE CASE//
 
     //Method for displaying selected customer details page
     @GetMapping("/customerDetails/{id}")
