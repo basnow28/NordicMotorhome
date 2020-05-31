@@ -15,7 +15,7 @@ html{
 td, th{
     border-bottom:1px solid #e3e6f0;
     border-top:1px solid #e3e6f0;
-    padding: 15px;
+    padding: 20px;
 }
 th{
     text-align: left;
@@ -84,6 +84,7 @@ table{
     color: white;
     text-decoration: none;
     line-height: normal;
+    font-family: "Font Awesome 5 Free";
 }
 
 .nav-icon{
@@ -296,4 +297,8 @@ textarea{
 .login-dog{
     background-image: url("../img/dogs/dog.jpeg");
     background-size: contain;
+}
+
+.align-items-start{
+    align-items: start;
 }
