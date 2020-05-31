@@ -12,7 +12,7 @@ public class BookingForm {
     @Autowired
     Vehicle vehicle;
 
-    private boolean isExistingCustomer;
+    public boolean isExistingCustomer;
     private double newPaymentAmount;
 
     public Booking getBooking() {
