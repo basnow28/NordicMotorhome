@@ -5,96 +5,97 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Profile - Nordic Notorhome</title>
-    <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}">
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome5-overrides.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
 </head>
 
-<body id="page-top" th:with="isDisabled=${employee_type} == 'BOOKKEEPER' ? true : false">
-    <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-start align-items-xl-start sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-text mx-3"><span class="float-left">Nordic</span><span class="float-left">Motorhome</span></div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" th:href="@{/dashboard}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/bookings}"><span><i class="fas fa-table"></i>Bookings</span></a></li>
-                    <li class="nav-item" role="presentation" ><a class="nav-link" th:href="@{/createNewBooking}"><i class="far fa-calendar-plus"></i><span>Create New Booking</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/vehicles}"><i class="fas fa-car"></i><span>Vehicles</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/customers}"><i class="fa fa-users fa-2x"></i><span>Customers</span></a></li>
-                </ul>
+<body id="wrapper" th:with="isDisabled=${employee_type} == 'BOOKKEEPER' ? true : false">
+        <nav class="nav">
+            <div class="nav-title">
+                    <span>Nordic</span>
+                    <span>Motorhome</span>
             </div>
+            <br>
+                <ul class="navbar-nav">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" th:href="@{/dashboard}"><i class="fas fa-tachometer-alt nav-icon"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/bookings}"><span><i class="fas fa-table nav-icon"></i>Bookings</span></a></li>
+                    <li class="nav-item" role="presentation" ><a class="nav-link" th:href="@{/createNewBooking}"><i class="far fa-calendar-plus nav-icon"></i><span>Create New Booking</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/vehicles}"><i class="fas fa-car nav-icon"></i><span>Vehicles</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/customers}"><i class="fas fa-users nav-icon"></i><span>Customers</span></a></li>
+                </ul>
         </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top flex-row justify-content-end">
-                    <a class="nav-link" th:href="@{/logout}" ></i><span>Logout</span></a>
+                <nav class="nav-top">
+                    <a class="nav-top-link" th:href="@{/logout}" ><span>Logout</span></a>
                 </nav>
-            <form th:action="${title} == 'New Booking'? @{/newBooking} : @{/saveBooking}" method="post" th:object="${bookingForm}" modelAttribute="bookingForm" class="container-fluid">
-                <div class="d-flex flex-row justify-content-between" style="margin-bottom: 10px;">
-                    <a th:href="@{/createNewBooking}"><button class="btn btn-link btn-sm" type="button"><i class="fa fa-chevron-left"></i></button></a>
-                    <input th:hidden="${isDisabled}" class="btn btn-primary btn-sm" type="submit" name="save" value="Save">
+            <form class="container-main" th:action="${title} == 'New Booking'? @{/newBooking} : @{/saveBooking}" method="post" th:object="${bookingForm}" modelAttribute="bookingForm">
+                <div class="container-header" style="margin-bottom: 10px;">
+                    <a th:href="@{/createNewBooking}"><button class="" type="button"><i class="fa fa-chevron-left"></i></button></a>
+                    <input th:hidden="${isDisabled}" class="" type="submit" name="save" value="Save">
                 </div>
-                <div class="row mb-2">
-                    <div class="col-lg-4">
-                        <div class="card mb-3">
-                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" th:src="@{/assets/img/rent-a-motorhome.jpg}" width="160" height="160">
-                                <span th:text="${title}" class="text-dark d-flex flex-row justify-content-center mb-4"></span>
+                <div class="container-column">
+                    <div class="container-row">
+                        <div class="form-left">
+                        <div class="card container-column justify-content-start align-items-center">
+                            <img class="" th:src="@{/assets/img/rent-a-motorhome.jpg}" width="160" height="160">
+                                <span th:text="${title}" class="text-dark flex flex-row justify-content-center mb-4"></span>
                                 <input type="hidden"  name="booking.booking_id" th:value="*{booking.booking_id}">
                                 <input type="hidden"  name="customer.customer_id" th:value="*{customer.customer_id}">
                                 <input type="hidden"  name="customer.address_id" th:value="*{customer.address_id}">
                                 <input type="hidden"  name="booking.customer_id" th:value="*{booking.customer_id}">
                                 <input type="hidden"  name="booking.card_id" th:value="*{booking.card_id}">
-                            </div>
                         </div>
-                        <div class="card shadow mb-4">
-                            <div class="card-header d-flex flex-row justify-content-between align-items-center py-3">
-                                <h6 class="text-primary font-weight-bold m-0">Status</h6>
+                        <div class="container-column">
+                            <div class="card shadow">
+                            <div class="card-header-container">
+                                <p class="card-header-text">Status</p>
                             </div>
-                            <div class="card-body d-flex flex-row justify-content-between align-items-center">
-                                <select th:disabled="${isDisabled}" th:field="*{booking.booking_status}" class="form-control form-control-sm custom-select custom-select-sm">
+                            <div class="container-column">
+                                <select th:disabled="${isDisabled}" th:field="*{booking.booking_status}" class="form-control">
                                     <option th:value="CREATED">CREATED</option>
                                     <option th:value="ACTIVE">ACTIVE</option>
                                     <option th:value="COMPLETED">COMPLETED</option>
                                     <option th:value="CANCELLED">CANCELLED</option>
                                 </select>
                             </div>
-                            <div
-                                class="card-header d-flex flex-row justify-content-between align-items-center py-3">
-                                <h6 class="text-primary font-weight-bold m-0">Vehicle Information</h6>
-                                <a th:hidden="${isDisabled}" class="btn btn-primary btn-sm" th:href="@{'/vehicleDetails/'+ *{vehicle.vehicle_id}}"><span>See More</span></a>
                             </div>
-                        <div class="card-body">
-                            <input type="hidden"  name="vehicle.vehicle_id" th:value="*{vehicle.vehicle_id}">
-                            <h4 class="small font-weight-bold">Brand<input readonly type="text" name="vehicle.vehicle_brand" th:value="*{vehicle.vehicle_brand}" class="float-right"></h4>
-                            <h4 class="small font-weight-bold">Model<input readonly type="text" name="vehicle.vehicle_model" th:value="*{vehicle.vehicle_model}" class="float-right"></h4>
-                            <h4 class="small font-weight-bold">Licence Plate<input readonly type="text" name="vehicle.licence_plate" th:value="*{vehicle.licence_plate}" class="float-right" ></h4>
-                            <h4 class="small font-weight-bold">Type<input readonly type="text" name="vehicle.vehicle_type_name" th:value="*{vehicle.vehicle_type_name}" class="float-right"></h4>
+                            <div class="card shadow">
+                            <div class="card-header-container">
+                                <p class="card-header-text">Vehicle Information</p>
+                                <a th:hidden="${isDisabled}" class="" th:href="@{'/vehicleDetails/'+ *{vehicle.vehicle_id}}"><span>See More</span></a>
+                            </div>
+                            <div class="container-column card-body">
+                                <input type="hidden"  name="vehicle.vehicle_id" th:value="*{vehicle.vehicle_id}">
+                                <h4 class="font-weight-bold small">Brand<input readonly type="text" name="vehicle.vehicle_brand" th:value="*{vehicle.vehicle_brand}" class="float-right"></h4>
+                                <h4 class="font-weight-bold small">Model<input readonly type="text" name="vehicle.vehicle_model" th:value="*{vehicle.vehicle_model}" class="float-right"></h4>
+                                <h4 class="font-weight-bold small">Licence Plate<input readonly type="text" name="vehicle.licence_plate" th:value="*{vehicle.licence_plate}" class="float-right" ></h4>
+                                <h4 class="font-weight-bold small">Type<input readonly type="text" name="vehicle.vehicle_type_name" th:value="*{vehicle.vehicle_type_name}" class="float-right"></h4>
+                            </div>
+                            </div>
+                            <div class="card shadow">
+                        <div class="card-header-container">
+                            <p class="card-header-text">Price Information</p>
                         </div>
-                        <div class="card-header d-flex flex-row justify-content-between align-items-center py-3">
-                            <h6 class="text-primary font-weight-bold m-0">Price Information</h6>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="text-primary font-weight-bold m-0" style="padding-bottom: 10px;">Quote</h6>
-                            <div class="form-group d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
-                                    <h4 class="small font-weight-bold">Initial Cost<br></h4>
+                        <div class="container-column card-body">
+                            <p class="card-header-text" style="padding-bottom: 10px;">Quote</p>
+                            <div class="">
+                                <div class="flex flex-row justify-content-between align-items-center" style="width: 180px;">
+                                    <h4 class="h4-text">Initial Cost<br></h4>
                                 </div>
                                 <div class="float-right flex-row justify-content-end">
-                                    <input readonly type="text" class="form-control-sm" name="booking.initial_cost"  th:value="*{booking.initial_cost}">
+                                    <input readonly type="text" class="" name="booking.initial_cost"  th:value="*{booking.initial_cost}">
                                     <span>€</span>
                                 </div>
                              </div>
 
-                            <h6 class="text-primary font-weight-bold m-0" style="padding-bottom: 10px;">Additional Costs</h6>
-                            <div class="form-group d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 200px;">
-                                    <h4 class="small font-weight-bold">Kilometers Driven (1€/km if over 400 a day)<br></h4>
-                                    <input th:disabled="${isDisabled}" class="border rounded form-control-sm" type="number"
+                            <p class="card-header-text" style="padding-bottom: 10px;">Additional Costs</p>
+                            <div class="flex justify-content-between align-items-center">
+                                <div class="flex flex-row justify-content-between align-items-center" style="width: 200px;">
+                                    <h4 class="small">Kilometers Driven (1€/km if over 400 a day)<br></h4>
+                                    <input th:disabled="${isDisabled}" class="form-control" type="number"
                                            style="width: 80px;color: #6e707e;padding-top: 6px;padding-right: 12px;padding-bottom: 6px;padding-left: 12px;"
                                            th:value="*{booking.distance_driven}" min="0"
                                            name="booking.distance_driven"
@@ -105,11 +106,10 @@
                                     <span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 200px;">
-                                    <h4 class="small font-weight-bold">Drop Off Kilometers (0,70€/km)<br></h4>
-                                    <input th:disabled="${isDisabled}" class="border rounded form-control-sm" type="number"
-                                           style="width: 80px;color: #6e707e;padding-top: 6px;padding-right: 12px;padding-bottom: 6px;padding-left: 12px;"
+                            <div class="flex justify-content-between align-items-center">
+                                <div class="flex flex-row justify-content-between align-items-center align-content-center" style="width: 200px;">
+                                    <h4 class="small">Drop Off Kilometers (0,70€/km)<br></h4>
+                                    <input th:disabled="${isDisabled}" class="form-control" type="number"
                                            th:value="*{booking.drop_off_kilometers}" min="0"
                                            name="booking.drop_off_kilometers"
                                     >
@@ -119,8 +119,8 @@
                                     <span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row justify-content-start align-items-center align-content-center" style="width: 180px;">
+                            <div class=" flex justify-content-between align-items-center">
+                                <div class="flex flex-row justify-content-start align-items-center align-content-center" style="width: 180px;">
                                     <h4 class="small font-weight-bold">Fuel Tank was half full (70€)<br></h4>
                                     <select th:disabled="${isDisabled}" th:field="*{booking.fuel_check}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 80px;height: 30px;margin-left: 20px;">
                                         <option th:value="true" >yes</option>
@@ -132,9 +132,9 @@
                                     <span>€</span>
                                 </div>
                             </div>
-                            <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20pxpx;padding-bottom: 10px;">Extras (prices per day)</h6>
-                            <div class="form-group d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                            <h6 class="card-header-text" style="margin-bottom: 20px;padding-bottom: 10px;">Extras (prices per day)</h6>
+                            <div class=" flex justify-content-between align-items-center">
+                                <div class="flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
                                     <h4 class="small font-weight-bold">Picnic Set (5€)<br></h4>
                                     <select th:disabled="${isDisabled}" th:field="*{booking.has_picnic}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 60px;height: 30px;margin-left: 20px;">
                                         <option th:value="true">yes</option>
@@ -146,8 +146,8 @@
                                     <span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                            <div class=" flex justify-content-between align-items-center">
+                                <div class="flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
                                     <h4 class="small font-weight-bold">Bike Rack (2€)<br></h4>
                                     <select th:disabled="${isDisabled}" th:field="*{booking.has_bikerack}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 60px;height: 30px;margin-left: 20px;">
                                         <option th:value="true">yes</option>
@@ -159,8 +159,8 @@
                                     <span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                            <div class=" flex justify-content-between align-items-center">
+                                <div class="flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
                                     <h4 class="small font-weight-bold">DVD Player (1€)<br></h4>
                                     <select th:disabled="${isDisabled}" th:field="*{booking.has_dvd_player}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 60px;height: 30px;margin-left: 20px;">
                                         <option th:value="true">yes</option>
@@ -172,8 +172,8 @@
                                     <span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                            <div class=" flex justify-content-between align-items-center">
+                                <div class="flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
                                     <h4 class="small font-weight-bold">Tent (4€)<br></h4>
                                     <select th:disabled="${isDisabled}" th:field="*{booking.has_tent}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 60px;height: 30px;margin-left: 20px;">
                                         <option th:value="true">yes</option>
@@ -185,8 +185,8 @@
                                     <span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
+                            <div class=" flex justify-content-between align-items-center">
+                                <div class="flex flex-row justify-content-between align-items-center align-content-center" style="width: 180px;">
                                     <h4 class="small font-weight-bold">Bed Linen Set (3€)<br></h4>
                                     <select th:disabled="${isDisabled}" th:field="*{booking.has_linen}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 60px;height: 30px;margin-left: 20px;">
                                         <option th:value="true">yes</option>
@@ -198,61 +198,63 @@
                                     <span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center align-content-center">
-                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Total Extras</h6>
+                            <div class=" flex justify-content-between align-items-center align-content-center">
+                                <p class="card-header-text" style="margin-bottom: 20px;padding-bottom: 10px;">Total Extras</p>
                                 <div class="float-right flex-row justify-content-end">
-                                    <input readonly type="text" class="form-control-sm" name="booking.extras_cost" th:value="*{booking.extras_cost}"><span>€</span>
+                                    <input readonly type="text" class="form-control" name="booking.extras_cost" th:value="*{booking.extras_cost}"><span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center align-content-center">
-                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Total</h6>
+                            <div class="flex justify-content-between align-items-center align-content-center">
+                                <p class="card-header-text" style="margin-bottom: 20px;padding-bottom: 10px;">Total</p>
                                 <div th:with="total=${bookingForm.booking.extras_cost} + ${bookingForm.booking.initial_cost}" class="float-right flex-row justify-content-end">
-                                    <input readonly type="text" class="form-control-sm" th:value="${total}"><span>€</span>
+                                    <input readonly type="text" class="form-control" th:value="${total}"><span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center align-content-center">
-                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Paid</h6>
+                            <div class=" flex justify-content-between align-items-center align-content-center">
+                                <p class="card-header-text" style="margin-bottom: 20px;padding-bottom: 10px;">Paid</p>
                                 <div class="float-right flex-row justify-content-end">
-                                    <input readonly type="text" class="form-control-sm" name="booking.payment_amount" th:value="*{booking.payment_amount}"><span>€</span>
+                                    <input readonly type="text" class="form-control" name="booking.payment_amount" th:value="*{booking.payment_amount}"><span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center align-content-center">
-                                <h6 class="text-primary font-weight-bold m-0" style="margin-bottom: 20px;padding-bottom: 10px;">Remaining</h6>
+                            <div class=" flex justify-content-between align-items-center align-content-center">
+                                <p class="card-header-text" style="margin-bottom: 20px;padding-bottom: 10px;">Remaining</p>
                                 <div th:with="remaining=(${bookingForm.booking.extras_cost} + ${bookingForm.booking.initial_cost}) - ${bookingForm.booking.payment_amount}" class="float-right flex-row justify-content-end">
-                                    <input readonly type="text" class="form-control-sm" th:value="${remaining}"><span>€</span>
+                                    <input readonly type="text" class="form-control" th:value="${remaining}"><span>€</span>
                                 </div>
                             </div>
-                            <div class="form-group d-flex justify-content-between align-items-center align-content-center">
+                            <div class=" flex justify-content-between align-items-center align-content-center">
                                 <div class="justify-content-start">
-                                    <input th:hidden="${isDisabled}"  type="number" step="any" class="form-control-sm" name="newPaymentAmount" th:value="*{newPaymentAmount}">
+                                    <input th:hidden="${isDisabled}"  type="number" step="any" class="form-control" name="newPaymentAmount" th:value="*{newPaymentAmount}">
                                     <span th:hidden="${isDisabled}" >€</span>
                                 </div>
                                 <div class="float-right flex-row justify-content-end">
                                     <button th:hidden="${isDisabled}" class="btn btn-primary btn-sm" name="addNewPayment" type="submit" style="height: 30px;font-size: 12px;">Add New Payment Amount</button>
                                 </div>
                             </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                    <div class="col-lg-8">
-                    <div class="row">
-                        <div class="col d-flex flex-column justify-content-between">
-                            <div class="card shadow mb-3">
-                                <div class="card-header py-3">
-                                    <p class="text-primary m-0 font-weight-bold">Booking Information</p>
+                        </div>
+                        </div>
+                    <div class="form-right">
+                    <div class="container-column">
+                            <div class="card shadow">
+                                <div class="card-header-container">
+                                    <p class="card-header-text">Booking Information</p>
                                 </div>
                                 <div class="card-body">
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Start Date</strong></label><input readonly class="form-control" type="text" name="booking.start_date" th:value="*{booking.start_date}" ></div>
+                                                    <label><strong>Start Date</strong></label>
+                                                    <input readonly class="form-control" type="text" name="booking.start_date" th:value="*{booking.start_date}" >
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label><strong>End Date</strong></label><input readonly class="form-control" type="text"  name="booking.end_date" th:value="*{booking.end_date}"></div>
+                                                <label><strong>End Date</strong></label>
+                                                <input readonly class="form-control" type="text"  name="booking.end_date" th:value="*{booking.end_date}">
                                             </div>
-                                        </div>
-                                    <div class="form-group" style="width: 280px;">
+                                            </div>
+                                    <div class="col">
                                         <label><strong>Capacity</strong><br></label>
-                                        <select disabled th:field="*{vehicle.vehicle_capacity}" class="form-control form-control-sm custom-select custom-select-sm" style="width: 277px;height: 38px;">
+                                        <select disabled th:field="*{vehicle.vehicle_capacity}" class="form-control">
                                             <option th:value="2" >2</option>
                                             <option th:value="3">3</option>
                                             <option th:value="4">4</option>
@@ -262,93 +264,87 @@
                                 </div>
                             </div>
                             <div class="card shadow">
-                                <div class="card-header py-3">
-                                    <p class="text-primary m-0 font-weight-bold">Customers Details</p>
+                                <div class="card-header-container">
+                                    <p class="card-header-text">Customers Details</p>
                                 </div>
                                 <div class="card-body">
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>First Name</strong></label>
+                                               <label><strong>First Name</strong></label>
                                                     <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.first_name" th:value="*{customer.first_name}">
-                                                </div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Last Name</strong></label>
+                                                <label><strong>Last Name</strong></label>
                                                     <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.last_name" th:value="*{customer.last_name}">
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Email</strong></label>
-                                                    <input th:disabled="${isDisabled}" required class="form-control" type="email" name="customer.email" th:value="*{customer.email}">
-                                                </div>
+                                                <label><strong>Email</strong></label>
+                                                <input th:disabled="${isDisabled}" required class="form-control" type="email" name="customer.email" th:value="*{customer.email}">
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Phone Number</strong><br></label>
+                                                <label><strong>Phone Number</strong><br></label>
                                                     <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.phone_number" th:value="*{customer.phone_number}">
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Driver Licence Number</strong><br></label>
+                                                <div class=""><label><strong>Driver Licence Number</strong><br></label>
                                                     <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.driver_licence_number" th:value="*{customer.driver_licence_number}"></div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Date of Birth</strong><br></label>
+                                                <div class=""><label><strong>Date of Birth</strong><br></label>
                                                     <input th:disabled="${isDisabled}" placeholder="YYYY-MM-DD" required pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="form-control" type="text" name="customer.date_of_birth" th:value="*{customer.date_of_birth}"></div>
                                             </div>
                                         </div>
                                 </div>
                             </div>
-                            <div class="card shadow" style="margin-top: 20px;">
-                                <div class="card-header py-3">
-                                    <p class="text-primary m-0 font-weight-bold">Contact Information</p>
+                            <div class="card shadow">
+                                <div class="card-header-container">
+                                    <p class="card-header-text">Contact Information</p>
                                 </div>
                                 <div class="card-body">
-                                        <div class="form-group">
+                                        <div class="col">
                                             <label><strong>Street</strong></label>
                                             <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.street_name" th:value="*{customer.street_name}">
                                         </div>
-                                        <div class="form-group"><label><strong>House Number</strong></label>
+                                        <div class="col"><label><strong>House Number</strong></label>
                                             <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.house_number" th:value="*{customer.house_number}">
                                         </div>
-                                        <div class="form-group"><label><strong>Postcode</strong><br></label>
+                                        <div class="col"><label><strong>Postcode</strong><br></label>
                                             <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.postcode" th:value="*{customer.postcode}">
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label><strong>City</strong></label>
-                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.city" th:value="*{customer.city}"></div>
+                                                <label><strong>City</strong></label>
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.city" th:value="*{customer.city}">
                                             </div>
                                             <div class="col">
-                                                <div class="form-group">
                                                     <label><strong>Country</strong></label>
-                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.country" th:value="*{customer.country}"></div>
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.country" th:value="*{customer.country}">
                                             </div>
                                         </div>
                                 </div>
                             </div>
 
-                            <div class="card shadow mb-3" style="margin-top: 20px;">
-                                <div class="card-header py-3">
-                                    <p class="text-primary m-0 font-weight-bold">Card Information</p>
+                            <div class="card shadow">
+                                <div class="card-header-container">
+                                    <p class="card-header-text">Card Information</p>
                                 </div>
                                 <div class="card-body">
                                         <div class="form-row">
-                                            <div class="col">
-                                                <div class="form-group"><label><strong>Card Number</strong><br></label>
-                                                    <input th:disabled="${isDisabled}" pattern="[0-9\s]{13,19}" required inputmode="numeric" placeholder="xxxx xxxx xxxx xxxx" class="form-control" type="text" th:name="booking.card_number" th:value="*{booking.card_number}"></div>
+                                            <div class="col"><label><strong>Card Number</strong><br></label>
+                                                    <input th:disabled="${isDisabled}" pattern="[0-9\s]{13,19}" required inputmode="numeric" placeholder="xxxx xxxx xxxx xxxx" class="form-control" type="text" th:name="booking.card_number" th:value="*{booking.card_number}">
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label><strong>Expiry Date</strong></label>
-                                                    <input th:disabled="${isDisabled}" pattern="\d{1,2}/\d{1,2}" inputmode="numeric" placeholder="MM/YY" required class="form-control" type="text" th:name="booking.card_expiry_date" th:value="*{booking.card_expiry_date}"></div>
+                                                <label><strong>Expiry Date</strong></label>
+                                                    <input th:disabled="${isDisabled}" pattern="\d{1,2}/\d{1,2}" inputmode="numeric" placeholder="MM/YY" required class="form-control" type="text" th:name="booking.card_expiry_date" th:value="*{booking.card_expiry_date}">
                                             </div>
                                         </div>
-                                    <div class="form-group d-flex flex-column" style="width: 280px;">
+                                    <div class="col">
                                         <label><strong>CVV</strong><br></label>
-                                        <input th:disabled="${isDisabled}" pattern="[0-9]{3,4}" required inputmode="numeric" class="border rounded form-control-sm" type="text" th:name="booking.card_cvv" th:value="*{booking.card_cvv}" style="color: #6e707e;height: 38px;width: 277;">
+                                        <input th:disabled="${isDisabled}" pattern="[0-9]{3,4}" required inputmode="numeric" class="border rounded form-control-sm" type="text" th:name="booking.card_cvv" th:value="*{booking.card_cvv}" style="color: #6e707e;height: 38px;width: 277px;">
                                     </div>
                                 </div>
                             </div>
@@ -356,27 +352,19 @@
                     </div>
                 </div>
                 </div>
-                <div class="card shadow mb-5">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group"><label><strong>Additional Notes</strong><br></label>
-                                    <textarea th:disabled="${isDisabled}" class="form-control" rows="4" name="booking.booking_notes" th:text="*{booking.booking_notes}"></textarea>
-                                </div>
-                            </div>
+                <div class="col" style="width: 100%">
+                    <div class="card shadow">
+                        <div class="card-header-container">
+                            <p class="card-header-text">Additional Notes</p>
                         </div>
+                        <textarea th:disabled="${isDisabled}" class="form-control" rows="4" name="booking.booking_notes" th:text="*{booking.booking_notes}"></textarea>
                     </div>
                 </div>
             </form>
+                <footer class="footer">
+                    <span>Copyright © Nordic Notorhome 2020</span>
+                </footer>
             </div>
-            </div>
-        </div>
-    </div>
-    <footer class="bg-white sticky-footer">
-        <div class="container my-auto">
-            <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
-        </div>
-    </footer>
 </body>
 
 </html>
