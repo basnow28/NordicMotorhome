@@ -19,13 +19,20 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-    @PostMapping("/findCustomer")
+//FIND CUSTOMER USE CASE//
+
+    //Method for modeling List of customers which fit searching criteria
+    @PostMapping("/findCustomer") //@get mapping should be
     public String findCustomer(@ModelAttribute SearchForm searchForm, Model model){
-        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(searchForm);
+        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomers(searchForm);
         model.addAttribute("customersList", customersList);
         model.addAttribute("searchForm", searchForm);
         return "/customers";
     }
+
+//UPDATE CUSTOMER USE CASE//
+
+    //Method for displaying selected customer details page
     @GetMapping("/customerDetails/{id}")
     public String viewCustomerDetails(@PathVariable int id, Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
@@ -37,6 +44,8 @@ public class CustomerController {
         model.addAttribute("employee_type", NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase());
         return "customerDetails";
     }
+
+    //Method for updating selected customer details and modeling new information
     @PostMapping("/saveCustomerDetails")
     public String viewCustomerDetails(@ModelAttribute Customer customer){
         customerService.updateCustomer(customer);

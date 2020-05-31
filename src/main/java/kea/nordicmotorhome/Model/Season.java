@@ -14,6 +14,7 @@ public class Season {
     private int season_end_month;
     private double season_rate;
 
+
     public int getSeason_id() {
         return season_id;
     }

@@ -16,19 +16,34 @@ public class VehicleRepository {
     @Autowired
     JdbcTemplate template;
 
+//FIND VEHICLE USE CASE//
+
+    //Method for returning list of all vehicles from database
     public List<Vehicle> getAllVehicles(){
         String sql = "SELECT * FROM vehicles INNER JOIN vehicle_types WHERE vehicles.vehicle_type_id = vehicle_types.vehicle_type_id";
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
         return template.query(sql, rowMapper);
     }
 
+    //Method for returning list of vehicles that fulfill specified searching criteria
+    public List<Vehicle> getVehicles(SearchForm searchForm) {
+        String sql = "SELECT * FROM vehicles INNER JOIN vehicle_types ON vehicles.vehicle_type_id = vehicle_types.vehicle_type_id " +
+                "WHERE " + searchForm.getAttribute() + " LIKE ? ";
+        RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
+        String value = "%"+searchForm.getValue()+"%";
+        return template.query(sql, rowMapper, value);
+    }
 
+//UPDATE VEHICLE USE CASE//
+
+    //Method for returning from database specified vehicle by given ID
     public Vehicle getVehicle(int vehicle_id) {
         String sql = "SELECT * FROM vehicles INNER JOIN vehicle_types WHERE vehicles.vehicle_id = " + vehicle_id + " AND vehicles.vehicle_type_id = vehicle_types.vehicle_type_id";
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
         return template.query(sql, rowMapper).get(0);
     }
 
+    //Method for updating in database vehicle information
     public void updateVehicle(Vehicle vehicle) {
         String sql = "UPDATE vehicles SET " +
                 "licence_plate = ? , " +
@@ -48,14 +63,7 @@ public class VehicleRepository {
                 vehicle.getVehicle_id());
     }
 
-    public List<Vehicle> getVehicles(SearchForm searchForm) {
-        String sql = "SELECT * FROM vehicles INNER JOIN vehicle_types ON vehicles.vehicle_type_id = vehicle_types.vehicle_type_id " +
-                "WHERE " + searchForm.getAttribute() + " LIKE ? ";
-        RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
-        String value = "%"+searchForm.getValue()+"%";
-        return template.query(sql, rowMapper, value);
-    }
-
+    //Method used by mechanic and cleaner for updating their status in database
     public void updateVehicleStatus(Vehicle vehicle) {
         String sql = "UPDATE vehicles SET " +
                 "mechanic_status = ? , " +
