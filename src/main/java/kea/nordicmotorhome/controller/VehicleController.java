@@ -20,6 +20,24 @@ public class VehicleController {
     @Autowired
     VehicleService vehicleService;
 
+//Find vehciles use case//
+
+    //
+    @GetMapping("/findVehicles")
+    public String findVehicles(@ModelAttribute SearchForm searchForm, Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
+        ArrayList<Vehicle> vehicles = (ArrayList<Vehicle>) vehicleService.getVehicles(searchForm);
+
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("vehicles", vehicles);
+        return "vehicles";
+    }
+
+//Update vehicle use case//
+
+
     @GetMapping("/vehicleDetails/{vehicle_id}")
     public String vehicleDetails(@PathVariable("vehicle_id") int vehicle_id, Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
@@ -48,18 +66,6 @@ public class VehicleController {
     public String saveVehicleStatus(@ModelAttribute Vehicle vehicle){
         vehicleService.updateVehicleStatus(vehicle);
         return "redirect:/vehicleDetails/"+vehicle.getVehicle_id();
-    }
-
-    @GetMapping("/findVehicles")
-    public String findVehicles(@ModelAttribute SearchForm searchForm, Model model){
-        if(!NordicmotorhomeApplication.isAuthorized()){
-            return "redirect:/";
-        }
-        ArrayList<Vehicle> vehicles = (ArrayList<Vehicle>) vehicleService.getVehicles(searchForm);
-        
-        model.addAttribute("searchForm", searchForm);
-        model.addAttribute("vehicles", vehicles);
-        return "vehicles";
     }
 
 }

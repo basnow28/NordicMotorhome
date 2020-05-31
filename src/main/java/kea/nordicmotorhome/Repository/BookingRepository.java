@@ -22,6 +22,9 @@ public class BookingRepository {
     @Autowired
     JdbcTemplate template;
 
+//CREATE BOOKING USE CASE//
+
+    //Method created new record in card information table in database and return card ID
     public int createCardInformation(Booking booking){
         String sqlCard = "INSERT INTO card_information (card_number, card_expiry_date, card_cvv) VALUES (?, ?, ?)";
         template.update(sqlCard, booking.getCard_number(), booking.getCard_expiry_date(), booking.getCard_cvv());
@@ -30,6 +33,7 @@ public class BookingRepository {
         return template.queryForObject(sqlCardID, Integer.class);
     }
 
+    //Method for adding new booking to database and returning ID for created booking
     public int createBooking(Booking booking, int customer_id) {
         int card_id = createCardInformation(booking);
 
@@ -67,6 +71,9 @@ public class BookingRepository {
         return booking_id;
     }
 
+//CHECK AVAILABLE VEHICLES USE CASE//
+
+    //Method return from database list of vehicles which fulfill searching criteria
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
         String sql = "SELECT vehicles.vehicle_id, vehicles.vehicle_model, vehicles.vehicle_brand, \n" +
                 "vehicle_types.vehicle_type_name, vehicle_types.vehicle_capacity, vehicles.licence_plate, \n" + "vehicle_types.cost_per_day\n" +
@@ -80,6 +87,7 @@ public class BookingRepository {
         return template.query(sql, rowMapper, vehicle_capacity, endDate,startDate);
     }
 
+    //Method returns list of seasons from database
     public List<Season> getSeasons() {
         String sql = "SELECT * FROM seasons;";
         RowMapper<Season> rowMapper = new BeanPropertyRowMapper<>(Season.class);
@@ -87,8 +95,10 @@ public class BookingRepository {
         return template.query(sql, rowMapper);
     }
 
+//FIND BOOKING USE CASE//
 
-
+    //Method for returning a list of booking table objects (based on searching criteria)
+    // which contain information( from different table in database) displayed in search booking page
     public List<BookingTable> getBookings(SearchForm searchForm ) {
         String sql = "SELECT CONCAT(customers.first_name,' ', customers.last_name) AS customer_name, bookings.booking_id, vehicles.vehicle_model, bookings.start_date, bookings.end_date, bookings.booking_status " +
                 "FROM bookings JOIN customers " +
@@ -102,27 +112,9 @@ public class BookingRepository {
 
     }
 
+//UPDATE BOOKING INFORMATION//
 
-    public List<Booking> getAllBookings(){
-        String sql = "SELECT * FROM bookings;";
-        RowMapper<Booking> rowMapper = new BeanPropertyRowMapper<>(Booking.class);
-        return template.query(sql, rowMapper);
-    }
-
-
-    public double getExtraPrice(String extra_name) {
-        String sql = "SELECT extra_price FROM extras WHERE extra_name = ?" ;
-        return template.queryForObject(sql,new Object[]{extra_name}, Double.class);
-    }
-
-    public Booking getBooking(int id) {
-        String sql = "SELECT * FROM bookings INNER JOIN card_information ON bookings.card_id = card_information.card_id WHERE booking_id = ?";
-        RowMapper<Booking> rowMapper = new BeanPropertyRowMapper<>(Booking.class);
-        return template.query(sql, rowMapper, id).get(0);
-    }
-
-    ///////////////UPDATE BOOKING INFORMATION////////////////////
-
+    //Method for updating card information of specified booking in database
     public void updateCardInformation(Booking booking){
         String sqlCard = "UPDATE card_information SET " +
                             "card_number = ? , " +
@@ -133,7 +125,8 @@ public class BookingRepository {
         template.update(sqlCard, booking.getCard_number(), booking.getCard_expiry_date(), booking.getCard_cvv(), booking.getCard_id());
     }
 
-    public void updateBooking(Booking booking, Customer customer) { //employee_id is manual for now
+    //Method for updating booking information in database
+    public void updateBooking(Booking booking) {
         updateCardInformation(booking);
 
         String sqlBooking = "UPDATE bookings SET " +
@@ -158,6 +151,14 @@ public class BookingRepository {
                 booking.getPayment_amount(), booking.isFuel_check(), booking.getBooking_notes(), booking.isHas_picnic(), booking.isHas_bikerack(),
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(), booking.getBooking_id());
     }
+
+    //Method return from database price for specified extra
+    public double getExtraPrice(String extra_name) {
+        String sql = "SELECT extra_price FROM extras WHERE extra_name = ?" ;
+        return template.queryForObject(sql,new Object[]{extra_name}, Double.class);
+    }
+
+    //Method return cancellation information based on number of days left to start booking date
     public Cancellation getCancellation(int days_out){
         String sql = "SELECT * FROM cancellations WHERE ? BETWEEN cancellations.days_out_min AND cancellations.days_out_max ";
         RowMapper<Cancellation> rowMapper = new BeanPropertyRowMapper<>(Cancellation.class);
@@ -169,10 +170,18 @@ public class BookingRepository {
         return c;
     }
 
+    //Method updates payment information in database
     public void updateBookingPayment(int booking_id, double payment_amount) {
         String sql = "UPDATE bookings SET " +
                 "payment_amount = ? " +
                 "WHERE booking_id = ?";
         template.update(sql, payment_amount, booking_id);
+    }
+
+    //Method which returns from database booking which has specified ID
+    public Booking getBooking(int id) {
+        String sql = "SELECT * FROM bookings INNER JOIN card_information ON bookings.card_id = card_information.card_id WHERE booking_id = ?";
+        RowMapper<Booking> rowMapper = new BeanPropertyRowMapper<>(Booking.class);
+        return template.query(sql, rowMapper, id).get(0);
     }
 }

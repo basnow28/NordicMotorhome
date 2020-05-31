@@ -1,8 +1,6 @@
 package kea.nordicmotorhome;
 
-import kea.nordicmotorhome.Model.Booking;
-import kea.nordicmotorhome.Model.Customer;
-import kea.nordicmotorhome.Model.Season;
+import kea.nordicmotorhome.Model.*;
 import kea.nordicmotorhome.Service.BookingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,13 +118,26 @@ public class BookingServiceTest {
     //Method which test if initial quota for selected vehicle in specified time range is calculated correctly
     @Test
     void getInitialQuoteTest(){
-        String start_date = "2020-06-19";
-        String end_date = "2020-06-22";
+        String start_date = "2020-05-30";
+        String end_date = "2020-06-01";
         int vehiclePricePerDay = 99;
-        assertEquals(475, bookingService.getInitialQuote(start_date, end_date, vehiclePricePerDay));
+        assertEquals(257.0, bookingService.getInitialQuote(start_date, end_date, vehiclePricePerDay));
+    }
+//TEST FOR FIND BOOKING USE CASE//
+
+    //Test method for checking if the list displays bookings which don't match criteria
+    @Test
+    void getBookingsTest(){
+        SearchForm searchForm = new SearchForm();
+        searchForm.setAttribute("last_name");
+        searchForm.setValue("Przygocka");
+
+        BookingTable bookingTable = new BookingTable();
+        bookingTable.setCustomer_name("Kamila Andrzejczak");
+        assertFalse(bookingService.getBookings(searchForm).contains(bookingTable));
     }
 
- //UPDATE USE CASE ITERATION
+ //TEST FOR UPDATE BOOKING USE CASE//
 
     //Test method for calculating additional fee for renting extras
     @Test
@@ -146,19 +157,68 @@ public class BookingServiceTest {
         assertEquals(expected, bookingService.setExtrasPrice(booking));
     }
 
-    //Method for calculating fee for cancelling a booking
+    //Test method for calculating fee for cancelling a booking, checked on date 31/05/2020 so expected fee is correct on that day
     @Test
     void calculateCancellationFee(){
-
-
-      //  double expected =
-      ///  assertEquals(expected, );
+        String start_date = "2020-07-20";
+        double initial_cost = 1900;
+        assertEquals(380, bookingService.calculateCancellationFee(start_date,initial_cost));
     }
 
-    // testing JUnit ????????????????????????????????????????????????????????????????????????????????
+    //Test method checks if information is updated in database,
+    // in this case based on card CVV number we check if the information was updated
     @Test
-    void getBookings(){
-        assertEquals(4, bookingService.getAllBookings().size());
+    void updateBookingTest(){
+        Booking booking = new Booking();
+        booking.setBooking_id(5);
+        booking.setStart_date("2020-05-30");
+        booking.setEnd_date("2020-05-31");
+        booking.setDistance_driven(0);
+        booking.setDrop_off_kilometers(0);
+        booking.setInitial_cost(4792);
+        booking.setExtras_cost(0);
+        booking.setBooking_status("CREATED");
+        booking.setPayment_amount(0);
+        booking.setFuel_check(true);
+        booking.setBooking_notes("smth");
+        booking.setHas_picnic(false);
+        booking.setHas_bikerack(false);
+        booking.setHas_dvd_player(false);
+        booking.setHas_tent(false);
+        booking.setHas_linen(false);
+        booking.setVehicle_id(2);
+        booking.setCard_number("1234 3333 2222 1111");
+        booking.setCard_expiry_date("12/21");
+        booking.setCard_cvv(202);
+        booking.setCard_id(5);
+
+        Customer customer = new Customer();
+        customer.setCustomer_id(5);
+        customer.setFirst_name("Thomas");
+        customer.setLast_name("Jensen");
+        customer.setAddress_id(5);
+        customer.setDate_of_birth("1970-11-21");
+        customer.setPhone_number("20202020");
+        customer.setEmail("t@jensen.com");
+        customer.setDriver_licence_number("GDA123");
+        customer.setStreet_name("Husumvej");
+        customer.setHouse_number("3");
+        customer.setPostcode("2700");
+        customer.setCity("Copenhagen");
+        customer.setCountry("Denmark");
+        bookingService.updateBooking(booking,customer);
+        int newCVV =  bookingService.getBooking(booking.getBooking_id()).getCard_cvv();
+        assertEquals(202, newCVV);
+    }
+
+    //Test method for checking if updating payment amount for specified booking works
+    @Test
+    void updateBookingPaymentTest(){
+        int booking_id = 5;
+        double payment_amount = 4792;
+        bookingService.updateBookingPayment(booking_id, payment_amount);
+        assertEquals(4792, bookingService.getBooking(booking_id).getPayment_amount());
 
     }
+
 }

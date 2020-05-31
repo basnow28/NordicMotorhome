@@ -19,6 +19,9 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
+//Find customer use case//
+
+    //Method for modeling ArrayList of customers which fit searching criteria
     @PostMapping("/findCustomer")
     public String findCustomer(@ModelAttribute SearchForm searchForm, Model model){
         ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomer(searchForm);
@@ -26,6 +29,10 @@ public class CustomerController {
         model.addAttribute("searchForm", searchForm);
         return "/customers";
     }
+
+//Update customer use case//
+
+    //Method for displaying selected customer details page
     @GetMapping("/customerDetails/{id}")
     public String viewCustomerDetails(@PathVariable int id, Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
@@ -37,6 +44,8 @@ public class CustomerController {
         model.addAttribute("employee_type", NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase());
         return "customerDetails";
     }
+
+    //Method for updating selected customer details and modeling new information
     @PostMapping("/saveCustomerDetails")
     public String viewCustomerDetails(@ModelAttribute Customer customer){
         customerService.updateCustomer(customer);

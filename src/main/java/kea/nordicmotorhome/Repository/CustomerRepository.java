@@ -73,6 +73,13 @@ public class CustomerRepository {
 
 ///FIND CUSTOMER USE CASE//
 
+    //Method for displaying all existing customers
+    public List<Customer> getAllCustomers(){
+        String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers ";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        return template.query(sql,rowMapper);
+    }
+
     //Method for creating list of all customers which fit searching criteria
     public List<Customer> findAllMatchingCustomer(SearchForm searchForm){
         String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers WHERE "+ searchForm.getAttribute() + " LIKE ?";

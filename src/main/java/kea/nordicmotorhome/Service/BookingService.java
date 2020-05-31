@@ -35,7 +35,7 @@ public class BookingService {
  //CHECK AVAILABLE BOOKINGS USE CASE
 
     //Method for returning from repository list of free vehicles in selected dates, additionally in method body there is a check if end
-    // datt is higher than start date and if the start dates is higher or equals to today's date
+    // date is higher than start date and if the start dates is higher or equals to today's date
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
             DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate start_date = LocalDate.parse(startDate, pattern);
@@ -89,6 +89,7 @@ public class BookingService {
             vehicle.setVehicle_calculated_quote(getInitialQuote(start_date, end_date, vehicle.getCost_per_day()));
         }
     }
+
 //FIND BOOKINGS USE CASE
 
     //Method which based on searching criteria in search form returns from repository list of booking table objects
@@ -97,10 +98,6 @@ public class BookingService {
         return bookingRepository.getBookings(searchForm);
     }
 
-    //Method for returning from repository all existing bookings ??????????????????????????????????????????????????????????????????????????????????????????//
-    public List<Booking> getAllBookings() {
-        return bookingRepository.getAllBookings();
-    }
 
 //UPDATE BOOKING USE CASE
 
@@ -148,7 +145,7 @@ public class BookingService {
     }
 
     //Method for calculating fee for cancellation
-    public double calculateCancellationFee(String start_date, Double initial_cost) {
+    public double calculateCancellationFee(String start_date, double initial_cost) {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(start_date, pattern);
         LocalDate cancellation_date = LocalDate.now();
@@ -167,11 +164,11 @@ public class BookingService {
         return bookingRepository.getCancellation(days_out);
     }
 
-    //Method for calling repositories to update changed fields in bookings, customers, card_information, addresses, vehicles, tables
+    //Method for calling repositories to update changed fields
     public void updateBooking(Booking booking, Customer customer) {
         customerRepository.updateAddress(customer);
         customerRepository.updateCustomer(customer);
-        bookingRepository.updateBooking(booking, customer);
+        bookingRepository.updateBooking(booking);
     }
 
     //Method for calling repository to update final payment amount
@@ -179,8 +176,7 @@ public class BookingService {
         bookingRepository.updateBookingPayment(booking_id, payment_amount);
     }
 
-
- //????????????????????????????????????????????
+    //Method which returns booking from repository based on its ID
     public Booking getBooking(int id) {
         return bookingRepository.getBooking(id);
     }
