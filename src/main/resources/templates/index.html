@@ -5,88 +5,40 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dashboard - Nordic Notorhome</title>
-    <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}">
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome5-overrides.min.css}">
 </head>
 
-<body id="page-top">
-    <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-start align-items-xl-start sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-text mx-3"><span class="float-left">Nordic</span><span class="float-left">Motorhome</span></div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" th:href="@{/dashboard}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/bookings}"><span><i class="fas fa-table"></i>Bookings</span></a></li>
-                    <li class="nav-item" role="presentation" ><a class="nav-link" th:href="@{/createNewBooking}"><i class="far fa-calendar-plus"></i><span>Create New Booking</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/vehicles}"><i class="fas fa-car"></i><span>Vehicles</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/customers}"><i class="fa fa-users fa-2x"></i><span>Customers</span></a></li>
-                </ul>
+<body id="wrapper">
+        <nav class="nav">
+            <div class="nav-title">
+                <span>Nordic</span>
+                <span>Motorhome</span>
             </div>
+            <br>
+            <ul class="navbar-nav">
+                <li class="nav-item" role="presentation"><a class="nav-link active" th:href="@{/dashboard}"><i class="fas fa-tachometer-alt nav-icon"></i><span>Dashboard</span></a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/bookings}"><span><i class="fas fa-table nav-icon"></i>Bookings</span></a></li>
+                <li class="nav-item" role="presentation" ><a class="nav-link" th:href="@{/createNewBooking}"><i class="far fa-calendar-plus nav-icon"></i><span>Create New Booking</span></a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/vehicles}"><i class="fas fa-car nav-icon"></i><span>Vehicles</span></a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{/customers}"><i class="fas fa-users nav-icon"></i><span>Customers</span></a></li>
+            </ul>
         </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top flex-row justify-content-end">
-                    <a class="nav-link" th:href="@{/logout}" ></i><span>Logout</span></a>
+                <nav class="nav-top">
+                    <a class="nav-top-link" th:href="@{/logout}" ><span>Logout</span></a>
                 </nav>
             <div class="container-fluid">
-                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                <div class="flex justify-content-between align-items-center">
                     <h3 class="text-dark mb-0"><span th:text="${welcome}"></span></h3>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-primary py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>CUSTOMERS expected today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>4</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fa fa-users fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>New Bookings today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>14</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-car-alt fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-success py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span style="color: rgb(200,28,183);">RETURNS&nbsp;today</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>2</span></div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-check-square fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
-        <footer class="bg-white sticky-footer">
-            <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Nordic Notorhome 2020</span></div>
-            </div>
-        </footer>
-        </div>
+                <footer class="footer">
+                    <span>Copyright © Nordic Notorhome 2020</span>
+                </footer>
     </div>
 </body>
 
