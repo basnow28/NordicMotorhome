@@ -89,7 +89,7 @@ body{
     text-decoration: none;
 }
 
-.container-main{
+.container-fluid{
     display: flex;
     flex-direction: column;
 }
@@ -213,4 +213,9 @@ body{
     border: 1px solid #d1d3e2;
     border-radius: 5px;
     background-color: white;
+}
+textarea{
+    width: 1332px;
+    height: 100px;
+    resize: none;
 }
