@@ -79,31 +79,18 @@ public class BookingController {
     //Method responsible for modeling search form in which are saved searching criteria
     //and adding to model list of vehicles that fit searching criteria
 
-    @GetMapping("/bookForCustomer/{vehicle_id}/{start_date}/{end_date}/{quote}")
-    public String createBookingExistingCustomer(@PathVariable("vehicle_id") int vehicle_id,
-                                                @PathVariable("start_date") String start_date,
-                                                @PathVariable("end_date") String end_date,
-                                                @PathVariable("quote") double quote,
-                                                Model model){
-        BookingForExistingCustomer bookingForExistingCustomer = new BookingForExistingCustomer();
-        bookingForExistingCustomer.setSearchForm(new SearchForm());
-        bookingForExistingCustomer.getSearchForm().setStart_date(start_date);
-        bookingForExistingCustomer.getSearchForm().setEnd_date(end_date);
-        bookingForExistingCustomer.setVehicle_id(vehicle_id);
-        bookingForExistingCustomer.setQuote(quote);
+    @PostMapping("/findFreeVehicles")
+    public String findFreeVehicles(@ModelAttribute SearchForm searchForm, Model model){
+        ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchForm.getStart_date(),
+                searchForm.getEnd_date(),
+                Integer.parseInt(searchForm.getValue()));
+        bookingService.setVehiclesQuotes(searchForm.getStart_date(), searchForm.getEnd_date(), freeVehicles);
 
-        model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
-
-        return "bookForCustomer.html";
+        model.addAttribute("freeVehicles", freeVehicles);
+        model.addAttribute("searchForm", searchForm);
+        return "createNewBooking";
     }
-
-    @PostMapping("/findCustomerForBooking")
-    public String findCustomer(@ModelAttribute BookingForExistingCustomer bookingForExistingCustomer, Model model){
-        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomers(bookingForExistingCustomer.getSearchForm());
-        model.addAttribute("customersList", customersList);
-        model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
-        return "bookForCustomer.html";
-    }
+    //Find existing customer //
 
     @GetMapping("/bookingDetails/{vehicle_id}/{start_date}/{end_date}/{quote}/{customer_id}")
     public String createNewBooking(@PathVariable("vehicle_id") int vehicle_id,
@@ -127,18 +114,30 @@ public class BookingController {
         model.addAttribute("title", "New Booking");
         return "bookingDetails.html";
     }
+    @PostMapping("/findCustomerForBooking")
+    public String findCustomer(@ModelAttribute BookingForExistingCustomer bookingForExistingCustomer, Model model){
+        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomers(bookingForExistingCustomer.getSearchForm());
+        model.addAttribute("customersList", customersList);
+        model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
+        return "bookForCustomer.html";
+    }
 
+    @GetMapping("/bookForCustomer/{vehicle_id}/{start_date}/{end_date}/{quote}")
+    public String createBookingExistingCustomer(@PathVariable("vehicle_id") int vehicle_id,
+                                                @PathVariable("start_date") String start_date,
+                                                @PathVariable("end_date") String end_date,
+                                                @PathVariable("quote") double quote,
+                                                Model model){
+        BookingForExistingCustomer bookingForExistingCustomer = new BookingForExistingCustomer();
+        bookingForExistingCustomer.setSearchForm(new SearchForm());
+        bookingForExistingCustomer.getSearchForm().setStart_date(start_date);
+        bookingForExistingCustomer.getSearchForm().setEnd_date(end_date);
+        bookingForExistingCustomer.setVehicle_id(vehicle_id);
+        bookingForExistingCustomer.setQuote(quote);
 
-    @PostMapping("/findFreeVehicles")
-    public String findFreeVehicles(@ModelAttribute SearchForm searchForm, Model model){
-        ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchForm.getStart_date(),
-                searchForm.getEnd_date(),
-                Integer.parseInt(searchForm.getValue()));
-        bookingService.setVehiclesQuotes(searchForm.getStart_date(), searchForm.getEnd_date(), freeVehicles);
+        model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
 
-        model.addAttribute("freeVehicles", freeVehicles);
-        model.addAttribute("searchForm", searchForm);
-        return "createNewBooking";
+        return "bookForCustomer.html";
     }
 
 //FIND BOOKING USE CASE//
@@ -155,7 +154,6 @@ public class BookingController {
         }
         ArrayList<BookingTable> bookinglist = (ArrayList<BookingTable>) bookingService.getBookings(searchForm);
         model.addAttribute("bookingTable", bookinglist);
-        model.addAttribute("searchForm", searchForm);
         return "bookings";
     }
 
