@@ -36,16 +36,7 @@ public class MainController {
     @Autowired
     CustomerService customerService;
 
-//?????????????????????????????????????????????????????????????????????????????????????????????????
-    @GetMapping("/dashboard")
-    public String dashboard(Model model){
-        if(!NordicmotorhomeApplication.isAuthorized()){
-            return "redirect:/";
-        }
-        String welcome = "Welcome "+NordicmotorhomeApplication.getEmployee().getFirst_name()+"! :)";
-        model.addAttribute("welcome", welcome);
-        return "index.html";
-    }
+
 
  //CREATE BOOKING USE CASE//
 
@@ -104,9 +95,9 @@ public class MainController {
 
 //FIND CUSTOMER USE CASE//
 
-    //method for dispalying search customer page
+    //method for displaying search customer page
     @GetMapping("/customers")
-    public String findCustomer(Model model){
+    public String customers(Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
@@ -150,10 +141,20 @@ public class MainController {
         return "redirect:/";
     }
 
-    //Method for displaying page when unauthorised uuser tries to enter the system
+    //Method for displaying page when unauthorised user tries to enter the system
     @GetMapping("/noAuth")
     public String noAuth(){
         return "noAuth.html";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard(Model model){
+        if(!NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/";
+        }
+        String welcome = "Welcome "+NordicmotorhomeApplication.getEmployee().getFirst_name()+"! :)";
+        model.addAttribute("welcome", welcome);
+        return "index.html";
     }
 
 }

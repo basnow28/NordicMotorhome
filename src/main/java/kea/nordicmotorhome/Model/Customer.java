@@ -1,15 +1,12 @@
 package kea.nordicmotorhome.Model;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Id;
 
 
 
 @Component
 public class Customer extends Person{
-    @Id
     private int customer_id;
     private String date_of_birth;
     private String phone_number;

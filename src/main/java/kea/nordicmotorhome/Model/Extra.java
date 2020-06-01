@@ -2,9 +2,10 @@ package kea.nordicmotorhome.Model;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Component
+@Entity
 public class Extra {
     @Id
     private int extra_id;
