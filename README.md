@@ -66,8 +66,8 @@ PRIMARY KEY(season_id)
 ```bash
 CREATE TABLE employees (
 employee_id		INT		NOT NULL	AUTO_INCREMENT,
-employee_first_name	VARCHAR(45)	NOT NULL,
-employee_last_name	VARCHAR(45)	NOT NULL,
+first_name	VARCHAR(45)	NOT NULL,
+last_name	VARCHAR(45)	NOT NULL,
 employee_type		VARCHAR(45)	NOT NULL,
 employee_login		VARCHAR(45)	NOT NULL,
 employee_password	VARCHAR(45)	NOT NULL,
@@ -232,7 +232,7 @@ INSERT INTO vehicle_types (vehicle_type_id,vehicle_type_name, cost_per_day, vehi
 ```
 
 ```bash
-INSERT INTO employees (employee_first_name, employee_last_name, employee_type, employee_login, employee_password) VALUES
+INSERT INTO employees (first_name, last_name, employee_type, employee_login, employee_password) VALUES
 ("David", "Hards", "SalesAssistant", "dhards", "qoehg2741"),
 ("Barbara", "Rekowska", "SalesAssistant", "brekowska", "cksle3391"),
 ("Maja", "Miskeri", "SalesAssistant", "mmiskeri", "lspwh0021"),
