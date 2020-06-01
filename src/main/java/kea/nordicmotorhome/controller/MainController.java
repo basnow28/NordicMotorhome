@@ -55,7 +55,7 @@ public class MainController {
         if(!NordicmotorhomeApplication.isAuthorized()){
             return "redirect:/";
         }
-        String welcome = "Welcome "+NordicmotorhomeApplication.getEmployee().getEmployee_first_name()+"! :)";
+        String welcome = "Welcome "+NordicmotorhomeApplication.getEmployee().getFirst_name()+"! :)";
         model.addAttribute("welcome", welcome);
         return "index.html";
     }

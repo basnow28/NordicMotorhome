@@ -16,7 +16,7 @@ public class EmployeeRepository {
     JdbcTemplate template;
 
     public Employee auth(Employee employee) {
-        String sql = "SELECT employee_id, employee_first_name, employee_last_name, employee_type FROM employees WHERE employee_login = ? AND employee_password = ?";
+        String sql = "SELECT employee_id, first_name, last_name, employee_type FROM employees WHERE employee_login = ? AND employee_password = ?";
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
         List<Employee> employees = template.query(sql, rowMapper, employee.getEmployee_login(), employee.getEmployee_password());
 
