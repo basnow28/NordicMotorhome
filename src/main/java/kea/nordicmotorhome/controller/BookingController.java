@@ -185,10 +185,10 @@ public class BookingController {
     //Method for passing changed information in the booking form to the service
     @RequestMapping(value = "/saveBooking", params="save", method=RequestMethod.POST)
     String saveBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
-        bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
         if (bookingForm.getBooking().getBooking_status().equalsIgnoreCase("cancelled")){
             bookingForm.getBooking().setInitial_cost(bookingService.calculateCancellationFee(bookingForm.getBooking().getStart_date(), bookingForm.getBooking().getInitial_cost()));
         }else {
+            bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
             bookingForm.getBooking().setExtra_kilometers_fee(
                     bookingService.calculateExtraKilometersPrice(
                             bookingForm.getBooking().getStart_date(),
