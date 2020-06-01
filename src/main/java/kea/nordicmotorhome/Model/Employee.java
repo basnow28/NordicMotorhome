@@ -6,19 +6,17 @@ import org.springframework.stereotype.Component;
 import javax.persistence.Id;
 
 @Component
-public class Employee {
+public class Employee extends Person{
     @Id
     private int employee_id;
-    private String employee_first_name;
-    private String employee_last_name;
     private String employee_type;
     private String employee_login;
     private String employee_password;
 
     public void setAllAttributesToEmpty(){
         this.employee_id = 0;
-        this.employee_first_name = null;
-        this.employee_last_name= null;
+        super.setFirst_name(null);
+        super.setLast_name(null);
         this.employee_type=null;
         this.employee_login=null;
         this.employee_password=null;
@@ -30,22 +28,6 @@ public class Employee {
 
     public void setEmployee_id(int employee_id) {
         this.employee_id = employee_id;
-    }
-
-    public String getEmployee_first_name() {
-        return employee_first_name;
-    }
-
-    public void setEmployee_first_name(String employee_first_name) {
-        this.employee_first_name = employee_first_name;
-    }
-
-    public String getEmployee_last_name() {
-        return employee_last_name;
-    }
-
-    public void setEmployee_last_name(String employee_last_name) {
-        this.employee_last_name = employee_last_name;
     }
 
     public String getEmployee_type() {
