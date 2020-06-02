@@ -80,11 +80,13 @@ public class BookingController {
     //and adding to model list of vehicles that fit searching criteria
 
     @PostMapping("/findFreeVehicles")
-    public String findFreeVehicles(@ModelAttribute SearchForm searchForm, Model model){
+    public String findFreeVehicles(@ModelAttribute SearchForm searchForm, Model model) {
         ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchForm.getStart_date(),
                 searchForm.getEnd_date(),
                 Integer.parseInt(searchForm.getValue()));
         bookingService.setVehiclesQuotes(searchForm.getStart_date(), searchForm.getEnd_date(), freeVehicles);
+        return "createNewBooking.html";
+    }
 
     /////Finding an existing customer to create a new booking under the same name
     @PostMapping("/findCustomerForBooking")
@@ -118,13 +120,6 @@ public class BookingController {
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("title", "New Booking");
         return "bookingDetails.html";
-    }
-    @PostMapping("/findCustomerForBooking")
-    public String findCustomer(@ModelAttribute BookingForExistingCustomer bookingForExistingCustomer, Model model){
-        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomers(bookingForExistingCustomer.getSearchForm());
-        model.addAttribute("customersList", customersList);
-        model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
-        return "bookForCustomer.html";
     }
 
     @GetMapping("/bookForCustomer/{vehicle_id}/{start_date}/{end_date}/{quote}")
