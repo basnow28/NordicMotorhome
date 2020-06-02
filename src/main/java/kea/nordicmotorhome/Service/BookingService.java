@@ -36,7 +36,6 @@ public class BookingService {
             customer_id = customerRepository.createCustomer(customer);
         }else{
             customer_id = customer.getCustomer_id();
-            address_id = customer.getAddress_id();
         }
         return bookingRepository.createBooking(booking, customer_id);
     }

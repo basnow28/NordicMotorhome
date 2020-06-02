@@ -97,6 +97,7 @@ public class BookingController {
         return "bookForCustomer.html";
     }
 
+    /////Finding an existing customer to create a new booking under the same name
     @PostMapping("/findCustomerForBooking")
     public String findCustomer(@ModelAttribute BookingForExistingCustomer bookingForExistingCustomer, Model model){
         ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomers(bookingForExistingCustomer.getSearchForm());
@@ -105,6 +106,7 @@ public class BookingController {
         return "bookForCustomer.html";
     }
 
+    //////Creating a booking for existing customer - the url is send from bookForCustomer.html
     @GetMapping("/bookingDetails/{vehicle_id}/{start_date}/{end_date}/{quote}/{customer_id}")
     public String createNewBooking(@PathVariable("vehicle_id") int vehicle_id,
                                    @PathVariable("start_date") String start_date,
@@ -117,7 +119,7 @@ public class BookingController {
         }
         BookingForm bookingForm = new BookingForm();
         bookingForm.setBooking(new Booking());
-        bookingForm.setCustomer(customerService.getCustomer(customer_id));
+        bookingForm.setCustomer(customerService.getCustomer(customer_id)); //////Setting an existing customer's data to the new booking form
         bookingForm.getBooking().setStart_date(start_date);
         bookingForm.getBooking().setEnd_date(end_date);
         bookingForm.getBooking().setInitial_cost(quote);

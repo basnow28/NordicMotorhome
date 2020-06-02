@@ -3,25 +3,20 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Login - Nordic Notorhome</title>
     <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
-    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}">
-    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-all.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome5-overrides.min.css}">
 </head>
 
 <body class="bg-gradient-primary">
     <div class="flex container-row card shadow" style="margin-top:200px; margin-left: 200px;margin-right: 200px">
            <div class="login-dog" style="width: 50%">
           </div>
-        <div class="flex col justify-content-center align-items-center card shadow" style="text-align: center; width:50%">
+        <div class="flex container-column justify-content-center align-items-center card shadow" style="text-align: center; width:50%">
         <div>
             <h3 class="text-dark">Welcome Back!</h3>
             <h5 class="text-dark" th:text="${incorrect}"></h5>
         </div>
-        <form th:action="@{/login}" th:object="${employee}" class="flex col justify-content-center align-items-center" method="post">
+        <form th:action="@{/login}" th:object="${employee}" class="flex container-column justify-content-center align-items-center" method="post">
                 <input th:value="*{employee_login}" name="employee_login" class="form-control-sm" type="text" placeholder="Enter Login Id...">
                 <input th:value="*{employee_password}" name="employee_password" class="form-control-sm" type="password" placeholder="Password">
             <input class="btn" type="submit">

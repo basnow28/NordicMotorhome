@@ -63,7 +63,9 @@ public class BookingRepository {
                 booking.getDistance_driven(), booking.getDrop_off_kilometers(), booking.getInitial_cost(), booking.getExtras_cost(), booking.getBooking_status(),
                 booking.getPayment_amount(), booking.isFuel_check(), booking.getBooking_notes(), booking.isHas_picnic(), booking.isHas_bikerack(),
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(),
-                booking.getVehicle_id(), NordicmotorhomeApplication.getEmployee().getEmployee_id(), null, customer_id, card_id);
+                booking.getVehicle_id(),
+                //NordicmotorhomeApplication.getEmployee().getEmployee_id(),
+                1, null, customer_id, card_id);
 
         //for testing purpose change  NordicmotorhomeApplication.getEmployee().getEmployee_id() to booking.getEmployee_id()
 
