@@ -33,11 +33,6 @@ public class CustomerService {
         customerRepository.updateCustomer(customer);
     }
 
-    //Method for calling repository to update existing address
-    public void updateAddress(Customer customer){
-        customerRepository.updateAddress(customer);
-    }
-
     //Method that returns from repository specified by ID customer
     public Customer getCustomer(int customer_id) {
         return customerRepository.getCustomer(customer_id);

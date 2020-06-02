@@ -56,22 +56,4 @@ public class CustomerServiceTest {
         assertEquals(customer.getFirst_name(), customerService.getCustomer(8).getFirst_name());
     }
 
-    @Test
-    //Method tests if the address information is updated in database
-    void updateAddressTest(){
-        Customer customer = new Customer();
-        customer.setAddress_id(7);
-        customer.setStreet_name("Lygten");
-        customer.setHouse_number("16");
-        customer.setPostcode("2000");
-        customer.setCity("Copenhagen");
-        customer.setCountry("Denmark");
-        customerService.updateAddress(customer);
-        assertEquals("Lygten", customerService.getCustomer(7).getStreet_name());
-        assertEquals("16", customerService.getCustomer(7).getHouse_number());
-        assertEquals("2000", customerService.getCustomer(7).getPostcode());
-        assertEquals("Copenhagen", customerService.getCustomer(7).getCity());
-        assertEquals("Denmark", customerService.getCustomer(7).getCountry());
-    }
-
 }

@@ -49,7 +49,6 @@ public class CustomerController {
     @PostMapping("/saveCustomerDetails")
     public String viewCustomerDetails(@ModelAttribute Customer customer){
         customerService.updateCustomer(customer);
-        customerService.updateAddress(customer);
         return "redirect:/customerDetails/"+customer.getCustomer_id();
     }
 
