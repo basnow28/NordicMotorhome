@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.awt.print.Book;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -59,6 +60,51 @@ public class BookingServiceTest {
         customer.setCity("Copenhagen");
         customer.setCountry("Denmark");
         assertEquals(7,bookingService.createBooking(booking, customer));
+    }
+
+    @Test
+    void createBookingForExistingCustomerTest(){
+        Booking booking = new Booking();
+
+        booking.setStart_date("2020-08-03");
+        booking.setEnd_date("2020-08-10");
+        booking.setDistance_driven(0);
+        booking.setDrop_off_kilometers(0);
+        booking.setInitial_cost(4792);
+        booking.setExtras_cost(0);
+        booking.setBooking_status("CREATED");
+        booking.setPayment_amount(0);
+        booking.setFuel_check(true);
+        booking.setBooking_notes("notes");
+        booking.setHas_picnic(false);
+        booking.setHas_bikerack(false);
+        booking.setHas_dvd_player(false);
+        booking.setHas_tent(false);
+        booking.setHas_linen(false);
+        booking.setVehicle_id(32);
+        booking.setEmployee_id(1); //for this test to work in createBooking method in repository employee_ID has to be set up in booking not called from nordicmotorhomeAPP
+
+        booking.setCard_number("1234 3333 2222 1111");
+        booking.setCard_expiry_date("12/21");
+        booking.setCard_cvv(222);
+
+        Customer customer = new Customer();
+        customer.setFirst_name("Marcin");
+        customer.setLast_name("Przygocki");
+        customer.setDate_of_birth("1970-11-21");
+        customer.setPhone_number("20202020");
+        customer.setDriver_licence_number("GDA123");
+        customer.setStreet_name("Husumvej");
+        customer.setHouse_number("10");
+        customer.setPostcode("2700");
+        customer.setCity("Copenhagen");
+        customer.setCountry("Denmark");
+
+        customer.setEmail("x@x.com"); ///////e-mail of an existing customer
+        customer.setCustomer_id(9);
+        BookingForm bookingForm = new BookingForm();
+        bookingForm.setBooking(bookingService.getBooking(bookingService.createBooking(booking, customer)));
+        assertEquals(9,bookingForm.getBooking().getCustomer_id());
     }
 
     //TESTS FOR CHECK AVAILABILITY USE CASE
