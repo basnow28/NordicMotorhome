@@ -105,12 +105,13 @@ public class BookingRepository {
     //Method for returning a list of booking table objects (based on searching criteria)
     // which contain information( from different table in database) displayed in search booking page
     public List<BookingTable> getBookings(SearchForm searchForm ) {
-        String sql = "SELECT CONCAT(customers.first_name,' ', customers.last_name) AS customer_name, bookings.booking_id, vehicles.vehicle_model, bookings.start_date, bookings.end_date, bookings.booking_status " +
-                "FROM bookings JOIN customers " +
+        String sql = "SELECT CONCAT(customers.first_name,' ', customers.last_name) " +
+                "AS customer_name, bookings.booking_id, vehicles.vehicle_model, bookings.start_date, bookings.end_date," +
+                " bookings.booking_status " + "FROM bookings JOIN customers " +
                 "ON bookings.customer_id=customers.customer_id JOIN vehicles " +
                 "ON bookings.vehicle_id=vehicles.vehicle_id" +
                 " WHERE "+ searchForm.getAttribute() +" LIKE ? OR bookings.start_date = ? OR bookings.end_date = ? ";
-
+        //LIKE allows to search for any record which contains searching value
         RowMapper<BookingTable> rowMapper = new BeanPropertyRowMapper<>(BookingTable.class);
         String value = "%"+searchForm.getValue()+"%";
         return template.query(sql, rowMapper, value, searchForm.getStart_date(), searchForm.getEnd_date());

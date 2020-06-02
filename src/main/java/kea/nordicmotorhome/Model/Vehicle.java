@@ -9,8 +9,6 @@ import javax.persistence.Id;
 
 @Component
 public class Vehicle {
-
-    @Id
     private int vehicle_id;
     private String vehicle_brand;
     private String vehicle_model;

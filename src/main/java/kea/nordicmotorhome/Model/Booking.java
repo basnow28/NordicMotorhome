@@ -10,7 +10,6 @@ import java.util.Date;
 @Component
 public class Booking {
 
-    @Id
     private int booking_id;
     private int customer_id;
     private int employee_id;

@@ -58,6 +58,7 @@ public class CustomerRepository {
 
     //Method for updating customer information in database
     public void updateCustomer(Customer customer){
+        updateAddress(customer);
         String sqlCustomer = " UPDATE customers SET " +
                 "first_name = ? , " +
                 "last_name = ?, " +

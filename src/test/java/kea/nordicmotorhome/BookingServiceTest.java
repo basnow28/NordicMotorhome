@@ -264,7 +264,6 @@ public class BookingServiceTest {
         double payment_amount = 4792;
         bookingService.updateBookingPayment(booking_id, payment_amount);
         assertEquals(4792, bookingService.getBooking(booking_id).getPayment_amount());
-
     }
 
 }

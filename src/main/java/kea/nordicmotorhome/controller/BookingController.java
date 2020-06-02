@@ -79,32 +79,22 @@ public class BookingController {
     //Method responsible for modeling search form in which are saved searching criteria
     //and adding to model list of vehicles that fit searching criteria
 
-    @GetMapping("/bookForCustomer/{vehicle_id}/{start_date}/{end_date}/{quote}")
-    public String createBookingExistingCustomer(@PathVariable("vehicle_id") int vehicle_id,
-                                                @PathVariable("start_date") String start_date,
-                                                @PathVariable("end_date") String end_date,
-                                                @PathVariable("quote") double quote,
-                                                Model model){
-        BookingForExistingCustomer bookingForExistingCustomer = new BookingForExistingCustomer();
-        bookingForExistingCustomer.setSearchForm(new SearchForm());
-        bookingForExistingCustomer.getSearchForm().setStart_date(start_date);
-        bookingForExistingCustomer.getSearchForm().setEnd_date(end_date);
-        bookingForExistingCustomer.setVehicle_id(vehicle_id);
-        bookingForExistingCustomer.setQuote(quote);
-
-        model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
-
-        return "bookForCustomer.html";
-    }
+    @PostMapping("/findFreeVehicles")
+    public String findFreeVehicles(@ModelAttribute SearchForm searchForm, Model model){
+        ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchForm.getStart_date(),
+                searchForm.getEnd_date(),
+                Integer.parseInt(searchForm.getValue()));
+        bookingService.setVehiclesQuotes(searchForm.getStart_date(), searchForm.getEnd_date(), freeVehicles);
 
     /////Finding an existing customer to create a new booking under the same name
     @PostMapping("/findCustomerForBooking")
     public String findCustomer(@ModelAttribute BookingForExistingCustomer bookingForExistingCustomer, Model model){
-        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomers(bookingForExistingCustomer.getSearchForm());
+        List<Customer> customersList = customerService.findAllMatchingCustomers(bookingForExistingCustomer.getSearchForm());
         model.addAttribute("customersList", customersList);
         model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
         return "bookForCustomer.html";
     }
+    //Find existing customer //
 
     //////Creating a booking for existing customer - the url is send from bookForCustomer.html
     @GetMapping("/bookingDetails/{vehicle_id}/{start_date}/{end_date}/{quote}/{customer_id}")
@@ -129,18 +119,30 @@ public class BookingController {
         model.addAttribute("title", "New Booking");
         return "bookingDetails.html";
     }
+    @PostMapping("/findCustomerForBooking")
+    public String findCustomer(@ModelAttribute BookingForExistingCustomer bookingForExistingCustomer, Model model){
+        ArrayList<Customer> customersList = (ArrayList<Customer>) customerService.findAllMatchingCustomers(bookingForExistingCustomer.getSearchForm());
+        model.addAttribute("customersList", customersList);
+        model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
+        return "bookForCustomer.html";
+    }
 
+    @GetMapping("/bookForCustomer/{vehicle_id}/{start_date}/{end_date}/{quote}")
+    public String createBookingExistingCustomer(@PathVariable("vehicle_id") int vehicle_id,
+                                                @PathVariable("start_date") String start_date,
+                                                @PathVariable("end_date") String end_date,
+                                                @PathVariable("quote") double quote,
+                                                Model model){
+        BookingForExistingCustomer bookingForExistingCustomer = new BookingForExistingCustomer();
+        bookingForExistingCustomer.setSearchForm(new SearchForm());
+        bookingForExistingCustomer.getSearchForm().setStart_date(start_date);
+        bookingForExistingCustomer.getSearchForm().setEnd_date(end_date);
+        bookingForExistingCustomer.setVehicle_id(vehicle_id);
+        bookingForExistingCustomer.setQuote(quote);
 
-    @PostMapping("/findFreeVehicles")
-    public String findFreeVehicles(@ModelAttribute SearchForm searchForm, Model model){
-        ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchForm.getStart_date(),
-                searchForm.getEnd_date(),
-                Integer.parseInt(searchForm.getValue()));
-        bookingService.setVehiclesQuotes(searchForm.getStart_date(), searchForm.getEnd_date(), freeVehicles);
+        model.addAttribute("bookExistingCustomer", bookingForExistingCustomer);
 
-        model.addAttribute("freeVehicles", freeVehicles);
-        model.addAttribute("searchForm", searchForm);
-        return "createNewBooking";
+        return "bookForCustomer.html";
     }
 
 //FIND BOOKING USE CASE//
@@ -157,7 +159,6 @@ public class BookingController {
         }
         ArrayList<BookingTable> bookinglist = (ArrayList<BookingTable>) bookingService.getBookings(searchForm);
         model.addAttribute("bookingTable", bookinglist);
-        model.addAttribute("searchForm", searchForm);
         return "bookings";
     }
 
@@ -189,10 +190,10 @@ public class BookingController {
     //Method for passing changed information in the booking form to the service
     @RequestMapping(value = "/saveBooking", params="save", method=RequestMethod.POST)
     String saveBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
-        bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
         if (bookingForm.getBooking().getBooking_status().equalsIgnoreCase("cancelled")){
             bookingForm.getBooking().setInitial_cost(bookingService.calculateCancellationFee(bookingForm.getBooking().getStart_date(), bookingForm.getBooking().getInitial_cost()));
         }else {
+            bookingForm.getBooking().setExtras_cost(bookingService.setExtrasPrice(bookingForm.getBooking()));
             bookingForm.getBooking().setExtra_kilometers_fee(
                     bookingService.calculateExtraKilometersPrice(
                             bookingForm.getBooking().getStart_date(),
