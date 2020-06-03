@@ -35,7 +35,11 @@ public class BookingService {
             customer.setAddress_id(address_id);
             customer_id = customerRepository.createCustomer(customer);
         }else{
-            customer_id = customer.getCustomer_id();
+            if(customer.getCustomer_id() != 0){
+                customer_id = customer.getCustomer_id();
+            }else{
+                customer_id = customerRepository.getCustomer(customer.getEmail());
+            }
         }
         return bookingRepository.createBooking(booking, customer_id);
     }

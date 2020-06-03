@@ -99,4 +99,10 @@ public class CustomerRepository {
         List<Customer> list = template.query(sql,rowMapper, customer.getEmail());
         return list.size() > 0;
     }
+
+    public int getCustomer(String email) {
+        String sql = "SELECT * FROM customers INNER JOIN addresses ON customers.address_id = addresses.address_id WHERE email = ?";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        return template.query(sql, rowMapper, email).get(0).getCustomer_id();
+    }
 }
