@@ -350,7 +350,7 @@
                         <div class="card-header-container">
                             <p class="card-header-text">Additional Notes</p>
                         </div>
-                        <textarea th:disabled="${isDisabled}" class="form-control" rows="4" name="booking.booking_notes" th:text="*{booking.booking_notes}"></textarea>
+                        <textarea th:disabled="${isDisabled}" class="form-control" rows="4" name="booking.booking_notes" th:text="*{booking.booking_notes}" maxlength="500"></textarea>
                     </div>
                 </div>
             </form>

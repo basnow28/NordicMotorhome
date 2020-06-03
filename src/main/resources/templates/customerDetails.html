@@ -45,27 +45,27 @@
                         <div class="form-row">
                             <div class="col">
                                 <label><strong>First Name</strong></label>
-                                <input th:disabled="${isDisabled}" required class="form-control" type="text" name="first_name" th:value="*{first_name}">
+                                <input th:disabled="${isDisabled}" required class="form-control" type="text" name="first_name" th:value="*{first_name}" maxlength="45" pattern="^[^0-9]+$">
                             </div>
                             <div class="col">
                                 <label><strong>Last Name</strong></label>
-                                <input th:disabled="${isDisabled}" required class="form-control" type="text" name="last_name" th:value="*{last_name}">
+                                <input th:disabled="${isDisabled}" required class="form-control" type="text" name="last_name" th:value="*{last_name}" maxlength="45" pattern="^[^0-9]+$">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
                                 <label><strong>Email</strong></label>
-                                <input th:disabled="${isDisabled}" required class="form-control" type="email" name="email" th:value="*{email}">
+                                <input th:disabled="${isDisabled}" required class="form-control" type="email" name="email" th:value="*{email}" maxlength="45">
                             </div>
                             <div class="col">
                                 <label><strong>Phone Number</strong><br></label>
-                                <input th:disabled="${isDisabled}" required class="form-control" type="text" name="phone_number" th:value="*{phone_number}">
+                                <input th:disabled="${isDisabled}" required class="form-control" type="text" name="phone_number" th:value="*{phone_number}" minlength="8" maxlength="45" pattern="^[0-9]+$">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
                                  <label><strong>Driver Licence Number</strong><br></label>
-                                 <input th:disabled="${isDisabled}" required class="form-control" type="text" name="driver_licence_number" th:value="*{driver_licence_number}">
+                                 <input th:disabled="${isDisabled}" required class="form-control" type="text" name="driver_licence_number" th:value="*{driver_licence_number}" maxlength="45">
                             </div>
                             <div class="col">
                                 <label><strong>Date of Birth</strong><br></label>
@@ -81,24 +81,24 @@
                     <div class="card-body">
                         <div class="col">
                             <label><strong>Street</strong></label>
-                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="street_name" th:value="*{street_name}">
+                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="street_name" th:value="*{street_name}" maxlength="45">
                         </div>
                         <div class="col">
                             <label><strong>House Number</strong></label>
-                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="house_number" th:value="*{house_number}">
+                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="house_number" th:value="*{house_number}" maxlength="45">
                         </div>
                         <div class="col">
                             <label><strong>Postcode</strong><br></label>
-                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="postcode" th:value="*{postcode}">
+                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="postcode" th:value="*{postcode}" maxlength="45">
                         </div>
                         <div class="form-row">
                             <div class="col">
                                 <label><strong>City</strong></label>
-                                <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="city" th:value="*{city}">
+                                <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="city" th:value="*{city}" maxlength="45" pattern="^[^0-9]+$">
                             </div>
                             <div class="col">
                                 <label><strong>Country</strong></label>
-                                <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="country" th:value="*{country}">
+                                <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="country" th:value="*{country}" maxlength="45" pattern="^[^0-9]+$">
                             </div>
                         </div>
                     </div>
