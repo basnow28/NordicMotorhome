@@ -68,7 +68,12 @@ public class MainController {
                 NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase().equals("CLEANER")){
             return "noAuth.html";
         }
-        model.addAttribute("searchForm", new SearchForm());
+        SearchForm searchForm = new SearchForm();
+        searchForm.setAttribute("first_name");
+        searchForm.setValue("");
+        List<BookingTable> bookingTable = bookingservice.getBookings(searchForm);
+        model.addAttribute("bookingTable", bookingTable);
+        model.addAttribute("searchForm", searchForm);
         return "bookings.html";
     }
 
