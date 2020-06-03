@@ -161,13 +161,16 @@ public class BookingService {
         LocalDate startDate = LocalDate.parse(start_date, pattern);
         LocalDate cancellation_date = LocalDate.now();
         int days = (int) ChronoUnit.DAYS.between(cancellation_date, startDate);
+        if(days < 0) {
+            days = 0;
+        }
         Cancellation cancellation = getCancellation(days);
 
         double cancellationFee = cancellation.getCancellation_rate() * initial_cost;
         if (cancellationFee < cancellation.getMinimum_fee()) {
             return cancellation.getMinimum_fee();
         }else
-            return cancellationFee ;
+            return Math.floor(cancellationFee);
     }
     ///////////////////********* DAGMARA ************///////////////////
     //Method for returning from repository right cancellation rate based on the days between cancellation day and start day og the booking
