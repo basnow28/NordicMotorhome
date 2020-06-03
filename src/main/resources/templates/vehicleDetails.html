@@ -152,7 +152,7 @@
                                     <div class="form-row justify-content-start">
                                         <div class="col">
                                             <label><strong>Licence Plate</strong></label>
-                                            <input th:disabled="${isDisabled}" th:value="*{licence_plate}" class="form-control" type="text" name="licence_plate">
+                                            <input th:disabled="${isDisabled}" th:value="*{licence_plate}" class="form-control" type="text" name="licence_plate" maxlength="45">
                                         </div>
                                         <div class="col" style="margin-left: 10px">
                                             <label><strong>Vehicle Type</strong></label>
@@ -200,7 +200,7 @@
                     <div class="card-header-container">
                         <p class="card-header-text">Additional Notes</p>
                     </div>
-                    <textarea th:text="*{additional_notes}" name="additional_notes" class="form-control" rows="4"></textarea>
+                    <textarea th:text="*{additional_notes}" name="additional_notes" class="form-control" rows="4" maxlength="500"></textarea>
                 </div>
             </div>
         </form>
