@@ -33,7 +33,7 @@ public class BookingController {
 
 
 //CREATE BOOKING USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for passing new booking information to service
     @PostMapping("/newBooking")
     String createNewBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
@@ -50,7 +50,7 @@ public class BookingController {
 
         return "redirect:/bookingDetails/"+bookingForm.getBooking().getBooking_id();
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method which allows to open booking form page for creating new booking with specified dates, capacity and initial cost
     @GetMapping("/bookingDetails/{vehicle.vehicle_id}/{start_date}/{end_date}/{vehicle.vehicle_calculated_quote}")
     public String createNewBooking(@PathVariable("vehicle.vehicle_id") int vehicle_id, @PathVariable("start_date") String start_date,
@@ -78,7 +78,7 @@ public class BookingController {
 
     //Method responsible for modeling search form in which are saved searching criteria
     //and adding to model list of vehicles that fit searching criteria
-
+    ///////////////////********* DAGMARA ************///////////////////
     @PostMapping("/findFreeVehicles")
     public String findFreeVehicles(@ModelAttribute SearchForm searchForm, Model model) {
         ArrayList<Vehicle> freeVehicles = (ArrayList<Vehicle>) bookingService.findFreeVehicles(searchForm.getStart_date(),
@@ -90,6 +90,7 @@ public class BookingController {
     }
 
     /////Finding an existing customer to create a new booking under the same name
+    ///////////////////********* BARBARA ************///////////////////
     @PostMapping("/findCustomerForBooking")
     public String findCustomer(@ModelAttribute BookingForExistingCustomer bookingForExistingCustomer, Model model){
         List<Customer> customersList = customerService.findAllMatchingCustomers(bookingForExistingCustomer.getSearchForm());
@@ -100,6 +101,7 @@ public class BookingController {
     //Find existing customer //
 
     //////Creating a booking for existing customer - the url is send from bookForCustomer.html
+    ///////////////////********* BARBARA ************///////////////////
     @GetMapping("/bookingDetails/{vehicle_id}/{start_date}/{end_date}/{quote}/{customer_id}")
     public String createNewBooking(@PathVariable("vehicle_id") int vehicle_id,
                                    @PathVariable("start_date") String start_date,
@@ -122,7 +124,7 @@ public class BookingController {
         model.addAttribute("title", "New Booking");
         return "bookingDetails.html";
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     @GetMapping("/bookForCustomer/{vehicle_id}/{start_date}/{end_date}/{quote}")
     public String createBookingExistingCustomer(@PathVariable("vehicle_id") int vehicle_id,
                                                 @PathVariable("start_date") String start_date,
@@ -145,6 +147,7 @@ public class BookingController {
 
     //Method is responsible modeling search form and  list of booking table objects which contains information
     // from different tables from database, the list has to fulfill searching criteria from search form object
+    ///////////////////********* DAGMARA ************///////////////////
     @PostMapping("/findBooking")
     public String findBooking(@ModelAttribute SearchForm searchForm, Model model){
         if (searchForm.getStart_date().equals("")){
@@ -159,7 +162,7 @@ public class BookingController {
     }
 
     //UPDATE BOOKING USE CASE//
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method for displaying specified booking details
     @GetMapping("/bookingDetails/{id}")
     String bookingDetails(@PathVariable("id") int id,  Model model) {
@@ -184,6 +187,7 @@ public class BookingController {
     }
 
     //Method for passing changed information in the booking form to the service
+    ///////////////////********* BARBARA ************///////////////////
     @RequestMapping(value = "/saveBooking", params="save", method=RequestMethod.POST)
     String saveBooking(@ModelAttribute("bookingForm") BookingForm bookingForm){
         if (bookingForm.getBooking().getBooking_status().equalsIgnoreCase("cancelled")){
@@ -202,6 +206,7 @@ public class BookingController {
     }
 
     //Method for modeling new booking form and sending information to update payment amount
+    ///////////////////********* BARBARA ************///////////////////
     @RequestMapping(value = "/saveBooking", params="addNewPayment", method=RequestMethod.POST)
     String addNewPayment(@ModelAttribute("bookingForm") BookingForm bookingForm){
         double bookingPayment = bookingForm.getBooking().getPayment_amount() + bookingForm.getNewPaymentAmount();

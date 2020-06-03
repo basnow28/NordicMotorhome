@@ -23,7 +23,7 @@ public class BookingRepository {
     JdbcTemplate template;
 
 //CREATE BOOKING USE CASE//
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method created new record in card information table in database and return card ID
     public int createCardInformation(Booking booking){
         String sqlCard = "INSERT INTO card_information (card_number, card_expiry_date, card_cvv) VALUES (?, ?, ?)";
@@ -34,6 +34,7 @@ public class BookingRepository {
     }
 
     //Method for adding new booking to database and returning ID for created booking
+    ///////////////////********* DAGMARA ************///////////////////
     public int createBooking(Booking booking, int customer_id) {
         int card_id = createCardInformation(booking);
 
@@ -77,7 +78,7 @@ public class BookingRepository {
     }
 
 //CHECK AVAILABLE VEHICLES USE CASE//
-
+///////////////////********* DAGMARA ************///////////////////
     //Method return from database list of vehicles which fulfill searching criteria
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
         String sql = "SELECT vehicles.vehicle_id, vehicles.vehicle_model, vehicles.vehicle_brand, \n" +
@@ -93,6 +94,7 @@ public class BookingRepository {
     }
 
     //Method returns list of seasons from database
+    ///////////////////********* BARBARA ************///////////////////
     public List<Season> getSeasons() {
         String sql = "SELECT * FROM seasons;";
         RowMapper<Season> rowMapper = new BeanPropertyRowMapper<>(Season.class);
@@ -101,7 +103,7 @@ public class BookingRepository {
     }
 
 //FIND BOOKING USE CASE//
-
+///////////////////********* DAGMARA ************///////////////////
     //Method for returning a list of booking table objects (based on searching criteria)
     // which contain information( from different table in database) displayed in search booking page
     public List<BookingTable> getBookings(SearchForm searchForm ) {
@@ -119,7 +121,7 @@ public class BookingRepository {
     }
 
 //UPDATE BOOKING INFORMATION//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for updating card information of specified booking in database
     public void updateCardInformation(Booking booking){
         String sqlCard = "UPDATE card_information SET " +
@@ -130,7 +132,7 @@ public class BookingRepository {
 
         template.update(sqlCard, booking.getCard_number(), booking.getCard_expiry_date(), booking.getCard_cvv(), booking.getCard_id());
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method for updating booking information in database
     public void updateBooking(Booking booking) {
         updateCardInformation(booking);
@@ -157,13 +159,13 @@ public class BookingRepository {
                 booking.getPayment_amount(), booking.isFuel_check(), booking.getBooking_notes(), booking.isHas_picnic(), booking.isHas_bikerack(),
                 booking.isHas_dvd_player(), booking.isHas_tent(), booking.isHas_linen(), booking.getBooking_id());
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method return from database price for specified extra
     public double getExtraPrice(String extra_name) {
         String sql = "SELECT extra_price FROM extras WHERE extra_name = ?" ;
         return template.queryForObject(sql,new Object[]{extra_name}, Double.class);
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method return cancellation information based on number of days left to start booking date
     public Cancellation getCancellation(int days_out){
         String sql = "SELECT * FROM cancellations WHERE ? BETWEEN cancellations.days_out_min AND cancellations.days_out_max ";
@@ -175,7 +177,7 @@ public class BookingRepository {
 
         return c;
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method updates payment information in database
     public void updateBookingPayment(int booking_id, double payment_amount) {
         String sql = "UPDATE bookings SET " +
@@ -183,7 +185,7 @@ public class BookingRepository {
                 "WHERE booking_id = ?";
         template.update(sql, payment_amount, booking_id);
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method which returns from database booking which has specified ID
     public Booking getBooking(int id) {
         String sql = "SELECT * FROM bookings INNER JOIN card_information ON bookings.card_id = card_information.card_id WHERE booking_id = ?";

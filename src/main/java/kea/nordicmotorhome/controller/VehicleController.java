@@ -21,7 +21,7 @@ public class VehicleController {
     VehicleService vehicleService;
 
 //FIND VEHICLE USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for modeling List of vehicles which fit searching criteria
     @GetMapping("/findVehicles")
     public String findVehicles(@ModelAttribute SearchForm searchForm, Model model){
@@ -36,7 +36,7 @@ public class VehicleController {
     }
 
 //UPDATE VEHICLE USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for displaying selected vehicle details page
     @GetMapping("/vehicleDetails/{vehicle_id}")
     public String vehicleDetails(@PathVariable("vehicle_id") int vehicle_id, Model model){
@@ -55,7 +55,7 @@ public class VehicleController {
         }
         return "vehicleDetails";
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method for updating selected vehicle details
     @PostMapping("/saveVehicle")
     public String saveVehicle(@ModelAttribute Vehicle vehicle){
@@ -65,7 +65,7 @@ public class VehicleController {
     }
 
 //UPDATE VEHICLE STATUS USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for updating new vehicle status
     @PostMapping("/saveVehicleStatus")
     public String saveVehicleStatus(@ModelAttribute Vehicle vehicle){

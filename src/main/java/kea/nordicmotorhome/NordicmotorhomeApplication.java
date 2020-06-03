@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class NordicmotorhomeApplication {
-
+    ///Singleton Employee throughout the program.
     @Autowired
     private static Employee employee;
 
@@ -16,6 +16,7 @@ public class NordicmotorhomeApplication {
         SpringApplication.run(NordicmotorhomeApplication.class, args);
     }
 
+    ///////////////////********* BARBARA ************///////////////////
     public static Employee getEmployee() {
         return employee;
     }

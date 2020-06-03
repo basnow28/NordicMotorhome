@@ -10,7 +10,8 @@ public class EmployeeService {
 
     @Autowired
     EmployeeRepository employeeRepository;
-
+    ///////////////////********* BARBARA ************///////////////////
+    ////Authorizing employee when logging in
     public Employee auth(Employee employee) {
         return employeeRepository.auth(employee);
     }

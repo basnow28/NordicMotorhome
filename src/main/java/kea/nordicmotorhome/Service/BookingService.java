@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.time.temporal.ChronoUnit;
 
@@ -23,7 +22,7 @@ public class BookingService {
     CustomerRepository customerRepository;
 
 //CREATE BOOKING USE CASE
-
+///////////////////********* BARBARA ************///////////////////
     //method for creating booking
     public int createBooking(Booking booking, Customer customer) {
 
@@ -45,7 +44,7 @@ public class BookingService {
     }
 
  //CHECK AVAILABLE BOOKINGS USE CASE
-
+///////////////////********* DAGMARA ************///////////////////
     //Method for returning from repository list of free vehicles in selected dates, additionally in method body there is a check if end
     // date is higher than start date and if the start dates is higher or equals to today's date
     public List<Vehicle> findFreeVehicles(String startDate, String endDate, int vehicle_capacity){
@@ -58,7 +57,7 @@ public class BookingService {
             }
         return new ArrayList<Vehicle>();
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method for calculating initial price for renting vehicle in given date range
     public double getInitialQuote(String start_date, String end_date, int vehiclePricePerDay) {
         ArrayList<Season> seasons = (ArrayList<Season>) bookingRepository.getSeasons();
@@ -76,7 +75,7 @@ public class BookingService {
         }
         return Math.floor(quote);
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method for calculating price for a specific day depending on date, vehicle and season
     public double getPricePerDayDependingOnASeason(LocalDate day, ArrayList<Season> seasons, int vehiclePricePerDay){
         for(Season season : seasons){
@@ -94,7 +93,7 @@ public class BookingService {
         }
         return 0.0;
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method for setting quota for every vehicle from available vehicles to book
     public void setVehiclesQuotes(String start_date, String end_date, ArrayList<Vehicle> freeVehicles) {
         for (Vehicle vehicle : freeVehicles) {
@@ -103,7 +102,7 @@ public class BookingService {
     }
 
 //FIND BOOKINGS USE CASE
-
+///////////////////********* DAGMARA ************///////////////////
     //Method which based on searching criteria in search form returns from repository list of booking table objects
     // (combined information from bookings, customers, vehicles tables from DB)
     public List<BookingTable> getBookings(SearchForm searchForm) {
@@ -112,7 +111,7 @@ public class BookingService {
 
 
 //UPDATE BOOKING USE CASE
-
+///////////////////********* BARBARA ************///////////////////
     //Method for adding to the initial price, price of extras (like bike rack)
     public double setExtrasPrice(Booking booking){
         double extrasPrice = 0;
@@ -143,7 +142,7 @@ public class BookingService {
 
         return extrasPrice;
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method for calculating price after vehicle is returned so the fee for additional kilometers can be added to the bill
     public double calculateExtraKilometersPrice(String start_date, String end_date, int kilometers){
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -155,7 +154,7 @@ public class BookingService {
 
         return extraKilometersPrice < 0? 0.0 : extraKilometersPrice;
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method for calculating fee for cancellation
     public double calculateCancellationFee(String start_date, double initial_cost) {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -170,24 +169,24 @@ public class BookingService {
         }else
             return cancellationFee ;
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method for returning from repository right cancellation rate based on the days between cancellation day and start day og the booking
     private Cancellation getCancellation(int days_out){
         return bookingRepository.getCancellation(days_out);
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method for calling repositories to update changed fields
     public void updateBooking(Booking booking, Customer customer) {
         customerRepository.updateAddress(customer);
         customerRepository.updateCustomer(customer);
         bookingRepository.updateBooking(booking);
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method for calling repository to update final payment amount
     public void updateBookingPayment(int booking_id, double payment_amount) {
         bookingRepository.updateBookingPayment(booking_id, payment_amount);
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method which returns booking from repository based on its ID
     public Booking getBooking(int id) {
         return bookingRepository.getBooking(id);

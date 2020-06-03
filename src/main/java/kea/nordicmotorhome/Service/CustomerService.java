@@ -15,19 +15,19 @@ public class CustomerService {
     CustomerRepository customerRepository;
 
  //FIND CUSTOMER USE CASE
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method returning list of all existing customers from repository
     public List<Customer> getAllCustomers() {
         return customerRepository.getAllCustomers();
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method for returning from repository list of matching customers with criteria from searchForm
     public List<Customer> findAllMatchingCustomers(SearchForm searchForm){
         return customerRepository.findAllMatchingCustomers(searchForm);
     }
 
  //UPDATE CUSTOMER USE CASE
-
+///////////////////********* BARBARA ************///////////////////
     //Method for calling repository to update existing customers with new information
     public void updateCustomer(Customer customer){
         if(customerRepository.getCustomerId(customer.getEmail()) == customer.getCustomer_id()) {
@@ -36,7 +36,7 @@ public class CustomerService {
             customerRepository.updateCustomer(customer);
         }
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method that returns from repository specified by ID customer
     public Customer getCustomer(int customer_id) {
         return customerRepository.getCustomer(customer_id);

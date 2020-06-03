@@ -18,7 +18,7 @@ public class CustomerRepository {
 
 
 ////// CREATE BOOKING USE CASE //
-
+///////////////////********* DAGMARA ************///////////////////
     //Method for creating new customer in database and returning created customer ID
     public int createCustomer(Customer customer){
 
@@ -30,7 +30,7 @@ public class CustomerRepository {
         customer.setCustomer_id(customer_id);
         return customer.getCustomer_id();
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method for creating new address in database and returning created address ID
     public int createAddress(Customer customer){
         String sqlAddress = "INSERT INTO addresses (street_name, house_number, postcode, city, country) VALUES (?, ?, ?, ?, ?)";
@@ -40,14 +40,14 @@ public class CustomerRepository {
     }
 
 ///FIND CUSTOMER USE CASE//
-
+///////////////////********* DAGMARA ************///////////////////
     //Method for displaying all existing customers
     public List<Customer> getAllCustomers(){
         String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers ";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return template.query(sql,rowMapper);
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method for creating list of all customers which fit searching criteria
     public List<Customer> findAllMatchingCustomers(SearchForm searchForm){
         String sql = "SELECT customer_id, first_name, last_name, phone_number,email, address_id FROM customers WHERE "+ searchForm.getAttribute() + " LIKE ?";
@@ -57,7 +57,7 @@ public class CustomerRepository {
     }
 
 //UPDATE CUSTOMER USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for updating customer information in database
     public void updateCustomer(Customer customer){
 
@@ -74,6 +74,7 @@ public class CustomerRepository {
                 customer.getDate_of_birth(), customer.getPhone_number(), customer.getEmail(),
                 customer.getDriver_licence_number(), customer.getCustomer_id());
     }
+    ///////////////////********* BARBARA ************///////////////////
     ////Method for updating address information in database
     public void updateAddress(Customer customer){
         String sqlAddress = "UPDATE addresses SET " +
@@ -85,7 +86,7 @@ public class CustomerRepository {
                 "WHERE address_id = ?";
         template.update(sqlAddress, customer.getStreet_name(), customer.getHouse_number(), customer.getPostcode(), customer.getCity(), customer.getCountry(), customer.getAddress_id());
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method for returning customer from database based on given ID
     public Customer getCustomer(int customer_id) {
         String sql = "SELECT * FROM customers INNER JOIN addresses ON customers.address_id = addresses.address_id WHERE customer_id = ?";
@@ -94,7 +95,7 @@ public class CustomerRepository {
     }
 
 //Check if customer exists
-
+///////////////////********* BARBARA ************///////////////////
     //Method return from database customer that already exists by email
     public boolean doesExist(Customer customer) {
         String sql = "SELECT * FROM customers WHERE email = ? ";
@@ -102,7 +103,7 @@ public class CustomerRepository {
         List<Customer> list = template.query(sql,rowMapper, customer.getEmail());
         return list.size() > 0;
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     public int getCustomerId(String email) {
         String sql = "SELECT * FROM customers INNER JOIN addresses ON customers.address_id = addresses.address_id WHERE email = ?";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);

@@ -20,7 +20,7 @@ public class CustomerController {
     CustomerService customerService;
 
 //FIND CUSTOMER USE CASE//
-
+///////////////////********* DAGMARA ************///////////////////
     //Method for modeling List of customers which fit searching criteria
     @PostMapping("/findCustomer") //@get mapping should be
     public String findCustomer(@ModelAttribute SearchForm searchForm, Model model){
@@ -31,7 +31,7 @@ public class CustomerController {
     }
 
 //UPDATE CUSTOMER USE CASE//
-
+///////////////////********* DAGMARA ************///////////////////
     //Method for displaying selected customer details page
     @GetMapping("/customerDetails/{id}")
     public String viewCustomerDetails(@PathVariable int id, Model model){
@@ -44,7 +44,7 @@ public class CustomerController {
         model.addAttribute("employee_type", NordicmotorhomeApplication.getEmployee().getEmployee_type().toUpperCase());
         return "customerDetails";
     }
-
+    ///////////////////********* DAGMARA ************///////////////////
     //Method for updating selected customer details and modeling new information
     @PostMapping("/saveCustomerDetails")
     public String viewCustomerDetails(@ModelAttribute Customer customer){

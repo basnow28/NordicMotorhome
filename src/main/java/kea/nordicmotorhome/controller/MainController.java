@@ -1,8 +1,5 @@
 package kea.nordicmotorhome.controller;
 
-
-
-
 import kea.nordicmotorhome.Model.*;
 import kea.nordicmotorhome.Model.Employee;
 import kea.nordicmotorhome.Model.SearchForm;
@@ -10,8 +7,6 @@ import kea.nordicmotorhome.Model.Vehicle;
 import kea.nordicmotorhome.NordicmotorhomeApplication;
 import kea.nordicmotorhome.Service.CustomerService;
 import kea.nordicmotorhome.Service.EmployeeService;
-
-import kea.nordicmotorhome.Model.Booking;
 import kea.nordicmotorhome.Service.BookingService;
 
 import kea.nordicmotorhome.Service.VehicleService;
@@ -21,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,7 +32,7 @@ public class MainController {
 
 
  //CREATE BOOKING USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for displaying search available vehicles pages
     @GetMapping("/createNewBooking")
     public String createNewBooking(Model model){
@@ -56,7 +49,7 @@ public class MainController {
     }
 
  //UPDATE BOOKING USE CASE//
-
+///////////////////********* DAGMARA ************///////////////////
     //method for displaying existing bookings
     @GetMapping("/bookings")
     public String bookings(Model model){
@@ -78,7 +71,7 @@ public class MainController {
     }
 
 //FIND VEHICLE USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //method for displaying vehicle search page
     @GetMapping("/vehicles")
     public String vehicles(Model model){
@@ -99,7 +92,7 @@ public class MainController {
     }
 
 //FIND CUSTOMER USE CASE//
-
+///////////////////********* DAGMARA ************///////////////////
     //method for displaying search customer page
     @GetMapping("/customers")
     public String customers(Model model){
@@ -119,7 +112,7 @@ public class MainController {
     }
 
 // Login and log out //
-
+///////////////////********* BARBARA ************///////////////////
     //Method for displaying login page
     @GetMapping("/")
     public String login(Model model){

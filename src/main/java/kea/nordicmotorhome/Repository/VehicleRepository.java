@@ -17,14 +17,14 @@ public class VehicleRepository {
     JdbcTemplate template;
 
 //FIND VEHICLE USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for returning list of all vehicles from database
     public List<Vehicle> getAllVehicles(){
         String sql = "SELECT * FROM vehicles INNER JOIN vehicle_types WHERE vehicles.vehicle_type_id = vehicle_types.vehicle_type_id";
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
         return template.query(sql, rowMapper);
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method for returning list of vehicles that fulfill specified searching criteria
     public List<Vehicle> getVehicles(SearchForm searchForm) {
         String sql = "SELECT * FROM vehicles INNER JOIN vehicle_types ON vehicles.vehicle_type_id = vehicle_types.vehicle_type_id " +
@@ -35,14 +35,14 @@ public class VehicleRepository {
     }
 
 //UPDATE VEHICLE USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for returning from database specified vehicle by given ID
     public Vehicle getVehicle(int vehicle_id) {
         String sql = "SELECT * FROM vehicles INNER JOIN vehicle_types WHERE vehicles.vehicle_id = " + vehicle_id + " AND vehicles.vehicle_type_id = vehicle_types.vehicle_type_id";
         RowMapper<Vehicle> rowMapper = new BeanPropertyRowMapper<>(Vehicle.class);
         return template.query(sql, rowMapper).get(0);
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method for updating in database vehicle information
     public void updateVehicle(Vehicle vehicle) {
         String sql = "UPDATE vehicles SET " +
@@ -62,7 +62,7 @@ public class VehicleRepository {
              //   vehicle.getVehicle_capacity(),
                 vehicle.getVehicle_id());
     }
-
+    ///////////////////********* BARBARA ************///////////////////
     //Method used by mechanic and cleaner for updating their status in database
     public void updateVehicleStatus(Vehicle vehicle) {
         String sql = "UPDATE vehicles SET " +

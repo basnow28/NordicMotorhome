@@ -14,7 +14,8 @@ public class EmployeeRepository {
 
     @Autowired
     JdbcTemplate template;
-
+    ////Authorizing Employee using password and login
+    ///////////////////********* BARBARA ************///////////////////
     public Employee auth(Employee employee) {
         String sql = "SELECT employee_id, first_name, last_name, employee_type FROM employees WHERE employee_login = ? AND employee_password = ?";
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);

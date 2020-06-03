@@ -16,7 +16,7 @@ public class VehicleService {
     VehicleRepository vehicleRepository;
 
 //FIND VEHICLE USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for returning from repository all vehicles
     public List<Vehicle> getAllVehicles(){
         return vehicleRepository.getAllVehicles();
@@ -28,7 +28,7 @@ public class VehicleService {
     }
 
 //UPDATE VEHICLE USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for returning specified vehicle from repository based on given vehicle_id
     public Vehicle getVehicle(int vehicle_id) {
         return vehicleRepository.getVehicle(vehicle_id);
@@ -40,7 +40,7 @@ public class VehicleService {
     }
 
 //UPDATE VEHICLE STATUS USE CASE//
-
+///////////////////********* BARBARA ************///////////////////
     //Method for passing updated status of vehicle to repository
     public void updateVehicleStatus(Vehicle vehicle) {
         vehicleRepository.updateVehicleStatus(vehicle);
