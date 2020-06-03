@@ -46,8 +46,8 @@ by David Hards @dshards <https://github.com/dshards>
 CREATE TABLE card_information (
 card_id			INT		NOT NULL	AUTO_INCREMENT,
 card_number		VARCHAR(20)	NOT NULL,
-card_expiry_date	VARCHAR(45)	NOT NULL,
-card_cvv		INT		NOT NULL,
+card_expiry_date	VARCHAR(5)	NOT NULL,
+card_cvv		VARCHAR(4)	NOT NULL,
 PRIMARY KEY(card_id)
 );
 ```
