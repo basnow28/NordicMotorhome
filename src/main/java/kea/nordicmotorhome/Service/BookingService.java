@@ -162,7 +162,6 @@ public class BookingService {
         LocalDate startDate = LocalDate.parse(start_date, pattern);
         LocalDate cancellation_date = LocalDate.now();
         int days = (int) ChronoUnit.DAYS.between(cancellation_date, startDate);
-        System.out.println(days);
         Cancellation cancellation = getCancellation(days);
 
         double cancellationFee = cancellation.getCancellation_rate() * initial_cost;

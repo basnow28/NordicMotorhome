@@ -20,6 +20,7 @@ public class CustomerRepository {
 
     //Method for creating new customer in database and returning created customer ID
     public int createCustomer(Customer customer){
+
         String sqlCustomer = " INSERT INTO customers (first_name, last_name, date_of_birth, phone_number, email, driver_licence_number, address_id) VALUES (?,?,?,?,?,?,?)";
         template.update(sqlCustomer, customer.getFirst_name(), customer.getLast_name(), customer.getDate_of_birth(), customer.getPhone_number(), customer.getEmail(), customer.getDriver_licence_number(), customer.getAddress_id());
 
@@ -58,6 +59,7 @@ public class CustomerRepository {
 
     //Method for updating customer information in database
     public void updateCustomer(Customer customer){
+
         updateAddress(customer);
         String sqlCustomer = " UPDATE customers SET " +
                 "first_name = ? , " +
