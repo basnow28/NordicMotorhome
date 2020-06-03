@@ -85,7 +85,8 @@ public class BookingController {
                 searchForm.getEnd_date(),
                 Integer.parseInt(searchForm.getValue()));
         bookingService.setVehiclesQuotes(searchForm.getStart_date(), searchForm.getEnd_date(), freeVehicles);
-        return "createNewBooking.html";
+        model.addAttribute("freeVehicles", freeVehicles);
+        return "createNewBooking";
     }
 
     /////Finding an existing customer to create a new booking under the same name

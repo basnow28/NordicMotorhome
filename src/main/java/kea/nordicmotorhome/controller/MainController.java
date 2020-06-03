@@ -147,6 +147,7 @@ public class MainController {
         return "noAuth.html";
     }
 
+    //Method for displaying dashboard
     @GetMapping("/dashboard")
     public String dashboard(Model model){
         if(!NordicmotorhomeApplication.isAuthorized()){
