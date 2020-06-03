@@ -31,7 +31,7 @@ public class Booking {
     private boolean has_linen;
     private String card_number;
     private String card_expiry_date;
-    private int card_cvv;
+    private String card_cvv;
     private double cancellation_rate;
     private int minimum_fee;
     private int card_id;
@@ -199,11 +199,11 @@ public class Booking {
         this.card_expiry_date = card_expiry_date;
     }
 
-    public int getCard_cvv() {
+    public String getCard_cvv() {
         return card_cvv;
     }
 
-    public void setCard_cvv(int card_cvv) {
+    public void setCard_cvv(String card_cvv) {
         this.card_cvv = card_cvv;
     }
 

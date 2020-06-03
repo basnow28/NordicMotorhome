@@ -45,7 +45,7 @@ public class BookingServiceTest {
 
         booking.setCard_number("1234 3333 2222 1111");
         booking.setCard_expiry_date("12/21");
-        booking.setCard_cvv(222);
+        booking.setCard_cvv("222");
 
         Customer customer = new Customer();
         customer.setFirst_name("Marcin");
@@ -86,7 +86,7 @@ public class BookingServiceTest {
 
         booking.setCard_number("1234 3333 2222 1111");
         booking.setCard_expiry_date("12/21");
-        booking.setCard_cvv(222);
+        booking.setCard_cvv("222");
 
         Customer customer = new Customer();
         customer.setFirst_name("Marcin");
@@ -235,7 +235,7 @@ public class BookingServiceTest {
         booking.setVehicle_id(2);
         booking.setCard_number("1234 3333 2222 1111");
         booking.setCard_expiry_date("12/21");
-        booking.setCard_cvv(202);
+        booking.setCard_cvv("202");
         booking.setCard_id(5);
 
         Customer customer = new Customer();
@@ -253,8 +253,8 @@ public class BookingServiceTest {
         customer.setCity("Copenhagen");
         customer.setCountry("Denmark");
         bookingService.updateBooking(booking,customer);
-        int newCVV =  bookingService.getBooking(booking.getBooking_id()).getCard_cvv();
-        assertEquals(202, newCVV);
+        String newCVV =  bookingService.getBooking(booking.getBooking_id()).getCard_cvv();
+        assertEquals("202", newCVV);
     }
 
     //Test method for checking if updating payment amount for specified booking works

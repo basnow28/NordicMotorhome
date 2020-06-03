@@ -264,27 +264,27 @@
                                         <div class="form-row">
                                             <div class="col">
                                                <label><strong>First Name</strong></label>
-                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.first_name" th:value="*{customer.first_name}">
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.first_name" th:value="*{customer.first_name}" maxlength="45" pattern="^[^0-9]+$">
                                             </div>
                                             <div class="col">
                                                 <label><strong>Last Name</strong></label>
-                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.last_name" th:value="*{customer.last_name}">
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.last_name" th:value="*{customer.last_name}" maxlength="45" pattern="^[^0-9]+$">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <label><strong>Email</strong></label>
-                                                <input th:disabled="${isDisabled}" required class="form-control" type="email" name="customer.email" th:value="*{customer.email}">
+                                                <input th:disabled="${isDisabled}" required class="form-control" type="email" name="customer.email" th:value="*{customer.email}" maxlength="45">
                                             </div>
                                             <div class="col">
                                                 <label><strong>Phone Number</strong><br></label>
-                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.phone_number" th:value="*{customer.phone_number}">
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.phone_number" th:value="*{customer.phone_number}" minlength="8" maxlength="45" pattern="^[0-9]+$">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class=""><label><strong>Driver Licence Number</strong><br></label>
-                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.driver_licence_number" th:value="*{customer.driver_licence_number}"></div>
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" name="customer.driver_licence_number" th:value="*{customer.driver_licence_number}" maxlength="45"></div>
                                             </div>
                                             <div class="col">
                                                 <div class=""><label><strong>Date of Birth</strong><br></label>
@@ -300,22 +300,22 @@
                                 <div class="card-body">
                                         <div class="col">
                                             <label><strong>Street</strong></label>
-                                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.street_name" th:value="*{customer.street_name}">
+                                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.street_name" th:value="*{customer.street_name}" maxlength="45">
                                         </div>
                                         <div class="col"><label><strong>House Number</strong></label>
-                                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.house_number" th:value="*{customer.house_number}">
+                                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.house_number" th:value="*{customer.house_number}" maxlength="45">
                                         </div>
                                         <div class="col"><label><strong>Postcode</strong><br></label>
-                                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.postcode" th:value="*{customer.postcode}">
+                                            <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.postcode" th:value="*{customer.postcode}" maxlength="45">
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <label><strong>City</strong></label>
-                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.city" th:value="*{customer.city}">
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.city" th:value="*{customer.city}" maxlength="45" pattern="^[^0-9]+$">
                                             </div>
                                             <div class="col">
                                                     <label><strong>Country</strong></label>
-                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.country" th:value="*{customer.country}">
+                                                    <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.country" th:value="*{customer.country}" maxlength="45" pattern="^[^0-9]+$">
                                             </div>
                                         </div>
                                 </div>
@@ -332,7 +332,7 @@
                                             </div>
                                             <div class="col">
                                                 <label><strong>Expiry Date</strong></label>
-                                                    <input th:disabled="${isDisabled}" pattern="\d{1,2}/\d{1,2}" inputmode="numeric" placeholder="MM/YY" required class="form-control" type="text" th:name="booking.card_expiry_date" th:value="*{booking.card_expiry_date}">
+                                                    <input th:disabled="${isDisabled}" pattern="((0[1-9])|(1[012]))/\d{2}" inputmode="numeric" placeholder="MM/YY" required class="form-control" type="text" th:name="booking.card_expiry_date" th:value="*{booking.card_expiry_date}">
                                             </div>
                                         </div>
                                     <div class="col">
