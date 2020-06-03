@@ -212,7 +212,7 @@ by Dagmara Przygocka @dprzygocka <https://github.com/dprzygocka>
 INSERT INTO cancellations (
 cancellation_id, minimum_fee, cancellation_rate, days_out_max, days_out_min)
 VALUES 
-(1,200,0,51,10000000),
+(1,200,0,10000000,51),
 (2,200,0.2, 50, 16),
 (3,200,0.5, 15, 2),
 (4,200,0.8, 1,1),
