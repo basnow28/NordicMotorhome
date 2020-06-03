@@ -30,7 +30,11 @@ public class CustomerService {
 
     //Method for calling repository to update existing customers with new information
     public void updateCustomer(Customer customer){
-        customerRepository.updateCustomer(customer);
+        if(customerRepository.getCustomerId(customer.getEmail()) == customer.getCustomer_id()) {
+            customerRepository.updateCustomer(customer);
+        }else if(customerRepository.getCustomerId(customer.getEmail()) == 0){
+            customerRepository.updateCustomer(customer);
+        }
     }
 
     //Method that returns from repository specified by ID customer

@@ -217,7 +217,7 @@
                             </div>
                             <div class=" flex justify-content-between align-items-center align-content-center">
                                 <div class="justify-content-start">
-                                    <input th:hidden="${isDisabled}"  type="number" step="any" class="form-control" name="newPaymentAmount" th:value="*{newPaymentAmount}">
+                                    <input required th:hidden="${isDisabled}"  type="number" step="any" class="form-control" name="newPaymentAmount" th:value="*{newPaymentAmount}">
                                     <span th:hidden="${isDisabled}" >€</span>
                                 </div>
                                 <div class="float-right container-row justify-content-end">
@@ -245,6 +245,7 @@
                                                 <input readonly class="form-control" type="text"  name="booking.end_date" th:value="*{booking.end_date}">
                                             </div>
                                             </div>
+                                    <div class="form-row">
                                     <div class="col">
                                         <label><strong>Capacity</strong><br></label>
                                         <select disabled th:field="*{vehicle.vehicle_capacity}" class="form-control">
@@ -253,6 +254,7 @@
                                             <option th:value="4">4</option>
                                             <option th:value="6">6</option>
                                         </select>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -298,6 +300,7 @@
                                     <p class="card-header-text">Contact Information</p>
                                 </div>
                                 <div class="card-body">
+                                    <div class="form-row">
                                         <div class="col">
                                             <label><strong>Street</strong></label>
                                             <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.street_name" th:value="*{customer.street_name}" maxlength="45">
@@ -305,10 +308,11 @@
                                         <div class="col"><label><strong>House Number</strong></label>
                                             <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.house_number" th:value="*{customer.house_number}" maxlength="45">
                                         </div>
+                                    </div>
+                                        <div class="form-row">
                                         <div class="col"><label><strong>Postcode</strong><br></label>
                                             <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.postcode" th:value="*{customer.postcode}" maxlength="45">
                                         </div>
-                                        <div class="form-row">
                                             <div class="col">
                                                 <label><strong>City</strong></label>
                                                     <input th:disabled="${isDisabled}" required class="form-control" type="text" th:name="customer.city" th:value="*{customer.city}" maxlength="45" pattern="^[^0-9]+$">
@@ -335,9 +339,11 @@
                                                     <input th:disabled="${isDisabled}" pattern="((0[1-9])|(1[012]))/\d{2}" inputmode="numeric" placeholder="MM/YY" required class="form-control" type="text" th:name="booking.card_expiry_date" th:value="*{booking.card_expiry_date}">
                                             </div>
                                         </div>
+                                    <div class="form-row">
                                     <div class="col">
                                         <label><strong>CVV</strong><br></label>
-                                        <input th:disabled="${isDisabled}" pattern="[0-9]{3,4}" required inputmode="numeric" class="border rounded form-control-sm" type="text" th:name="booking.card_cvv" th:value="*{booking.card_cvv}" style="color: #6e707e;height: 38px;width: 277px;">
+                                        <input th:disabled="${isDisabled}" pattern="[0-9]{3,4}" required class="border rounded form-control" type="text" th:name="booking.card_cvv" th:value="*{booking.card_cvv}">
+                                    </div>
                                     </div>
                                 </div>
                             </div>

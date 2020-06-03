@@ -139,7 +139,7 @@
                                     <p class="card-header-text">Vehicle Information</p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="form-row justify-content-start">
+                                    <div class="form-row">
                                         <div class="col">
                                             <label><strong>Brand</strong></label>
                                             <span th:text="*{vehicle_brand}" name="vehicle_brand"></span>
@@ -149,7 +149,7 @@
                                             <span th:text="*{vehicle_model}" name="vehicle_model"></span>
                                         </div>
                                     </div>
-                                    <div class="form-row justify-content-start">
+                                    <div class="form-row">
                                         <div class="col">
                                             <label><strong>Licence Plate</strong></label>
                                             <input th:disabled="${isDisabled}" th:value="*{licence_plate}" class="form-control" type="text" name="licence_plate" maxlength="45">

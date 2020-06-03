@@ -123,6 +123,9 @@ public class MainController {
     //Method for displaying login page
     @GetMapping("/")
     public String login(Model model){
+        if(NordicmotorhomeApplication.isAuthorized()){
+            return "redirect:/dashboard";
+        }
         model.addAttribute("employee", NordicmotorhomeApplication.getEmployee());
         model.addAttribute("incorrect", "");
         return "login.html";

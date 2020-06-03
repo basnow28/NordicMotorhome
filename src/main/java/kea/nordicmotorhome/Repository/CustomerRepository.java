@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -102,9 +103,14 @@ public class CustomerRepository {
         return list.size() > 0;
     }
 
-    public int getCustomer(String email) {
+    public int getCustomerId(String email) {
         String sql = "SELECT * FROM customers INNER JOIN addresses ON customers.address_id = addresses.address_id WHERE email = ?";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-        return template.query(sql, rowMapper, email).get(0).getCustomer_id();
+        ArrayList<Customer> list = (ArrayList<Customer>) template.query(sql, rowMapper, email);
+
+        if(list.size() > 0){
+            return list.get(0).getCustomer_id();
+        }
+        return 0;
     }
 }
