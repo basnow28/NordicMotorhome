@@ -1,9 +1,8 @@
-package kea.nordicmotorhome.Service;
+package kea.nordicmotorhome.service;
 
-import kea.nordicmotorhome.Model.Booking;
-import kea.nordicmotorhome.Model.Customer;
-import kea.nordicmotorhome.Model.SearchForm;
-import kea.nordicmotorhome.Repository.CustomerRepository;
+import kea.nordicmotorhome.model.Customer;
+import kea.nordicmotorhome.model.SearchForm;
+import kea.nordicmotorhome.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

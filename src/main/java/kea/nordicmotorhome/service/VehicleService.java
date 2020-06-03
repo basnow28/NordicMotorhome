@@ -1,12 +1,11 @@
-package kea.nordicmotorhome.Service;
+package kea.nordicmotorhome.service;
 
-import kea.nordicmotorhome.Model.SearchForm;
-import kea.nordicmotorhome.Model.Vehicle;
-import kea.nordicmotorhome.Repository.VehicleRepository;
+import kea.nordicmotorhome.model.SearchForm;
+import kea.nordicmotorhome.model.Vehicle;
+import kea.nordicmotorhome.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

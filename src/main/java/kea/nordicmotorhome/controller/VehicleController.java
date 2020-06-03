@@ -1,9 +1,9 @@
 package kea.nordicmotorhome.controller;
 
-import kea.nordicmotorhome.Model.SearchForm;
-import kea.nordicmotorhome.Model.Vehicle;
+import kea.nordicmotorhome.model.SearchForm;
+import kea.nordicmotorhome.model.Vehicle;
 import kea.nordicmotorhome.NordicmotorhomeApplication;
-import kea.nordicmotorhome.Service.VehicleService;
+import kea.nordicmotorhome.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 
 @Controller

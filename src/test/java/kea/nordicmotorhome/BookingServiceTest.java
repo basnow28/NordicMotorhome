@@ -1,12 +1,11 @@
 package kea.nordicmotorhome;
 
-import kea.nordicmotorhome.Model.*;
-import kea.nordicmotorhome.Service.BookingService;
+import kea.nordicmotorhome.model.*;
+import kea.nordicmotorhome.service.BookingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.awt.print.Book;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

@@ -1,15 +1,15 @@
 package kea.nordicmotorhome.controller;
 
-import kea.nordicmotorhome.Model.*;
-import kea.nordicmotorhome.Model.Employee;
-import kea.nordicmotorhome.Model.SearchForm;
-import kea.nordicmotorhome.Model.Vehicle;
+import kea.nordicmotorhome.model.*;
+import kea.nordicmotorhome.model.Employee;
+import kea.nordicmotorhome.model.SearchForm;
+import kea.nordicmotorhome.model.Vehicle;
 import kea.nordicmotorhome.NordicmotorhomeApplication;
-import kea.nordicmotorhome.Service.CustomerService;
-import kea.nordicmotorhome.Service.EmployeeService;
-import kea.nordicmotorhome.Service.BookingService;
+import kea.nordicmotorhome.service.CustomerService;
+import kea.nordicmotorhome.service.EmployeeService;
+import kea.nordicmotorhome.service.BookingService;
 
-import kea.nordicmotorhome.Service.VehicleService;
+import kea.nordicmotorhome.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

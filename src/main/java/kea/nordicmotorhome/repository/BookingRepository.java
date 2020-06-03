@@ -1,20 +1,13 @@
-package kea.nordicmotorhome.Repository;
+package kea.nordicmotorhome.repository;
 
 
-import kea.nordicmotorhome.Model.*;
-import kea.nordicmotorhome.NordicmotorhomeApplication;
+import kea.nordicmotorhome.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.awt.print.Book;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository

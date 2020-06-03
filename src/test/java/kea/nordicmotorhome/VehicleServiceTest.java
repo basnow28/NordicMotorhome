@@ -1,9 +1,8 @@
 package kea.nordicmotorhome;
 
-import kea.nordicmotorhome.Model.SearchForm;
-import kea.nordicmotorhome.Model.Vehicle;
-import kea.nordicmotorhome.Repository.VehicleRepository;
-import kea.nordicmotorhome.Service.VehicleService;
+import kea.nordicmotorhome.model.SearchForm;
+import kea.nordicmotorhome.model.Vehicle;
+import kea.nordicmotorhome.service.VehicleService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

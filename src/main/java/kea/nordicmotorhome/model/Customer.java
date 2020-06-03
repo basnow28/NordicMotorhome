@@ -1,4 +1,4 @@
-package kea.nordicmotorhome.Model;
+package kea.nordicmotorhome.model;
 
 import org.springframework.stereotype.Component;
 

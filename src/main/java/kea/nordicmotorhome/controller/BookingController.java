@@ -1,23 +1,18 @@
 package kea.nordicmotorhome.controller;
 
-import kea.nordicmotorhome.Model.*;
+import kea.nordicmotorhome.model.*;
 import kea.nordicmotorhome.NordicmotorhomeApplication;
-import kea.nordicmotorhome.Service.CustomerService;
-import kea.nordicmotorhome.Service.VehicleService;
+import kea.nordicmotorhome.service.CustomerService;
+import kea.nordicmotorhome.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import kea.nordicmotorhome.Service.BookingService;
-import org.springframework.stereotype.Controller;
+import kea.nordicmotorhome.service.BookingService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.print.attribute.IntegerSyntax;
-import java.awt.print.Book;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;

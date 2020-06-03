@@ -1,6 +1,4 @@
-package kea.nordicmotorhome.Model;
-
-import org.springframework.stereotype.Component;
+package kea.nordicmotorhome.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

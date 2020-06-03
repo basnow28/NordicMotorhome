@@ -1,11 +1,6 @@
-package kea.nordicmotorhome.Model;
+package kea.nordicmotorhome.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-
-import javax.persistence.*;
-import java.util.Date;
 
 @Component
 public class Booking {

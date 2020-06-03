@@ -1,7 +1,7 @@
-package kea.nordicmotorhome.Repository;
+package kea.nordicmotorhome.repository;
 
-import kea.nordicmotorhome.Model.SearchForm;
-import kea.nordicmotorhome.Model.Vehicle;
+import kea.nordicmotorhome.model.SearchForm;
+import kea.nordicmotorhome.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

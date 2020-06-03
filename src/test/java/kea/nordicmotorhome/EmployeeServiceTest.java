@@ -1,8 +1,8 @@
 package kea.nordicmotorhome;
 
 
-import kea.nordicmotorhome.Model.Employee;
-import kea.nordicmotorhome.Service.EmployeeService;
+import kea.nordicmotorhome.model.Employee;
+import kea.nordicmotorhome.service.EmployeeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

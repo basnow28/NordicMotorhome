@@ -1,4 +1,4 @@
-package kea.nordicmotorhome.Model;
+package kea.nordicmotorhome.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
